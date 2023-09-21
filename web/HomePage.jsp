@@ -55,9 +55,9 @@
             <div class="row gx-0">
                 <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</small>
+                        <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>FPT UNNIVERSITY</small>
                         <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</small>
-                        <small class="text-light"><i class="fa fa-envelope-open me-2"></i>info@example.com</small>
+                        <small class="text-light"><i class="fa fa-envelope-open me-2"></i>communityunity407@gmail.com</small>
                     </div>
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
@@ -78,7 +78,7 @@
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1>
+                    <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>COMMUNITY UNITY</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -86,33 +86,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="package.html" class="nav-item nav-link">Packages</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="destination.html" class="dropdown-item">Destination</a>
-                                <a href="booking.html" class="dropdown-item">Booking</a>
-                                <a href="team.html" class="dropdown-item">Travel Guides</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-
-
+                        <a href="HomePage.jsp" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About us</a>
+                        <a href="service.html" class="nav-item nav-link">Activity</a>
+                        <a href="package.html" class="nav-item nav-link">Organization</a>
+                        <a href="package.html" class="nav-item nav-link">Blogs</a>
+                        <a href="logout" class="nav-item nav-link">Logout</a>
                     </div>
-
-
                     <c:if test="${sessionScope.LOGIN_USER == null}">
                         <a href="login.jsp"><i style="" class="fa-solid fa-user"></i></a>
                         </c:if>
                         <c:if test="${sessionScope.LOGIN_USER != null}">
-                      <a href="Profile.jsp"><i style="" class="fa-solid fa-user"> ${sessionScope.LOGIN_USER.fullName}</i></a>
+                        <a href="Profile.jsp"><i style="" class="fa-solid fa-user"> ${sessionScope.LOGIN_USER.fullName}</i></a>
 
-                        </c:if>
+                    </c:if>
+
+
                 </div>
             </nav>
 
@@ -120,12 +109,14 @@
                 <div class="container py-5">
                     <div class="row justify-content-center py-5">
                         <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                            <h1 class="display-3 text-white mb-3 animated slideInDown">Help us to save earth</h1>
-                        
-                            <p class="fs-4 text-white mb-4 animated slideInDown">Make the World Green Again</p>
+                            <h1 class="display-3 text-white mb-3 animated slideInDown">Make a Difference, Be a Volunteer</h1>
+                            <p class="fs-4 text-white mb-4 animated slideInDown">Building Communities Through Service</p>
                             <div class="position-relative w-75 mx-auto animated slideInDown">
-                                <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Eg: Da Nang">
-                                <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+                                <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                                       placeholder="Eg: Da Nang">
+                                <button type="button"
+                                        class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
+                                        style="margin-top: 7px;">Search</button>
                             </div>
                         </div>
                     </div>
@@ -133,6 +124,7 @@
             </div>
         </div>
         <!-- Navbar & Hero End -->
+
 
 
         <!-- About Start -->
@@ -146,9 +138,9 @@
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                         <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
-                        <h1 class="mb-4">Welcome to <span class="text-primary">Tourist</span></h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <h1 class="mb-4">Welcome to <span class="text-primary">Community Unity</span></h1>
+                        <p class="mb-4">At Community Unity , we've gathered volunteers from all over to build a strong community of passionate individuals committed to changing the world around us. Our mission is</p>
+                        <p class="mb-4">To encourage and support people to engage in volunteer projects within their communities in any way they can, to collectively build a brighter future.</p>
                         <div class="row gy-2 gx-4 mb-4">
                             <div class="col-sm-6">
                                 <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>First Class Flights</p>
@@ -177,90 +169,91 @@
         <!-- About End -->
 
 
-        <!-- Service Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
-                    <h1 class="mb-5">Our Services</h1>
+    
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Activites</h6>
+                <h1 class="mb-5">Our activities</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                            <h5>Education</h5>
+                            <p>Tutoring or teaching students, assisting with after-school programs, helping with educational nonprofit organizations.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                                <h5>Recyling</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
+                            <h5>Health and human services</h5>
+                            <p>Volunteering at hospitals, nursing homes, hospices, food banks, shelters, assisting individuals with disabilities.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
-                                <h5>Water refine</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-user text-primary mb-4"></i>
+                            <h5>Environment </h5>
+                            <p>Working with land conservation efforts, parks, beaches, trails, environmental nonprofits. Tasks include restoration, research, education.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-user text-primary mb-4"></i>
-                                <h5>Ecosystem   </h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-cog text-primary mb-4"></i>
+                            <h5>Animal welfare</h5>
+                            <p>Volunteering at animal shelters, rescues, sanctuaries, veterinary clinics, wildlife rehabilitation. Tasks include socializing animals, cleaning, fundraising.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-cog text-primary mb-4"></i>
-                                <h5>Save Animal</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                            <h5>Arts and culture</h5>
+                            <p> Assisting with museums, theaters, music/dance groups. Tasks include event support, docent/tour guiding, administrative work.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                                <h5>Education</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
+                            <h5>Community improvement</h5>
+                            <p>Volunteering with neighborhood associations, community centers, libraries. Tasks include event planning, beautification projects, administrative support.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
-                                <h5>Hotel Reservation</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-user text-primary mb-4"></i>
+                            <h5>International/global </h5>
+                            <p>Volunteering abroad or for international nonprofit organizations focused on issues like poverty, healthcare, education, human rights.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-user text-primary mb-4"></i>
-                                <h5>Travel Guides</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-cog text-primary mb-4"></i>
-                                <h5>Event Management</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item rounded pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-cog text-primary mb-4"></i>
+                            <h5>Political/social advocacy</h5>
+                            <p>Volunteering for campaigns, organizations that focus on issues like voter registration, women's rights, LGBTQ+ rights, racial justice, poverty advocacy. Tasks include outreach, fundraising, administrative support.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Service End -->
+    </div>
+    <!-- Service End -->
 
 
         <!-- Destination Start -->
@@ -480,7 +473,7 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                                 <i class="fa fa-globe fa-3x text-white"></i>
                             </div>
-                            <h5 class="mt-4">Choose A Destination</h5>
+                            <h5 class="mt-4">Choose A Event</h5>
                             <hr class="w-25 mx-auto bg-primary mb-1">
                             <hr class="w-50 mx-auto bg-primary mt-0">
                             <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
@@ -491,7 +484,7 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                                 <i class="fa fa-dollar-sign fa-3x text-white"></i>
                             </div>
-                            <h5 class="mt-4">Pay Online</h5>
+                            <h5 class="mt-4">Apply</h5>
                             <hr class="w-25 mx-auto bg-primary mb-1">
                             <hr class="w-50 mx-auto bg-primary mt-0">
                             <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
@@ -502,7 +495,7 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                                 <i class="fa fa-plane fa-3x text-white"></i>
                             </div>
-                            <h5 class="mt-4">Fly Today</h5>
+                            <h5 class="mt-4">Do Volunteer</h5>
                             <hr class="w-25 mx-auto bg-primary mb-1">
                             <hr class="w-50 mx-auto bg-primary mt-0">
                             <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
@@ -519,7 +512,7 @@
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="section-title bg-white text-center text-primary px-3">Travel Guide</h6>
-                    <h1 class="mb-5">Meet Our Guide</h1>
+                    <h1 class="mb-5">Meet Our Organizer</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -644,9 +637,9 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h4 class="text-white mb-3">Contact</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>FPT UNIVERSITY</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>communityunity407@gmail.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
