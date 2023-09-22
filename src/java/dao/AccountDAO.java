@@ -570,6 +570,23 @@ public class AccountDAO {
         }
         return id;
     }
+    
+        public String getUserName_byEmail(String email) {
+
+        try {
+            int index = email.indexOf('@');
+            if (index != -1) { // Check if "@" symbol is found
+                String username = email.substring(0, index);
+                return username;
+            } else {
+                // Handle the case where "@" symbol is not found
+                return "Invalid email format";
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // Handle the exception if it occurs
+            return "Invalid email format";
+        }
+    }
 
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
