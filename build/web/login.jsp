@@ -23,7 +23,7 @@
                 <form action="signup" method="post">
                     <h1>Create Account</h1>
                     <div class="social-container">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/CommunityUnity/LoginGoogleController&response_type=code&client_id=552963219492-6a880it69r6hmnahrj8c69f328id25m6.apps.googleusercontent.com&approval_prompt=force" class="social">
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/CommunityUnity/LoginGoogleController&response_type=code&client_id=552963219492-rlahrheu7p4a3vab2pimmed69atebaeo.apps.googleusercontent.com&approval_prompt=force" class="social">
                             <img src="./images/OIP.jpg" style="height: 100%;" alt="Image Description"><i
                                 class="fab fa-google"></i></a>
 
@@ -42,7 +42,7 @@
                 <form action="login" method ="POST">
                     <h1>Sign in</h1>
                     <div class="social-container">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/MilkTeaProjectPRJ301/LoginGoogleController&response_type=code&client_id=552963219492-6a880it69r6hmnahrj8c69f328id25m6.apps.googleusercontent.com&approval_prompt=force" class="social">
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/CommunityUnity/LoginGoogleController&response_type=code&client_id=552963219492-rlahrheu7p4a3vab2pimmed69atebaeo.apps.googleusercontent.com&approval_prompt=force" class="social">
                             <img src="./images/OIP.jpg" style="height: 100%;" alt="Image Description">
                             <i class="fab fa-google"></i></a>
 
