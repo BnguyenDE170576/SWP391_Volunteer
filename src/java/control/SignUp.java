@@ -6,9 +6,10 @@
 package control;
 
 import dao.AccountDAO;
+import dao.Login;
+import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +59,14 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+        String otp = request.getParameter("otp");
+
+        PrintWriter out = response.getWriter();
+
+        out.print(email);
+        out.print(otp);
+
     }
 
     /**
@@ -87,8 +95,16 @@ public class SignUp extends HttpServlet {
             AccountDAO dao = new AccountDAO();
             boolean a = dao.checkAccountExits(user);
             if (!a) {
-
-                request.getRequestDispatcher("alertLogin.jsp").forward(request, response);
+                request.setAttribute("ERROR_MASSEGE", "Account creation success. Please check your email to verify your identity");
+                Login l = new Login();
+                int otp = l.generateOTP(6);
+                l.insertOTP(email, otp);
+                
+                SendMail send = new SendMail();
+                String link = "http://localhost:8080/CommunityUnity/signup";
+                send.sendEmail(email, otp,link);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                //out.println("<script>alert('Please check your email to verify your identity.');</script>");
             } else {
                 //Day ve trang login
                 request.setAttribute("ERROR_MASSEGE", "Account already exists");

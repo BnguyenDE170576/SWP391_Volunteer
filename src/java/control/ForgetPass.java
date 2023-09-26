@@ -112,7 +112,8 @@ public class ForgetPass extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             SendMail send = new SendMail();
-            send.sendEmail(email, otp);
+            String link = "http://localhost:8080/SendMail/sendmail";
+            send.sendEmail(email, otp, link);
             request.setAttribute("email", email);
             request.getRequestDispatcher("otp.jsp").forward(request, response);
 

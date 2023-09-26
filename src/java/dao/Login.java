@@ -188,7 +188,7 @@ public class Login {
         return false;
     }
 
-    public static int generateOTP(int length) {
+    public int generateOTP(int length) {
         if (length <= 0) {
             throw new IllegalArgumentException("Length must be greater than zero.");
         }
