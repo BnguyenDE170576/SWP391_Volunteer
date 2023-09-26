@@ -11,6 +11,7 @@ import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,11 +62,32 @@ public class SignUp extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String otp = request.getParameter("otp");
+        Cookie[] cookies = request.getCookies();
+        String user = "";
+        String pass = "";
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+                String value = cookie.getValue();
 
+                if (name.equals("name")) {
+                    user = cookie.getValue();
+                }
+                if (name.equals("pass")) {
+                    pass = cookie.getValue();
+                }
+            }
+
+        }
         PrintWriter out = response.getWriter();
 
-        out.print(email);
-        out.print(otp);
+        AccountDAO dao = new AccountDAO();
+        dao.insertAccount(email, pass, user, "", 1, 1, "");
+
+        Login login = new Login();
+        login.deleteOTP(email);
+        request.setAttribute("ERROR_MASSEGE", "Verify Success");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
 
     }
 
@@ -94,17 +116,29 @@ public class SignUp extends HttpServlet {
         } else {
             AccountDAO dao = new AccountDAO();
             boolean a = dao.checkAccountExits(user);
-            if (!a) {
+            if (!a && !dao.checkEmail(email)) {
                 request.setAttribute("ERROR_MASSEGE", "Account creation success. Please check your email to verify your identity");
                 Login l = new Login();
                 int otp = l.generateOTP(6);
                 l.insertOTP(email, otp);
-                
+
                 SendMail send = new SendMail();
+
                 String link = "http://localhost:8080/CommunityUnity/signup";
-                send.sendEmail(email, otp,link);
+                String title = "VERIFY ACCOUNT - COMMUNITY UNITY";
+                send.sendEmail(email, otp, link, title, "");
+
+                //cookie
+                Cookie userCookie = new Cookie("name", user);
+                Cookie passwordCookie = new Cookie("pass", pass);
+                //dat time ton tai
+                userCookie.setMaxAge(60 * 60 * 24);
+                passwordCookie.setMaxAge(60 * 60 * 24);
+                //add browser cua nguoi dung
+                response.addCookie(userCookie);
+                response.addCookie(passwordCookie);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-                //out.println("<script>alert('Please check your email to verify your identity.');</script>");
+
             } else {
                 //Day ve trang login
                 request.setAttribute("ERROR_MASSEGE", "Account already exists");

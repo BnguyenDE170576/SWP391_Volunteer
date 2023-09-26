@@ -21,7 +21,7 @@
 
         <div class="box login">
             <div class="content">
-
+                Enter your Email.
 
                 <form name="forget" action="forget" method="POST" style="border: 2px">
 

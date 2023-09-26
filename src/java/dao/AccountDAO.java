@@ -26,6 +26,7 @@ public class AccountDAO {
     private static final String UPDATE_TOKEN = "UPDATE Accounts Set token = ? WHERE email = ?";
     private static final String VALID_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role FROM Accounts WHERE token = ?";
     private static final String VALID_ACCOUNT_USERNAME = "select * from Accounts where username = ?  ";
+
     private static final String GET_ROLE_ACCOUNT_BY_TOKEN = "SELECT role FROM Accounts WHERE token = ?";
 
     private static final String UPDATE_PASSWORD = "UPDATE Accounts Set password = ? WHERE UserID = ?";

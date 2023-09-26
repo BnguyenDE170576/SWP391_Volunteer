@@ -27,7 +27,7 @@
                     <input type="email" name="email" placeholder="email" />
                     <input type="password" name="su_password" placeholder="Password" />
                     <input type="password" name="repass" placeholder="Repeat Password" />
-
+                    
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>
                 </form>
             </div>

@@ -76,7 +76,7 @@ public class ForgetPass extends HttpServlet {
 
             } else {
 
-                out.print(otp + "for: " + email + " not valid" + "or maybe expired. ");
+                out.print(otp + "for: " + email + " not valid" + " or maybe expired. ");
 
             }
 
@@ -113,7 +113,9 @@ public class ForgetPass extends HttpServlet {
             out.println("</html>");
             SendMail send = new SendMail();
             String link = "http://localhost:8080/SendMail/sendmail";
-            send.sendEmail(email, otp, link);
+            String title = "FORGOT PASSWORD - COMMUNITY UNITY";
+            String otpMSG = "\n" + "<p>This is OTP:</p>" + "<p>OTP: " + otp + "</p>";
+            send.sendEmail(email, otp, link, title, otpMSG);
             request.setAttribute("email", email);
             request.getRequestDispatcher("otp.jsp").forward(request, response);
 

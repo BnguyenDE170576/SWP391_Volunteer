@@ -37,6 +37,13 @@ public class Login {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
+
+                if (userEmailExists(conn,userEmail)) {
+                    // Handle the case where the userEmail already exists
+                    // You can throw an exception or return false, depending on your requirements
+                    return false;
+                }
+
                 stm = conn.prepareStatement(INSERT_OTP);
                 stm.setString(1, userEmail);
                 stm.setInt(2, OTP);
@@ -217,8 +224,35 @@ public class Login {
         return false;
     }
 
-    public static void main(String[] args) {
+    private boolean userEmailExists(Connection conn,String userEmail) throws SQLException {
+        PreparedStatement checkStm = null;
+        ResultSet resultSet = null;
+   
+        try {
+            checkStm = conn.prepareStatement("SELECT COUNT(*) FROM UserOTP WHERE userEmail = ?");
+            checkStm.setString(1, userEmail);
+            resultSet = checkStm.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0; // If count > 0, the userEmail already exists
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (checkStm != null) {
+                checkStm.close();
+            }
+        }
+        return false; // If something went wrong or no rows found, consider it doesn't exist
+    }
 
+    public static void main(String[] args) throws SQLException {
+        Login l = new Login();
+        
+        //l.insertOTP("ytbhelp2@gmail.com", 0);
+               System.out.println(""+ l.insertOTP("ytbhelp2@gm5ail.com",123));
+                       
     }
 
 }
