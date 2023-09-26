@@ -28,6 +28,10 @@
         <servlet-name>LogoutControl</servlet-name>
         <servlet-class>control.LogoutControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendMailController</servlet-name>
+        <servlet-class>control.SendMailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -56,6 +60,7 @@
         <servlet-name>LogoutControl</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

@@ -22,12 +22,12 @@
             <div class="form-container sign-up-container">
                 <form action="signup" method="post">
                     <h1>Create Account</h1>
-           
-                    <input type="text" placeholder="username" name="su_username" />
 
+                    <input type="text" placeholder="username" name="su_username" />
+                    <input type="email" name="email" placeholder="email" />
                     <input type="password" name="su_password" placeholder="Password" />
                     <input type="password" name="repass" placeholder="Repeat Password" />
-                    <input type="email" name="email" placeholder="email" />
+
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>
                 </form>
             </div>
@@ -40,7 +40,7 @@
                             <i class="fab fa-google"></i></a>
 
                     </div>
-                    
+
                     <c:if test="${not empty requestScope.ERROR_MASSEGE}">
                         <!-- Error MSG -->
                         <div class="alert alert-danger" role="alert" style="color: red">

@@ -4,7 +4,6 @@
  */
 package entity;
 
-
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -20,10 +19,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMail {
 
-   
-    
-    
-     public void sendEmail(String recipientEmail, Account a) {
+    public void sendEmail(String recipientEmail, int otp) {
         // Sender's email credentials
         final String senderEmail = "communityunity407@gmail.com";
         final String senderPassword = "qyhi ensr ncdx xict";
@@ -51,7 +47,7 @@ public class SendMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-                    message.setSubject("FORGOT PASSWORD - COMMUNITY UNITY");
+            message.setSubject("FORGOT PASSWORD - COMMUNITY UNITY");
 
             message.setContent("<!DOCTYPE html>\n"
                     + "<html lang=\"en\">\n"
@@ -62,13 +58,14 @@ public class SendMail {
                     + "</head>\n"
                     + "\n"
                     + "<body>\n"
-                    + "\n" +"<p>This is your Account:</p>"+"<p>USERNAME: "+a.getUserName()+"</p>"+"<p>PASSWORD: "+a.getPassword()+"</p>"
+                    + "\n" + "<p>This is OTP:</p>" + "<p>OTP: " + otp + "</p>"
+                    + "\n" + "<p>Or you can use a quick link <a href=\"http://localhost:8080/SendMail/sendmail?otp=" + otp + "&email=" + recipientEmail + "\">Link</a>:</p>"
                     + "----------------------------------------------\n"
                     + "<h3 style=\"color: blue;\">Thank you very much!</h3>\n"
                     + "<p>Organize volunteers</p>"
                     + "<p>FPT DANANG</p>"
                     + "<div style=\"text-align:center\">\n"
-                    + "    <img src=\""+"image"+"\" alt=\"alternatetext\">\n"
+                    + "    <img src=\"" + "image" + "\" alt=\"alternatetext\">\n"
                     + "</div>\n"
                     + "\n"
                     + "</body>\n"
@@ -83,12 +80,6 @@ public class SendMail {
             e.printStackTrace();
             System.out.println("Failed to send email.");
         }
-    }
-     
-     public static void main(String[] args) {
-        SendMail a =new SendMail();
-        Account b = new Account();
-       a.sendEmail("ytbhel2@gmail.com", b);
     }
 
 }

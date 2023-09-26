@@ -73,6 +73,8 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        PrintWriter out = response.getWriter();
         String user = request.getParameter("su_username");
         String pass = request.getParameter("su_password");
 
@@ -86,10 +88,7 @@ public class SignUp extends HttpServlet {
             boolean a = dao.checkAccountExits(user);
             if (!a) {
 
-                dao.insertAccount(email, repass, user, "", 1, 1, "");
-
-                request.setAttribute("ERROR_MASSEGE", "Successful account creation");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("alertLogin.jsp").forward(request, response);
             } else {
                 //Day ve trang login
                 request.setAttribute("ERROR_MASSEGE", "Account already exists");

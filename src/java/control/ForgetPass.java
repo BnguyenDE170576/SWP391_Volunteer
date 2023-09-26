@@ -5,14 +5,10 @@
  */
 package control;
 
-import dao.AccountDAO;
-import entity.Account;
+import dao.Login;
 import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +58,29 @@ public class ForgetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            int otp = Integer.parseInt(request.getParameter("otp"));
+            String email = request.getParameter("email");
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SendMailController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            Login dao = new Login();
+
+            if ((otp == dao.getOTP(email)) && dao.checkTIME_OTP(email)) {
+                out.println("PAGE edit password");
+                dao.deleteOTP(email);
+
+            } else {
+
+                out.print(otp + "for: " + email + " not valid" + "or maybe expired. ");
+
+            }
+
+        }
     }
 
     /**
@@ -76,31 +94,28 @@ public class ForgetPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
             String email = request.getParameter("email");
-            AccountDAO dao = new AccountDAO();
-            Account a = dao.getAccountInfoByEmail(email);
-            
-            if (!dao.checkEmail(email)) {
-                request.setAttribute("ERROR_MASSEGE", "Account not existed");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-            SendMail m = new SendMail();
-            m.sendEmail(email, a);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ForgetPass.class.getName()).log(Level.SEVERE, null, ex);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SendMailController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SendMailController at " + email + "</h1>");
+            Login dao = new Login();
+            int otp = dao.generateOTP(6);
+            dao.insertOTP(email, otp);
+
+            out.println("</body>");
+            out.println("</html>");
+            SendMail send = new SendMail();
+            send.sendEmail(email, otp);
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
+
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

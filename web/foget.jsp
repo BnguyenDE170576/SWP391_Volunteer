@@ -23,24 +23,10 @@
             <div class="content">
 
 
-                <form action="forget" method="post"id="form">
-                    <h4>
-                        We will send to mail a you Account! Please input it.
-                    </h4>
+                <form name="forget" action="forget" method="POST" style="border: 2px">
 
-
-                    <div class="form_input">
-                        <input type="email" name="email" id="name" placeholder="abc@gmail.com" required>
-
-                    </div>
-                  
-
-                        <button class="btn submit"  onclick="showAlert()">
-                            Send
-                        </button>
-                        <a href="login.jsp" style="color: black">Back</a>
-              
-
+                    <input type="email" name="email" placeholder="abc@gmail.com">
+                    <button type="submit">SUBMIT</button>
 
                 </form>
             </div>
