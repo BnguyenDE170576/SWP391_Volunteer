@@ -112,7 +112,7 @@ public class ForgetPass extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             SendMail send = new SendMail();
-            String link = "http://localhost:8080/SendMail/sendmail";
+            String link = "http://localhost:8080/CommunityUnity/forget";
             String title = "FORGOT PASSWORD - COMMUNITY UNITY";
             String otpMSG = "\n" + "<p>This is OTP:</p>" + "<p>OTP: " + otp + "</p>";
             send.sendEmail(email, otp, link, title, otpMSG);

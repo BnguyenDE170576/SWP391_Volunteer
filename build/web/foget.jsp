@@ -21,10 +21,10 @@
 
         <div class="box login">
             <div class="content">
-                Enter your Email.
+
 
                 <form name="forget" action="forget" method="POST" style="border: 2px">
-
+                    Enter your Email.
                     <input type="email" name="email" placeholder="abc@gmail.com">
                     <button type="submit">SUBMIT</button>
 

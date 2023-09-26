@@ -38,10 +38,9 @@ public class Login {
             conn = DBUtils.getConnection();
             if (conn != null) {
 
-                if (userEmailExists(conn,userEmail)) {
-                    // Handle the case where the userEmail already exists
-                    // You can throw an exception or return false, depending on your requirements
-                    return false;
+                if (userEmailExists(conn, userEmail)) {
+                    deleteOTP(userEmail);
+
                 }
 
                 stm = conn.prepareStatement(INSERT_OTP);
@@ -224,10 +223,10 @@ public class Login {
         return false;
     }
 
-    private boolean userEmailExists(Connection conn,String userEmail) throws SQLException {
+    private boolean userEmailExists(Connection conn, String userEmail) throws SQLException {
         PreparedStatement checkStm = null;
         ResultSet resultSet = null;
-   
+
         try {
             checkStm = conn.prepareStatement("SELECT COUNT(*) FROM UserOTP WHERE userEmail = ?");
             checkStm.setString(1, userEmail);
@@ -249,10 +248,10 @@ public class Login {
 
     public static void main(String[] args) throws SQLException {
         Login l = new Login();
-        
+
         //l.insertOTP("ytbhelp2@gmail.com", 0);
-               System.out.println(""+ l.insertOTP("ytbhelp2@gm5ail.com",123));
-                       
+        System.out.println("" + l.insertOTP("ytbhelp2@gm5ail.com", 123));
+
     }
 
 }
