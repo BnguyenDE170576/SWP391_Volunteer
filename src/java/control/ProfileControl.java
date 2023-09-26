@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DELL
+ * @author twna21
  */
 public class ProfileControl extends HttpServlet {
 

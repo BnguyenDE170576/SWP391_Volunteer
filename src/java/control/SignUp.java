@@ -37,7 +37,7 @@ public class SignUp extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignUp</title>");            
+            out.println("<title>Servlet SignUp</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SignUp at " + request.getContextPath() + "</h1>");
@@ -68,33 +68,34 @@ public class SignUp extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-
+     *
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-          String user = request.getParameter("su_username");
-   String pass = request.getParameter("su_password");
+            throws ServletException, IOException {
+        String user = request.getParameter("su_username");
+        String pass = request.getParameter("su_password");
 
-   String repass = request.getParameter("repass");
-   if (!pass.equals(repass)) {
-       request.setAttribute("ERROR_MASSEGE", "Account creation failed");
-       request.getRequestDispatcher("login.jsp").forward(request, response);
-   } else {
-       AccountDAO dao = new AccountDAO();
-       boolean a = dao.checkAccountExits(user);
-       if (!a) {
-           
-          dao.insertAccount("", repass, user, "", 1, 1,"");
-         
-           request.setAttribute("ERROR_MASSEGE", "Successful account creation");
-           request.getRequestDispatcher("login.jsp").forward(request, response);
-       } else {
-           //Day ve trang login
-           request.setAttribute("ERROR_MASSEGE", "Account already exists");
-           request.getRequestDispatcher("login.jsp").forward(request, response);
-       }
-   }
+        String repass = request.getParameter("repass");
+        String email = request.getParameter("email");
+        if (!pass.equals(repass)) {
+            request.setAttribute("ERROR_MASSEGE", "Account creation failed");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            AccountDAO dao = new AccountDAO();
+            boolean a = dao.checkAccountExits(user);
+            if (!a) {
+
+                dao.insertAccount(email, repass, user, "", 1, 1, "");
+
+                request.setAttribute("ERROR_MASSEGE", "Successful account creation");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                //Day ve trang login
+                request.setAttribute("ERROR_MASSEGE", "Account already exists");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+        }
     }
 
     /**

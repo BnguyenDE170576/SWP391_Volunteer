@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author PC
+ * @author twna21
  */
 public class LogoutControl extends HttpServlet {
 

@@ -22,19 +22,12 @@
             <div class="form-container sign-up-container">
                 <form action="signup" method="post">
                     <h1>Create Account</h1>
-                    <div class="social-container">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/CommunityUnity/LoginGoogleController&response_type=code&client_id=552963219492-rlahrheu7p4a3vab2pimmed69atebaeo.apps.googleusercontent.com&approval_prompt=force" class="social">
-                            <img src="./images/OIP.jpg" style="height: 100%;" alt="Image Description"><i
-                                class="fab fa-google"></i></a>
-
-
-
-                    </div>
-                    <span>or registration by Account</span>
+           
                     <input type="text" placeholder="username" name="su_username" />
 
                     <input type="password" name="su_password" placeholder="Password" />
                     <input type="password" name="repass" placeholder="Repeat Password" />
+                    <input type="email" name="email" placeholder="email" />
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>
                 </form>
             </div>

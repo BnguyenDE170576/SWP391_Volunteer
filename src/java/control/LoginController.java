@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author PC
+ * @author twna21
  */
 public class LoginController extends HttpServlet {
 

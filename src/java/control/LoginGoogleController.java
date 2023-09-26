@@ -27,7 +27,7 @@ import org.apache.http.client.fluent.Form;
 
 /**
  *
- * @author KhoaHD7621
+ * @author twna21
  */
 public class LoginGoogleController extends HttpServlet {
 

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ytbhe
+ * @author twna21
  */
 public class ForgetPass extends HttpServlet {
 
