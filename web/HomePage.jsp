@@ -36,9 +36,9 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+        
+   <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet"> </head>
 
     <body>
         <!-- Spinner Start -->
@@ -100,7 +100,7 @@
                                 <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="logout" class="nav-item nav-link">Logout</a>
 
 
                     </div>
