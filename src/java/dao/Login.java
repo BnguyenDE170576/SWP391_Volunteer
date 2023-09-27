@@ -46,7 +46,7 @@ public class Login {
                 stm = conn.prepareStatement(INSERT_OTP);
                 stm.setString(1, userEmail);
                 stm.setInt(2, OTP);
-                LocalDateTime expirationTime = now.plusMinutes(1);
+                LocalDateTime expirationTime = now.plusMinutes(2);
                 String date = expirationTime.format(formatter);
                 stm.setString(3, date);
 

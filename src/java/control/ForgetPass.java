@@ -5,11 +5,13 @@
  */
 package control;
 
+import dao.AccountDAO;
 import dao.Login;
 import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,19 +33,7 @@ public class ForgetPass extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ForgetPass</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ForgetPass at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,29 +48,33 @@ public class ForgetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            int otp = Integer.parseInt(request.getParameter("otp"));
-            String email = request.getParameter("email");
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SendMailController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            Login dao = new Login();
 
-            if ((otp == dao.getOTP(email)) && dao.checkTIME_OTP(email)) {
-                out.println("PAGE edit password");
-                dao.deleteOTP(email);
+        int otp = Integer.parseInt(request.getParameter("otp"));
+        String email = request.getParameter("email");
+        /* TODO output your page here. You may use following sample code. */
 
-            } else {
+        Login dao = new Login();
 
-                out.print(otp + "for: " + email + " not valid" + " or maybe expired. ");
+        if ((otp == dao.getOTP(email)) && dao.checkTIME_OTP(email)) {
 
-            }
+            dao.deleteOTP(email);
+
+            Cookie status = new Cookie("status", "statusOK");
+            //dat time ton tai
+            status.setMaxAge(60 * 60 * 24);
+
+            //add browser cua nguoi dung
+            response.addCookie(status);
+
+            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+
+        } else {
+
+            request.setAttribute("ERROR_MASSEGE", " OTP not valid" + " or maybe expired. ");
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
 
         }
+
     }
 
     /**
@@ -95,22 +89,19 @@ public class ForgetPass extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SendMailController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SendMailController at " + email + "</h1>");
-            Login dao = new Login();
+
+        String email = request.getParameter("email");
+
+        Login dao = new Login();
+        AccountDAO acc = new AccountDAO();
+
+        if (!acc.checkEmail(email)) {
+            request.setAttribute("ERROR_MASSEGE", "The email is not exist.");
+            request.getRequestDispatcher("foget.jsp").forward(request, response);
+        } else {
             int otp = dao.generateOTP(6);
             dao.insertOTP(email, otp);
 
-            out.println("</body>");
-            out.println("</html>");
             SendMail send = new SendMail();
             String link = "http://localhost:8080/CommunityUnity/forget";
             String title = "FORGOT PASSWORD - COMMUNITY UNITY";
@@ -118,7 +109,7 @@ public class ForgetPass extends HttpServlet {
             send.sendEmail(email, otp, link, title, otpMSG);
             request.setAttribute("email", email);
             request.getRequestDispatcher("otp.jsp").forward(request, response);
-
         }
+
     }
 }

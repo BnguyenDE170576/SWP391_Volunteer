@@ -61,14 +61,14 @@ public class SignUp extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        String otp = request.getParameter("otp");
+ 
         Cookie[] cookies = request.getCookies();
         String user = "";
         String pass = "";
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 String name = cookie.getName();
-                String value = cookie.getValue();
+            
 
                 if (name.equals("name")) {
                     user = cookie.getValue();
@@ -79,7 +79,7 @@ public class SignUp extends HttpServlet {
             }
 
         }
-        PrintWriter out = response.getWriter();
+      
 
         AccountDAO dao = new AccountDAO();
         dao.insertAccount(email, pass, user, "", 1, 1, "");
@@ -103,7 +103,7 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        SendMail send = new SendMail();
         PrintWriter out = response.getWriter();
         String user = request.getParameter("su_username");
         String pass = request.getParameter("su_password");
@@ -121,8 +121,6 @@ public class SignUp extends HttpServlet {
                 Login l = new Login();
                 int otp = l.generateOTP(6);
                 l.insertOTP(email, otp);
-
-                SendMail send = new SendMail();
 
                 String link = "http://localhost:8080/CommunityUnity/signup";
                 String title = "VERIFY ACCOUNT - COMMUNITY UNITY";

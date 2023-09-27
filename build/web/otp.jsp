@@ -29,9 +29,21 @@
         <div class="box login">
             <div class="content">
                 <form action="forget" method="get">
+                    <c:if test="${not empty requestScope.ERROR_MASSEGE}">
+                        <!-- Error MSG -->
+                        <div class="alert alert-danger" role="alert" style="color: red">
+                            ${requestScope.ERROR_MASSEGE}
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty requestScope.MSG_SUCCESS}">
+                        <!-- Error MSG -->
+                        <div class="alert alert-success" role="alert">
+                            ${requestScope.MSG_SUCCESS}
+                        </div>
+                    </c:if>
                     <h1>Enter OTP</h1>
                     <p>Please enter the OTP sent to your email address.</p>
-                    <div id="countdown">60</div>
+                    <div id="countdown">90</div>
                     <input type="text" id="email" name="email" value="${email}" >
                     <input type="text" id="otp" name="otp" placeholder="OTP" required>
 
@@ -43,12 +55,12 @@
         </div>
         <script>
 // JavaScript to create the countdown timer
-            var countdown = 60; // Set the initial countdown time in seconds
+            var countdown = 90; // Set the initial countdown time in seconds
             var countdownDisplay = document.getElementById("countdown");
 
             function updateCountdown() {
                 countdown -= 1;
-                countdownDisplay.textContent = countdown;
+                countdownDisplay.textContent = formatTime(countdown);
 
                 if (countdown <= 0) {
                     countdownDisplay.textContent = "OTP had expired ";
@@ -58,6 +70,12 @@
 
 // Update the countdown every 1000 milliseconds (1 second)
             var interval = setInterval(updateCountdown, 1000);
+            function formatTime(seconds) {
+                var minutes = Math.floor(seconds / 60);
+                var remainingSeconds = seconds % 60;
+                return "0" + minutes + ":" + remainingSeconds + " s";
+            }
         </script>
+
     </body>
 </html>

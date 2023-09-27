@@ -24,6 +24,18 @@
 
 
                 <form name="forget" action="forget" method="POST" style="border: 2px">
+                    <c:if test="${not empty requestScope.ERROR_MASSEGE}">
+                        <!-- Error MSG -->
+                        <div class="alert alert-danger" role="alert" style="color: red">
+                            ${requestScope.ERROR_MASSEGE}
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty requestScope.MSG_SUCCESS}">
+                        <!-- Error MSG -->
+                        <div class="alert alert-success" role="alert">
+                            ${requestScope.MSG_SUCCESS}
+                        </div>
+                    </c:if>
                     Enter your Email.
                     <input type="email" name="email" placeholder="abc@gmail.com">
                     <button type="submit">SUBMIT</button>
