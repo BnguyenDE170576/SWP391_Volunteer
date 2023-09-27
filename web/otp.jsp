@@ -20,7 +20,7 @@
                 color: red;
             }
         </style>
-    
+
 
     </head>
     <body>
@@ -42,8 +42,9 @@
                     </c:if>
                     <h1>Enter OTP</h1>
                     <p>Please enter the OTP sent to your email address.</p>
-                    <div id="countdown">90</div>
-                    <input type="text" id="email" name="email" value="${email}" >
+                    <div id="countdown"></div>
+
+                    <input type="text" id="email" name="email" value="${email}" readonly>
                     <input type="text" id="otp" name="otp" placeholder="OTP" required>
 
                     <br>
@@ -52,7 +53,7 @@
                 </form>
             </div>
         </div>
-    <script src="./js/timeOTP.js"></script>
+        <script src="./js/timeOTP.js"></script>
 
     </body>
 </html>

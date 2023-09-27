@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Volunteer</title>
         <link rel="stylesheet" href="./css/loginCSS.css">
-        <script src="./js/changepass.js"></script>
+        <script src="./js/checkinput.js"></script>
 
     </head>
 
@@ -80,7 +80,7 @@
 
         <footer>    
         </footer>
-
+        
         <script src="./js/login.js" type="text/javascript"></script>
     </body>
 
