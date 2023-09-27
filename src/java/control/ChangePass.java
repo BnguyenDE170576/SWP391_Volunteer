@@ -9,7 +9,6 @@ import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,7 +57,7 @@ public class ChangePass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -79,32 +78,19 @@ public class ChangePass extends HttpServlet {
 
         AccountDAO dao = new AccountDAO();
 
-        Cookie[] cookies = request.getCookies();
-        String status = "";
+        if (new_password.equals(repass)) {
+            dao.updateAccountPassword(email, repass);
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
+        } else {
+            // mk ko khop
 
-                if (name.equals("status")) {
-                    status = cookie.getValue();
-                }
-
-            }
-            if (status.equals("statusOK")) {
-                if (new_password.equals(repass)) {
-                    dao.updateAccountPassword(email, repass);
-                } else {
-                    // mk ko khop
-                    request.setAttribute("ERROR_MASSEGE", "Password not match. Please enter again.");
-                    request.getRequestDispatcher("changePass.jsp").forward(request, response);
-                }
-            } else {
-                request.setAttribute("ERROR_MASSEGE", "You cannot access it.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
+            request.setAttribute("ERROR_MASSEGE", "Password not match. Please enter again.");
+            request.setAttribute("email", email);
+            request.setAttribute("status", "Had verify");
+            request.getRequestDispatcher("changePass.jsp").forward(request, response);
 
         }
+
     }
 
     /**

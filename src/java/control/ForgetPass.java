@@ -59,13 +59,7 @@ public class ForgetPass extends HttpServlet {
 
             dao.deleteOTP(email);
 
-            Cookie status = new Cookie("status", "statusOK");
-            //dat time ton tai
-            status.setMaxAge(60 * 60 * 24);
-
-            //add browser cua nguoi dung
-            response.addCookie(status);
-
+            request.setAttribute("email", email);
             request.getRequestDispatcher("changePass.jsp").forward(request, response);
 
         } else {
