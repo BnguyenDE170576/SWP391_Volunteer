@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Volunteer</title>
         <link rel="stylesheet" href="./css/loginCSS.css">
+        <script src="./js/changepass.js"></script>
 
     </head>
 
@@ -22,11 +23,11 @@
             <div class="form-container sign-up-container">
                 <form action="signup" method="post">
                     <h1>Create Account</h1>
-
+                     <span id="error_message" style="color: red;  white-space: pre-line;"></span>
                     <input type="text" placeholder="username" name="su_username" />
-                    <input type="email" name="email" placeholder="email" />
-                    <input type="password" name="su_password" placeholder="Password" />
-                    <input type="password" name="repass" placeholder="Repeat Password" />
+                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();"/>
+                    <input type="password" id="newpass"  name="su_password" placeholder="Password" onkeyup="checkStrong();" />
+                    <input type="password" id ="repass" name="repass" placeholder="Repeat Password" onkeyup="checkPasswordMatch();"/>
                     
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>
                 </form>

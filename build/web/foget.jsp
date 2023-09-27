@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Volunteer</title>
         <link rel="stylesheet" href="./css/loginCSS.css">
-
+        <script src="./js/checkinput.js"></script>
     </head>
 
     <body>
@@ -37,7 +37,7 @@
                         </div>
                     </c:if>
                     Enter your Email.
-                    <input type="email" name="email" placeholder="abc@gmail.com">
+                    <input type="email" id="email" name="email" placeholder="abc@gmail.com" onkeyup="checkEmail();">
                     <button type="submit">SUBMIT</button>
 
                 </form>

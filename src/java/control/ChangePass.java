@@ -75,21 +75,18 @@ public class ChangePass extends HttpServlet {
         String new_password = request.getParameter("new_password");
         String repass = request.getParameter("repass");
         String email = request.getParameter("email");
+        if (email.equals("") || email == null) {
+            request.setAttribute("ERROR_MASSEGE", "You cannot access.");
 
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
         AccountDAO dao = new AccountDAO();
 
-        if (new_password.equals(repass)) {
-            dao.updateAccountPassword(email, repass);
+        dao.updateAccountPassword(email, repass);
 
-        } else {
-            // mk ko khop
+        request.setAttribute("ERROR_MASSEGE", "The password had update.");
 
-            request.setAttribute("ERROR_MASSEGE", "Password not match. Please enter again.");
-            request.setAttribute("email", email);
-            request.setAttribute("status", "Had verify");
-            request.getRequestDispatcher("changePass.jsp").forward(request, response);
-
-        }
+        request.getRequestDispatcher("login.jsp").forward(request, response);
 
     }
 
