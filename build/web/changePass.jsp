@@ -28,7 +28,7 @@
             document.getElementById("confirm_password").addEventListener("input", checkPasswordMatch);
         </script>
         <h2>Change Password</h2>
-        <form action="changepass" method="post" onkeyup="return checkPasswordMatch();">
+        <form action="changepass" method="post" onkeyup="checkPasswordMatch();">
             <c:if test="${not empty requestScope.ERROR_MASSEGE}">
                 <!-- Error MSG -->
                 <div class="alert alert-danger" role="alert" style="color: red">
