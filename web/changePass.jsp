@@ -11,8 +11,24 @@
         <title>Change Password</title>
     </head>
     <body>
+ <script>
+            function checkPasswordMatch() {
+                var newPassword = document.getElementById("new_password").value;
+                var confirmNewPassword = document.getElementById("confirm_password").value;
+                var errorElement = document.getElementById("error_message");
+
+                if (newPassword !== confirmNewPassword) {
+                    errorElement.innerHTML = "New Password and Confirm New Password do not match!";
+                } else {
+                    errorElement.innerHTML = ""; // Clear the error message if passwords match
+                }
+            }
+
+            // Attach the checkPasswordMatch function to the "input" event of the "confirm_password" field
+            document.getElementById("confirm_password").addEventListener("input", checkPasswordMatch);
+        </script>
         <h2>Change Password</h2>
-        <form action="changepass" method="post">
+        <form action="changepass" method="post" onkeyup="return checkPasswordMatch();">
             <c:if test="${not empty requestScope.ERROR_MASSEGE}">
                 <!-- Error MSG -->
                 <div class="alert alert-danger" role="alert" style="color: red">
