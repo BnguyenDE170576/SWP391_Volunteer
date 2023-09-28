@@ -25,7 +25,7 @@
                     <h1>Create Account</h1>
                     <span id="error_message" style="color: red;  white-space: pre-line;"></span>
                     <input type="text" id="username" placeholder="username" name="su_username" onkeyup="checkUserNAme();lowerCase();"/>
-                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();ok();"/>
+                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();trimInput();"/>
                     <input type="password" id="newpass"  name="su_password" placeholder="Password" onkeyup="checkStrong();" />
                     <input type="password" id ="repass" name="repass" placeholder="Repeat Password" onkeyup="checkPasswordMatch();"/>
 

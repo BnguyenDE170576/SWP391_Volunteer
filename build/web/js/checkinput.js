@@ -137,7 +137,7 @@ function lowerCase1() {
     let x = document.getElementById("username1");
     x.value = x.value.toLowerCase().trim();
 }
-function ok() {
+function trimInput() {
     let x = document.getElementById("email");
-    x.value = x.value().toLowerCase.trim();
+    x.value = x.value().trim();
 }

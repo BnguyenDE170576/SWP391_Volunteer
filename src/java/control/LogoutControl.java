@@ -6,6 +6,7 @@ package control;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +32,22 @@ public class LogoutControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         session.removeAttribute("LOGIN_USER");
-        
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("name".equals(cookie.getName())) {
+                    // Set the maximum age of the cookie to 0 (to delete it)
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+
+                if ("pass".equals(cookie.getName())) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+            }
+        }
         response.sendRedirect("home");
     }
 
