@@ -65,6 +65,7 @@ public class ForgetPass extends HttpServlet {
         } else {
 
             request.setAttribute("ERROR_MASSEGE", " OTP not valid" + " or maybe expired. ");
+            dao.deleteOTP(email);
             request.getRequestDispatcher("otp.jsp").forward(request, response);
 
         }

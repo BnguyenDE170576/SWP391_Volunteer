@@ -37,9 +37,10 @@
                         </div>
                     </c:if>
                     Enter your Email.
-                      <span id="error_message" style="color: red;  white-space: pre-line;"></span>
+                    <span id="error_message" style="color: red;  white-space: pre-line;"></span>
                     <input type="email" id="email" name="email" placeholder="abc@gmail.com" onkeyup="checkEmail();">
                     <button type="submit">SUBMIT</button>
+                    <a href="login.jsp">BACK</a>
 
                 </form>
             </div>

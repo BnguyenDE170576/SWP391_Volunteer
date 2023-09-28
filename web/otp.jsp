@@ -50,6 +50,7 @@
                     <br>
 
                     <button type="submit">Verify OTP</button>
+                    <a href="login.jsp">BACK</a>
                 </form>
             </div>
         </div>
