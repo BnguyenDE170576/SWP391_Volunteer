@@ -23,12 +23,12 @@
             <div class="form-container sign-up-container">
                 <form action="signup" method="post">
                     <h1>Create Account</h1>
-                     <span id="error_message" style="color: red;  white-space: pre-line;"></span>
-                    <input type="text" id="username" placeholder="username" name="su_username" />
-                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();"/>
+                    <span id="error_message" style="color: red;  white-space: pre-line;"></span>
+                    <input type="text" id="username" placeholder="username" name="su_username" onkeyup="checkUserNAme();lowerCase();"/>
+                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();trimInput();"/>
                     <input type="password" id="newpass"  name="su_password" placeholder="Password" onkeyup="checkStrong();" />
                     <input type="password" id ="repass" name="repass" placeholder="Repeat Password" onkeyup="checkPasswordMatch();"/>
-                    
+
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>
                 </form>
             </div>
@@ -55,7 +55,7 @@
                         </div>
                     </c:if>
                     <span>or use your account</span>
-                    <input type="text" placeholder="username" name="username" />
+                    <input type="text" id="username" placeholder="username" name="username" onkeyup="checkUserNAme();lowerCase();"/>
                     <input type="password" placeholder="Password" name="password" />
                     <a href="foget.jsp">Forgot your password?</a>
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
@@ -80,7 +80,7 @@
 
         <footer>    
         </footer>
-        
+
         <script src="./js/login.js" type="text/javascript"></script>
     </body>
 

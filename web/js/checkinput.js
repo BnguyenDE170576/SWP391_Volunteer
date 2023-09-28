@@ -56,7 +56,6 @@ function isStrongPassword(password) {
 
 function checkEmail() {
     var email = document.getElementById("email").value;
-
     var errorElement = document.getElementById("error_message");
     if (isEmail(email)) {
         errorElement.innerHTML = "";
@@ -79,17 +78,34 @@ function isEmail(email) {
 function checkUserNAme() {
     var username = document.getElementById("username").value;
     var errorElement = document.getElementById("error_message");
+    var specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/;
     username = username.trim();
 
 
+
+
     if (username === "") {
-        alert("Username cannot be empty.");
-    } else if (/^\s+$/.test(username)) {
+        errorElement.innerHTML = "Username cannot be empty.";
+
+    } else if (/\s+/g.test(username)) {
         errorElement.innerHTML = "Username cannot consist of only spaces";
 
+    } else if (specialCharRegex.test(username)) {
+        errorElement.innerHTML = "Username cannot consist of special chars";
+
     } else {
+
         errorElement.innerHTML = "";
 
     }
 
+}
+
+function lowerCase() {
+    let x = document.getElementById("username");
+    x.value = x.value.toLowerCase().trim();
+}
+function trimInput() {
+    let x = document.getElementById("email");
+    x.value = x.value().trim();
 }
