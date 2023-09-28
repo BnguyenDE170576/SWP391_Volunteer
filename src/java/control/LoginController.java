@@ -2,6 +2,7 @@ package control;
 
 import dao.AccountDAO;
 import entity.Account;
+import entity.SecurityUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -46,7 +47,7 @@ public class LoginController extends HttpServlet {
 
         try {
             String user = request.getParameter("username");
-            String pass = request.getParameter("password");
+            String pass =  SecurityUtils.hashMd5(request.getParameter("password"));
             AccountDAO loginDAO = new AccountDAO();
 
             if (!loginDAO.checkAccountExits(user)) {

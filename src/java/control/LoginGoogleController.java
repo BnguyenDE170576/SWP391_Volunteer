@@ -10,6 +10,8 @@ import com.google.gson.JsonObject;
 import dao.AccountDAO;
 import entity.Account;
 import entity.Constants;
+import entity.PasswordGenerator;
+import entity.SecurityUtils;
 import entity.Tools;
 import entity.UserGoogle;
 
@@ -35,6 +37,7 @@ public class LoginGoogleController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        PasswordGenerator pw = new PasswordGenerator();
 
         try {
             String code = request.getParameter("code");
@@ -42,8 +45,7 @@ public class LoginGoogleController extends HttpServlet {
             UserGoogle user = getUserInfo(accessToken);
             String email = user.getEmail();
             String photo = user.getPicture();
-
-  
+            String pass = SecurityUtils.hashMd5(pw.generatePassword(8));
 
             AccountDAO accDAO = new AccountDAO();
             boolean check = accDAO.getAccountByEmail(email);
@@ -52,7 +54,7 @@ public class LoginGoogleController extends HttpServlet {
                 Account account = accDAO.getAccountInfoByEmail(email);
                 session.setAttribute("LOGIN_USER", account);
             } else {
-                accDAO.insertAccount(email, "******", accDAO.getUserName_byEmail(email), "", 1, 1,photo);
+                accDAO.insertAccount(email, pass, accDAO.getUserName_byEmail(email), "", 1, 1, photo);
                 Account account = accDAO.getAccountInfoByEmail(email);
                 session.setAttribute("LOGIN_USER", account);
             }
@@ -62,8 +64,6 @@ public class LoginGoogleController extends HttpServlet {
             Cookie cookie = new Cookie("accountGG", token);
             cookie.setMaxAge(60 * 5);
             response.addCookie(cookie);
-
-      
 
             response.sendRedirect("home");
         } catch (Exception e) {

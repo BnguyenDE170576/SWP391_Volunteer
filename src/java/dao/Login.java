@@ -249,8 +249,7 @@ public class Login {
     public static void main(String[] args) throws SQLException {
         Login l = new Login();
 
-        //l.insertOTP("ytbhelp2@gmail.com", 0);
-        System.out.println("" + l.insertOTP("ytbhelp2@gm5ail.com", 123));
+   
 
     }
 

@@ -2,6 +2,7 @@ package dao;
 
 import context.DBUtils;
 import entity.Account;
+import entity.SecurityUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -591,7 +592,9 @@ public class AccountDAO {
 
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
-        dao.updateAccountPassword("tuongnmde170578@fpt.edu.vn", "12345");
+        Account a = dao.getAccountInfoByEmail("tuongnmde170578@fpt.edu.vn");
+        System.out.println(""+a.getPassword());
+        System.out.println(""+ SecurityUtils.hashMd5("Abc123@"));
     }
 
 }

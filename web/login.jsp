@@ -25,7 +25,7 @@
                     <h1>Create Account</h1>
                     <span id="error_message" style="color: red;  white-space: pre-line;"></span>
                     <input type="text" id="username" placeholder="username" name="su_username" onkeyup="checkUserNAme();lowerCase();"/>
-                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();trimInput();"/>
+                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();ok();"/>
                     <input type="password" id="newpass"  name="su_password" placeholder="Password" onkeyup="checkStrong();" />
                     <input type="password" id ="repass" name="repass" placeholder="Repeat Password" onkeyup="checkPasswordMatch();"/>
 
@@ -56,7 +56,7 @@
                     </c:if>
                     <span>or use your account</span>
                     <span id="error_message1" style="color: red;  white-space: pre-line;"></span>
-                    <input type="text" id="username1" placeholder="username" name="username" onkeyup="checkUserNAmeLogin()();lowerCase();"/>
+                    <input type="text" id="username1" placeholder="username" name="username" onkeyup="checkUserNAmeLogin();lowerCase1();"/>
                     <input type="password" placeholder="Password" name="password" />
                     <a href="foget.jsp">Forgot your password?</a>
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>

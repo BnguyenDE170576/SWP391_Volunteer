@@ -7,6 +7,7 @@ package control;
 
 import dao.AccountDAO;
 import dao.Login;
+import entity.SecurityUtils;
 import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,7 +61,7 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email").trim();
+        String email = request.getParameter("email");
  
         Cookie[] cookies = request.getCookies();
         String user = "";
@@ -82,7 +83,7 @@ public class SignUp extends HttpServlet {
       
 
         AccountDAO dao = new AccountDAO();
-        dao.insertAccount(email, pass, user, "", 1, 1, "");
+        dao.insertAccount(email,  SecurityUtils.hashMd5(pass), user, "", 1, 1, "");
 
         Login login = new Login();
         login.deleteOTP(email);
