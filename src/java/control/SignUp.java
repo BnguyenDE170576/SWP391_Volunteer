@@ -60,7 +60,7 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").trim();
  
         Cookie[] cookies = request.getCookies();
         String user = "";
@@ -71,7 +71,7 @@ public class SignUp extends HttpServlet {
             
 
                 if (name.equals("name")) {
-                    user = cookie.getValue();
+                    user = cookie.getValue().trim();
                 }
                 if (name.equals("pass")) {
                     pass = cookie.getValue();
@@ -105,11 +105,11 @@ public class SignUp extends HttpServlet {
             throws ServletException, IOException {
         SendMail send = new SendMail();
         PrintWriter out = response.getWriter();
-        String user = request.getParameter("su_username");
+        String user = request.getParameter("su_username").trim();
         String pass = request.getParameter("su_password");
 
         String repass = request.getParameter("repass");
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").trim();
         if (!pass.equals(repass)) {
             request.setAttribute("ERROR_MASSEGE", "Account creation failed");
             request.getRequestDispatcher("login.jsp").forward(request, response);

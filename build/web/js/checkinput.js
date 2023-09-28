@@ -18,7 +18,7 @@ function checkPasswordMatch() {
     }
 }
 
-function checkStrong(){
+function checkStrong() {
     var newPassword = document.getElementById("newpass").value;
     var confirmNewPassword = document.getElementById("repass").value;
     var errorElement = document.getElementById("error_message");
@@ -56,10 +56,10 @@ function isStrongPassword(password) {
 
 function checkEmail() {
     var email = document.getElementById("email").value;
-  
+
     var errorElement = document.getElementById("error_message");
     if (isEmail(email)) {
-        errorElement.innerHTML = ""; 
+        errorElement.innerHTML = "";
     } else {
         errorElement.innerHTML = "Invalid email address";
     }
@@ -69,9 +69,27 @@ function isEmail(email) {
 
     var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-    if (!emailRegex.test(email)){
+    if (!emailRegex.test(email)) {
         return false;
     }
-        // If all conditions are met, the password is strong
-        return true;
+    // If all conditions are met, the password is strong
+    return true;
+}
+
+function checkUserNAme() {
+    var username = document.getElementById("username").value;
+    var errorElement = document.getElementById("error_message");
+    username = username.trim();
+
+
+    if (username === "") {
+        alert("Username cannot be empty.");
+    } else if (/^\s+$/.test(username)) {
+        errorElement.innerHTML = "Username cannot consist of only spaces";
+
+    } else {
+        errorElement.innerHTML = "";
+
+    }
+
 }
