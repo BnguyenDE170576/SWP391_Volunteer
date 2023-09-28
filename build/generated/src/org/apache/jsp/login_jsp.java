@@ -100,8 +100,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         return;
       out.write("\r\n");
       out.write("                    <span>or use your account</span>\r\n");
-      out.write("                    <span id=\"error_message\" style=\"color: red;  white-space: pre-line;\"></span>\r\n");
-      out.write("                    <input type=\"text\" id=\"username\" placeholder=\"username\" name=\"username\" onkeyup=\"checkUserNAme();lowerCase();\"/>\r\n");
+      out.write("                    <span id=\"error_message1\" style=\"color: red;  white-space: pre-line;\"></span>\r\n");
+      out.write("                    <input type=\"text\" id=\"username1\" placeholder=\"username\" name=\"username\"/>\r\n");
       out.write("                    <input type=\"password\" placeholder=\"Password\" name=\"password\" />\r\n");
       out.write("                    <a href=\"foget.jsp\">Forgot your password?</a>\r\n");
       out.write("                    <button class=\"btn btn-dark btn-lg btn-block\" type=\"submit\">Login</button>\r\n");

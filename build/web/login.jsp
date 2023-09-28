@@ -55,8 +55,8 @@
                         </div>
                     </c:if>
                     <span>or use your account</span>
-                    <span id="error_message" style="color: red;  white-space: pre-line;"></span>
-                    <input type="text" id="username" placeholder="username" name="username" onkeyup="checkUserNAme();lowerCase();"/>
+                    <span id="error_message1" style="color: red;  white-space: pre-line;"></span>
+                    <input type="text" id="username1" placeholder="username" name="username" onkeyup="checkUserNAmeLogin()();lowerCase();"/>
                     <input type="password" placeholder="Password" name="password" />
                     <a href="foget.jsp">Forgot your password?</a>
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>

@@ -102,8 +102,39 @@ function checkUserNAme() {
 
 }
 
+function checkUserNAmeLogin() {
+    var username = document.getElementById("username1").value;
+    var errorElement = document.getElementById("error_message1");
+    var specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/;
+    username = username.trim();
+
+
+
+
+    if (username === "") {
+        errorElement.innerHTML = "Username cannot be empty.";
+
+    } else if (/\s+/g.test(username)) {
+        errorElement.innerHTML = "Username cannot consist of only spaces";
+
+    } else if (specialCharRegex.test(username)) {
+        errorElement.innerHTML = "Username cannot consist of special chars";
+
+    } else {
+
+        errorElement.innerHTML = "";
+
+    }
+
+}
+
+
 function lowerCase() {
     let x = document.getElementById("username");
+    x.value = x.value.toLowerCase().trim();
+}
+function lowerCase1() {
+    let x = document.getElementById("username1");
     x.value = x.value.toLowerCase().trim();
 }
 function trimInput() {
