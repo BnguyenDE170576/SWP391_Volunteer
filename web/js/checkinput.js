@@ -57,6 +57,7 @@ function isStrongPassword(password) {
 function checkEmail() {
     var email = document.getElementById("email").value;
     var errorElement = document.getElementById("error_message");
+    email = email.trim();
     if (isEmail(email)) {
         errorElement.innerHTML = "";
     } else {
