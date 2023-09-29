@@ -76,7 +76,11 @@ form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+<<<<<<< HEAD
 	padding: 20px 50px;
+=======
+	padding: 0 50px;
+>>>>>>> origin/DAT
 	height: 100%;
 	text-align: center;
         border-radius: 20px;
