@@ -29,12 +29,17 @@
         <servlet-class>control.LogoutControl</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>SendMailController</servlet-name>
         <servlet-class>control.SendMailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePass</servlet-name>
         <servlet-class>control.ChangePass</servlet-class>
+=======
+        <servlet-name>EventDetailControl</servlet-name>
+        <servlet-class>control.EventDetailControl</servlet-class>
+>>>>>>> origin/DAT
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -65,8 +70,13 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>ChangePass</servlet-name>
         <url-pattern>/changepass</url-pattern>
+=======
+        <servlet-name>EventDetailControl</servlet-name>
+        <url-pattern>/EventDetailControl</url-pattern>
+>>>>>>> origin/DAT
     </servlet-mapping>
     <session-config>
         <session-timeout>

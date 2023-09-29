@@ -13,7 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Volunteer</title>
         <link rel="stylesheet" href="./css/loginCSS.css">
+<<<<<<< HEAD
         <script src="./js/checkinput.js"></script>
+=======
+
+>>>>>>> origin/DAT
     </head>
 
     <body>
@@ -23,6 +27,7 @@
             <div class="content">
 
 
+<<<<<<< HEAD
                 <form name="forget" action="forget" method="POST" style="border: 2px">
                     <c:if test="${not empty requestScope.ERROR_MASSEGE}">
                         <!-- Error MSG -->
@@ -41,6 +46,26 @@
                     <input type="email" id="email" name="email" placeholder="abc@gmail.com" onkeyup="checkEmail();">
                     <button type="submit">SUBMIT</button>
                     <a href="login.jsp">BACK</a>
+=======
+                <form action="forget" method="post"id="form">
+                    <h4>
+                        We will send to mail a you Account! Please input it.
+                    </h4>
+
+
+                    <div class="form_input">
+                        <input type="email" name="email" id="name" placeholder="abc@gmail.com" required>
+
+                    </div>
+                  
+
+                        <button class="btn submit"  onclick="showAlert()">
+                            Send
+                        </button>
+                        <a href="login.jsp" style="color: black">Back</a>
+              
+
+>>>>>>> origin/DAT
 
                 </form>
             </div>
