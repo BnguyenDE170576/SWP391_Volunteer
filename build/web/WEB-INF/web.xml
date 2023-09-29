@@ -28,6 +28,10 @@
         <servlet-name>LogoutControl</servlet-name>
         <servlet-class>control.LogoutControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EventDetailControl</servlet-name>
+        <servlet-class>control.EventDetailControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LogoutControl</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventDetailControl</servlet-name>
+        <url-pattern>/EventDetailControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
