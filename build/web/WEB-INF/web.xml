@@ -17,6 +17,10 @@
         <servlet-class>control.LoginGoogleController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EventDetailControl</servlet-name>
+        <servlet-class>control.EventDetailControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProfileControl</servlet-name>
         <servlet-class>control.ProfileControl</servlet-class>
     </servlet>
@@ -70,6 +74,10 @@
 
         <servlet-name>ChangePass</servlet-name>
         <url-pattern>/changepass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventDetailControl</servlet-name>
+        <url-pattern>/EventDetailControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
