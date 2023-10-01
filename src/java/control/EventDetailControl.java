@@ -4,12 +4,14 @@
  */
 package control;
 
+import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,8 +30,11 @@ public class EventDetailControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("EventDetail.jsp").forward(request, response);
+        int eid = Integer.parseInt(request.getParameter("id"));
+        ActivityDAO aDAO = new ActivityDAO();
+        
+        request.setAttribute("detail", aDAO.getActivityById(eid));
+        request.getRequestDispatcher("EventDetail.jsp").forward(request, response);
         
     }
 

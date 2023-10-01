@@ -25,6 +25,7 @@ public class ActivityDAO {
                 + "select *, ROW_NUMBER() over (order by activity_id) as rownumber from volunteer_activities"
                 + ") as activity "
                 + "where activity.rownumber >= ? and activity.rownumber <=?";
+    private static final String GET_WITH_ID = "SELECT * FROM volunteer_activities WHERE activity_id = ?;";
     private static final String GET_TOTAL_ROWS = "SELECT COUNT(*) FROM volunteer_activities;";
 
     public List<VolunteerActivity> getActivityFromTo(int page, int pageSize) throws SQLException {
@@ -110,5 +111,53 @@ public class ActivityDAO {
             }
         }
         return rowCount;
+    }
+    
+    public VolunteerActivity getActivityById(int eid){
+        VolunteerActivity activities = new VolunteerActivity();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_WITH_ID);
+            psm.setInt(1, eid);
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+                VolunteerActivity activity = new VolunteerActivity();
+                activity.setActivityId(rs.getInt("activity_id"));
+                activity.setActivityName(rs.getString("activity_name"));
+                activity.setDescription(rs.getString("description"));
+                activity.setStartDate(rs.getTimestamp("start_date"));
+                activity.setEndDate(rs.getTimestamp("end_date"));
+                activity.setLocation(rs.getString("location"));
+                activity.setOrganizerId(rs.getInt("organizer_id"));
+                activity.setNumberMember(rs.getInt("numberMemBer"));
+                activity.setCreatedDate(rs.getTimestamp("created_date"));
+                activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activities=activity;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return activities;
     }
 }
