@@ -4,7 +4,9 @@
  */
 package control;
 
+import dao.AccountDAO;
 import dao.ActivityDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -30,12 +32,16 @@ public class EventDetailControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         int eid = Integer.parseInt(request.getParameter("id"));
         ActivityDAO aDAO = new ActivityDAO();
-        
+        String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+        AccountDAO dao = new AccountDAO();
+
+        request.setAttribute("userID", dao.GetUSERID(name));
         request.setAttribute("detail", aDAO.getActivityById(eid));
         request.getRequestDispatcher("EventDetail.jsp").forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +70,7 @@ public class EventDetailControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

@@ -36,7 +36,7 @@
             <c:otherwise>
                 <div class="nav-item dropdown"> 
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
-                        <i class="fa fa-user"></i> ${sessionScope.LOGIN_USER.fullName}
+                        <i class="fa fa-user"></i> 
                     </a>
                     <div class="dropdown-menu m-0">
                         <a class="dropdown-item" href="#">Change Password</a>
