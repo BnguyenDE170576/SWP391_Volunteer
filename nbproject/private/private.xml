@@ -2,9 +2,26 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group name="Group 20230725-10:42:04">
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/css/loginCSS.css</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/changePass.jsp</file>
+=======
+        <group name="Group 20230725-10:42:04"/>
+        <group>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/EventDetail.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/Profile.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/errormanage.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/HomePage.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/UserGoogle.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/header.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/HomeControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LoginController.java</file>
+>>>>>>> origin/DAT
         </group>
     </open-files>
 </project-private>
