@@ -25,19 +25,33 @@
                         <a href="404.html" class="dropdown-item">404 Page</a>
                     </div>
                 </div>
-                <a href="logout" class="nav-item nav-link">Logout</a>
+
 
 
             </div>
 
 
-            <c:if test="${sessionScope.LOGIN_USER == null}">
-                <a href="login.jsp"><i style="" class="fa-solid fa-user"></i></a>
-                </c:if>
-                <c:if test="${sessionScope.LOGIN_USER != null}">
-                <a href="Profile.jsp"><i style="" class="fa-solid fa-user"> ${sessionScope.LOGIN_USER.fullName}</i></a>
+            <c:choose>
+                <c:when test="${sessionScope.LOGIN_USER == null}">
+                    <li class="nav-item">
+                        <a href="login.jsp"><i class="fa fa-user"></i></a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <div class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
+                            <i class="fa fa-user"></i> 
+                        </a>
+                        <div class="dropdown-menu m-0">
+                            <a class="dropdown-item" href="#">Change Password</a>
+                            <a class="dropdown-item" href="#">View Profile</a>
+                            <a class="dropdown-item" href="#">Edit Profile</a>
+                            <a class="dropdown-item" href="logout.jsp">Log Out</a>
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
-            </c:if>
         </div>
     </nav>
 

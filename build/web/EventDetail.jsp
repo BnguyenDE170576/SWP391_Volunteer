@@ -39,7 +39,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
+        <style> .navbar-light {
+                position: unset;
+        }</style>
     </head>
 
     <body>
@@ -85,61 +87,7 @@
         </script>
     </body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5">
-        <div class="container">
-            <a class="navbar-brand" href="home.jsp">
-                <h1 class="text-dark m-0"><i class="fa fa-map-marker-alt me-3"></i>Volunteer</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="home.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="service.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="package.html">Packages</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" data-bs-toggle="dropdown">
-                            Pages
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item" href="destination.html">Destination</a>
-                            <a class="dropdown-item" href="booking.html">Booking</a>
-                            <a class="dropdown-item" href="team.html">Travel Guides</a>
-                            <a class="dropdown-item" href="testimonial.html">Testimonial</a>
-                            <a class="dropdown-item" href="404.html">404 Page</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <c:choose>
-                        <c:when test="${sessionScope.LOGIN_USER == null}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.jsp"><i class="fa fa-user"></i></a>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Profile.jsp">
-                                    <i class="fa fa-user"></i> ${sessionScope.LOGIN_USER.fullName}
-                                </a>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <%@include file="./components/header.jsp" %>
 
 
     <div class="container mt-5">
@@ -175,7 +123,7 @@
         </c:if>
     </div>
 
-
+    <%@include file="./components/footer.jsp" %>
 </body>
 
 </html>
