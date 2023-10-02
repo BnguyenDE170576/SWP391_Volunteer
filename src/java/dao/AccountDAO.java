@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author KhoaHD7621
+ * @author twna21
  */
 public class AccountDAO {
 
