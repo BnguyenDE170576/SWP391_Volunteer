@@ -12,11 +12,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Enter OTP</title>
         <link rel="stylesheet" href="./css/loginCSS.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
         <style>
             /* Add some CSS for styling the countdown timer */
             #countdown {
@@ -29,6 +24,7 @@
 
     </head>
     <body>
+
         <div class="box login">
             <div class="content">
                 <form action="forget" method="get">
