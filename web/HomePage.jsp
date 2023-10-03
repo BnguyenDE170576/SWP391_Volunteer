@@ -4,12 +4,17 @@
     Author     : ytbhe
 --%>
 
+<<<<<<< HEAD
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+=======
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+>>>>>>> parent of d615221 (tuong)
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
+<<<<<<< HEAD
         <meta charset="utf-8">
         <title>Community Volunteer</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -94,6 +99,30 @@
                             <div class="position-relative w-75 mx-auto animated slideInDown">
                                 <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Eg: Da Nang">
                                 <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+=======
+        <%@include file="./components/header.jsp" %>
+    </head>
+
+    <body>
+
+        <div class="container-fluid position-relative p-0">
+
+            <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+                <div class="container py-5">
+                    <div class="row justify-content-center py-5">
+                        <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                            <h1 class="display-3 text-white mb-3 animated slideInDown">Help us to save earth
+                            </h1>
+
+                            <p class="fs-4 text-white mb-4 animated slideInDown">Make the World Great Again
+                            </p>
+                            <div class="position-relative w-75 mx-auto animated slideInDown">
+                                <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5"
+                                       type="text" placeholder="Eg: Da Nang">
+                                <button type="button"
+                                        class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
+                                        style="margin-top: 7px;">Search</button>
+>>>>>>> parent of d615221 (tuong)
                             </div>
                         </div>
                     </div>
@@ -113,15 +142,23 @@
                 <c:if test="${not empty content}">
 
                     <div class="row g-4 justify-content-center">
+<<<<<<< HEAD
                         <div class="row row-product" >
                             <c:forEach var="activity" items="${content}" varStatus="status">
 
                                 <div class="col-lg-4 col-md-6 wow fadeInUp mb-3" data-wow-delay="0.1s">
+=======
+                        <div class="row row-product">
+                            <c:forEach var="activity" items="${content}" varStatus="status">
+
+                                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+>>>>>>> parent of d615221 (tuong)
                                     <div class="package-item">
                                         <div class="overflow-hidden">
                                             <img class="img-fluid" src="img/package-1.jpg" alt="">
                                         </div>
                                         <div class="d-flex border-bottom">
+<<<<<<< HEAD
                                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${activity.getLocation()}</small>
                                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3  days</small>
                                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>${activity.getNumberMember()}</small>
@@ -133,6 +170,28 @@
                                             <div class="d-flex justify-content-center mb-2">
                                                 <a href="EventDetailControl?id=${activity.getActivityId()}" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                                 <a href="EventDetailControl?id=${activity.getActivityId()}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+=======
+                                            <small class="flex-fill text-center border-end py-2"><i
+                                                    class="fa fa-map-marker-alt text-primary me-2"></i>${activity.getLocation()}</small>
+                                            <small class="flex-fill text-center border-end py-2"><i
+                                                    class="fa fa-calendar-alt text-primary me-2"></i>3
+                                                days</small>
+                                            <small class="flex-fill text-center py-2"><i
+                                                    class="fa fa-user text-primary me-2"></i>${activity.getNumberMember()}</small>
+                                        </div>
+                                        <div class="text-center p-4">
+                                            <h3 class="mb-0">$149.00</h3>
+
+                                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                                amet diam eos</p>
+                                            <div class="d-flex justify-content-center mb-2">
+                                                <a href="EventDetailControl?id=${activity.getActivityId()}"
+                                                   class="btn btn-sm btn-primary px-3 border-end"
+                                                   style="border-radius: 30px 0 0 30px;">Read More</a>
+                                                <a href="EventDetailControl?id=${activity.getActivityId()}"
+                                                   class="btn btn-sm btn-primary px-3"
+                                                   style="border-radius: 0 30px 30px 0;">Book Now</a>
+>>>>>>> parent of d615221 (tuong)
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +201,11 @@
                                 <div class="row row-product">
 
                                 </c:if>
+<<<<<<< HEAD
                             </c:forEach>     
+=======
+                            </c:forEach>
+>>>>>>> parent of d615221 (tuong)
                         </c:if>
                     </div>
 
@@ -183,11 +246,15 @@
             <!-- Package End -->
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d615221 (tuong)
             <!-- Service Start -->
             <div class="container-xxl py-5">
                 <div class="container">
                     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+<<<<<<< HEAD
                         <h6
                             class="section-title bg-white text-center text-primary px-3">
                             Activites</h6>
@@ -196,10 +263,18 @@
                     <div class="row g-4">
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.1s">
+=======
+                        <h6 class="section-title bg-white text-center text-primary px-3">Activites</h6>
+                        <h1 class="mb-5">Our activities</h1>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-globe text-primary mb-4"></i>
                                     <h5>Education</h5>
+<<<<<<< HEAD
                                     <p>Tutoring or teaching students, assisting with
                                         after-school programs, helping with educational
                                         nonprofit organizations.<br>
@@ -210,10 +285,19 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.3s">
+=======
+                                    <p>Tutoring or teaching students, assisting with after-school programs, helping with educational nonprofit organizations.<br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
                                     <h5>Health and human services</h5>
+<<<<<<< HEAD
                                     <p>Volunteering at hospitals, nursing homes,
                                         hospices, food banks, shelters, assisting
                                         individuals with disabilities.</p>
@@ -222,10 +306,18 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.5s">
+=======
+                                    <p>Volunteering at hospitals, nursing homes, hospices, food banks, shelters, assisting individuals with disabilities.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-user text-primary mb-4"></i>
                                     <h5>Environment </h5>
+<<<<<<< HEAD
                                     <p>Working with land conservation efforts, parks,
                                         beaches, trails, environmental nonprofits. Tasks
                                         include restoration, research, education.</p>
@@ -234,10 +326,18 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.7s">
+=======
+                                    <p>Working with land conservation efforts, parks, beaches, trails, environmental nonprofits. Tasks include restoration, research, education.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-cog text-primary mb-4"></i>
                                     <h5>Animal welfare</h5>
+<<<<<<< HEAD
                                     <p>Volunteering at animal shelters, rescues,
                                         sanctuaries, veterinary clinics, wildlife
                                         rehabilitation. Tasks include socializing
@@ -247,10 +347,18 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.1s">
+=======
+                                    <p>Volunteering at animal shelters, rescues, sanctuaries, veterinary clinics, wildlife rehabilitation. Tasks include socializing animals, cleaning, fundraising.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-globe text-primary mb-4"></i>
                                     <h5>Arts and culture</h5>
+<<<<<<< HEAD
                                     <p> Assisting with museums, theaters, music/dance
                                         groups. Tasks include event support, docent/tour
                                         guiding, administrative work.</p>
@@ -259,10 +367,18 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.3s">
+=======
+                                    <p> Assisting with museums, theaters, music/dance groups. Tasks include event support, docent/tour guiding, administrative work.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-hotel text-primary mb-4"></i>
                                     <h5>Community improvement</h5>
+<<<<<<< HEAD
                                     <p>Volunteering with neighborhood associations,
                                         community centers, libraries. Tasks include
                                         event planning, beautification projects,
@@ -272,10 +388,18 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.5s">
+=======
+                                    <p>Volunteering with neighborhood associations, community centers, libraries. Tasks include event planning, beautification projects, administrative support.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-user text-primary mb-4"></i>
                                     <h5>International/global </h5>
+<<<<<<< HEAD
                                     <p>Volunteering abroad or for international
                                         nonprofit organizations focused on issues like
                                         poverty, healthcare, education, human rights.
@@ -285,15 +409,26 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 wow fadeInUp"
                              data-wow-delay="0.7s">
+=======
+                                    <p>Volunteering abroad or for international nonprofit organizations focused on issues like poverty, healthcare, education, human rights.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+>>>>>>> parent of d615221 (tuong)
                             <div class="service-item rounded pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-cog text-primary mb-4"></i>
                                     <h5>Political/social advocacy</h5>
+<<<<<<< HEAD
                                     <p>Volunteering for campaigns, organizations that
                                         focus on issues like voter registration, women's
                                         rights, LGBTQ+ rights, racial justice, poverty
                                         advocacy. Tasks include outreach, fundraising,
                                         administrative support.</p>
+=======
+                                    <p>Volunteering for campaigns, organizations that focus on issues like voter registration, women's rights, LGBTQ+ rights, racial justice, poverty advocacy. Tasks include outreach, fundraising, administrative support.</p>
+>>>>>>> parent of d615221 (tuong)
                                 </div>
                             </div>
                         </div>
@@ -303,7 +438,10 @@
             <!-- Service End -->
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d615221 (tuong)
             <!-- Destination Start -->
             <div class="container-xxl py-5 destination">
                 <div class="container">
@@ -317,31 +455,69 @@
                                 <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                                     <a class="position-relative d-block overflow-hidden" href="">
                                         <img class="img-fluid" src="img/destination-1.jpg" alt="">
+<<<<<<< HEAD
                                         <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">30% OFF</div>
                                         <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Thailand</div>
+=======
+                                        <div
+                                            class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">
+                                            30% OFF</div>
+                                        <div
+                                            class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
+                                            Thailand</div>
+>>>>>>> parent of d615221 (tuong)
                                     </a>
                                 </div>
                                 <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
                                     <a class="position-relative d-block overflow-hidden" href="">
                                         <img class="img-fluid" src="img/destination-2.jpg" alt="">
+<<<<<<< HEAD
                                         <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">25% OFF</div>
                                         <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Malaysia</div>
+=======
+                                        <div
+                                            class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">
+                                            25% OFF</div>
+                                        <div
+                                            class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
+                                            Malaysia</div>
+>>>>>>> parent of d615221 (tuong)
                                     </a>
                                 </div>
                                 <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
                                     <a class="position-relative d-block overflow-hidden" href="">
                                         <img class="img-fluid" src="img/destination-3.jpg" alt="">
+<<<<<<< HEAD
                                         <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">35% OFF</div>
                                         <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Australia</div>
+=======
+                                        <div
+                                            class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">
+                                            35% OFF</div>
+                                        <div
+                                            class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
+                                            Australia</div>
+>>>>>>> parent of d615221 (tuong)
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
                             <a class="position-relative d-block h-100 overflow-hidden" href="">
+<<<<<<< HEAD
                                 <img class="img-fluid position-absolute w-100 h-100" src="img/destination-4.jpg" alt="" style="object-fit: cover;">
                                 <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">20% OFF</div>
                                 <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Indonesia</div>
+=======
+                                <img class="img-fluid position-absolute w-100 h-100" src="img/destination-4.jpg"
+                                     alt="" style="object-fit: cover;">
+                                <div
+                                    class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">
+                                    20% OFF</div>
+                                <div
+                                    class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">
+                                    Indonesia</div>
+>>>>>>> parent of d615221 (tuong)
                             </a>
                         </div>
                     </div>
@@ -360,8 +536,16 @@
                             <div class="col-md-6 text-white">
                                 <h6 class="text-white text-uppercase">Booking</h6>
                                 <h1 class="text-white mb-4">Online Booking</h1>
+<<<<<<< HEAD
                                 <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
                                 <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+=======
+                                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
+                                    diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
+                                    diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit
+                                    clita duo justo magna dolore erat amet</p>
+>>>>>>> parent of d615221 (tuong)
                                 <a class="btn btn-outline-light py-3 px-5 mt-2" href="">Read More</a>
                             </div>
                             <div class="col-md-6">
@@ -370,19 +554,36 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-floating">
+<<<<<<< HEAD
                                                 <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name">
+=======
+                                                <input type="text" class="form-control bg-transparent" id="name"
+                                                       placeholder="Your Name">
+>>>>>>> parent of d615221 (tuong)
                                                 <label for="name">Your Name</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
+<<<<<<< HEAD
                                                 <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email">
+=======
+                                                <input type="email" class="form-control bg-transparent" id="email"
+                                                       placeholder="Your Email">
+>>>>>>> parent of d615221 (tuong)
                                                 <label for="email">Your Email</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating date" id="date3" data-target-input="nearest">
+<<<<<<< HEAD
                                                 <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
+=======
+                                                <input type="text"
+                                                       class="form-control bg-transparent datetimepicker-input"
+                                                       id="datetime" placeholder="Date & Time" data-target="#date3"
+                                                       data-toggle="datetimepicker" />
+>>>>>>> parent of d615221 (tuong)
                                                 <label for="datetime">Date & Time</label>
                                             </div>
                                         </div>
@@ -398,12 +599,23 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
+<<<<<<< HEAD
                                                 <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
+=======
+                                                <textarea class="form-control bg-transparent"
+                                                          placeholder="Special Request" id="message"
+                                                          style="height: 100px"></textarea>
+>>>>>>> parent of d615221 (tuong)
                                                 <label for="message">Special Request</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
+<<<<<<< HEAD
                                             <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+=======
+                                            <button class="btn btn-outline-light w-100 py-3" type="submit">Book
+                                                Now</button>
+>>>>>>> parent of d615221 (tuong)
                                         </div>
                                     </div>
                                 </form>
@@ -425,35 +637,65 @@
                     <div class="row gy-5 gx-4 justify-content-center">
                         <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="position-relative border border-primary pt-5 pb-4 px-4">
+<<<<<<< HEAD
                                 <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+=======
+                                <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow"
+                                     style="width: 100px; height: 100px;">
+>>>>>>> parent of d615221 (tuong)
                                     <i class="fa fa-globe fa-3x text-white"></i>
                                 </div>
                                 <h5 class="mt-4">Choose A Destination</h5>
                                 <hr class="w-25 mx-auto bg-primary mb-1">
                                 <hr class="w-50 mx-auto bg-primary mt-0">
+<<<<<<< HEAD
                                 <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+=======
+                                <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam
+                                    eos erat ipsum et lorem et sit sed stet lorem sit</p>
+>>>>>>> parent of d615221 (tuong)
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
                             <div class="position-relative border border-primary pt-5 pb-4 px-4">
+<<<<<<< HEAD
                                 <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+=======
+                                <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow"
+                                     style="width: 100px; height: 100px;">
+>>>>>>> parent of d615221 (tuong)
                                     <i class="fa fa-dollar-sign fa-3x text-white"></i>
                                 </div>
                                 <h5 class="mt-4">Pay Online</h5>
                                 <hr class="w-25 mx-auto bg-primary mb-1">
                                 <hr class="w-50 mx-auto bg-primary mt-0">
+<<<<<<< HEAD
                                 <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+=======
+                                <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam
+                                    eos erat ipsum et lorem et sit sed stet lorem sit</p>
+>>>>>>> parent of d615221 (tuong)
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
                             <div class="position-relative border border-primary pt-5 pb-4 px-4">
+<<<<<<< HEAD
                                 <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+=======
+                                <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow"
+                                     style="width: 100px; height: 100px;">
+>>>>>>> parent of d615221 (tuong)
                                     <i class="fa fa-plane fa-3x text-white"></i>
                                 </div>
                                 <h5 class="mt-4">Fly Today</h5>
                                 <hr class="w-25 mx-auto bg-primary mb-1">
                                 <hr class="w-50 mx-auto bg-primary mt-0">
+<<<<<<< HEAD
                                 <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+=======
+                                <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam
+                                    eos erat ipsum et lorem et sit sed stet lorem sit</p>
+>>>>>>> parent of d615221 (tuong)
                             </div>
                         </div>
                     </div>
@@ -475,7 +717,12 @@
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="img/team-1.jpg" alt="">
                                 </div>
+<<<<<<< HEAD
                                 <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+=======
+                                <div class="position-relative d-flex justify-content-center"
+                                     style="margin-top: -19px;">
+>>>>>>> parent of d615221 (tuong)
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
@@ -491,7 +738,12 @@
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="img/team-2.jpg" alt="">
                                 </div>
+<<<<<<< HEAD
                                 <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+=======
+                                <div class="position-relative d-flex justify-content-center"
+                                     style="margin-top: -19px;">
+>>>>>>> parent of d615221 (tuong)
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
@@ -507,7 +759,12 @@
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="img/team-3.jpg" alt="">
                                 </div>
+<<<<<<< HEAD
                                 <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+=======
+                                <div class="position-relative d-flex justify-content-center"
+                                     style="margin-top: -19px;">
+>>>>>>> parent of d615221 (tuong)
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
@@ -523,7 +780,12 @@
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="img/team-4.jpg" alt="">
                                 </div>
+<<<<<<< HEAD
                                 <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+=======
+                                <div class="position-relative d-flex justify-content-center"
+                                     style="margin-top: -19px;">
+>>>>>>> parent of d615221 (tuong)
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
                                     <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
@@ -549,6 +811,7 @@
                     </div>
                     <div class="owl-carousel testimonial-carousel position-relative">
                         <div class="testimonial-item bg-white text-center border p-4">
+<<<<<<< HEAD
                             <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
                             <h5 class="mb-0">John Doe</h5>
                             <p>New York, USA</p>
@@ -571,11 +834,44 @@
                             <h5 class="mb-0">John Doe</h5>
                             <p>New York, USA</p>
                             <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+=======
+                            <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-1.jpg"
+                                 style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">John Doe</h5>
+                            <p>New York, USA</p>
+                            <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet
+                                diam et eos. Clita erat ipsum et lorem et sit.</p>
+                        </div>
+                        <div class="testimonial-item bg-white text-center border p-4">
+                            <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-2.jpg"
+                                 style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">John Doe</h5>
+                            <p>New York, USA</p>
+                            <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                        </div>
+                        <div class="testimonial-item bg-white text-center border p-4">
+                            <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-3.jpg"
+                                 style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">John Doe</h5>
+                            <p>New York, USA</p>
+                            <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                        </div>
+                        <div class="testimonial-item bg-white text-center border p-4">
+                            <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-4.jpg"
+                                 style="width: 80px; height: 80px;">
+                            <h5 class="mb-0">John Doe</h5>
+                            <p>New York, USA</p>
+                            <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam
+                                amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+>>>>>>> parent of d615221 (tuong)
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Testimonial End -->
+<<<<<<< HEAD
 
             <%@include file="./components/footer.jsp"%>
 
@@ -594,9 +890,38 @@
             <script src="lib/tempusdominus/js/moment.min.js"></script>
             <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
             <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+=======
+
+
+            <!-- Footer Start -->
+      
+            <!-- Footer End -->
+
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+>>>>>>> parent of d615221 (tuong)
 
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
     </body>
 
+<<<<<<< HEAD
+=======
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+            <!-- Template Javascript -->
+            <script src="js/main.js"></script>
+    </body>
+    
+>>>>>>> parent of d615221 (tuong)
 </html>

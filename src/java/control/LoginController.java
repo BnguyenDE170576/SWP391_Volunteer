@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
             String pass =  SecurityUtils.hashMd5(request.getParameter("password"));
             AccountDAO loginDAO = new AccountDAO();
 
-            if (!loginDAO.checkAccountExits(user)) {
+            if (!loginDAO.checkAccountExits(user) ) {
                 request.setAttribute("ERROR_MASSEGE", "Account not existed");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }

@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
 
 
 
@@ -35,10 +36,15 @@
 
 
         <group name="Group 20230725-10:42:04">
+=======
+<<<<<<< HEAD
+        <group name="Group 20230725-10:42:04">
+>>>>>>> parent of d615221 (tuong)
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/js/checkinput.js</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/login.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/LoginController.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/SignUp.java</file>
+<<<<<<< HEAD
 
 
 
@@ -47,5 +53,12 @@
         <group name="Group 20230725-10:42:04"/>
         <group/>
 
+=======
+        </group>
+=======
+        <group name="Group 20230725-10:42:04"/>
+        <group/>
+>>>>>>> origin/DAT
+>>>>>>> parent of d615221 (tuong)
     </open-files>
 </project-private>
