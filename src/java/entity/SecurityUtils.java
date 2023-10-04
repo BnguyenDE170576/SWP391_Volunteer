@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author KhoaHD7621
+ * @author twna21
  */
 public class SecurityUtils {
     

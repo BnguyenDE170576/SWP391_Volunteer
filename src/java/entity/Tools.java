@@ -5,7 +5,7 @@ import java.util.Base64;
 
 /**
  *
- * @author hoang
+ * @author twna21
  */
 public class Tools {
 

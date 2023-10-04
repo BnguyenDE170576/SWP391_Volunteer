@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DELL
+ * @author twna21
  */
 public class ProfileControl extends HttpServlet {
 
@@ -37,27 +37,26 @@ public class ProfileControl extends HttpServlet {
 //        Lấy thông tin muốn cập nhật từ JSP xuống
         request.setCharacterEncoding("UTF-8");
         String user = request.getParameter("username");
-        String pass = request.getParameter("password");
+
         String name = request.getParameter("name");
         String address = request.getParameter("address");
 //        String birthday = request.getParameter("birthday");
         String phone = request.getParameter("phone");
-        
 
         String email = request.getParameter("email");
 
         AccountDAO data = new AccountDAO();
 //        Lấy UserID khi muốn cập nhật UserInfor sẽ chính xác hơn
         int userID = data.GetUSERID(user);
-//        Cập nhật password khi lấy được username
-        data.updateAccountPassword(userID, pass);
+//     
+
 //        Cập nhật information có UserID trên
-        data.updateACCOUNT(userID, pass, phone, address, name, email);
+        data.updateACCOUNT(userID, phone, address, name, email);
         //dao.updateACCOUNT(4,"1234","085989589", "2003-12-2", "FPT", "Manh Tuong", "E@gmail.com");
 
         Account a = data.getAccount_BYUSER(user);
         request.setAttribute("LOGIN_USER", a);
         request.getRequestDispatcher("Profile.jsp").forward(request, response);
 
-}
+    }
 }

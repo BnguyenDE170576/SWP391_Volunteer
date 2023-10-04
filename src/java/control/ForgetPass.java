@@ -6,21 +6,19 @@
 package control;
 
 import dao.AccountDAO;
-import entity.Account;
+import dao.Login;
 import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ytbhe
+ * @author twna21
  */
 public class ForgetPass extends HttpServlet {
 
@@ -35,19 +33,7 @@ public class ForgetPass extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ForgetPass</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ForgetPass at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +48,28 @@ public class ForgetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        int otp = Integer.parseInt(request.getParameter("otp"));
+        String email = request.getParameter("email");
+        /* TODO output your page here. You may use following sample code. */
+
+        Login dao = new Login();
+
+        if ((otp == dao.getOTP(email)) && dao.checkTIME_OTP(email)) {
+
+            dao.deleteOTP(email);
+
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+
+        } else {
+
+            request.setAttribute("ERROR_MASSEGE", " OTP not valid" + " or maybe expired. ");
+            dao.deleteOTP(email);
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
+
+        }
+
     }
 
     /**
@@ -76,31 +83,28 @@ public class ForgetPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String email = request.getParameter("email");
-            AccountDAO dao = new AccountDAO();
-            Account a = dao.getAccountInfoByEmail(email);
-            
-            if (!dao.checkEmail(email)) {
-                request.setAttribute("ERROR_MASSEGE", "Account not existed");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-            SendMail m = new SendMail();
-            m.sendEmail(email, a);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ForgetPass.class.getName()).log(Level.SEVERE, null, ex);
+        response.setContentType("text/html;charset=UTF-8");
+
+        String email = request.getParameter("email");
+
+        Login dao = new Login();
+        AccountDAO acc = new AccountDAO();
+
+        if (!acc.checkEmail(email)) {
+            request.setAttribute("ERROR_MASSEGE", "The email is not exist.");
+            request.getRequestDispatcher("foget.jsp").forward(request, response);
+        } else {
+            int otp = dao.generateOTP(6);
+            dao.insertOTP(email, otp);
+
+            SendMail send = new SendMail();
+            String link = "http://localhost:8080/CommunityUnity/forget";
+            String title = "FORGOT PASSWORD - COMMUNITY UNITY";
+            String otpMSG = "\n" + "<p>This is OTP:</p>" + "<p>OTP: " + otp + "</p>";
+            send.sendEmail(email, otp, link, title, otpMSG);
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
         }
+
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

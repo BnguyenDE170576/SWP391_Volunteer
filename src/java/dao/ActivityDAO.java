@@ -25,7 +25,9 @@ public class ActivityDAO {
                 + "select *, ROW_NUMBER() over (order by activity_id) as rownumber from volunteer_activities"
                 + ") as activity "
                 + "where activity.rownumber >= ? and activity.rownumber <=?";
+
     private static final String GET_WITH_ID = "SELECT * FROM volunteer_activities WHERE activity_id = ?;";
+
     private static final String GET_TOTAL_ROWS = "SELECT COUNT(*) FROM volunteer_activities;";
 
     public List<VolunteerActivity> getActivityFromTo(int page, int pageSize) throws SQLException {
@@ -112,6 +114,7 @@ public class ActivityDAO {
         }
         return rowCount;
     }
+
     
     public VolunteerActivity getActivityById(int eid){
         VolunteerActivity activities = new VolunteerActivity();
@@ -160,4 +163,5 @@ public class ActivityDAO {
 
         return activities;
     }
+
 }

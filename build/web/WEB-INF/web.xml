@@ -17,6 +17,10 @@
         <servlet-class>control.LoginGoogleController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EventDetailControl</servlet-name>
+        <servlet-class>control.EventDetailControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProfileControl</servlet-name>
         <servlet-class>control.ProfileControl</servlet-class>
     </servlet>
@@ -29,8 +33,14 @@
         <servlet-class>control.LogoutControl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EventDetailControl</servlet-name>
-        <servlet-class>control.EventDetailControl</servlet-class>
+
+        <servlet-name>SendMailController</servlet-name>
+        <servlet-class>control.SendMailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePass</servlet-name>
+        <servlet-class>control.ChangePass</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -59,6 +69,11 @@
     <servlet-mapping>
         <servlet-name>LogoutControl</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>ChangePass</servlet-name>
+        <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EventDetailControl</servlet-name>

@@ -2,7 +2,7 @@ package entity;
 
 /**
  *
- * @author KhoaHD7621
+ * @author twna21
  */
 public class Constants {
 
