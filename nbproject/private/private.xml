@@ -2,71 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-
         <group name="Group 20230725-10:42:04">
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ChangePass.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/css/loginCSS.css</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/Login.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ForgetPass.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/HomePage.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/ActivityDAO.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/changePass.jsp</file>
-
-
-        <group name="Group 20230725-10:42:04"/>
-        <group>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/EventDetail.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/Profile.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/errormanage.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/HomePage.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/UserGoogle.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/header.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/HomeControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LoginController.java</file>
-
-
-
-        <group name="Group 20230725-10:42:04">
-=======
-<<<<<<< HEAD
-        <group name="Group 20230725-10:42:04">
->>>>>>> parent of d615221 (tuong)
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/js/checkinput.js</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/login.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/LoginController.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/SignUp.java</file>
-<<<<<<< HEAD
-
-
-
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/HomeControl.java</file>
         </group>
-
-        <group name="Group 20230725-10:42:04"/>
-        <group/>
-
-=======
-        </group>
-=======
-        <group name="Group 20230725-10:42:04"/>
-        <group/>
->>>>>>> origin/DAT
->>>>>>> parent of d615221 (tuong)
-=======
-        <group name="Group 20230725-10:42:04">
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/newjsp.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/DonationForPage.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/donation.jsp</file>
-        </group>
->>>>>>> TUONG
     </open-files>
 </project-private>
