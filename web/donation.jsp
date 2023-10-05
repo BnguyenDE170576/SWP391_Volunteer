@@ -84,20 +84,20 @@
                         <div class="donation-container">
 
                             <div class="donation-box">
-                                <form id="donationForm" action="donationpage" method="post">
+                                <form id="donationForm" action="donationpage" method="post" onsubmit="return validateDonation()">
                                     <div class="title">Donation Information</div>
 
                                     <div class="fields">
-                                        <input type="text" id="firstName" placeholder="First Name"> 
-                                        <input type="email" id="email" placeholder="Email">
-                                        <input type="text" name="text" id="text" placeholder="Describe">
+                                        <input type="text" id="firstName" placeholder="First Name" required> 
+                                        <input type="email" id="email" placeholder="Email" required>
+                                        <input type="text" name="text" id="text" placeholder="Describe - option">
 
 
                                     </div>
 
                                     <div class="amount">
                                         <div class="button"> <label>
-                                                <input type="radio" name="donation" value="50000">50.000đ</label></div>
+                                                <input type="radio" name="donation" value="50000" checked >50.000đ</label></div>
                                         <div class="button"> <label>
                                                 <input type="radio" name="donation" value="100000">100.000đ</label></div>
                                         <div class="button"> <label>
@@ -106,7 +106,7 @@
                                         <div class="button">
                                             <label>
                                                 <input type="radio" class="set-amount" name="donation" value="">
-                                                <input type="number" name="donation" id="customAmount" oninput="updateDonationValue(this)" style="width:100%;">
+                                                <input type="number" name="donation"  id="customAmount" oninput="updateDonationValue(this)" style="width:100%;">
                                             </label>
                                         </div>
 
@@ -159,6 +159,25 @@
                     radioButton.value = customValue;
                 }
             }
+            
+             function validateDonation() {
+        var selectedDonation = document.querySelector('input[name="donation"]:checked');
+        var customAmountInput = document.getElementById('customAmount');
+
+        // Check if either the radio button is checked or a custom amount is entered
+        if (!selectedDonation && customAmountInput.value.trim() === "") {
+            alert("Please choose a donation amount or enter a custom amount.");
+            return false; // Prevent form submission
+        }
+        
+        // If the "set-amount" radio button is checked, ensure that a custom amount is entered
+        if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
+            alert("Please enter a custom amount.");
+            return false; // Prevent form submission
+        }
+        
+        return true; // Allow form submission
+    }
         </script>
 
 
