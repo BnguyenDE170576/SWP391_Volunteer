@@ -86,6 +86,8 @@
                                         <tr>0 vnđ</tr><br><br>
                                         <tr>Mã đơn hàng</tr><br>
                                         <tr>${maDH}</tr> <br><br>
+                                        <tr>Thời gian</tr><br>
+                                        <tr>${time}</tr> <br><br>
                                     </table>
                                       </div>
                             <div style="padding-left: 90px; font-size: 17px; padding-top:4%;">
@@ -96,9 +98,6 @@
                                         </button>
                                     </div>
                                 </form>
-
-
-                        
 
                         </div>
 

@@ -197,6 +197,10 @@ public final class QRcode_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        <tr>");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${maDH}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("</tr> <br><br>\r\n");
+      out.write("                                        <tr>Thời gian</tr><br>\r\n");
+      out.write("                                        <tr>");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${time}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</tr> <br><br>\r\n");
       out.write("                                    </table>\r\n");
       out.write("                                      </div>\r\n");
       out.write("                            <div style=\"padding-left: 90px; font-size: 17px; padding-top:4%;\">\r\n");
@@ -207,9 +211,6 @@ public final class QRcode_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        </button>\r\n");
       out.write("                                    </div>\r\n");
       out.write("                                </form>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("                        \r\n");
       out.write("\r\n");
       out.write("                        </div>\r\n");
       out.write("\r\n");
