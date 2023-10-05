@@ -1,0 +1,27 @@
+SMAP
+QRcode_jsp.java
+JSP
+*S JSP
+*F
++ 0 QRcode.jsp
+QRcode.jsp
++ 1 header.jsp
+./components/header.jsp
++ 2 footer.jsp
+./components/footer.jsp
+*L
+1,73:68
+1#1,30:141
+30:406,7
+31:413
+31:440,8
+32,4:448
+35,2:416
+36:470,7
+37,12:477
+48,2:420
+49,5:173
+73#0,74:178
+5#2,133:252
+146#0,4:384
+*E
