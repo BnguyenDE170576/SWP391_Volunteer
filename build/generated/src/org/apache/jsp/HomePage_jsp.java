@@ -81,7 +81,7 @@ public final class HomePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <head>\r\n");
 <<<<<<< HEAD
       out.write("        <meta charset=\"utf-8\">\r\n");
-      out.write("        <title>Vounteer</title>\r\n");
+      out.write("        <title>Community Volunteer</title>\r\n");
       out.write("        <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">\r\n");
       out.write("        <meta content=\"\" name=\"keywords\">\r\n");
       out.write("        <meta content=\"\" name=\"description\">\r\n");
@@ -89,8 +89,7 @@ public final class HomePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
 >>>>>>> parent of d615221 (tuong)
       out.write("\r\n");
-      out.write("        <!-- Favicon -->\r\n");
-      out.write("        <link href=\"img/favicon.ico\" rel=\"icon\">\r\n");
+      out.write("\r\n");
       out.write("\r\n");
 <<<<<<< HEAD
       out.write("        <!-- Google Web Fonts -->\r\n");
@@ -184,11 +183,10 @@ public final class HomePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"row gx-0\">\r\n");
       out.write("                <div class=\"col-lg-8 text-center text-lg-start mb-2 mb-lg-0\">\r\n");
       out.write("                    <div class=\"d-inline-flex align-items-center\" style=\"height: 45px;\">\r\n");
-      out.write("                        <small class=\"me-3 text-light\"><i class=\"fa fa-map-marker-alt me-2\"></i>123 Street, New\r\n");
-      out.write("                            York, USA</small>\r\n");
+      out.write("                        <small class=\"me-3 text-light\"><i class=\"fa fa-map-marker-alt me-2\"></i>FPT DA NA NANG</small>\r\n");
       out.write("                        <small class=\"me-3 text-light\"><i class=\"fa fa-phone-alt me-2\"></i>+012 345 6789</small>\r\n");
       out.write("                        <small class=\"text-light\"><i\r\n");
-      out.write("                                class=\"fa fa-envelope-open me-2\"></i>info@example.com</small>\r\n");
+      out.write("                                class=\"fa fa-envelope-open me-2\"></i>communityunity21@gmail.com</small>\r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"col-lg-4 text-center text-lg-end\">\r\n");
@@ -231,7 +229,7 @@ public final class HomePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </button>\r\n");
       out.write("    <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n");
       out.write("        <div class=\"navbar-nav ms-auto py-0\">\r\n");
-      out.write("            <a href=\"index.html\" class=\"nav-item nav-link active\">Home</a>\r\n");
+      out.write("            <a href=\"home\" class=\"nav-item nav-link active\">Home</a>\r\n");
       out.write("            <a href=\"about.html\" class=\"nav-item nav-link\">About</a>\r\n");
       out.write("            <a href=\"service.html\" class=\"nav-item nav-link\">Services</a>\r\n");
       out.write("            <a href=\"package.html\" class=\"nav-item nav-link\">Packages</a>\r\n");
@@ -245,7 +243,7 @@ public final class HomePage_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <a href=\"404.html\" class=\"dropdown-item\">404 Page</a>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
-      out.write("            <a href=\"contact.html\" class=\"nav-item nav-link\">Contact</a>\r\n");
+      out.write("            <a href=\"donation.jsp\" class=\"nav-item nav-link\">Donation</a>\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("        </div>\r\n");
@@ -1354,9 +1352,9 @@ public final class HomePage_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                    </a>\r\n");
         out.write("                    <div class=\"dropdown-menu m-0\">\r\n");
         out.write("                        <a class=\"dropdown-item\" href=\"#\">Change Password</a>\r\n");
-        out.write("                        <a class=\"dropdown-item\" href=\"#\">View Profile</a>\r\n");
+        out.write("                        <a class=\"dropdown-item\" href=\"./Profile.jsp\">View Profile</a>\r\n");
         out.write("                        <a class=\"dropdown-item\" href=\"#\">Edit Profile</a>\r\n");
-        out.write("                        <a class=\"dropdown-item\" href=\"logout.jsp\">Log Out</a>\r\n");
+        out.write("                        <a class=\"dropdown-item\" href=\"logout\">Log Out</a>\r\n");
         out.write("                    </div>\r\n");
         out.write("                </div>\r\n");
         out.write("            ");

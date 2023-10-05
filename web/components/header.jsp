@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="home" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Services</a>
             <a href="package.html" class="nav-item nav-link">Packages</a>
@@ -23,7 +23,7 @@
                     <a href="404.html" class="dropdown-item">404 Page</a>
                 </div>
             </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="donation.jsp" class="nav-item nav-link">Donation</a>
 
 
         </div>
@@ -41,9 +41,9 @@
                     </a>
                     <div class="dropdown-menu m-0">
                         <a class="dropdown-item" href="#">Change Password</a>
-                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="#">Edit Profile</a>
-                        <a class="dropdown-item" href="logout.jsp">Log Out</a>
+                        <a class="dropdown-item" href="logout">Log Out</a>
                     </div>
                 </div>
             </c:otherwise>

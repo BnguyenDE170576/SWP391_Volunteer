@@ -20,7 +20,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/profile.css">
-
+        <link rel="stylesheet" href="css/templatemo-style.css">
+        <link rel="stylesheet" href="css/fontawesome.min.css" />
         <style>
             .photo-frame {
                 border: 2px;
@@ -39,7 +40,7 @@
     <body>
 
         <%
-          String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+            String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
             Account a = new Account();
             AccountDAO dao = new AccountDAO();
 
@@ -54,124 +55,158 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <h5>MY PROFILE</h5>
-         
+
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6">
-                        <table>
-                            <tr>
-                                <th>Photo:</th>
 
-                                <td>
+                    <div class="container mt-12">
 
-                                    <div class="photo-frame">
-                                        <img src="${sessionScope.LOGIN_USER.photo}">
-                                        <c:if test="${sessionScope.LOGIN_USER.photo == null  || sessionScope.LOGIN_USER.photo eq ''}">
-                                            <img src="./images/uer.png" alt="images/uer.png">
-                                        </c:if> 
-                                    </div>
-                                </td>
-
-
-
-
-
-                            </tr>
-                            <tr>
-                                <th>Tên đăng nhập:</th>
-                                <td>${sessionScope.LOGIN_USER.userName}</td>
-                            </tr>
-                            <tr>
-                                <th>Name:</th>
-                                <td>
-                                    <%=a.getFullName()%>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Phone</th>
-                                <td>
-                                    <p style="padding-right: 10px;" id=""> <%=a.getPhone()%></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Address</th>
-                                <td>
-                                    <p style="padding-right: 10px;" id=""> <%=a.getAddress()%></p>
-                                </td>
-                            </tr>
-                   
-                     
-                            <tr>
-                                <th>Email</th>
-                                <td>
-                                     <%=a.getEmail()%>
-                                </td>
-                            </tr>
-
-                        </table>
-                        </form>
-                        <div>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">EDIT</button>
-                            <a href="home" class="btn btn-primary" data-bs-whatever="@getbootstrap"> BACK HOME </a>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Thông Tin</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!-- row -->
+                        <div class="row tm-content-row">
+                            <div class="tm-block-col tm-col-avatar">
+                                <div class="tm-bg-primary-dark tm-block tm-block-avatar">
+                                    <h2 class="tm-block-title">Change Avatar</h2>
+                                    <div class="tm-avatar-container">
+                                        <div class="photo-frame">
+                                            <img src="${sessionScope.LOGIN_USER.photo}">
+                                            <c:if test="${sessionScope.LOGIN_USER.photo == null  || sessionScope.LOGIN_USER.photo eq ''}">
+                                                <img src="./images/uer.png" alt="images/uer.png">
+                                            </c:if> 
                                         </div>
-                                        <form action="ProfileControl" method="post"> 
-                                            <div class="modal-body">
-
-                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label">Username: </label>
-                                                    <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" readonly>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label">Nqme</label>
-                                                    <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" name="name">
-                                                </div>
-<!--                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label">Birth Day: </label>
-                                                    <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" placeholder="yyyy-mm-dd" name="birthday">
-                                                </div>-->
-                                                <div class="mb-3">
-                                                    <label for="recipient-name" class="col-form-label">Phone:</label>
-                                                    <input type="number" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.phone}" name="phone">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="message-text" class="col-form-label">Address</label>
-                                                    <input type="email" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.address}" name="address">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="message-text" class="col-form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.email}" name="email">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="message-text" class="col-form-label">New password:</label>
-                                                    <input type="password" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.password}" name="password">
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" hidden="">
-                                                <input type="submit" class="btn btn-primary" value="Update"> 
-                                            </div>
-
-
-                                        </form>
-
-
                                     </div>
+                                    <button class="btn btn-primary btn-block text-uppercase">
+                                        Upload New Photo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tm-block-col tm-col-account-settings">
+                                <div class="tm-bg-primary-dark tm-block tm-block-settings">
+                                    <h2 class="tm-block-title">Account Settings</h2>
+                                    <form action="" class="tm-signup-form row">
+
+
+                                        <div class="form-group col-lg-6">
+                                            <label for="name">Account Name</label>
+
+                                            <input
+                                                id="email"
+                                                name="username"
+                                                type="text"
+                                                placeholder="${sessionScope.LOGIN_USER.userName}" readonly
+                                                class="form-control validate"
+                                                />
+
+
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label for="email">Account Email</label>
+                                            <%=a.getEmail()%>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="phone">Address</label>
+                                            <input
+                                                id="email"
+                                                name="phone"
+                                                type="phone"
+                                                placeholder="<%=a.getPhone()%>"
+                                                class="form-control validate"
+                                                />
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="Address">Address</label>
+                                            <input
+                                                id="email"
+                                                name="address"
+                                                type="text"
+                                                placeholder="<%=a.getAddress()%>"
+                                                class="form-control validate"
+                                                />
+                                        </div>
+
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="tm-hide-sm">&nbsp;</label>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary btn-block text-uppercase"
+                                                >
+                                                Update Your Profile
+                                            </button>
+                                        </div>
+                                        <div class="col-12">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary btn-block text-uppercase"
+                                                >
+                                                Delete Your Account
+                                            </button>
+                                        </div>
+                                        </table>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">EDIT</button>
+                        <a href="home" class="btn btn-primary" data-bs-whatever="@getbootstrap"> BACK HOME </a>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Thông Tin</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="ProfileControl" method="post"> 
+                                        <div class="modal-body">
+
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Username: </label>
+                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Nqme</label>
+                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" name="name">
+                                            </div>
+                                            <!--                                                <div class="mb-3">
+                                                                                                <label for="recipient-name" class="col-form-label">Birth Day: </label>
+                                                                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" placeholder="yyyy-mm-dd" name="birthday">
+                                                                                            </div>-->
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Phone:</label>
+                                                <input type="number" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.phone}" name="phone">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Address</label>
+                                                <input type="email" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.address}" name="address">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Email:</label>
+                                                <input type="email" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.email}" name="email">
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" hidden="">
+                                            <input type="submit" class="btn btn-primary" value="Update"> 
+                                        </div>
+
+
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
