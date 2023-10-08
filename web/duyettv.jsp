@@ -9,8 +9,7 @@
                     <div class="modal-body">
                         <!-- Hiển thị danh sách thành viên và các nút từ chối/xét duyệt tại đây -->
                         <ul>
-                            <li>Thành viên 1 <button onclick="rejectMember(1)">Từ chối</button> <button onclick="approveMember(1)">Xét duyệt</button></li>
-                            <li>Thành viên 2 <button onclick="rejectMember(2)">Từ chối</button> <button onclick="approveMember(2)">Xét duyệt</button></li>
+                             
                             <!-- Thêm danh sách thành viên và nút tại đây -->
                         </ul>
                     </div>

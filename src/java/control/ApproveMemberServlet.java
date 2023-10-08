@@ -4,27 +4,23 @@
  */
 package control;
 
-import dao.AccountDAO;
-import dao.ActivityDAO;
-import entity.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import dao.*;
+import entity.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author datka
  */
-public class EventDetailControl extends HttpServlet {
+public class ApproveMemberServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,36 +32,20 @@ public class EventDetailControl extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
-        try {
-            HttpSession session = request.getSession();
-            int eid = Integer.parseInt(request.getParameter("id"));
-            ActivityDAO aDAO = new ActivityDAO();
-            String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
-            AccountDAO dao = new AccountDAO();
-            int check=0;
-            if (aDAO.isPendingUserExists(dao.GetUSERID(name),eid)) check=1;
-            else if (aDAO.isParticipationExist(dao.GetUSERID(name),eid)) check=2;
-            List<Integer> pendinglistid = new ArrayList<>();
-            List<UserPending> pendinglist = new ArrayList<>();
-            pendinglistid = aDAO.getPendingUserByActivity(eid);
-         
-            for (int a : pendinglistid){
-                Account x = dao.getAnAccountById(a);
-                if (x !=null){
-                pendinglist.add(new UserPending(x.getUserName(),x.getPhoto(),x.getAccId()));
-           
-                }
-            }
-            request.setAttribute("pendinglist", pendinglist);
-            request.setAttribute("userID", dao.GetUSERID(name));
-            request.setAttribute("check", check);
-            request.setAttribute("detail", aDAO.getActivityById(eid));
-            request.getRequestDispatcher("EventDetail.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ApproveMemberServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ApproveMemberServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,11 +60,7 @@ public class EventDetailControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -98,6 +74,17 @@ public class EventDetailControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            int eventId = Integer.parseInt(request.getParameter("eventID"));
+            ActivityDAO acDAO = new ActivityDAO();
+            acDAO.removePendingUser(userId, eventId);
+            acDAO.addParticipation(userId, eventId);
+        } catch (SQLException ex) {
+            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -110,5 +97,5 @@ public class EventDetailControl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

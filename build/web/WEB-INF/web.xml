@@ -33,14 +33,16 @@
         <servlet-class>control.LogoutControl</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>SendMailController</servlet-name>
         <servlet-class>control.SendMailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePass</servlet-name>
         <servlet-class>control.ChangePass</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <servlet-class>control.ApproveMemberServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -71,13 +73,16 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ChangePass</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EventDetailControl</servlet-name>
         <url-pattern>/EventDetailControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <url-pattern>/ApproveMemberServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
