@@ -43,6 +43,10 @@
     <servlet>
         <servlet-name>DonationForPage</servlet-name>
         <servlet-class>control.DonationForPage</servlet-class>
+       </servlet>
+        <servlet>
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <servlet-class>control.ApproveMemberServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -83,6 +87,10 @@
     <servlet-mapping>
         <servlet-name>DonationForPage</servlet-name>
         <url-pattern>/donationpage</url-pattern>
+           </servlet-mapping>
+              <servlet-mapping>
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <url-pattern>/ApproveMemberServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

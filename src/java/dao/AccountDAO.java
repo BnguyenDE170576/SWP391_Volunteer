@@ -21,7 +21,7 @@ public class AccountDAO {
     private static final String GET_USER_ID = "SELECT UserID FROM Accounts WHERE username = ?;";
     private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo) VALUES (?, ?, ?, ?, ?, ?,?)";
     private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address FROM Accounts WHERE Email = ?";
-
+    private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address FROM Accounts WHERE UserID = ?";
     private static final String GET_AN_ACCOUNT_BY_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role,address FROM Accounts WHERE token = ?";
     private static final String GET_ACC = "SELECT UserID,username ,Email, Password, name, Phone, photo,Status, Role,address FROM Accounts WHERE username = ?";
     private static final String UPDATE_TOKEN = "UPDATE Accounts Set token = ? WHERE email = ?";
@@ -33,7 +33,7 @@ public class AccountDAO {
 
     private static final String UPDATE_PASSWORD = "UPDATE Accounts Set password = ? WHERE email = ?";
     private static final String UPDATE_ACC = "UPDATE Accounts "
-            + "SET "
+            + "SET " 
             + "[name] = ?, "
             + "[email] = ?, "
             + "[phone] = ?, "
@@ -109,6 +109,49 @@ public class AccountDAO {
             }
         }
         return check;
+    }
+
+    public Account getAnAccountById(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Account acc = null;
+        try {
+            conn = DBUtils.getConnection();
+            stm = conn.prepareStatement(GET_AN_ACCOUNT_BY_ID);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            if (conn != null) {
+
+                if (rs.next()) {
+                    int AccId = rs.getInt("UserID");
+                    String Email = rs.getString("Email");
+                    String photo = rs.getString("photo");
+
+                    String username = rs.getString("username");
+                    String Password = rs.getString("Password");
+                    String FullName = rs.getString("name");
+                    int Status = rs.getInt("Status");
+                    String Phone = rs.getString("Phone");
+
+                    int Role = rs.getInt("Role");
+                    String add = rs.getString("address");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return acc;
     }
 
     public int getRoleAccountByToken(String token) throws SQLException {
@@ -593,8 +636,9 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
         Account a = dao.getAccountInfoByEmail("tuongnmde170578@fpt.edu.vn");
-        System.out.println(""+a.getPassword());
-        System.out.println(""+ SecurityUtils.hashMd5("Abc123@"));
+        System.out.println("" + a.getPassword());
+        System.out.println("" + SecurityUtils.hashMd5("Abc123@"));
+
     }
 
 }

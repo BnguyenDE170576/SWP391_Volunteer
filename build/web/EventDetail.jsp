@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Vounteer</title>
+        <title>Volunteer</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -41,13 +41,65 @@
 
         <style> .navbar-light {
                 position: unset;
-        }</style>
+            }</style>
     </head>
 
     <body>
-        <!-- Nội dung trang web của bạn -->
 
-        <!-- Mã HTML và JavaScript modal -->
+
+        <%@include file="./components/header.jsp" %>
+        <div class="container mt-5">
+            <h1 class="display-4">Chi Tiết Hoạt Động</h1>
+            <c:if test="${not empty detail}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="img/package-1.jpg" alt="Hình ảnh hoạt động" class="img-fluid mb-3">
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="card-title">${detail.activityName}</h5>                                                           
+
+                                <p class="card-text">${detail.description}</p>
+                                <p class="card-text"><strong>Ngày Bắt Đầu:</strong> ${detail.startDate}</p>
+                                <p class="card-text"><strong>Ngày Kết Thúc:</strong> ${detail.endDate}</p>
+                                <p class="card-text"><strong>Địa Điểm:</strong> ${detail.location}</p>
+                                <p class="card-text"><strong>Người Tổ Chức ID:</strong> ${detail.organizerId}</p>
+                                <p class="card-text"><strong>Số Lượng Thành Viên:</strong> ${detail.numberMember}</p>
+                                <p class="card-text"><strong>Ngày Tạo:</strong> ${detail.createdDate}</p>
+                                <p class="card-text"><strong>Ngày Cập Nhật:</strong> ${detail.updatedDate}</p>
+                                <p> ${check} </p>
+                                <div class="text-center mt-4">
+                                    <c:if test="${detail.organizerId == userID}">
+                                        <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  
+                                    </c:if>
+                                    <c:if test="${detail.organizerId != userID && check==0}">
+                                        <form action="PendingUser"  method="POST">
+                                            <input type="hidden" name="activityId" value="${detail.activityId}">
+
+                                            <input type="hidden" name="userID" value="${userID}">
+                                            <button class="btn btn-primary btn-lg">Tham gia</button>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${detail.organizerId != userID && check==1}">
+
+                                        <box class="btn btn-primary btn-lg">Đợi xét duyệt</box>
+
+                                    </c:if>
+                                    <c:if test="${detail.organizerId != userID && check==2}">
+
+                                        <box class="btn btn-primary btn-lg">Đã Tham gia</box>
+
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+
+        <%@include file="./components/footer.jsp" %>
         <div class="modal fade" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -58,9 +110,15 @@
                     <div class="modal-body">
                         <!-- Hiển thị danh sách thành viên và các nút từ chối/xét duyệt tại đây -->
                         <ul>
-                            <li>Thành viên 1 <button onclick="rejectMember(1)">Từ chối</button> <button onclick="approveMember(1)">Xét duyệt</button></li>
-                            <li>Thành viên 2 <button onclick="rejectMember(2)">Từ chối</button> <button onclick="approveMember(2)">Xét duyệt</button></li>
-                            <!-- Thêm danh sách thành viên và nút tại đây -->
+                            <c:forEach var="us" items="${pendinglist}" varStatus="status">    
+                                <li>
+                                    <span>${us.getUserName()}</span>
+                                    <div class="btn-group" role="group">
+                                        <button onclick="rejectMember(${us.getId()}, ${detail.activityId}, this, this.nextElementSibling)">Từ chối</button>
+                                        <button onclick="approveMember(${us.getId()}, ${detail.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
+                                    </div>
+                                </li>
+                            </c:forEach>   
                         </ul>
                     </div>
                     <div class="modal-footer">
@@ -70,60 +128,22 @@
             </div>
         </div>
 
+        <script src="./js/BrowserJoin.js"></script>    
         <script>
-            $(document).ready(function () {
-                $("#myModal").on("click", "button[data-action='reject']", function () {
-                    // Xử lý từ chối thành viên
-                    // Đóng modal sau khi xử lý
-                    $("#myModal").modal("hide");
-                });
+                                            $(document).ready(function () {
+                                                $("#myModal").on("click", "button[data-action='reject']", function () {
+                                                    // Xử lý từ chối thành viên
+                                                    // Đóng modal sau khi xử lý
+                                                    $("#myModal").modal("hide");
+                                                });
 
-                $("#myModal").on("click", "button[data-action='approve']", function () {
-                    // Xử lý xét duyệt thành viên
-                    // Đóng modal sau khi xử lý
-                    $("#myModal").modal("hide");
-                });
-            });
+                                                $("#myModal").on("click", "button[data-action='approve']", function () {
+                                                    // Xử lý xét duyệt thành viên
+                                                    // Đóng modal sau khi xử lý
+                                                    $("#myModal").modal("hide");
+                                                });
+                                            });
         </script>
     </body>
-
-    <%@include file="./components/header.jsp" %>
-
-
-    <div class="container mt-5">
-        <h1 class="display-4">Chi Tiết Hoạt Động</h1>
-        <c:if test="${not empty detail}">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="img/package-1.jpg" alt="Hình ảnh hoạt động" class="img-fluid mb-3">
-                        </div>
-                        <div class="col-md-8">
-                            <h5 class="card-title">${detail.activityName}</h5>                                                           
-                            <c:if test="${detail.organizerId == userID}">
-                                <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  
-                            </c:if>
-                            <p class="card-text">${detail.description}</p>
-                            <p class="card-text"><strong>Ngày Bắt Đầu:</strong> ${detail.startDate}</p>
-                            <p class="card-text"><strong>Ngày Kết Thúc:</strong> ${detail.endDate}</p>
-                            <p class="card-text"><strong>Địa Điểm:</strong> ${detail.location}</p>
-                            <p class="card-text"><strong>Người Tổ Chức ID:</strong> ${detail.organizerId}</p>
-                            <p class="card-text"><strong>Số Lượng Thành Viên:</strong> ${detail.numberMember}</p>
-                            <p class="card-text"><strong>Ngày Tạo:</strong> ${detail.createdDate}</p>
-                            <p class="card-text"><strong>Ngày Cập Nhật:</strong> ${detail.updatedDate}</p>
-                            <div class="text-center mt-4">
-                                <button class="btn btn-primary btn-lg">Tham gia</button>
-                                <button class="btn btn-success btn-lg">Donate</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:if>
-    </div>
-
-    <%@include file="./components/footer.jsp" %>
-</body>
 
 </html>

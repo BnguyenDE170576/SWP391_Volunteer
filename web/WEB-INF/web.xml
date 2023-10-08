@@ -41,8 +41,13 @@
         <servlet-class>control.ChangePass</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>DonationForPage</servlet-name>
         <servlet-class>control.DonationForPage</servlet-class>
+=======
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <servlet-class>control.ApproveMemberServlet</servlet-class>
+>>>>>>> origin/DAT
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -81,8 +86,13 @@
         <url-pattern>/EventDetailControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>DonationForPage</servlet-name>
         <url-pattern>/donationpage</url-pattern>
+=======
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <url-pattern>/ApproveMemberServlet</url-pattern>
+>>>>>>> origin/DAT
     </servlet-mapping>
     <session-config>
         <session-timeout>
