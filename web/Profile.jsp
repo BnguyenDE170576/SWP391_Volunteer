@@ -100,49 +100,51 @@
 
 
                                         </div>
+                                                    <div class="form-group col-lg-6">
+                                            <label for="SEX">SEX</label>
+                                            <input
+                                                id="phone"
+                                                name="sex"
+                                                type="text"
+                                                placeholder="Female"
+                                                class="form-control validate"
+                                                />
+                                        </div>
 
                                         <div class="form-group col-lg-6">
                                             <label for="email">Account Email</label>
                                             <%=a.getEmail()%>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <label for="phone">Address</label>
+                                            <label for="phone">Phone</label>
                                             <input
-                                                id="email"
+                                                id="phone"
                                                 name="phone"
-                                                type="phone"
+                                                type="text"
                                                 placeholder="<%=a.getPhone()%>"
                                                 class="form-control validate"
                                                 />
                                         </div>
                                         <div class="form-group col-lg-6">
+                                            <label for="DateBirth">DateBirth</label>
+                                            <input
+                                                id="phone"
+                                                name="dateBirth"
+                                                type="text"
+                                                placeholder="01/06/2003"
+                                                class="form-control validate"
+                                                />
+                                        </div>
+                                    
+                                        <div class="form-group col-lg-6">
                                             <label for="Address">Address</label>
                                             <input
-                                                id="email"
+                                                id="phone"
                                                 name="address"
                                                 type="text"
                                                 placeholder="<%=a.getAddress()%>"
                                                 class="form-control validate"
                                                 />
-                                        </div>
-
-
-                                        <div class="form-group col-lg-6">
-                                            <label class="tm-hide-sm">&nbsp;</label>
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary btn-block text-uppercase"
-                                                >
-                                                Update Your Profile
-                                            </button>
-                                        </div>
-                                        <div class="col-12">
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary btn-block text-uppercase"
-                                                >
-                                                Delete Your Account
-                                            </button>
                                         </div>
                                         </table>
                                     </form>
@@ -169,7 +171,7 @@
                                                 <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" readonly>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">Nqme</label>
+                                                <label for="recipient-name" class="col-form-label">Name</label>
                                                 <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" name="name">
                                             </div>
                                             <!--                                                <div class="mb-3">
@@ -183,7 +185,7 @@
 
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Address</label>
-                                                <input type="email" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.address}" name="address">
+                                                <input type="text" class="form-control" id="message-text" value="<%=a.getAddress()%>" name="address">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Email:</label>

@@ -6,6 +6,7 @@
 package control;
 
 import dao.AccountDAO;
+import entity.SecurityUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -57,7 +58,10 @@ public class ChangePass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String email = request.getParameter("email");
+        request.setAttribute("email", email);
 
+        request.getRequestDispatcher("changePass.jsp").forward(request, response);
     }
 
     /**
@@ -73,7 +77,7 @@ public class ChangePass extends HttpServlet {
             throws ServletException, IOException {
 
         String new_password = request.getParameter("new_password");
-        String repass = request.getParameter("repass");
+        String repass = SecurityUtils.hashMd5(request.getParameter("repass"));
         String email = request.getParameter("email");
         if (email.equals("") || email == null) {
             request.setAttribute("ERROR_MASSEGE", "You cannot access.");

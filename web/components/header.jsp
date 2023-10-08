@@ -39,7 +39,7 @@
                         <i class="fa fa-user"></i> 
                     </a>
                     <div class="dropdown-menu m-0">
-                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="changepass">Change Password</a>
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="#">Edit Profile</a>
                         <a class="dropdown-item" href="logout">Log Out</a>
