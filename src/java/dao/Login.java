@@ -6,6 +6,10 @@
 package dao;
 
 import context.DBUtils;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -247,9 +251,6 @@ public class Login {
     }
 
     public static void main(String[] args) throws SQLException {
-        Login l = new Login();
-
-   
 
     }
 

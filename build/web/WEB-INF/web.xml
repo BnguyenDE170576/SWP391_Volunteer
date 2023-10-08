@@ -43,10 +43,18 @@
     <servlet>
         <servlet-name>DonationForPage</servlet-name>
         <servlet-class>control.DonationForPage</servlet-class>
-       </servlet>
-        <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>ApproveMemberServlet</servlet-name>
         <servlet-class>control.ApproveMemberServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processChangePass</servlet-name>
+        <servlet-class>control.process.processChangePass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processNewPass</servlet-name>
+        <servlet-class>control.process.processNewPass</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -87,15 +95,21 @@
     <servlet-mapping>
         <servlet-name>DonationForPage</servlet-name>
         <url-pattern>/donationpage</url-pattern>
-           </servlet-mapping>
-              <servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ApproveMemberServlet</servlet-name>
         <url-pattern>/ApproveMemberServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processChangePass</servlet-name>
+        <url-pattern>/changepassprc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processNewPass</servlet-name>
+        <url-pattern>/newpass</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <error-page>
         <error-code>404</error-code>

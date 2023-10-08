@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group name="Group 20230725-10:42:04">
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/EventDetail.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ChangePass.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/DonationForPage.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/components/header.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/LoginGoogleController.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/HomeControl.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/SignUp.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ProfileControl.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/LoginController.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/HomePage.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/ActivityDAO.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/changePass.jsp</file>
-=======
         <group>
             <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/CreateActivityControl.java</file>
             <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
@@ -53,7 +36,25 @@
             <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/Account.java</file>
             <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
             <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/HomeControl.java</file>
->>>>>>> origin/DAT
+        </group>
+        <group name="Group 20230725-10:42:04">
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ChangePass.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/components/header.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/HomeControl.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/context/DBUtils.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/foget.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/SignUp.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ProfileControl.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/process/processNewPass.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/forgetPass_newpass.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/process/processChangePass.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ForgetPass.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/LoginController.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/HomePage.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/entity/SendMail.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/changePass.jsp</file>
         </group>
     </open-files>
 </project-private>
