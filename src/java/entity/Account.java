@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Account implements Serializable {
 
@@ -15,12 +17,12 @@ public class Account implements Serializable {
     private String phone;
     private int role;
     private String address;
-    private String birtDay;
+    private Date birtDay;
 
     public Account() {
     }
 
-    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address, String date, int sex) {
+    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address, Date date, int sex) {
         this.accId = accId;
         this.email = email;
         this.photo = photo;
@@ -107,11 +109,11 @@ public class Account implements Serializable {
         return photo;
     }
 
-    public String getBirtDay() {
+    public Date getBirtDay() {
         return birtDay;
     }
 
-    public void setBirtDay(String birtDay) {
+    public void setBirtDay(Date birtDay) {
         this.birtDay = birtDay;
     }
 
@@ -161,7 +163,9 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", phone=" + phone + ", role=" + role + '}';
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String date = dateFormat.format(birtDay);
+        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + birtDay + '}';
     }
 
 }

@@ -3,6 +3,8 @@
     Created on : Mar 17, 2023, 1:59:39 PM
     Author     : DELL
 --%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -35,6 +37,9 @@
                 max-width: 80%;
                 max-height: 80%;
             }
+            
+          
+            
         </style>
     </head>
     <body>
@@ -45,6 +50,7 @@
             AccountDAO dao = new AccountDAO();
 
             a = dao.getAccount_BYUSER(name);
+
 
         %>
         <form action="" method="post" class="form1">
@@ -95,7 +101,7 @@
                                                 name="username"
                                                 type="text"
                                                 placeholder="${sessionScope.LOGIN_USER.userName}" readonly
-                                                class="form-control validate"
+                                                class="form-control validate" style="background-color: white;"
                                                 />
 
 
@@ -107,7 +113,7 @@
                                                 name="sex"
                                                 type="text"
                                                 placeholder="Female"
-                                                class="form-control validate"
+                                                class="form-control validate"  style="background-color: white;"
                                                 />
                                         </div>
 
@@ -122,7 +128,7 @@
                                                 name="phone"
                                                 type="text"
                                                 placeholder="<%=a.getPhone()%>"
-                                                class="form-control validate"
+                                                class="form-control validate"  style="background-color: white;"
                                                 />
                                         </div>
                                         <div class="form-group col-lg-6">
@@ -132,7 +138,7 @@
                                                 name="dateBirth"
                                                 type="text"
                                                 placeholder="<%=a.getBirtDay()%>"
-                                                class="form-control validate"
+                                                class="form-control validate"  style="background-color: white;"
                                                 />
                                         </div>
 
@@ -143,7 +149,7 @@
                                                 name="address"
                                                 type="text"
                                                 placeholder="<%=a.getAddress()%>"
-                                                class="form-control validate"
+                                                class="form-control validate"  style="background-color: white;"
                                                 />
                                         </div>
                                         </table>
