@@ -113,7 +113,6 @@
         <url-pattern>/ApproveMemberServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>processChangePass</servlet-name>
         <url-pattern>/changepassprc</url-pattern>
     </servlet-mapping>
@@ -128,10 +127,10 @@
     <servlet-mapping>
         <servlet-name>processDonationEV</servlet-name>
         <url-pattern>/donationeventq</url-pattern>
-=======
+</servlet-mapping>
+        <servlet-mapping>
         <servlet-name>AddActivityControl</servlet-name>
         <url-pattern>/AddActivityControl</url-pattern>
->>>>>>> origin/DAT
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
