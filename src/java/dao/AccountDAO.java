@@ -9,10 +9,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author KhoaHD7621
- */
 public class AccountDAO {
 
     private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address FROM Accounts WHERE Email = ? AND Password = ?;";
