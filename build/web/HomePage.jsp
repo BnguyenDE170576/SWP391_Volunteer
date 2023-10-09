@@ -129,10 +129,10 @@
                                         <div class="text-center p-4">
                                             <h3 href="EventDetailControl?id=${activity.getActivityId()}" class="mb-0">${activity.getActivityName()}</h3>
 
-                                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam eos</p>
+                                            <p>Description.........</p>
                                             <div class="d-flex justify-content-center mb-2">
-                                                <a href="EventDetailControl?id=${activity.getActivityId()}" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                                <a href="EventDetailControl?id=${activity.getActivityId()}" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                                <a href="EventDetailControl?id=${activity.getActivityId()}" class="btn btn-sm btn-primary px-3 " style="border-radius: 30px 30px 30px 30px;">Detail</a>
+                                               
                                             </div>
                                         </div>
                                     </div>

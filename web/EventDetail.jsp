@@ -68,7 +68,6 @@
                                 <p class="card-text"><strong>Số Lượng Thành Viên:</strong> ${detail.numberMember}</p>
                                 <p class="card-text"><strong>Ngày Tạo:</strong> ${detail.createdDate}</p>
                                 <p class="card-text"><strong>Ngày Cập Nhật:</strong> ${detail.updatedDate}</p>
-                                <p> ${check} </p>
                                 <div class="text-center mt-4">
                                     <c:if test="${detail.organizerId == userID}">
                                         <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  

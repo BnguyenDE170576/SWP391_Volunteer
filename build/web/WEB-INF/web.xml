@@ -44,6 +44,10 @@
         <servlet-name>ApproveMemberServlet</servlet-name>
         <servlet-class>control.ApproveMemberServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddActivityControl</servlet-name>
+        <servlet-class>control.AddActivityControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -83,6 +87,10 @@
     <servlet-mapping>
         <servlet-name>ApproveMemberServlet</servlet-name>
         <url-pattern>/ApproveMemberServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddActivityControl</servlet-name>
+        <url-pattern>/AddActivityControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

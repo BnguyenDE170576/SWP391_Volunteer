@@ -4,25 +4,25 @@
  */
 package control;
 
+import dao.AccountDAO;
+import dao.ActivityDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.internet.ParseException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author datka
  */
-@WebServlet(name = "CreateActivityControl", urlPatterns = {"/CreateActivityControl"})
-public class CreateActivityControl extends HttpServlet {
+public class AddActivityControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class CreateActivityControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateActivityControl</title>");
+            out.println("<title>Servlet AddActivityControl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateActivityControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddActivityControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,51 +76,49 @@ public class CreateActivityControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy dữ liệu từ biểu mẫu
-        String eventName = request.getParameter("event_name");
-        String description = request.getParameter("description");
-        String startDateStr = request.getParameter("start_date");
-        String endDateStr = request.getParameter("end_date");
+        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-        // Chuyển đổi ngày tháng từ chuỗi thành đối tượng Date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        HttpSession session = request.getSession();
+        String activityName = request.getParameter("activityName");
+        String description = request.getParameter("description");
+        String startDateStr = request.getParameter("startDate");
+        String endDateStr = request.getParameter("endDate");
+        String location = request.getParameter("location");
+        int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
+
+        // Xử lý tải lên hình ảnh (nếu có)
+        // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
         Date startDate = null;
+        Date endDate = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             startDate = dateFormat.parse(startDateStr);
-        } catch (java.text.ParseException ex) {
-            Logger.getLogger(CreateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Date endDate = null;
-        try {
             endDate = dateFormat.parse(endDateStr);
-        } catch (java.text.ParseException ex) {
-            Logger.getLogger(CreateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        // Lấy ngày hiện tại
-        Date currentDate = new Date();
-        // Kiểm tra tính hợp lệ của ngày bắt đầu và ngày kết thúc
-        if (startDate.before(currentDate)) {
-            // Ngày bắt đầu bé hơn ngày hiện tại, xử lý lỗi hoặc thông báo
-            response.sendRedirect("error.jsp"); // Thay "error.jsp" bằng trang lỗi của bạn
-        } else if (endDate.before(startDate)) {
-            // Ngày kết thúc bé hơn ngày bắt đầu, xử lý lỗi hoặc thông báo
-            response.sendRedirect("error.jsp"); // Thay "error.jsp" bằng trang lỗi của bạn
-        } else {
-            // Tạo sự kiện và lưu vào cơ sở dữ liệu (hoặc xử lý tùy ý)
-            // ...
-            
-            // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
-            response.sendRedirect("home"); // Thay "success.jsp" bằng trang thành công của bạn
-        }
-}
+        session.setAttribute("activityName", activityName);
+        session.setAttribute("description", description);
+        session.setAttribute("startDateStr", startDate);
+        session.setAttribute("endDateStr", endDate);
+        session.setAttribute("location", location);
+        session.setAttribute("memberLimit", memberLimit);
+        AccountDAO dao = new AccountDAO();
+        String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+        ActivityDAO acDAO = new ActivityDAO();
+        acDAO.CreateActivity(activityName, description, startDate, endDate, location, dao.GetUSERID(name),memberLimit);
+        // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
+        response.sendRedirect("home");
+    }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
