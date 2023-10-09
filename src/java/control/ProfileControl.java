@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author DELL
- */
+
 public class ProfileControl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
