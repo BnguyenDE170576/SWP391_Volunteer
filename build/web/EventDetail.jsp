@@ -70,9 +70,24 @@
                                 <p class="card-text"><strong>Ngày Cập Nhật:</strong> ${detail.updatedDate}</p>
                                 <p> ${check} </p>
                                 <div class="text-center mt-4">
-                                    <c:if test="${detail.organizerId == userID}">
-                                        <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  
-                                    </c:if>
+
+
+
+
+                                    <div class="grouptbt" style="
+                                         justify-content: space-between;
+                                         display: flex;
+                                         text-align: center;
+                                         ">
+                                        <c:if test="${detail.organizerId == userID}">
+                                            <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  
+                                        </c:if>
+                                        <form action="donationevent" method="post">
+                                            <input type="hidden" value="${detail.organizerId}" name="id">
+                                            <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
+                                        </form>
+                                    </div>
+
                                     <c:if test="${detail.organizerId != userID && check==0}">
                                         <form action="PendingUser"  method="POST">
                                             <input type="hidden" name="activityId" value="${detail.activityId}">
@@ -98,6 +113,7 @@
                 </div>
             </c:if>
         </div>
+
 
         <%@include file="./components/footer.jsp" %>
         <div class="modal fade" id="myModal">

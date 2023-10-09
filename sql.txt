@@ -122,3 +122,14 @@ insert into information_pages values ('Education','Tutoring or teaching students
                                         rights, LGBTQ+ rights, racial justice, poverty
                                         advocacy. Tasks include outreach, fundraising,
                                         administrative support.')
+
+
+CREATE TABLE TransOfOrganizer (
+    id INT not null IDENTITY(1,1) PRIMARY KEY,
+organizer_id int,
+    numberCard NVARCHAR(255) UNIQUE,
+    nameCard NVARCHAR(255),
+	nameBank NVARCHAR(255)
+FOREIGN KEY (organizer_id) REFERENCES Accounts (UserID) );
+
+insert into TransOfOrganizer values(3,'038888059999','NGUYEN MANH TUONG', 'Mbbank')

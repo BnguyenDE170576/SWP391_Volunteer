@@ -56,6 +56,14 @@
         <servlet-name>processNewPass</servlet-name>
         <servlet-class>control.process.processNewPass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DonationEvent</servlet-name>
+        <servlet-class>control.DonationEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processDonationEV</servlet-name>
+        <servlet-class>control.process.processDonationEV</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -107,6 +115,14 @@
     <servlet-mapping>
         <servlet-name>processNewPass</servlet-name>
         <url-pattern>/newpass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DonationEvent</servlet-name>
+        <url-pattern>/donationevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processDonationEV</servlet-name>
+        <url-pattern>/donationeventq</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

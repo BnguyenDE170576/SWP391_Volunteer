@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package control.process;
 
+import dao.AccountDAO;
 import dao.Login;
+import entity.Bank;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -14,12 +16,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
  *
  * @author ytbhe
  */
-public class DonationForPage extends HttpServlet {
+public class processDonationEV extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +41,10 @@ public class DonationForPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DonationForPage</title>");
+            out.println("<title>Servlet processDonationEV</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DonationForPage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet processDonationEV at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,7 +76,9 @@ public class DonationForPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        int id = Integer.parseInt(request.getParameter("id"));
+        AccountDAO acc = new AccountDAO();
+        Bank bank = acc.getBank(id);
         /* TODO output your page here. You may use following sample code. */
         String text = request.getParameter("text");
         Login l = new Login();
@@ -84,21 +89,16 @@ public class DonationForPage extends HttpServlet {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
         String time = now.format(formatter);
-        // donate cho PAGE, nen stk goc la vay
-        
-        
-        // out.println("<img src='https://img.vietqr.io/image/mbbank-038888059999-print.png?amount=" + donation + "&addInfo=" + text + "&accountName=NGUYEN+MANH+TUONG'>");
+
         request.setAttribute("text", text);
         request.setAttribute("donation", donation);
         request.setAttribute("maDH", maDH);
         request.setAttribute("time", time);
-        request.setAttribute("namebank", "mbbank");
-        request.setAttribute("namecard", "038888059999");
-        request.setAttribute("nameAcc", "NGUYEN MANH TUONG");
-        
+        request.setAttribute("namebank", bank.getNameBank());
+        request.setAttribute("namecard", bank.getNumberCard());
+        request.setAttribute("nameAcc", bank.getNameCard());
 
         request.getRequestDispatcher("QRcode.jsp").forward(request, response);
-
     }
 
     /**

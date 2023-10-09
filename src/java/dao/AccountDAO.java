@@ -2,6 +2,7 @@ package dao;
 
 import context.DBUtils;
 import entity.Account;
+import entity.Bank;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +38,6 @@ public class AccountDAO {
     private static final String UPDATE_ACC = "UPDATE Accounts "
             + "SET "
             + "[name] = ?, "
-           
             + "[email] = ?, "
             + "[phone] = ?, "
             + "[address] = ?, "
@@ -464,6 +463,57 @@ public class AccountDAO {
         return acc;
     }
 
+    public Bank getBank(int or_id) {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Bank acc = null;
+        String query = "select * from TransOfOrganizer where organizer_id = ?;";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(query);
+                stm.setInt(1, or_id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    int orID = rs.getInt("organizer_id");
+                    String numberCard = rs.getString("numberCard");
+                    String nameCard = rs.getString("nameCard");
+                    String nameBank = rs.getString("nameBank");
+                    
+
+                    acc = new Bank(id, or_id, numberCard, nameCard, nameBank);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return acc;
+    }
+
     public Account getAccountInfoByEmail(String email) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -647,10 +697,8 @@ public class AccountDAO {
 
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
-           
 
+        System.out.println("" + dao.getBank(3));
 
-        dao.updateACCOUNT(2, "123", "tt", "tt", "ytbhelp2@gmail.com", "01-06-2003");
-    
     }
 }

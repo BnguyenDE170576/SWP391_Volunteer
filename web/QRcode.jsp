@@ -109,7 +109,7 @@
                         <form>
 
                             <div class="position-relative h-100 " >
-                                <img class="" src='https://img.vietqr.io/image/mbbank-038888059999-print.png?amount=${donation}&addInfo=${text}&accountName=NGUYEN+MANH+TUONG' alt="" style="object-fit: cover;">
+                                <img class="" src='https://img.vietqr.io/image/${namebank}-${namecard}-print.png?amount=${donation}&addInfo=${text}&accountName=${nameAcc}' alt="" style="object-fit: cover;">
                                
                             </div>
                             <div style="padding-left: 213px;">
