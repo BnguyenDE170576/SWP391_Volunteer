@@ -37,9 +37,9 @@
                 max-width: 80%;
                 max-height: 80%;
             }
-            
-          
-            
+
+
+
         </style>
     </head>
     <body>
@@ -119,7 +119,13 @@
 
                                         <div class="form-group col-lg-6">
                                             <label for="email">Account Email</label>
-                                            <%=a.getEmail()%>
+                                            <input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                placeholder="<%=a.getEmail()%>"
+                                                class="form-control validate"  style="background-color: white;"
+                                                />
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="phone">Phone</label>
