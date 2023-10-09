@@ -44,6 +44,7 @@ public class EventDetailControl extends HttpServlet {
             String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
             AccountDAO dao = new AccountDAO();
             int check=0;
+            
             if (aDAO.isPendingUserExists(dao.GetUSERID(name),eid)) check=1;
             else if (aDAO.isParticipationExist(dao.GetUSERID(name),eid)) check=2;
             List<Integer> pendinglistid = new ArrayList<>();

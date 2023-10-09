@@ -15,7 +15,7 @@ public class HomeControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-
+            response.setContentType("text/html;charset=UTF-8");
             ActivityDAO DAO = new ActivityDAO();
             int page = 1, pageSize = 6;
             int totalPage = DAO.getTotalRow();
