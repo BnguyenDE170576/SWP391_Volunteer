@@ -93,6 +93,14 @@ public class Account implements Serializable {
         return accId;
     }
 
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
     public void setAccId(int accId) {
         this.accId = accId;
     }

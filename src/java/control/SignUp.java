@@ -83,7 +83,7 @@ public class SignUp extends HttpServlet {
       
 
         AccountDAO dao = new AccountDAO();
-        dao.insertAccount(email,  SecurityUtils.hashMd5(pass), user, "", 1, 1, "");
+        dao.insertAccount(email,  SecurityUtils.hashMd5(pass), user, "", 1, 1, "",user);
 
         Login login = new Login();
         login.deleteOTP(email);
@@ -117,7 +117,7 @@ public class SignUp extends HttpServlet {
         } else {
             AccountDAO dao = new AccountDAO();
             boolean a = dao.checkAccountExits(user);
-            if (!a && !dao.checkEmail(email)) {
+            if (!a && !dao.checkEmail(email))  {
                 request.setAttribute("ERROR_MASSEGE", "Account creation success. Please check your email to verify your identity");
                 Login l = new Login();
                 int otp = l.generateOTP(6);

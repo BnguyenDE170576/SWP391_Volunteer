@@ -80,6 +80,7 @@
                                             <c:if test="${sessionScope.LOGIN_USER.photo == null  || sessionScope.LOGIN_USER.photo eq ''}">
                                                 <img src="./images/uer.png" alt="images/uer.png">
                                             </c:if> 
+
                                         </div>
                                     </div>
                                     <button class="btn btn-primary btn-block text-uppercase">
@@ -179,20 +180,30 @@
                                         <div class="modal-body">
 
                                             <div class="mb-3">
+                                                <label for="image" class="col-form-label">Image: </label>
+                                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Username: </label>
                                                 <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Name</label>
-                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" name="name">
+                                                <input type="text" class="form-control" id="recipient-name" value="<%=a.getFullName()%>" name="name">
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">SEX</label>
+                                              
+                                            </div>
+
+
                                             <!--                                                <div class="mb-3">
                                                                                                 <label for="recipient-name" class="col-form-label">Birth Day: </label>
                                                                                                 <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" placeholder="yyyy-mm-dd" name="birthday">
                                                                                             </div>-->
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Phone:</label>
-                                                <input type="number" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.phone}" name="phone">
+                                                <input type="number" class="form-control" id="recipient-name" value="<%=a.getPhone()%>" name="phone">
                                             </div>
 
                                             <div class="mb-3">

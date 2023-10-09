@@ -22,7 +22,7 @@ public class AccountDAO {
     private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address FROM Accounts WHERE Email = ? AND Password = ?;";
     private static final String GET_AN_ACCOUNT1 = "SELECT UserID, username, Password, name, Phone, email,photo,status, Role,address FROM Accounts WHERE username = ? AND Password = ?;";
     private static final String GET_USER_ID = "SELECT UserID FROM Accounts WHERE username = ?;";
-    private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo) VALUES (?, ?, ?, ?, ?, ?,?)";
+    private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name) VALUES (?, ?, ?, ?, ?, ?,?,?)";
     private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address FROM Accounts WHERE Email = ?";
     private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address FROM Accounts WHERE UserID = ?";
     private static final String GET_AN_ACCOUNT_BY_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role,address FROM Accounts WHERE token = ?";
@@ -38,6 +38,7 @@ public class AccountDAO {
     private static final String UPDATE_ACC = "UPDATE Accounts "
             + "SET "
             + "[name] = ?, "
+           
             + "[email] = ?, "
             + "[phone] = ?, "
             + "[address] = ?, "
@@ -58,6 +59,7 @@ public class AccountDAO {
                 psm = conn.prepareStatement(UPDATE_ACC);
 
                 psm.setString(1, Fullname);
+
                 psm.setString(2, email);
 
                 psm.setString(3, phone);
@@ -504,7 +506,7 @@ public class AccountDAO {
         return acc;
     }
 
-    public boolean insertAccount(String newEmail, String newPassword, String username, String newPhone, int newStatus, int newRole, String photo) {
+    public boolean insertAccount(String newEmail, String newPassword, String username, String newPhone, int newStatus, int newRole, String photo, String fullName) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -520,6 +522,7 @@ public class AccountDAO {
                 stm.setInt(5, newStatus);
                 stm.setInt(6, newRole);
                 stm.setString(7, photo);
+                stm.setString(8, fullName);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -644,7 +647,10 @@ public class AccountDAO {
 
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
-        System.out.println(""+dao.getAccount_BYUSER("ytbhelp2"));
+           
+
+
+        dao.updateACCOUNT(2, "123", "tt", "tt", "ytbhelp2@gmail.com", "01-06-2003");
     
     }
 }

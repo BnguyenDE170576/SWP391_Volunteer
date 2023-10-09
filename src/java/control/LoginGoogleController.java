@@ -54,7 +54,7 @@ public class LoginGoogleController extends HttpServlet {
                 Account account = accDAO.getAccountInfoByEmail(email);
                 session.setAttribute("LOGIN_USER", account);
             } else {
-                accDAO.insertAccount(email, pass, accDAO.getUserName_byEmail(email), "", 1, 1, photo);
+                accDAO.insertAccount(email, pass, accDAO.getUserName_byEmail(email), "", 1, 1, photo, user.getName());
                 Account account = accDAO.getAccountInfoByEmail(email);
                 session.setAttribute("LOGIN_USER", account);
             }
@@ -71,8 +71,6 @@ public class LoginGoogleController extends HttpServlet {
         }
 
     }
-    
-
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
         // call api to get token
