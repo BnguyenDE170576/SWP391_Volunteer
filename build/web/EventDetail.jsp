@@ -39,9 +39,28 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <style> .navbar-light {
-                position: unset;
-            }</style>
+        <style>
+            .navbar-light {
+                background-color: black;
+            }
+            .py-5{
+                padding-top: 10rem !important;
+            }
+
+            .donation-box .title {
+                background-color: #86B817;
+            }
+
+            .donation-box .donate-button {
+                background-color: #86B817;}
+
+            .donation-box .amount .button {
+                background-color: #86B817;
+                text-transform: lowercase;
+
+            }
+
+        </style>
     </head>
 
     <body>
@@ -49,7 +68,9 @@
 
         <%@include file="./components/header.jsp" %>
         <div class="container mt-5">
-            <h1 class="display-4">Chi Tiết Hoạt Động</h1>
+            <h1 class="display-4" style="
+                padding-top: 12%;
+                ">Chi Tiết Hoạt Động</h1>
             <c:if test="${not empty detail}">
                 <div class="card">
                     <div class="card-body">

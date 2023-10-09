@@ -191,10 +191,7 @@
                                                 <label for="recipient-name" class="col-form-label">Name</label>
                                                 <input type="text" class="form-control" id="recipient-name" value="<%=a.getFullName()%>" name="name">
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">SEX</label>
-                                              
-                                            </div>
+                                     
 
 
                                             <!--                                                <div class="mb-3">
