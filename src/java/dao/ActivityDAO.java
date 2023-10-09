@@ -16,7 +16,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import entity.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ActivityDAO {
@@ -37,7 +39,7 @@ public class ActivityDAO {
     private static final String SELECT_PARTICIPANTS_BY_ACTIVITY = "SELECT volunteer_id FROM volunteer_participation WHERE activity_id = ?";
     private static final String SELECT_USERPENDING_BY_ACTIVITY = "SELECT UserID FROM UserPending WHERE ActivityID = ?";
     private static final String SELECT_ACTIVITIES_BY_USER = "SELECT activity_id FROM volunteer_participation WHERE volunteer_id = ?";
-    
+    private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE())";
     public List<VolunteerActivity> getActivityFromTo(int page, int pageSize) throws SQLException {
         int from = page * pageSize - (pageSize - 1);
         int to = page * pageSize;
@@ -89,7 +91,44 @@ public class ActivityDAO {
 
         return activities;
     }
+    
+    public void CreateActivity(String activityName, String description, Date startDate, Date endDate, String location, int organizerId, int memberLimit) {
+        Connection conn = null;
+        PreparedStatement psm = null;
 
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(CREATE_ACTIVITY);
+            psm.setString(1, activityName);
+            psm.setString(2, description);
+            psm.setTimestamp(3, new Timestamp(startDate.getTime()));
+            psm.setTimestamp(4, new Timestamp(endDate.getTime()));
+            psm.setString(5, location);
+            psm.setInt(6, organizerId);
+            psm.setInt(7, memberLimit);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+    
     public void setPendingUser(int userid, int activityid) throws SQLException {
         Connection conn = null;
         PreparedStatement psm = null;

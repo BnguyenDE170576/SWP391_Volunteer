@@ -49,6 +49,7 @@
         <servlet-class>control.ApproveMemberServlet</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>processChangePass</servlet-name>
         <servlet-class>control.process.processChangePass</servlet-class>
     </servlet>
@@ -63,6 +64,10 @@
     <servlet>
         <servlet-name>processDonationEV</servlet-name>
         <servlet-class>control.process.processDonationEV</servlet-class>
+=======
+        <servlet-name>AddActivityControl</servlet-name>
+        <servlet-class>control.AddActivityControl</servlet-class>
+>>>>>>> origin/DAT
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -109,6 +114,7 @@
         <url-pattern>/ApproveMemberServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>processChangePass</servlet-name>
         <url-pattern>/changepassprc</url-pattern>
     </servlet-mapping>
@@ -123,6 +129,10 @@
     <servlet-mapping>
         <servlet-name>processDonationEV</servlet-name>
         <url-pattern>/donationeventq</url-pattern>
+=======
+        <servlet-name>AddActivityControl</servlet-name>
+        <url-pattern>/AddActivityControl</url-pattern>
+>>>>>>> origin/DAT
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
