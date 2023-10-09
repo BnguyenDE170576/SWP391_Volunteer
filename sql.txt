@@ -99,3 +99,26 @@ CREATE TABLE UserOTP (
 	otpTimestamp datetime
 
 );
+
+
+insert into information_pages values ('Education','Tutoring or teaching students, assisting with
+ after-school programs, helping with educational
+                                        nonprofit organizations'), ('Health and human services','Volunteering at hospitals, nursing homes,
+                                        hospices, food banks, shelters, assisting
+                                        individuals with disabilities.'),('Environment','Working with land conservation efforts, parks,
+                                        beaches, trails, environmental nonprofits. Tasks
+                                        include restoration, research, education.'),('Animal welfare','Volunteering at animal shelters, rescues,
+                                        sanctuaries, veterinary clinics, wildlife
+                                        rehabilitation. Tasks include socializing
+                                        animals, cleaning, fundraising.'),('Arts and culture','Assisting with museums, theaters, music/dance
+                                        groups. Tasks include event support, docent/tour
+                                        guiding, administrative work.'),('Community improvement','Volunteering with neighborhood associations,
+                                        community centers, libraries. Tasks include
+                                        event planning, beautification projects,
+                                        administrative support.'),('International/global','Volunteering abroad or for international
+                                        nonprofit organizations focused on issues like
+                                        poverty, healthcare, education, human rights.'),('Political/social advocacy','Volunteering for campaigns, organizations that
+                                        focus on issues like voter registration, women''s
+                                        rights, LGBTQ+ rights, racial justice, poverty
+                                        advocacy. Tasks include outreach, fundraising,
+                                        administrative support.')

@@ -2,11 +2,13 @@ package dao;
 
 import context.DBUtils;
 import entity.Account;
-import entity.SecurityUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,18 +35,23 @@ public class AccountDAO {
 
     private static final String UPDATE_PASSWORD = "UPDATE Accounts Set password = ? WHERE email = ?";
     private static final String UPDATE_ACC = "UPDATE Accounts "
-            + "SET " 
+            + "SET "
             + "[name] = ?, "
             + "[email] = ?, "
             + "[phone] = ?, "
-            + "[address] = ? "
+            + "[address] = ?, "
+            + "[birthDay] = ? "
             + "WHERE USERID = ?;";
 
-    public boolean updateACCOUNT(int accId, String phone, String Address, String Fullname, String email) {
+    public boolean updateACCOUNT(int accId, String phone, String Address, String Fullname, String email, String birthDAY) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement psm = null;
         try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(birthDAY, formatter);
+            String formattedDate = date.format(outputFormatter);
             conn = DBUtils.getConnection();
             if (conn != null) {
                 psm = conn.prepareStatement(UPDATE_ACC);
@@ -54,7 +61,8 @@ public class AccountDAO {
 
                 psm.setString(3, phone);
                 psm.setString(4, Address);
-                psm.setInt(5, accId);
+                psm.setInt(6, accId);
+                psm.setString(5, formattedDate);
                 check = psm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -137,7 +145,7 @@ public class AccountDAO {
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
                     acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
-                    
+
                 }
             }
         } catch (Exception e) {
@@ -421,8 +429,9 @@ public class AccountDAO {
                     int Status = rs.getInt("Status");
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
-
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    String date = rs.getString("birthDay");
+                    int sex = rs.getInt("sex");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add, date, sex);
                 }
             }
         } catch (Exception e) {
@@ -635,10 +644,9 @@ public class AccountDAO {
 
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
-        Account a = dao.getAccountInfoByEmail("tuongnmde170578@fpt.edu.vn");
-        System.out.println("" + a.getPassword());
-        System.out.println("" + SecurityUtils.hashMd5("Abc123@"));
-
-    }
+     
+          dao.updateACCOUNT(1, "01646447631", "DN", "Nguyen Manh Tuong", "tuongnmde170578@fpt.edu.vn", "22-05-2020");
 
 }
+}
+

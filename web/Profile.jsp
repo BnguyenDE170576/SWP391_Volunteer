@@ -100,7 +100,7 @@
 
 
                                         </div>
-                                                    <div class="form-group col-lg-6">
+                                        <div class="form-group col-lg-6">
                                             <label for="SEX">SEX</label>
                                             <input
                                                 id="phone"
@@ -131,11 +131,11 @@
                                                 id="phone"
                                                 name="dateBirth"
                                                 type="text"
-                                                placeholder="01/06/2003"
+                                                placeholder="<%=a.getBirtDay()%>"
                                                 class="form-control validate"
                                                 />
                                         </div>
-                                    
+
                                         <div class="form-group col-lg-6">
                                             <label for="Address">Address</label>
                                             <input
@@ -186,6 +186,10 @@
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Address</label>
                                                 <input type="text" class="form-control" id="message-text" value="<%=a.getAddress()%>" name="address">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Date of Birth</label>
+                                                <input type="text" class="form-control" id="message-text" value="<%=a.getBirtDay()%>" name="birthDAY">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Email:</label>

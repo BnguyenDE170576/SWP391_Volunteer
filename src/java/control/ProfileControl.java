@@ -40,7 +40,7 @@ public class ProfileControl extends HttpServlet {
 
         String name = request.getParameter("name");
         String address = request.getParameter("address");
-//        String birthday = request.getParameter("birthday");
+        String birthday = request.getParameter("birthDAY");
         String phone = request.getParameter("phone");
 
         String email = request.getParameter("email");
@@ -51,7 +51,7 @@ public class ProfileControl extends HttpServlet {
 //     
 
 //        Cập nhật information có UserID trên
-        data.updateACCOUNT(userID, phone, address, name, email);
+        data.updateACCOUNT(userID, phone, address, name, email, birthday);
         //dao.updateACCOUNT(4,"1234","085989589", "2003-12-2", "FPT", "Manh Tuong", "E@gmail.com");
 
         Account a = data.getAccount_BYUSER(user);
