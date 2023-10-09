@@ -49,18 +49,7 @@
                 padding-top: 10rem !important;
             }
 
-            .donation-box .title {
-                background-color: #86B817;
-            }
 
-            .donation-box .donate-button {
-                background-color: #86B817;}
-
-            .donation-box .amount .button {
-                background-color: #86B817;
-                text-transform: lowercase;
-
-            }
 
         </style>
 
@@ -79,71 +68,103 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="donation-container">
 
-                            <div class="">
-                                <form id="donationForm" action="donationpage" method="post" style="background-color: #f5f7f9;">
+                            <div class="col-md-7" style="background-color: #f5f7f9;   font-size: 20px;">
+                                <form id="donationForm" action="donationpage" method="post" >
 
                                     <table >
-                                        <tr><h6>Thông Tin Đơn Hàng</h6></tr>
+                                        <tr><h3>Thông Tin Đơn Hàng</h3></tr>
                                         <tr>--------------------------</tr><br>
 
                                         <tr>Số tiền thanh toán</tr><br>
-                                        <tr>10000 vnđ</tr><br><br>
+                                        <tr>${donation} vnđ</tr><br><br>
 
 
                                         <tr>Giá trị đơn hàng</tr><br>
-                                        <tr>10000 vnd</tr> <br><br>
-                              
+                                        <tr>${donation} vnd</tr> <br><br>
+
                                         <tr>Phí giao dịch</tr> <br>
                                         <tr>0 vnđ</tr><br><br>
                                         <tr>Mã đơn hàng</tr><br>
-                                        <tr>12345</tr> <br><br>
+                                        <tr>${maDH}</tr> <br><br>
+                                        <tr>Thời gian</tr><br>
+                                        <tr>${time}</tr> <br><br>
                                     </table>
+                                      </div>
+                            <div style="padding-left: 90px; font-size: 17px; padding-top:4%;">
+                                        <button>
+                                            <span class="btn-text font-size: 20px;">
+                                                Đã thanh toán
+                                            </span>
+                                        </button>
+                                    </div>
                                 </form>
-
-
-                            </div>
 
                         </div>
 
                     </div>
 
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                        <div class="position-relative h-100">
-                            <img class="img-fluid position-absolute w-100 h-100" src="images/volunteer.jpg" alt="" style="object-fit: cover;">
-                        </div>
+
+                        <h4 style="justify-content: center;padding-left: 86px;">Quét mã qua ứng dụng Ví VNPAY</h4>
+                        <form>
+
+                            <div class="position-relative h-100 " >
+                                <img class="" src='https://img.vietqr.io/image/${namebank}-${namecard}-print.png?amount=${donation}&addInfo=${text}&accountName=${nameAcc}' alt="" style="object-fit: cover;">
+                               
+                            </div>
+                            <div style="padding-left: 213px;">
+                                <button>
+                                    <span class="btn-text">
+                                        <a href="donation.jsp">Hủy thanh toán</a>
+                                    </span>
+                                </button>
+                            </div>
+
+                        </form>
+
+
+
                     </div>
+
+
+
                 </div>
             </div>
         </div>
-        <!-- About End -->
+
+        <img class="" src="images/bankpng.png" alt="" style="object-fit: cover; padding: 6%;" loading="lazy">
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="./js/myjs.js"></script>
-        <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    </button>
+    <!-- About End -->
 
-        <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
-        <script>
-            function updateDonationValue(input) {
-                // Get the input value
-                var customValue = input.value;
 
-                // Find the radio button with class "set-amount"
-                var radioButton = document.querySelector('input[type="radio"].set-amount');
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./js/myjs.js"></script>
+    <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-                // Update the radio button's value attribute
-                if (radioButton) {
-                    radioButton.value = customValue;
-                }
+    <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
+    <script>
+        function updateDonationValue(input) {
+            // Get the input value
+            var customValue = input.value;
+
+            // Find the radio button with class "set-amount"
+            var radioButton = document.querySelector('input[type="radio"].set-amount');
+
+            // Update the radio button's value attribute
+            if (radioButton) {
+                radioButton.value = customValue;
             }
-        </script>
+        }
+    </script>
 
 
 
 
 
-        <%@include file="./components/footer.jsp" %>
-    </body>
+    <%@include file="./components/footer.jsp" %>
+</body>
 
 </html>

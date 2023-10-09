@@ -4,6 +4,7 @@ import dao.AccountDAO;
 
 import entity.Account;
 import java.io.IOException;
+import javax.servlet.http.Part;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,25 +35,26 @@ public class ProfileControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Lấy thông tin muốn cập nhật từ JSP xuống
+
         request.setCharacterEncoding("UTF-8");
         String user = request.getParameter("username");
+        
 
         String name = request.getParameter("name");
         String address = request.getParameter("address");
-//        String birthday = request.getParameter("birthday");
+        String birthday = request.getParameter("birthDAY");
         String phone = request.getParameter("phone");
 
         String email = request.getParameter("email");
 
         AccountDAO data = new AccountDAO();
-//        Lấy UserID khi muốn cập nhật UserInfor sẽ chính xác hơn
-        int userID = data.GetUSERID(user);
-//     
 
-//        Cập nhật information có UserID trên
-        data.updateACCOUNT(userID, phone, address, name, email);
-        //dao.updateACCOUNT(4,"1234","085989589", "2003-12-2", "FPT", "Manh Tuong", "E@gmail.com");
+        int userID = data.GetUSERID(user);
+
+
+
+        data.updateACCOUNT(userID, phone, address, name, email, birthday);
+ 
 
         Account a = data.getAccount_BYUSER(user);
         request.setAttribute("LOGIN_USER", a);

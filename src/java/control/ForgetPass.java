@@ -60,7 +60,7 @@ public class ForgetPass extends HttpServlet {
             dao.deleteOTP(email);
 
             request.setAttribute("email", email);
-            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+            request.getRequestDispatcher("forgetPass_newpass.jsp").forward(request, response);
 
         } else {
 

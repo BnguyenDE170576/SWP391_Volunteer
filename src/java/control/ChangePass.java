@@ -6,9 +6,14 @@
 package control;
 
 import dao.AccountDAO;
+import dao.Login;
+import entity.Account;
+import entity.SecurityUtils;
+import entity.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,7 +62,31 @@ public class ChangePass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
+        String user = "";
 
+        if (cookies != null) {
+
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+
+                if (name.equals("name")) {
+                    user = cookie.getValue().trim();
+                }
+
+            }
+
+            AccountDAO data = new AccountDAO();
+            Account a = data.getAccount_BYUSER(user);
+            String email = a.getEmail();
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+
+        } else {
+            request.setAttribute("ERROR_MASSEGE", "You cannot access.");
+
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -72,21 +101,39 @@ public class ChangePass extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String new_password = request.getParameter("new_password");
+        SendMail send = new SendMail();
+
+        String email = request.getParameter("email").trim();
+        String pass = request.getParameter("new_password");
         String repass = request.getParameter("repass");
-        String email = request.getParameter("email");
-        if (email.equals("") || email == null) {
-            request.setAttribute("ERROR_MASSEGE", "You cannot access.");
 
+        if (!pass.equals(repass)) {
+            request.setAttribute("ERROR_MASSEGE", "Account creation failed");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            AccountDAO dao = new AccountDAO();
+
+            request.setAttribute("ERROR_MASSEGE", "Please check your email to verify your change");
+            Login l = new Login();
+            int otp = l.generateOTP(6);
+            l.insertOTP(email, otp);
+
+            String link = "http://localhost:8080/CommunityUnity/changepassprc";
+            String title = "CHANGE PASS - COMMUNITY UNITY";
+            send.sendEmail(email, otp, link, title, "");
+
+
+            Cookie passwordCookie = new Cookie("newpass", pass);
+            //dat time ton tai
+
+            //add browser cua nguoi dung
+
+            passwordCookie.setMaxAge(60 * 60 * 24);
+
+            response.addCookie(passwordCookie);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+
         }
-        AccountDAO dao = new AccountDAO();
-
-        dao.updateAccountPassword(email, repass);
-
-        request.setAttribute("ERROR_MASSEGE", "The password had update.");
-
-        request.getRequestDispatcher("login.jsp").forward(request, response);
 
     }
 

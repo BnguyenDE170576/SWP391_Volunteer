@@ -13,13 +13,10 @@
             <a href="service.html" class="nav-item nav-link">Services</a>
             <a href="package.html" class="nav-item nav-link">Packages</a>
             <div class="nav-item dropdown"> 
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activity</a>
                 <div class="dropdown-menu m-0">
-                    <a href="destination.html" class="dropdown-item">Destination</a>
-                    <a href="booking.html" class="dropdown-item">Booking</a>
-                    <a href="team.html" class="dropdown-item">Travel Guides</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
+                    <a href="./CreateActivity.jsp" class="dropdown-item">Create Activity</a>
+                    <a href="booking.html" class="dropdown-item">Manager Activity</a>
                 </div>
             </div>
             <a href="donation.jsp" class="nav-item nav-link">Donation</a>
@@ -39,7 +36,7 @@
                         <i class="fa fa-user"></i> 
                     </a>
                     <div class="dropdown-menu m-0">
-                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="changepass">Change Password</a>
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="#">Edit Profile</a>
                         <a class="dropdown-item" href="logout">Log Out</a>

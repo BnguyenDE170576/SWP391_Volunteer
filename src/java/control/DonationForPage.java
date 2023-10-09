@@ -5,8 +5,11 @@
  */
 package control;
 
+import dao.Login;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -70,28 +73,32 @@ public class DonationForPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
 
-            String text = request.getParameter("text");
-            String donation = request.getParameter("donation");
+        /* TODO output your page here. You may use following sample code. */
+        String text = request.getParameter("text");
+        Login l = new Login();
 
-         
+        String maDH = String.valueOf(l.generateOTP(6));
+        String donation = request.getParameter("donation");
 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Transaction</title>");
-            out.println("</head>");
-            out.println("<body>");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+        String time = now.format(formatter);
+        // donate cho PAGE, nen stk goc la vay
+        
+        
+        // out.println("<img src='https://img.vietqr.io/image/mbbank-038888059999-print.png?amount=" + donation + "&addInfo=" + text + "&accountName=NGUYEN+MANH+TUONG'>");
+        request.setAttribute("text", text);
+        request.setAttribute("donation", donation);
+        request.setAttribute("maDH", maDH);
+        request.setAttribute("time", time);
+        request.setAttribute("namebank", "mbbank");
+        request.setAttribute("namecard", "038888059999");
+        request.setAttribute("nameAcc", "NGUYEN MANH TUONG");
+        
 
-            // donate cho PAGE, nen stk goc la vay
-           // out.println("<img src='https://img.vietqr.io/image/mbbank-038888059999-print.png?amount=" + donation + "&addInfo=" + text + "&accountName=NGUYEN+MANH+TUONG'>");
-            out.println(" donation"+ donation + "&addInfo=" + text + "&accountName=NGUYEN+MANH+TUONG'>");
+        request.getRequestDispatcher("QRcode.jsp").forward(request, response);
 
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     /**

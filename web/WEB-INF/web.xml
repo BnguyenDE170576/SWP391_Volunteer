@@ -44,6 +44,26 @@
         <servlet-name>DonationForPage</servlet-name>
         <servlet-class>control.DonationForPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <servlet-class>control.ApproveMemberServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processChangePass</servlet-name>
+        <servlet-class>control.process.processChangePass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processNewPass</servlet-name>
+        <servlet-class>control.process.processNewPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DonationEvent</servlet-name>
+        <servlet-class>control.DonationEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processDonationEV</servlet-name>
+        <servlet-class>control.process.processDonationEV</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -84,10 +104,28 @@
         <servlet-name>DonationForPage</servlet-name>
         <url-pattern>/donationpage</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveMemberServlet</servlet-name>
+        <url-pattern>/ApproveMemberServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processChangePass</servlet-name>
+        <url-pattern>/changepassprc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processNewPass</servlet-name>
+        <url-pattern>/newpass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DonationEvent</servlet-name>
+        <url-pattern>/donationevent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processDonationEV</servlet-name>
+        <url-pattern>/donationeventq</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <error-page>
         <error-code>404</error-code>

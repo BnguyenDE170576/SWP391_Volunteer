@@ -3,6 +3,8 @@
     Created on : Mar 17, 2023, 1:59:39 PM
     Author     : DELL
 --%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -35,6 +37,9 @@
                 max-width: 80%;
                 max-height: 80%;
             }
+
+
+
         </style>
     </head>
     <body>
@@ -45,6 +50,7 @@
             AccountDAO dao = new AccountDAO();
 
             a = dao.getAccount_BYUSER(name);
+
 
         %>
         <form action="" method="post" class="form1">
@@ -74,6 +80,7 @@
                                             <c:if test="${sessionScope.LOGIN_USER.photo == null  || sessionScope.LOGIN_USER.photo eq ''}">
                                                 <img src="./images/uer.png" alt="images/uer.png">
                                             </c:if> 
+
                                         </div>
                                     </div>
                                     <button class="btn btn-primary btn-block text-uppercase">
@@ -95,54 +102,62 @@
                                                 name="username"
                                                 type="text"
                                                 placeholder="${sessionScope.LOGIN_USER.userName}" readonly
-                                                class="form-control validate"
+                                                class="form-control validate" style="background-color: white;"
                                                 />
 
 
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="SEX">SEX</label>
+                                            <input
+                                                id="phone"
+                                                name="sex"
+                                                type="text"
+                                                placeholder="Female"
+                                                class="form-control validate"  style="background-color: white;"
+                                                />
                                         </div>
 
                                         <div class="form-group col-lg-6">
                                             <label for="email">Account Email</label>
-                                            <%=a.getEmail()%>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="phone">Address</label>
                                             <input
                                                 id="email"
-                                                name="phone"
-                                                type="phone"
-                                                placeholder="<%=a.getPhone()%>"
-                                                class="form-control validate"
+                                                name="email"
+                                                type="email"
+                                                placeholder="<%=a.getEmail()%>"
+                                                class="form-control validate"  style="background-color: white;"
                                                 />
                                         </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="phone">Phone</label>
+                                            <input
+                                                id="phone"
+                                                name="phone"
+                                                type="text"
+                                                placeholder="<%=a.getPhone()%>"
+                                                class="form-control validate"  style="background-color: white;"
+                                                />
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="DateBirth">DateBirth</label>
+                                            <input
+                                                id="phone"
+                                                name="dateBirth"
+                                                type="text"
+                                                placeholder="<%=a.getBirtDay()%>"
+                                                class="form-control validate"  style="background-color: white;"
+                                                />
+                                        </div>
+
                                         <div class="form-group col-lg-6">
                                             <label for="Address">Address</label>
                                             <input
-                                                id="email"
+                                                id="phone"
                                                 name="address"
                                                 type="text"
                                                 placeholder="<%=a.getAddress()%>"
-                                                class="form-control validate"
+                                                class="form-control validate"  style="background-color: white;"
                                                 />
-                                        </div>
-
-
-                                        <div class="form-group col-lg-6">
-                                            <label class="tm-hide-sm">&nbsp;</label>
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary btn-block text-uppercase"
-                                                >
-                                                Update Your Profile
-                                            </button>
-                                        </div>
-                                        <div class="col-12">
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary btn-block text-uppercase"
-                                                >
-                                                Delete Your Account
-                                            </button>
                                         </div>
                                         </table>
                                     </form>
@@ -165,25 +180,39 @@
                                         <div class="modal-body">
 
                                             <div class="mb-3">
+                                                <label for="image" class="col-form-label">Image: </label>
+                                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Username: </label>
                                                 <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.userName}" name="username" readonly>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">Nqme</label>
-                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" name="name">
+                                                <label for="recipient-name" class="col-form-label">Name</label>
+                                                <input type="text" class="form-control" id="recipient-name" value="<%=a.getFullName()%>" name="name">
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">SEX</label>
+                                              
+                                            </div>
+
+
                                             <!--                                                <div class="mb-3">
                                                                                                 <label for="recipient-name" class="col-form-label">Birth Day: </label>
                                                                                                 <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" placeholder="yyyy-mm-dd" name="birthday">
                                                                                             </div>-->
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Phone:</label>
-                                                <input type="number" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.phone}" name="phone">
+                                                <input type="number" class="form-control" id="recipient-name" value="<%=a.getPhone()%>" name="phone">
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Address</label>
-                                                <input type="email" class="form-control" id="message-text" value="${sessionScope.LOGIN_USER.address}" name="address">
+                                                <input type="text" class="form-control" id="message-text" value="<%=a.getAddress()%>" name="address">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Date of Birth</label>
+                                                <input type="text" class="form-control" id="message-text" value="<%=a.getBirtDay()%>" name="birthDAY">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Email:</label>
