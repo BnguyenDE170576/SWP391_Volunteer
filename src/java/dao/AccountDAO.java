@@ -41,10 +41,11 @@ public class AccountDAO {
             + "[email] = ?, "
             + "[phone] = ?, "
             + "[address] = ?, "
-            + "[birthDay] = ? "
+            + "[birthDay] = ?, "
+            + "[photo] = ? "
             + "WHERE USERID = ?;";
 
-    public boolean updateACCOUNT(int accId, String phone, String Address, String Fullname, String email, String birthDAY) {
+    public boolean updateACCOUNT(int accId, String phone, String Address, String Fullname, String email, String birthDAY, String photo) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement psm = null;
@@ -63,8 +64,9 @@ public class AccountDAO {
 
                 psm.setString(3, phone);
                 psm.setString(4, Address);
-                psm.setInt(6, accId);
+                psm.setInt(7, accId);
                 psm.setString(5, formattedDate);
+                psm.setString(6, photo);
                 check = psm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -481,7 +483,6 @@ public class AccountDAO {
                     String numberCard = rs.getString("numberCard");
                     String nameCard = rs.getString("nameCard");
                     String nameBank = rs.getString("nameBank");
-                    
 
                     acc = new Bank(id, or_id, numberCard, nameCard, nameBank);
                 }
@@ -698,7 +699,7 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.getBank(3));
+        System.out.println("" + dao.getAccount_BYUSER("tuongnmde170578").getBirtDay());
 
     }
 }

@@ -50,6 +50,7 @@
             AccountDAO dao = new AccountDAO();
 
             a = dao.getAccount_BYUSER(name);
+            String image = a.getPhoto();
 
 
         %>
@@ -75,17 +76,15 @@
                                 <div class="tm-bg-primary-dark tm-block tm-block-avatar">
                                     <h2 class="tm-block-title">Change Avatar</h2>
                                     <div class="tm-avatar-container">
-                                        <div class="photo-frame">
-                                            <img src="${sessionScope.LOGIN_USER.photo}">
+                                        <div class="photo-frame" style="height: 100%; width:  130%;">
+                                            <img src="<%=image%>">
                                             <c:if test="${sessionScope.LOGIN_USER.photo == null  || sessionScope.LOGIN_USER.photo eq ''}">
                                                 <img src="./images/uer.png" alt="images/uer.png">
                                             </c:if> 
 
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-block text-uppercase">
-                                        Upload New Photo
-                                    </button>
+
                                 </div>
                             </div>
                             <div class="tm-block-col tm-col-account-settings">
@@ -176,12 +175,12 @@
                                         <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Thông Tin</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form action="ProfileControl" method="post"> 
+                                    <form action="ProfileControl" method="post"  enctype="multipart/form-data"> 
                                         <div class="modal-body">
 
                                             <div class="mb-3">
                                                 <label for="image" class="col-form-label">Image: </label>
-                                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                                <input type="file" class="form-control" id="image" name="image">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Username: </label>
@@ -191,13 +190,9 @@
                                                 <label for="recipient-name" class="col-form-label">Name</label>
                                                 <input type="text" class="form-control" id="recipient-name" value="<%=a.getFullName()%>" name="name">
                                             </div>
-                                     
 
 
-                                            <!--                                                <div class="mb-3">
-                                                                                                <label for="recipient-name" class="col-form-label">Birth Day: </label>
-                                                                                                <input type="text" class="form-control" id="recipient-name" value="${sessionScope.LOGIN_USER.fullName}" placeholder="yyyy-mm-dd" name="birthday">
-                                                                                            </div>-->
+
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Phone:</label>
                                                 <input type="number" class="form-control" id="recipient-name" value="<%=a.getPhone()%>" name="phone">
