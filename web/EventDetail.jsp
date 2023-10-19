@@ -1,3 +1,6 @@
+
+<%@page import="entity.VolunteerActivity"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="entity.Account" %>
@@ -59,7 +62,7 @@
                             </div>
                             <div class="col-md-8">
                                 <h5 class="card-title">${detail.activityName}</h5>                                                           
-
+                                <p class="card-text"><strong>Status:</strong> ${status}</p>
                                 <p class="card-text">${detail.description}</p>
                                 <p class="card-text"><strong>Ngày Bắt Đầu:</strong> ${detail.startDate}</p>
                                 <p class="card-text"><strong>Ngày Kết Thúc:</strong> ${detail.endDate}</p>
@@ -86,6 +89,8 @@
                                             <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
                                         </form>
                                     </div>
+
+                                    <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  
 
                                     <c:if test="${detail.organizerId != userID && check==0}">
                                         <form action="PendingUser"  method="POST">
@@ -142,22 +147,153 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Activity</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nội dung của modal -->
+
+                        <div class="mb-3">
+                            <label for="activityName">Activity Name:</label>
+                            <input type="text" id="activityName" name="activityName" class="form-control" required value="${detail.activityName}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" class="form-control" value="${detail.description}"></textarea>
+                        </div>
+
+                        <c:choose>
+                            <c:when test="${status == 'Đang diễn ra'}">
+                                <div class="mb-3">
+                                    <label for="endDateStr">End Date:</label>
+                                    <input type="date" id="endDateStr" name="endDateStr" class="form-control" required>
+                                    <input type="hidden" name="startDateStr" class="form-control" value="${detail.startDate}">
+                                </div>
+                            </c:when>
+                            <c:when test="${status == 'Sắp diễn ra'}">
+                                <div class="mb-3">
+                                    <label for="startDateStr">Start Date:</label>
+                                    <input type="date" id="startDateStr" name="startDateStr" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="endDateStr">End Date:</label>
+                                    <input type="date" id="endDateStr" name="endDateStr" class="form-control" required>
+                                </div>
+                                <input type="hidden" name="editcase" class="form-control" value="2">
+                            </c:when>          
+                        </c:choose>
+
+
+                        <div class="mb-3">
+                            <label for="location">Location:</label>
+                            <input type="text" id="location" name="location" class="form-control" required value="${detail.location}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="memberLimit">Member Limit:</label>
+                            <input type="number" id="memberLimit" name="memberLimit" class="form-control" min="1" max="50" required  value="${detail.numberMember}">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="updateActivity()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="./js/BrowserJoin.js"></script>    
         <script>
-                                            $(document).ready(function () {
-                                                $("#myModal").on("click", "button[data-action='reject']", function () {
-                                                    // Xử lý từ chối thành viên
-                                                    // Đóng modal sau khi xử lý
-                                                    $("#myModal").modal("hide");
-                                                });
+                            $(document).ready(function () {
+                                $("#myModal").on("click", "button[data-action='reject']", function () {
+                                    // Xử lý từ chối thành viên
+                                    // Đóng modal sau khi xử lý
+                                    $("#myModal").modal("hide");
+                                });
 
-                                                $("#myModal").on("click", "button[data-action='approve']", function () {
-                                                    // Xử lý xét duyệt thành viên
-                                                    // Đóng modal sau khi xử lý
-                                                    $("#myModal").modal("hide");
-                                                });
-                                            });
+                                $("#myModal").on("click", "button[data-action='approve']", function () {
+                                    // Xử lý xét duyệt thành viên
+                                    // Đóng modal sau khi xử lý
+                                    $("#myModal").modal("hide");
+                                });
+                            });
+
+                            //---------------------------------------------------------------------------
+                            function updateActivity() {
+                                if (validateForm()) {
+                                    var activityName = $("#activityName").val();
+                                    var description = $("#description").val();
+                                    var startDate = $("#startDateStr").val();
+                                    var endDate = $("#endDateStr").val();
+                                    var location = $("#location").val();
+                                    var memberLimit = $("#memberLimit").val();
+
+                                    var data = {
+                                        activityName: activityName,
+                                        description: description,
+                                        startDate: startDate,
+                                        endDate: endDate,
+                                        location: location,
+                                        memberLimit: memberLimit
+                                                // Thêm dữ liệu từ các trường khác
+                                    };
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "UpdateActivityControl", //URL của servlet 
+                                        data: data,
+                                        success: function (response) {
+                                            // Xử lý kết quả trả về từ servlet
+                                            $("#result").html(response);
+                                        },
+                                        error: function () {
+                                            alert("Đã xảy ra lỗi khi gửi yêu cầu.");
+                                        }
+                                    });
+                                }
+                            }
+                            document.getElementById("editButton").addEventListener("click", function () {
+                                // Hiển thị form chỉnh sửa bằng cách thay đổi thuộc tính style.display
+                                document.getElementById("editForm").style.display = "block";
+                            });
+                            function cancelEdit() {
+                                // Ẩn form chỉnh sửa bằng cách thay đổi thuộc tính style.display
+                                document.getElementById("editForm").style.display = "none";
+                            }
+                            //----------------------------------------------------------------
+                            function validateForm() {
+                                var activityName = document.getElementById("activityName").value;
+                                var startDate = new Date(document.getElementById("startDateStr").value);
+                                var endDate = new Date(document.getElementById("endDateStr").value);
+                                var currentDate = new Date();
+                                currentDate.setHours(0, 0, 0, 0);
+                                startDate.setHours(0, 0, 0, 0);
+                                endDate.setHours(0, 0, 0, 0);
+                                // Kiểm tra tên hoạt động
+                                if (activityName.length > 70) {
+                                    alert("Tên hoạt động không được quá 70 ký tự.");
+                                    return false;
+                                }
+
+                                // Kiểm tra ngày bắt đầu và ngày kết thúc
+                                if (startDate < currentDate && startDate != null) {
+                                    alert("Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại.");
+                                    return false;
+                                }
+
+                                if (endDate <= startDate && startDate != null) {
+                                    alert("Ngày kết thúc phải lớn hơn ngày bắt đầu.");
+                                    return false;
+                                }
+
+                                return true;
+                            }
         </script>
     </body>
 

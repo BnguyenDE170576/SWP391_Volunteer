@@ -68,6 +68,10 @@
         <servlet-name>AddActivityControl</servlet-name>
         <servlet-class>control.AddActivityControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActivityPendingControl</servlet-name>
+        <servlet-class>control.ActivityPendingControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -131,6 +135,10 @@
     <servlet-mapping>
         <servlet-name>AddActivityControl</servlet-name>
         <url-pattern>/AddActivityControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActivityPendingControl</servlet-name>
+        <url-pattern>/ActivityPendingControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

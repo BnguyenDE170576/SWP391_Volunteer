@@ -2,44 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/CreateActivity.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/otp.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/HomePage.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/dao/AccountDAO.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/context/DBUtils.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/js/BrowserJoin.js</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LoginController.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/EventDetail.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/duyettv.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/AddActivityControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/js/checkinput.js</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/SignUp.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/login.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ProfileControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/changePass.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/UserGoogle.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/components/footer.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/components/header.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/Profile.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ApproveMemberServlet.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/adminPage.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LoginGoogleController.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/foget.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/UserPending.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ChangePass.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LogoutControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/RejectMemberServlet.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/errormanage.jsp</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/PendingUserControl.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/Account.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
-            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/HomeControl.java</file>
-        </group>
         <group name="Group 20230725-10:42:04">
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/HomePage.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/HomeControl.java</file>
@@ -69,6 +31,54 @@
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/entity/Account.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/ActivityDAO.java</file>
+        </group>
+        <group>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/CreateActivity.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/js/jquery-3.3.1.min.js</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/HomePage.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/process/processDonationEV.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/dao/AccountDAO.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/context/DBUtils.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/Approve.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/PasswordGenerator.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/js/BrowserJoin.js</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/QRcode.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LoginController.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ActivityPendingControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/AddActivityControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/EventDetail.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/DonationEvent.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/js/checkinput.js</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/SignUp.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/login.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ProfileControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/changePass.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/UserGoogle.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/components/footer.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/components/header.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/Profile.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ApproveMemberServlet.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/adminPage.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LoginGoogleController.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/UpdateActivityControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/foget.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/UserPending.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ChangePass.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/ApproveControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/LogoutControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/Constants.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/forgetPass_newpass.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/errormanage.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/PendingUserControl.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/newjsp.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/Account.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/web/donation.jsp</file>
+            <file>file:/D:/Volunteer/SWP391_Volunteer/src/java/control/HomeControl.java</file>
         </group>
     </open-files>
 </project-private>

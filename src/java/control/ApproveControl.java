@@ -1,26 +1,27 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package control;
 
+import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import dao.*;
-import entity.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author datka
  */
-public class ApproveMemberServlet extends HttpServlet {
+@WebServlet(name = "ApproveControl", urlPatterns = {"/ApproveControl"})
+public class ApproveControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +34,16 @@ public class ApproveMemberServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ApproveMemberServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ApproveMemberServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            ActivityDAO actDAO = new ActivityDAO();
+            request.setAttribute("pendingEvents", actDAO.getPendingActivity());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+             request.getRequestDispatcher("Approve.jsp").forward(request, response);
         }
     }
 
@@ -74,18 +73,7 @@ public class ApproveMemberServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            int eventId = Integer.parseInt(request.getParameter("eventID"));
-            ActivityDAO acDAO = new ActivityDAO();
-            acDAO.removePendingUser(userId, eventId);
-            acDAO.addParticipation(userId, eventId);
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        processRequest(request, response);
     }
 
     /**

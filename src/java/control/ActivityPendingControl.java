@@ -1,26 +1,28 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package control;
 
+import dao.AccountDAO;
+import dao.ActivityDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.*;
-import entity.*;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author datka
  */
-public class ApproveMemberServlet extends HttpServlet {
+public class ActivityPendingControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class ApproveMemberServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApproveMemberServlet</title>");            
+            out.println("<title>Servlet ActivityPendingControl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApproveMemberServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ActivityPendingControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +62,7 @@ public class ApproveMemberServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -74,18 +76,41 @@ public class ApproveMemberServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            int eventId = Integer.parseInt(request.getParameter("eventID"));
-            ActivityDAO acDAO = new ActivityDAO();
-            acDAO.removePendingUser(userId, eventId);
-            acDAO.addParticipation(userId, eventId);
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
+        HttpSession session = request.getSession();
+        String activityName = request.getParameter("activityName");
+        String description = request.getParameter("description");
+        String startDateStr = request.getParameter("startDate");
+        String endDateStr = request.getParameter("endDate");
+        String location = request.getParameter("location");
+        int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
+
+        // Xử lý tải lên hình ảnh (nếu có)
+        // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
+        Date startDate = null;
+        Date endDate = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            startDate = dateFormat.parse(startDateStr);
+            endDate = dateFormat.parse(endDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        session.setAttribute("activityName", activityName);
+        session.setAttribute("description", description);
+        session.setAttribute("startDateStr", startDate);
+        session.setAttribute("endDateStr", endDate);
+        session.setAttribute("location", location);
+        session.setAttribute("memberLimit", memberLimit);
+        AccountDAO dao = new AccountDAO();
+        int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
+        ActivityDAO acDAO = new ActivityDAO();
+        acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit);
+        // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
+        response.sendRedirect("newjsp.jsp");
     }
 
     /**

@@ -133,3 +133,30 @@ organizer_id int,
 FOREIGN KEY (organizer_id) REFERENCES Accounts (UserID) );
 
 insert into TransOfOrganizer values(3,'038888059999','NGUYEN MANH TUONG', 'Mbbank')
+
+CREATE TABLE Pending_activity (
+    activity_id INT not null IDENTITY(1,1) PRIMARY KEY ,
+    activity_name NVARCHAR(100) NOT NULL,
+    description TEXT,
+    start_date datetime,
+    end_date datetime,
+    location NVARCHAR(100),
+   organizer_id INT,
+   numberMemBer int,
+    created_date datetime not null,
+    updated_date datetime not null,
+	FOREIGN KEY (organizer_id) REFERENCES Accounts (UserID),
+);
+
+ALTER TABLE volunteer_activities
+ALTER COLUMN activity_name NVARCHAR(100);
+
+ALTER TABLE volunteer_activities
+ALTER COLUMN description NVARCHAR(MAX);
+
+ALTER TABLE volunteer_activities
+ALTER COLUMN location NVARCHAR(100);
+
+ALTER TABLE Pending_activity
+ALTER COLUMN description NVARCHAR(MAX);
+

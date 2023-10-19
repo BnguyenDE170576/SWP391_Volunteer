@@ -11,7 +11,7 @@
             <a href="home" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Services</a>
-            <a href="package.html" class="nav-item nav-link">Packages</a>
+            <a href="./ApproveControl" class="nav-item nav-link">Approve</a>
             <div class="nav-item dropdown"> 
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activity</a>
                 <div class="dropdown-menu m-0">
@@ -31,14 +31,18 @@
                 </li>
             </c:when>
             <c:otherwise>
+
                 <div class="nav-item dropdown"> 
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
-                        <i class="fa fa-user"></i> 
+
+                        <img class="rounded-circle-perfect" src="img/package-2.jpg" alt="">
+                        <label class="font-weight-bold text-primary">${sessionScope.LOGIN_USER.userName}</label>
                     </a>
+
                     <div class="dropdown-menu m-0">
                         <a class="dropdown-item" href="changepass">Change Password</a>
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
-                 
+
                         <a class="dropdown-item" href="logout">Log Out</a>
                     </div>
                 </div>
@@ -48,3 +52,12 @@
 
     </div>
 </nav>
+<style>
+    .rounded-circle-perfect {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 5px
+    }
+</style>

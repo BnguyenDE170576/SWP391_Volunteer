@@ -1,26 +1,31 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package control;
 
+import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.*;
-import entity.*;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author datka
  */
-public class ApproveMemberServlet extends HttpServlet {
+@WebServlet(name = "UpdateActivityControl", urlPatterns = {"/UpdateActivityControl"})
+public class UpdateActivityControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +44,10 @@ public class ApproveMemberServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ApproveMemberServlet</title>");            
+            out.println("<title>Servlet UpdateActivityControl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ApproveMemberServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateActivityControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,17 +80,37 @@ public class ApproveMemberServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            int eventId = Integer.parseInt(request.getParameter("eventID"));
-            ActivityDAO acDAO = new ActivityDAO();
-            acDAO.removePendingUser(userId, eventId);
-            acDAO.addParticipation(userId, eventId);
+            response.setContentType("text/html;charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            
+            HttpSession session = request.getSession();
+            String activityName = request.getParameter("activityName");
+            String description = request.getParameter("description");
+            String startDateStr = request.getParameter("startDate");
+            String endDateStr = request.getParameter("endDate");
+            String location = request.getParameter("location");
+            int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
+            
+            // Xử lý tải lên hình ảnh (nếu có)
+            // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
+            Date startDate = null;
+            Date endDate = null;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                startDate = dateFormat.parse(startDateStr);
+                endDate = dateFormat.parse(endDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            ActivityDAO activityDAO = new ActivityDAO();
+            activityDAO.UpdateActivity(activityName, description, startDate, endDate, location, memberLimit);
+            
         } catch (SQLException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     /**
