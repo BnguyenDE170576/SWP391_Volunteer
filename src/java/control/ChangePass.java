@@ -70,15 +70,13 @@ public class ChangePass extends HttpServlet {
             for (Cookie cookie : cookies) {
                 String name = cookie.getName();
 
-                if (name.equals("name")) {
+                if (name.equals("email")) {
                     user = cookie.getValue().trim();
                 }
 
             }
 
-            AccountDAO data = new AccountDAO();
-            Account a = data.getAccount_BYUSER(user);
-            String email = a.getEmail();
+            String email = user;
             request.setAttribute("email", email);
             request.getRequestDispatcher("changePass.jsp").forward(request, response);
 

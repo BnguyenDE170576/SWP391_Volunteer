@@ -64,6 +64,9 @@ public class LoginGoogleController extends HttpServlet {
             Cookie cookie = new Cookie("accountGG", token);
             cookie.setMaxAge(60 * 5);
             response.addCookie(cookie);
+            Cookie emailuser = new Cookie("email", email);
+            cookie.setMaxAge(60 * 5);
+            response.addCookie(emailuser);
 
             response.sendRedirect("home");
         } catch (Exception e) {
