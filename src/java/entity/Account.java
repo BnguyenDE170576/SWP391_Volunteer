@@ -117,8 +117,10 @@ public class Account implements Serializable {
         return photo;
     }
 
-    public Date getBirtDay() {
-        return birtDay;
+    public String getBirtDay() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(birtDay);
+        return formattedDate;
     }
 
     public void setBirtDay(Date birtDay) {
@@ -171,9 +173,9 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String date = dateFormat.format(birtDay);
-        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + birtDay + '}';
+        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + date + '}';
     }
 
 }

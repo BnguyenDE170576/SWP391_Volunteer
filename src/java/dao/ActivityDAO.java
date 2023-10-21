@@ -29,7 +29,6 @@ public class ActivityDAO {
             + "where activity.rownumber >= ? and activity.rownumber <=?";
 
     private static final String GET_WITH_ID = "SELECT * FROM volunteer_activities WHERE activity_id = ?;";
-
     private static final String GET_TOTAL_ROWS = "SELECT COUNT(*) FROM volunteer_activities;";
     private static final String SET_PENDING_USER = "INSERT INTO UserPending (UserID, ActivityID) VALUES (?, ?);";
     private static final String CHECK_PENDING_USER = "SELECT COUNT(*) FROM Userpending WHERE UserID = ? AND ActivityID = ?";
