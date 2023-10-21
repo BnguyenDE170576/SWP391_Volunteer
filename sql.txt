@@ -133,3 +133,26 @@ organizer_id int,
 FOREIGN KEY (organizer_id) REFERENCES Accounts (UserID) );
 
 insert into TransOfOrganizer values(3,'038888059999','NGUYEN MANH TUONG', 'Mbbank')
+
+
+
+----------------------------
+
+CREATE TABLE likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_clicker INT,
+    id_post INT,
+    FOREIGN KEY (id_clicker) REFERENCES users(id),   -- Assuming 'users' is the user table
+    FOREIGN KEY (id_post) REFERENCES posts(id)        -- Assuming 'posts' is the post table
+);
+
+
+
+CREATE TABLE comments (
+    comment_id INT PRIMARY KEY,
+    post_id INT, -- Foreign key referencing the post table
+    parent_comment_id INT, -- For replies, references the comment_id of the parent comment
+    comment_content TEXT,
+    comment_author_id INT, -- Foreign key referencing the user table
+    comment_date TIMESTAMP
+);

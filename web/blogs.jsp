@@ -106,7 +106,7 @@
                         <header class="entry__header">
 
                             <h2 class="entry__title h1">
-                                <a href="./BlogsComponent/single.html" title="">Hey, We Love Open Sans!</a>
+                                <a href="" title="">Hey, We Love Open Sans!</a>
                             </h2>
 
                             <img src="./BlogsComponent/android-chrome-512x512.png">
@@ -133,6 +133,42 @@
                         </div> 
 
                     </article> <!-- end entry -->
+                    <!--test-->
+
+                    <ul>
+                        <c:forEach var="o" items="${blogs}">
+                            <article class="entry">
+
+                                <header class="entry__header">
+
+                                    <h2 class="entry__title h1">
+                                        <a href="blogsdetail?id=${o.blogId}" title="">${o.title}</a>
+                                    </h2>
+
+                                    <div class="entry__meta">
+                                        <ul>
+                                            <li>${o.blogId}</li>
+                                            <li>
+                                                <a href="#0" title="" rel="category tag">Wordpress</a>,
+                                                <a href="#0" title="" rel="category tag">Ghost</a>
+                                            </li>
+                                            <li>${o.author}</li>
+                                        </ul>
+                                    </div>
+
+                                </header>
+
+                                <div class="entry__content">
+                                    <p>
+                                        ${o.content}
+                                    </p>
+                                </div>
+
+                            </article> 
+                        </c:forEach>
+
+                    </ul>
+                    <!--test-->
 
                     <article class="entry">
 
@@ -372,10 +408,10 @@
                             <h3  class="h6">Navigate</h3>
 
                             <ul class="s-footer__list s-footer-list--nav group">
-                                <li><a href="#0">Home</a></li>
-                                <li><a href="#0">Blog</a></li>
+                                <li><a href="home">Home</a></li>
+                                <li><a href="blogs">Blog</a></li>
                                 <li><a href="#0">Demo</a></li>
-                                <li><a href="#0">Archives</a></li>
+                                <li><a href="logout">Logout</a></li>
                                 <li><a href="#0">About</a></li>
                             </ul>
                         </div>

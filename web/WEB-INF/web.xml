@@ -68,6 +68,22 @@
         <servlet-name>AddActivityControl</servlet-name>
         <servlet-class>control.AddActivityControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LikeServlet</servlet-name>
+        <servlet-class>control.LikeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogsComment</servlet-name>
+        <servlet-class>control.BlogsComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogsController</servlet-name>
+        <servlet-class>control.BlogsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogsDetailController</servlet-name>
+        <servlet-class>control.BlogsDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -131,6 +147,22 @@
     <servlet-mapping>
         <servlet-name>AddActivityControl</servlet-name>
         <url-pattern>/AddActivityControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LikeServlet</servlet-name>
+        <url-pattern>/LikeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogsComment</servlet-name>
+        <url-pattern>/BlogsComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogsController</servlet-name>
+        <url-pattern>/blogs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogsDetailController</servlet-name>
+        <url-pattern>/blogsdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

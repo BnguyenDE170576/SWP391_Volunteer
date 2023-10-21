@@ -1,3 +1,10 @@
+<%-- 
+    Document   : single
+    Created on : Oct 19, 2023, 5:07:37 PM
+    Author     : ytbhe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
@@ -374,17 +381,7 @@
                                 <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
                                     <fieldset>
 
-                                        <div class="form-field">
-                                            <input name="cName" id="cName" class="h-full-width" placeholder="Your Name" value="" type="text">
-                                        </div>
-
-                                        <div class="form-field">
-                                            <input name="cEmail" id="cEmail" class="h-full-width" placeholder="Your Email" value="" type="text">
-                                        </div>
-
-                                        <div class="form-field">
-                                            <input name="cWebsite" id="cWebsite" class="h-full-width" placeholder="Website" value="" type="text">
-                                        </div>
+                                  
 
                                         <div class="message form-field">
                                             <textarea name="cMessage" id="cMessage" class="h-full-width" placeholder="Your Message"></textarea>

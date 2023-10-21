@@ -22,6 +22,7 @@ public class AccountDAO {
     private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address FROM Accounts WHERE Email = ? AND Password = ?;";
     private static final String GET_AN_ACCOUNT1 = "SELECT UserID, username, Password, name, Phone, email,photo,status, Role,address FROM Accounts WHERE username = ? AND Password = ?;";
     private static final String GET_USER_ID = "SELECT UserID FROM Accounts WHERE username = ?;";
+    private static final String GET_USER_NAME = "SELECT username FROM Accounts WHERE UserID = ?;";
     private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name) VALUES (?, ?, ?, ?, ?, ?,?,?)";
     private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address FROM Accounts WHERE Email = ?";
     private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address FROM Accounts WHERE UserID = ?";
@@ -678,6 +679,48 @@ public class AccountDAO {
         }
         return id;
     }
+    public String GetUserName(int id) {
+        String  name = "";
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(GET_USER_NAME);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    name = rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return name;
+    }
 
     public String getUserName_byEmail(String email) {
 
@@ -699,7 +742,7 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.getAccount_BYUSER("tuongnmde170578").getBirtDay());
+        System.out.println("" + dao.GetUserName(3));
 
     }
 }
