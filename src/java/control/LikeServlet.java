@@ -5,6 +5,7 @@
  */
 package control;
 
+import dao.AccountDAO;
 import dao.BlogsDAO;
 import dao.CommentDAO;
 import dao.likeDAO;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,51 +64,62 @@ public class LikeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        likeDAO l = new likeDAO();
-        int count = l.getToTalLike(1);
-        request.setAttribute("count", count);
-
-        request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the action (Like or Unlike)
-        String action = request.getParameter("action");
-        likeDAO l = new likeDAO();
 
-        // Get the user ID and post ID from the request
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        int postId = Integer.parseInt(request.getParameter("postId"));
+        String email = "";
+        Cookie[] cookies = request.getCookies();
 
-        // Your logic to handle liking or unliking the post
-        if ("Like".equals(action)) {
-            if (l.checkValid(userId, postId)) {
-                l.deleteLikePost(userId, postId);
-            } else {
-                l.insertAccount(userId, postId);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+
+                if (name.equals("email")) {
+                    email = cookie.getValue().trim();
+                }
             }
+
+            AccountDAO a = new AccountDAO();
+            int userIDLG = a.GetUSERID(a.getUserName_byEmail(email));
+
+            String action = request.getParameter("action");
+            likeDAO l = new likeDAO();
+
+            // Get the user ID and post ID from the request
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            int postId = Integer.parseInt(request.getParameter("postId"));
+
+            // Your logic to handle liking or unliking the post
+            if ("Like".equals(action)) {
+                if (l.checkValid(userId, postId)) {
+                    l.deleteLikePost(userId, postId);
+                } else {
+                    l.insertAccount(userId, postId);
+                }
+            }
+
+            // Redirect back to the post.jsp page after processing
+            int count = l.getToTalLike(postId);
+
+            BlogsDAO dao = new BlogsDAO();
+            Blogs b = dao.getBlogByID(postId);
+            CommentDAO o = new CommentDAO();
+            List<Comment> list = o.getAllComment(postId);
+
+            int countcmt = o.getToTalComment(postId);
+            request.setAttribute("userIDLG", userIDLG);
+            request.setAttribute("countcmt", countcmt);
+            request.setAttribute("comments", list);
+            request.setAttribute("blogsdetails", b);
+            request.setAttribute("blogsdetails", b);
+            request.setAttribute("count", count);
+            request.setAttribute("id", postId);
+
+            request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
         }
-
-        // Redirect back to the post.jsp page after processing
-        int count = l.getToTalLike(postId);
-
-        BlogsDAO dao = new BlogsDAO();
-        Blogs b = dao.getBlogByID(postId);
-        CommentDAO o = new CommentDAO();
-        List<Comment> list = o.getAllComment(postId);
-        
-        int countcmt = o.getToTalComment(postId);
-
-        request.setAttribute("countcmt", countcmt);
-        request.setAttribute("comments", list);
-        request.setAttribute("blogsdetails", b);
-        request.setAttribute("blogsdetails", b);
-        request.setAttribute("count", count);
-        request.setAttribute("id", postId);
-
-        request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
     }
 
     @Override

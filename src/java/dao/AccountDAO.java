@@ -25,7 +25,7 @@ public class AccountDAO {
     private static final String GET_USER_NAME = "SELECT username FROM Accounts WHERE UserID = ?;";
     private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name) VALUES (?, ?, ?, ?, ?, ?,?,?)";
     private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address FROM Accounts WHERE Email = ?";
-    private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address FROM Accounts WHERE UserID = ?";
+    private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address,birthDay FROM Accounts WHERE UserID = ?";
     private static final String GET_AN_ACCOUNT_BY_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role,address FROM Accounts WHERE token = ?";
     private static final String GET_ACC = "SELECT UserID,username ,Email, Password, name, Phone, photo,Status, Role,address,birthDay,sex FROM Accounts WHERE username = ?";
     private static final String UPDATE_TOKEN = "UPDATE Accounts Set token = ? WHERE email = ?";
@@ -148,7 +148,8 @@ public class AccountDAO {
                     String Phone = rs.getString("Phone");
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    Date date = rs.getDate("birthDay");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add,date);
 
                 }
             }
@@ -742,7 +743,7 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.GetUserName(3));
+        System.out.println("" + dao.getAnAccountById(4));
 
     }
 }

@@ -38,7 +38,7 @@ public class Account implements Serializable {
 
     }
 
-    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address) {
+    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address, Date d) {
         this.accId = accId;
         this.email = email;
         this.photo = photo;
@@ -49,6 +49,7 @@ public class Account implements Serializable {
         this.phone = phone;
         this.role = role;
         this.address = address;
+        this.birtDay = d;
 
     }
 
@@ -119,8 +120,8 @@ public class Account implements Serializable {
 
     public String getBirtDay() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = dateFormat.format(birtDay);
-        return formattedDate;
+        String date = dateFormat.format(birtDay);
+        return date;
     }
 
     public void setBirtDay(Date birtDay) {
@@ -173,9 +174,8 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String date = dateFormat.format(birtDay);
-        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + date + '}';
+
+        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + getBirtDay() + '}';
     }
 
 }

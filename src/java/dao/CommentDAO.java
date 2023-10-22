@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +38,8 @@ public class CommentDAO {
 
     public List<Comment> getAllComment(int postid) {
         List<Comment> list = new ArrayList<>();
-        String query = "SELECT A. comment_id, A.post_id, A.comment_content,  comment_author_id,B.name, A.comment_date FROM comments A JOIN Accounts B ON A.comment_author_id = B.UserID \n"+
-                "where post_id = ?";
+        String query = "SELECT A. comment_id, A.post_id, A.comment_content,  comment_author_id,B.name, A.comment_date FROM comments A JOIN Accounts B ON A.comment_author_id = B.UserID \n"
+                + "where post_id = ?";
 
         try {
             ps = conn.prepareStatement(query);
@@ -106,10 +108,19 @@ public class CommentDAO {
         return count;
     }
 
-    public static void main(String[] args) {
-        CommentDAO a = new CommentDAO();
+    public void insertComment(int postID, int userID, String content) {
 
-        System.out.println("" + a.getAllComment(2));
+        String query = "insert into comments values (?,?,?,GETDATE())";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, postID);
+            ps.setInt(3, userID);
+        
+            ps.setString(2, content);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 
+  
 }
