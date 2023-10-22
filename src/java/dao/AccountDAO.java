@@ -742,7 +742,7 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.GetUserName(3));
+        System.out.println("" + dao.getAnAccountById(3));
 
     }
 }
