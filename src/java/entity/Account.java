@@ -53,6 +53,20 @@ public class Account implements Serializable {
 
     }
 
+    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address) {
+        this.accId = accId;
+        this.email = email;
+        this.photo = photo;
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+        this.status = status;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+
+    }
+
     public String getAddress() {
         return address;
     }
@@ -120,8 +134,8 @@ public class Account implements Serializable {
 
     public String getBirtDay() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String date = dateFormat.format(birtDay);
-        return date;
+        String formattedDate = dateFormat.format(birtDay);
+        return formattedDate;
     }
 
     public void setBirtDay(Date birtDay) {
