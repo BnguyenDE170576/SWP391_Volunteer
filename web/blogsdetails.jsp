@@ -67,23 +67,17 @@
                 <div class="row">
 
                     <ul class="s-header__nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="has-children"><a href="#0">Dropdown</a>
-                            <ul>
-                                <li><a href="#0">Submenu 01</a></li>
-                                <li><a href="#0">Submenu 02</a></li>
-                                <li><a href="#0">Submenu 03</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="demo.html">Demo</a></li>	
-                        <li><a href="archives.html">Archives</a></li>
+                        <li><a href="home">Home</a></li>
+
+                        <li><a href="donation.jsp">Donation</a></li>	
+                        <li><a href="archives.html">Activity</a></li>
                         <li class="has-children current"><a href="#0">Blog</a>
                             <ul>
-                                <li><a href="blog.html">Blog Entries</a></li>
-                                <li><a href="single.html">Single Blog</a></li>
+                                <li><a href="blogs">Blog Entries</a></li>
+
                             </ul>
                         </li>
-                        <li><a href="page.html">Page</a></li>
+
                     </ul> <!-- end #nav -->
 
                 </div> 
@@ -122,12 +116,12 @@
                             <header class="entry__header">
 
                                 <h2 class="entry__title h1">
-                                    <a href="single.html" title=""><h2>${p.title}</h2></a>
+                                    <a href=title=""><h2>${p.title}</h2></a>
                                 </h2>
 
                                 <div class="entry__meta">
                                     <ul>
-                                        <li>July 12, 2019</li>
+                                        <li>${p.date}</li>
                                         <li><a href="#" title="" rel="category tag">Ghost</a></li>
                                         <li>${p.author}</li>
                                     </ul>
@@ -136,10 +130,10 @@
                             </header> <!-- entry__header -->
 
                             <div class="entry__content-media">
-                                <img src="./BlogsComponent/images/wheel-500.jpg" 
-                                     srcset="images/wheel-1000.jpg 1000w, 
-                                     images/wheel-500.jpg 500w" 
-                                     sizes="(max-width: 1000px) 100vw, 1000px" alt="">
+                                <img src=${p.photo}" 
+                                     srcset="${p.photo} 1000w, 
+                                     ${p.photo} 500w" 
+                                     sizes="(max-width: 1000px) 100vw, 1000px" alt="null">
                             </div>
 
                             <div class="entry__content">
@@ -197,7 +191,7 @@
                                 <li class="depth-1 comment">
                                     <c:forEach var="o" items="${comments}">
                                         <div class="comment__avatar">
-                                            <img class="avatar" src="./BlogsComponent/images/avatars/user-01.jpg" alt="" width="50" height="50">
+                                            <img class="avatar" src="${o.photoUser}" alt="./BlogsComponent/images/avatars/user-01.jpg" width="50" height="50">
                                         </div>
 
                                         <div class="comment__content">

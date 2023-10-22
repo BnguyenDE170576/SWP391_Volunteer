@@ -34,7 +34,7 @@ public class BlogsDAO {
 
     public List<Blogs> getAllBlogs() {
         List<Blogs> list = new ArrayList<>();
-        String query = "SELECT A. blog_id, A.title, A.content, B.name, A.date,A.category\n"
+        String query = "SELECT A. blog_id, A.title, A.content, B.name, A.date,A.category, A.photo,A.shortcontent\n"
                 + "FROM Blogs A\n"
                 + "JOIN Accounts B ON A.author = B.UserID; ";
 
@@ -50,7 +50,9 @@ public class BlogsDAO {
 
                 Date date = rs.getDate(5);
                 String cate = rs.getString(6);
-                Blogs blogs = new Blogs(blogsID, title, content, author, date, cate);
+                String photo = rs.getString(7);
+                String shortcontent =rs.getString(8);
+                Blogs blogs = new Blogs(blogsID, title, content, author, date, cate, photo,shortcontent);
                 list.add(blogs);
             }
         } catch (Exception e) {
@@ -62,7 +64,7 @@ public class BlogsDAO {
     public Blogs getBlogByID(int id) {
 
         try {
-            String query = "  SELECT A. blog_id, A.title, A.content, B.name, A.date,A.category\n"
+            String query = "  SELECT A. blog_id, A.title, A.content, B.name, A.date,A.category, A.photo, A.shortcontent\n"
                     + "             FROM Blogs A\n"
                     + "                JOIN Accounts B ON A.author = B.UserID\n"
                     + "				where blog_id = ?; ";
@@ -77,11 +79,14 @@ public class BlogsDAO {
 
                 Date date = rs.getDate(5);
                 String cate = rs.getString(6);
-                Blogs p = new Blogs(blogsID, title, content, author, date, cate);
+                String photo = rs.getString(7);
+                String shortcontent = rs.getString(8);
+                Blogs p = new Blogs(blogsID, title, content, author, date, cate, photo,shortcontent);
 
                 return p;
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
 
         return null;

@@ -20,17 +20,19 @@ public class Comment {
     private int commentAuthorId;
     private String commentAuthorName;
     private Date commentDate;
+    private String photoUser;
 
     public Comment() {
     }
 
-    public Comment(int commentId, int postId, String commentContent, int commentAuthorId, String commentAuthorName, Date commentDate) {
+    public Comment(int commentId, int postId, String commentContent, int commentAuthorId, String commentAuthorName, Date commentDate, String photo) {
         this.commentId = commentId;
         this.postId = postId;
         this.commentContent = commentContent;
         this.commentAuthorId = commentAuthorId;
         this.commentAuthorName = commentAuthorName;
         this.commentDate = commentDate;
+        this.photoUser = photo;
     }
 
     public int getCommentId() {
@@ -40,6 +42,16 @@ public class Comment {
     public void setCommentId(int commentId) {
         this.commentId = commentId;
     }
+
+    public String getPhotoUser() {
+        return photoUser;
+    }
+
+    public void setPhotoUser(String photoUser) {
+        this.photoUser = photoUser;
+    }
+    
+    
 
     public int getPostId() {
         return postId;
@@ -85,7 +97,8 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" + "commentId=" + commentId + ", postId=" + postId + ", commentContent=" + commentContent + ", commentAuthorId=" + commentAuthorId + ", commentAuthorName=" + commentAuthorName + ", commentDate=" + getCommentDate() + '}';
+        return "Comment{" + "commentId=" + commentId + ", postId=" + postId + ", commentContent=" + commentContent + ", commentAuthorId=" + commentAuthorId + ", commentAuthorName=" + commentAuthorName + ", commentDate=" + commentDate + ", photoUser=" + photoUser + '}';
     }
+
 
 }

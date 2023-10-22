@@ -124,7 +124,7 @@ public class AccountDAO {
         return check;
     }
 
-    public Account getAnAccountById(int id) throws SQLException {
+    public Account getAnAccountById(int id)  {
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -158,10 +158,18 @@ public class AccountDAO {
         } finally {
 
             if (stm != null) {
-                stm.close();
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if (conn != null) {
-                conn.close();
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return acc;

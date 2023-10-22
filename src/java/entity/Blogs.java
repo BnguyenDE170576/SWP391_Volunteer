@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,20 +17,24 @@ public class Blogs {
     private int blogId;
     private String title;
     private String content;
+    private String shortContent;
     private String author;
     private Date date;
     private String category;
+    private String photo;
 
     public Blogs() {
     }
 
-    public Blogs(int blogId, String title, String content, String author, Date date, String category) {
+    public Blogs(int blogId, String title, String content, String author, Date date, String category, String photo, String shortContent) {
         this.blogId = blogId;
         this.title = title;
         this.content = content;
         this.author = author;
         this.date = date;
         this.category = category;
+        this.photo = photo;
+        this.shortContent = shortContent;
     }
 
     public int getBlogId() {
@@ -64,8 +69,10 @@ public class Blogs {
         this.author = author;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(date);
+        return formattedDate;
     }
 
     public void setDate(Date date) {
@@ -80,9 +87,25 @@ public class Blogs {
         this.category = category;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getShortContent() {
+        return shortContent;
+    }
+
+    public void setShortContent(String shortContent) {
+        this.shortContent = shortContent;
+    }
+
     @Override
     public String toString() {
-        return "Blogs{" + "blogId=" + blogId + ", title=" + title + ", content=" + content + ", author=" + author + ", date=" + date + ", category=" + category + '}';
+        return "Blogs{" + "blogId=" + blogId + ", title=" + title + ", content=" + content + ", shortContent=" + shortContent + ", author=" + author + ", date=" + getDate() + ", category=" + category + ", photo=" + photo + '}';
     }
 
 }

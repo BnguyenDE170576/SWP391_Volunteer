@@ -11,8 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +37,7 @@ public class CommentDAO {
 
     public List<Comment> getAllComment(int postid) {
         List<Comment> list = new ArrayList<>();
-        String query = "SELECT A. comment_id, A.post_id, A.comment_content,  comment_author_id,B.name, A.comment_date FROM comments A JOIN Accounts B ON A.comment_author_id = B.UserID \n"
+        String query = "SELECT A. comment_id, A.post_id, A.comment_content,  comment_author_id,B.name, A.comment_date, B.photo FROM comments A JOIN Accounts B ON A.comment_author_id = B.UserID \n"
                 + "where post_id = ?";
 
         try {
@@ -54,8 +53,9 @@ public class CommentDAO {
                 int commentAuthorId = rs.getInt(4);
                 String name = rs.getString(5);
                 Date commentDate = rs.getDate(6);
+                String photo = rs.getString(7);
 
-                Comment comment = new Comment(commentId, postId, commentContent, commentAuthorId, name, commentDate);
+                Comment comment = new Comment(commentId, postId, commentContent, commentAuthorId, name, commentDate,photo);
                 list.add(comment);
             }
         } catch (Exception e) {
@@ -137,7 +137,7 @@ public class CommentDAO {
     
     public static void main(String[] args) {
         CommentDAO a = new CommentDAO();
-        a.deleteComment(14);
+        System.out.println(""+a.getToTalComment(1));
     }
 
 }

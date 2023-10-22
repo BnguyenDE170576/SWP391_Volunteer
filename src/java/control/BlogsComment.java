@@ -9,7 +9,6 @@ import dao.AccountDAO;
 import dao.BlogsDAO;
 import dao.CommentDAO;
 import dao.likeDAO;
-import entity.Account;
 import entity.Blogs;
 import entity.Comment;
 import java.io.IOException;
@@ -81,7 +80,7 @@ public class BlogsComment extends HttpServlet {
             throws ServletException, IOException {
         String commentMessage = request.getParameter("cMessage");
         int userId = Integer.parseInt(request.getParameter("userId"));
-   
+        PrintWriter out = response.getWriter();
         String email = "";
         Cookie[] cookies = request.getCookies();
 

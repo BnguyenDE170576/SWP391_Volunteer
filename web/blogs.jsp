@@ -144,10 +144,10 @@
                                     <h2 class="entry__title h1">
                                         <a href="blogsdetail?id=${o.blogId}" title="">${o.title}</a>
                                     </h2>
-
+                                    <img src="${o.photo}">
                                     <div class="entry__meta">
                                         <ul>
-                                            <li>${o.blogId}</li>
+                                            <li>${o.date}</li>
                                             <li>
                                                 <a href="#0" title="" rel="category tag">Wordpress</a>,
                                                 <a href="#0" title="" rel="category tag">Ghost</a>
@@ -160,7 +160,7 @@
 
                                 <div class="entry__content">
                                     <p>
-                                        ${o.content}
+                                        ${o.shortContent}
                                     </p>
                                 </div>
 
