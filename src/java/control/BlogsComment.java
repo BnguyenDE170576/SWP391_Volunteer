@@ -5,13 +5,18 @@
  */
 package control;
 
+import dao.AccountDAO;
+import dao.BlogsDAO;
 import dao.CommentDAO;
+import dao.likeDAO;
+import entity.Account;
+import entity.Blogs;
 import entity.Comment;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.nio.file.Files.list;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,19 +65,7 @@ public class BlogsComment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//      
-//        CommentDAO dao = new CommentDAO();
-//        List<Comment> list = dao.getAllComment();
-//
-//        request.setAttribute("comments", list);
 
-        // request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
-    
-
-        // You can also retrieve the value of the "submit" parameter if needed
-        // Now, you can work with the values you retrieved
-        // For example, you can print the comment message to the console
-    
     }
 
     /**
@@ -86,9 +79,45 @@ public class BlogsComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      String commentMessage = request.getParameter("cMessage");
-        PrintWriter out = response.getWriter();
-        out.print(commentMessage);
+        String commentMessage = request.getParameter("cMessage");
+        int userId = Integer.parseInt(request.getParameter("userId"));
+   
+        String email = "";
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+
+                if (name.equals("email")) {
+                    email = cookie.getValue().trim();
+                }
+            }
+
+            AccountDAO a = new AccountDAO();
+            int userIDLG = a.GetUSERID(a.getUserName_byEmail(email));
+
+            likeDAO l = new likeDAO();
+            int id_blogs = Integer.parseInt(request.getParameter("postId"));
+            BlogsDAO dao = new BlogsDAO();
+            Blogs b = dao.getBlogByID(id_blogs);
+            int count = l.getToTalLike(id_blogs);
+
+            CommentDAO o = new CommentDAO();
+            o.insertComment(id_blogs, userId, commentMessage);
+            List<Comment> list = o.getAllComment(id_blogs);
+            int countcmt = o.getToTalComment(id_blogs);
+
+            //test
+            request.setAttribute("userIDLG", userIDLG);
+            request.setAttribute("countcmt", countcmt);
+            request.setAttribute("comments", list);
+            request.setAttribute("blogsdetails", b);
+            request.setAttribute("count", count);
+            request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
+
+        }
+
     }
 
     /**

@@ -208,19 +208,49 @@
                                                 <div class="comment__author">${o.commentAuthorName}</div>
 
                                                 <div class="comment__meta">
-                                                    <div class="comment__time">July 12, 2019</div>
+                                                    <div class="comment__time">${o.commentDate}</div>
 
                                                 </div>
                                             </div>
 
                                             <div class="comment__text">
-                                                <p>${o.commentContent}</p>
+                                                <p>${o.commentContent} </p>
+                                                <c:if test="${o.commentAuthorId == userIDLG}">
+                                                    <!-- Show the delete comment button here -->
+
+                                                    <form action="blogsdetail" method="post" style="  text-align: end;">
+                                                        <div class="a" style="
+                                                             display: flex;
+                                                             padding-left: 265px;
+                                                             flex-wrap: wrap-reverse;
+                                                             ">
+                                                            <div class="b"> Delete comment </div>
+                                                            <input type="hidden" name="postId" value="${p.blogId}">
+
+                                                            <input type="hidden" name="userId" value="<%=userID%>">
+                                                            <input type="hidden" name="cmtID" value="${o.commentId}">
+
+                                                            <input type="submit" value="Delete Comment" style="
+                                                                   height: 23px;
+                                                                   padding: 8px;
+                                                                   width: 5px;
+                                                                   justify-content: center;
+                                                                   font-size: 3px;
+                                                                   text-align: start;
+                                                                   ">
+                                                            </form>
+                                                        </c:if>
+                                                    </div>
+
+
+
+
+
+
+
                                             </div>
 
-
-                                        </div>
-
-                                    </c:forEach>
+                                        </c:forEach>
 
                                 </li> <!-- end comment level 1 -->
 
@@ -246,6 +276,9 @@
 
                                         <div class="message form-field">
                                             <textarea name="cMessage" id="cMessage" class="h-full-width" placeholder="Your Message"></textarea>
+                                            <input type="hidden" name="postId" value="${p.blogId}">
+
+                                            <input type="hidden" name="userId" value="<%=userID%>">
                                         </div>
 
                                         <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large h-full-width" value="Add Comment" type="submit">

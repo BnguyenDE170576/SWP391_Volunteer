@@ -128,13 +128,16 @@ public class SignUp extends HttpServlet {
 
                 //cookie
                 Cookie userCookie = new Cookie("name", user);
+                Cookie emaill = new Cookie("email", email);
                 Cookie passwordCookie = new Cookie("pass", pass);
                 //dat time ton tai
                 userCookie.setMaxAge(60 * 60 * 24);
                 passwordCookie.setMaxAge(60 * 60 * 24);
+                emaill.setMaxAge(60 * 60 * 24);
                 //add browser cua nguoi dung
                 response.addCookie(userCookie);
                 response.addCookie(passwordCookie);
+                response.addCookie(emaill);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
 
             } else {
