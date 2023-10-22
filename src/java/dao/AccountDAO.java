@@ -19,13 +19,13 @@ import java.util.logging.Logger;
  */
 public class AccountDAO {
 
-    private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address FROM Accounts WHERE Email = ? AND Password = ?;";
-    private static final String GET_AN_ACCOUNT1 = "SELECT UserID, username, Password, name, Phone, email,photo,status, Role,address FROM Accounts WHERE username = ? AND Password = ?;";
+    private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address,birthDay FROM Accounts WHERE Email = ? AND Password = ?;";
+    private static final String GET_AN_ACCOUNT1 = "SELECT UserID, username, Password, name, Phone, email,photo,status, Role,address,birthDay FROM Accounts WHERE username = ? AND Password = ?;";
     private static final String GET_USER_ID = "SELECT UserID FROM Accounts WHERE username = ?;";
     private static final String GET_USER_NAME = "SELECT username FROM Accounts WHERE UserID = ?;";
     private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name) VALUES (?, ?, ?, ?, ?, ?,?,?)";
-    private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address FROM Accounts WHERE Email = ?";
-    private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address FROM Accounts WHERE UserID = ?";
+    private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address,birthDay FROM Accounts WHERE Email = ?";
+    private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address,birthDay FROM Accounts WHERE UserID = ?";
     private static final String GET_AN_ACCOUNT_BY_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role,address FROM Accounts WHERE token = ?";
     private static final String GET_ACC = "SELECT UserID,username ,Email, Password, name, Phone, photo,Status, Role,address,birthDay,sex FROM Accounts WHERE username = ?";
     private static final String UPDATE_TOKEN = "UPDATE Accounts Set token = ? WHERE email = ?";
@@ -148,7 +148,8 @@ public class AccountDAO {
                     String Phone = rs.getString("Phone");
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    Date date = rs.getDate("birthDay");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add, date);
 
                 }
             }
@@ -307,7 +308,8 @@ public class AccountDAO {
                     int Status = rs.getInt("Status");
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    Date date = rs.getDate("birthDay");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add, date);
 
                 }
             }
@@ -350,7 +352,8 @@ public class AccountDAO {
                     int Status = rs.getInt("Status");
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    Date d = rs.getDate("birthDay");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add,d);
 
                 }
             }
@@ -538,7 +541,8 @@ public class AccountDAO {
                     int Status = rs.getInt("Status");
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add);
+                    Date date = rs.getDate("birthDay");
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add,date);
 
                 }
             }
@@ -679,8 +683,9 @@ public class AccountDAO {
         }
         return id;
     }
+
     public String GetUserName(int id) {
-        String  name = "";
+        String name = "";
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -742,7 +747,7 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.getAnAccountById(3));
+        System.out.println("" + dao.getAccountInfoByEmail("tuongnmde170578@fpt.edu.vn"));
 
     }
 }
