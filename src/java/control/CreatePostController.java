@@ -121,6 +121,7 @@ public class CreatePostController extends HttpServlet {
             if (isImageFile(image)) {
                 imagePart.write(image);
                 blogDAO.insertBlogs(title, content, shortcontent, dao.GetUSERID(name), category, "images/" + filename);
+                request.setAttribute("ERROR_MASSEGE", "Create success. Please wait for admin approval.");
                 request.getRequestDispatcher("blogs").forward(request, response);
 
             } else {

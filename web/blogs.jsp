@@ -312,7 +312,7 @@
 
                     <div class="widget widget_popular">
                         <h3 class="h6">Create your blogs.</h3>
-
+                        <span id="error_message" style="color: red;  white-space: pre-line;"></span>
                         <ul class="link-list">
                             <li><a href="createpost">Add new post</a></li>
 
