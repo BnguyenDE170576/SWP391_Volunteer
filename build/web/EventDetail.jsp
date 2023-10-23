@@ -3,6 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="entity.Account" %>
 <%@ page import="dao.AccountDAO" %>
 <!DOCTYPE html>
@@ -42,79 +43,110 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <style> .navbar-light {
+        <style>
+            .navbar-light {
                 position: unset;
-            }</style>
+            }
+
+            .icon-hover:hover {
+                border-color: #3b71ca !important;
+                background-color: white !important;
+                color: #3b71ca !important;
+            }
+
+            .icon-hover:hover i {
+                color: #3b71ca !important;
+            }
+
+        </style>
     </head>
 
     <body>
 
 
         <%@include file="./components/header.jsp" %>
+
+        <!-- content -->
         <div class="container mt-5">
-            <h1 class="display-4">Chi Tiết Hoạt Động</h1>
             <c:if test="${not empty detail}">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="img/package-1.jpg" alt="Hình ảnh hoạt động" class="img-fluid mb-3">
-                            </div>
-                            <div class="col-md-8">
-                                <h5 class="card-title">${detail.activityName}</h5>                                                           
-                                <p class="card-text"><strong>Status:</strong> ${status}</p>
-                                <p class="card-text">${detail.description}</p>
-                                <p class="card-text"><strong>Ngày Bắt Đầu:</strong> ${detail.startDate}</p>
-                                <p class="card-text"><strong>Ngày Kết Thúc:</strong> ${detail.endDate}</p>
-                                <p class="card-text"><strong>Địa Điểm:</strong> ${detail.location}</p>
-                                <p class="card-text"><strong>Người Tổ Chức ID:</strong> ${detail.organizerId}</p>
-                                <p class="card-text"><strong>Số Lượng Thành Viên:</strong> ${detail.numberMember}</p>
-                                <p class="card-text"><strong>Ngày Tạo:</strong> ${detail.createdDate}</p>
-                                <p class="card-text"><strong>Ngày Cập Nhật:</strong> ${detail.updatedDate}</p>
-                                <div class="text-center mt-4">
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row gx-5">
+                            <aside class="col-lg-6">
+                                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp">
+                                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
+                                    </a>
+                                </div>
+                            </aside>
+                            <main class="col-lg-6">
+                                <div class="ps-lg-3">
+                                    <h4 class="title text-dark">
+                                        ${detail.activityName}
+                                    </h4>
+                                    <h6 class="title text-dark">
+                                        ${status}
+                                    </h6>
 
+                                    <div class="d-flex flex-row my-3">
+                                        <span class="text-muted"></i>${detail.organizerId}</span>
+                                    </div>
+                                    <div class="row">
+                                        <dt class="col-3">Ngày Bắt Đầu:</dt>
+                                        <dd class="col-3"><fmt:formatDate value="${detail.startDate}" pattern="yyyy-MM-dd" /></dd>
+                                        <dt class="col-3">Ngày Kết Thúc:</dt>
+                                        <dd class="col-3"><fmt:formatDate value="${detail.endDate}" pattern="yyyy-MM-dd" /></dd>
+                                        <dt class="col-3">Ngày Tạo:</dt>
+                                        <dd class="col-3"><fmt:formatDate value="${detail.createdDate}" pattern="yyyy-MM-dd" /></dd>
+                                        <dt class="col-3">Ngày Cập Nhật:</dt>
+                                        <dd class="col-3"><fmt:formatDate value="${detail.updatedDate}" pattern="yyyy-MM-dd" /></dd>        
+                                    </div>
+                                    <hr /> 
+                                    <p style="word-wrap: break-word;">
+                                        ${detail.description}
+                                    </p>
+                                    <hr /> 
+                                    <div class="row">
+                                        <dt class="col-4">Địa Điểm:</dt>
+                                        <dd class="col-8"> ${detail.location}</dd>
+                                        <dt class="col-4">Số Lượng Thành Viên:</dt>
+                                        <dd class="col-8">${detail.numberMember}</dd>
 
-
-
-                                    <div class="grouptbt" style="
-                                         justify-content: space-between;
-                                         display: flex;
-                                         text-align: center;
-                                         ">
-                                        <c:if test="${detail.organizerId == userID}">
-                                            <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  
-                                        </c:if>
-                                        <form action="donationevent" method="post">
-                                            <input type="hidden" value="${detail.organizerId}" name="id">
-                                            <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
-                                        </form>
+                                    </div>
+                                    <hr />                                
+                                    <div class="text-center mt-4">
+                                        <div class="grouptbt" style="display: flex; justify-content: space-between; align-items: center;">
+                                            <c:if test="${detail.organizerId == userID}">
+                                                <button id="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Xét duyệt</button>  
+                                            </c:if>
+                                            <form action="donationevent" method="post">
+                                                <input type="hidden" value="${detail.organizerId}" name="id">
+                                                <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
+                                            </form>
+                                            <c:if test="${detail.organizerId == userID}">
+                                                <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  
+                                            </c:if>
+                                            <c:if test="${detail.organizerId != userID && check==0}">
+                                                <form action="PendingUser" method="POST">
+                                                    <input type="hidden" name="activityId" value="${detail.activityId}">
+                                                    <input type="hidden" name="userID" value="${userID}">
+                                                    <button class="btn btn-primary btn-lg">Tham gia</button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${detail.organizerId != userID && check==1}">
+                                                <box class="btn btn-primary btn-lg">Đợi xét duyệt</box>
+                                                </c:if>
+                                                <c:if test="${detail.organizerId != userID && check==2}">
+                                                <box class="btn btn-primary btn-lg">Đã Tham gia</box>
+                                                </c:if> 
+                                        </div>
                                     </div>
 
-                                    <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  
-
-                                    <c:if test="${detail.organizerId != userID && check==0}">
-                                        <form action="PendingUser"  method="POST">
-                                            <input type="hidden" name="activityId" value="${detail.activityId}">
-
-                                            <input type="hidden" name="userID" value="${userID}">
-                                            <button class="btn btn-primary btn-lg">Tham gia</button>
-                                        </form>
-                                    </c:if>
-                                    <c:if test="${detail.organizerId != userID && check==1}">
-
-                                        <box class="btn btn-primary btn-lg">Đợi xét duyệt</box>
-
-                                    </c:if>
-                                    <c:if test="${detail.organizerId != userID && check==2}">
-
-                                        <box class="btn btn-primary btn-lg">Đã Tham gia</box>
-
-                                    </c:if>
                                 </div>
-                            </div>
+                            </main>
                         </div>
                     </div>
-                </div>
+                </section>
             </c:if>
         </div>
 
@@ -147,6 +179,7 @@
                 </div>
             </div>
         </div>
+
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -173,7 +206,7 @@
                                 <div class="mb-3">
                                     <label for="endDateStr">End Date:</label>
                                     <input type="date" id="endDateStr" name="endDateStr" class="form-control" required>
-                                    <input type="hidden" name="startDateStr" class="form-control" value="${detail.startDate}">
+                                    <input type="hidden" name="startDateStr" id="startDateStr" class="form-control" value="${detail.startDate}">
                                 </div>
                             </c:when>
                             <c:when test="${status == 'Sắp diễn ra'}">
@@ -191,8 +224,24 @@
 
 
                         <div class="mb-3">
-                            <label for="location">Location:</label>
-                            <input type="text" id="location" name="location" class="form-control" required value="${detail.location}">
+                            <label for="province" class="form-label" >Tỉnh/Thành Phố:</label>
+                            <select id="province" class="form-select" name="province">
+                                <option value="">Chọn tỉnh/thành phố</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown quận/huyện -->
+                        <div class="mb-3">
+                            <label for="district" class="form-label" >Quận/Huyện:    </label>
+                            <select id="district" class="form-select" name="district">
+                                <option value="">Chọn quận/huyện</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown xã/ward -->
+                        <div class="mb-3">
+                            <label for="ward" class="form-label">Xã/Phường:</label>
+                            <select id="ward" class="form-select" name="ward">
+                                <option value="">Chọn xã/phường</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="memberLimit">Member Limit:</label>
@@ -208,93 +257,20 @@
             </div>
         </div>
 
+        <script src="./js/location.js"></script> 
         <script src="./js/BrowserJoin.js"></script>    
-        <script>
-                            $(document).ready(function () {
-                                $("#myModal").on("click", "button[data-action='reject']", function () {
-                                    // Xử lý từ chối thành viên
-                                    // Đóng modal sau khi xử lý
-                                    $("#myModal").modal("hide");
-                                });
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-                                $("#myModal").on("click", "button[data-action='approve']", function () {
-                                    // Xử lý xét duyệt thành viên
-                                    // Đóng modal sau khi xử lý
-                                    $("#myModal").modal("hide");
-                                });
-                            });
-
-                            //---------------------------------------------------------------------------
-                            function updateActivity() {
-                                if (validateForm()) {
-                                    var activityName = $("#activityName").val();
-                                    var description = $("#description").val();
-                                    var startDate = $("#startDateStr").val();
-                                    var endDate = $("#endDateStr").val();
-                                    var location = $("#location").val();
-                                    var memberLimit = $("#memberLimit").val();
-
-                                    var data = {
-                                        activityName: activityName,
-                                        description: description,
-                                        startDate: startDate,
-                                        endDate: endDate,
-                                        location: location,
-                                        memberLimit: memberLimit
-                                                // Thêm dữ liệu từ các trường khác
-                                    };
-
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "UpdateActivityControl", //URL của servlet 
-                                        data: data,
-                                        success: function (response) {
-                                            // Xử lý kết quả trả về từ servlet
-                                            $("#result").html(response);
-                                        },
-                                        error: function () {
-                                            alert("Đã xảy ra lỗi khi gửi yêu cầu.");
-                                        }
-                                    });
-                                }
-                            }
-                            document.getElementById("editButton").addEventListener("click", function () {
-                                // Hiển thị form chỉnh sửa bằng cách thay đổi thuộc tính style.display
-                                document.getElementById("editForm").style.display = "block";
-                            });
-                            function cancelEdit() {
-                                // Ẩn form chỉnh sửa bằng cách thay đổi thuộc tính style.display
-                                document.getElementById("editForm").style.display = "none";
-                            }
-                            //----------------------------------------------------------------
-                            function validateForm() {
-                                var activityName = document.getElementById("activityName").value;
-                                var startDate = new Date(document.getElementById("startDateStr").value);
-                                var endDate = new Date(document.getElementById("endDateStr").value);
-                                var currentDate = new Date();
-                                currentDate.setHours(0, 0, 0, 0);
-                                startDate.setHours(0, 0, 0, 0);
-                                endDate.setHours(0, 0, 0, 0);
-                                // Kiểm tra tên hoạt động
-                                if (activityName.length > 70) {
-                                    alert("Tên hoạt động không được quá 70 ký tự.");
-                                    return false;
-                                }
-
-                                // Kiểm tra ngày bắt đầu và ngày kết thúc
-                                if (startDate < currentDate && startDate != null) {
-                                    alert("Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại.");
-                                    return false;
-                                }
-
-                                if (endDate <= startDate && startDate != null) {
-                                    alert("Ngày kết thúc phải lớn hơn ngày bắt đầu.");
-                                    return false;
-                                }
-
-                                return true;
-                            }
-        </script>
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
     </body>
 
 </html>

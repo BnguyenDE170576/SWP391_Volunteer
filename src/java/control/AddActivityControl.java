@@ -107,7 +107,7 @@ public class AddActivityControl extends HttpServlet {
         AccountDAO dao = new AccountDAO();
         String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
         ActivityDAO acDAO = new ActivityDAO();
-        acDAO.CreateActivity(activityName, description, startDate, endDate, location, dao.GetUSERID(name),memberLimit);
+      //  acDAO.CreateActivity(activityName, description, startDate, endDate, location, dao.GetUSERID(name),memberLimit);
         // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
         response.sendRedirect("home");
     }

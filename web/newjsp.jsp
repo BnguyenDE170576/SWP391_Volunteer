@@ -3,17 +3,36 @@
 
 <!DOCTYPE html>
 <html>
-    <meta charset="UTF-8">
-<head>
-    <!-- Import Bootstrap CSS nếu cần -->
-</head>
-<body>
-    <h1>Thông Tin Hoạt Động</h1>
-    <p>Tên Hoạt Động: <c:out value="${sessionScope.activityName}" /></p>
-    <p>Mô Tả: <c:out value="${sessionScope.description}" /></p>
-    <p>Ngày Bắt Đầu: <c:out value="${sessionScope.startDateStr}" /></p>
-    <p>Ngày Kết Thúc: <c:out value="${sessionScope.endDateStr}" /></p>
-    <p>Địa Chỉ: <c:out value="${sessionScope.location}" /></p>
-    <p>Số Lượng Thành Viên: <c:out value="${sessionScope.memberLimit}" /></p>
-</body>
+    <head>
+        <title>Chọn Tỉnh/Thành Phố, Quận/Huyện và Xã/Phường</title>
+    </head>
+    <body>
+        <h1>Chọn Tỉnh/Thành Phố, Quận/Huyện và Xã/Phường</h1>
+
+        <!-- Dropdown tỉnh/thành phố -->
+        <div class="mb-3">
+            <label for="province" class="form-label">Tỉnh/Thành Phố:</label>
+            <select id="province" class="form-select">
+                <option value="">Chọn tỉnh/thành phố</option>
+            </select>
+        </div>
+
+        <!-- Dropdown quận/huyện -->
+        <div class="mb-3">
+            <label for="district" class="form-label">Quận/Huyện:</label>
+            <select id="district" class="form-select">
+                <option value="">Chọn quận/huyện</option>
+            </select>
+        </div>
+
+        <!-- Dropdown xã/ward -->
+        <div class="mb-3">
+            <label for="ward" class="form-label">Xã/Phường:</label>
+            <select id="ward" class="form-select">
+                <option value="">Chọn xã/phường</option>
+            </select>
+        </div>
+
+        
+    </body>
 </html>

@@ -7,9 +7,6 @@ package control;
 import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author datka
  */
-@WebServlet(name = "ApproveControl", urlPatterns = {"/ApproveControl"})
-public class ApproveControl extends HttpServlet {
+@WebServlet(name = "SearchControl", urlPatterns = {"/SearchControl"})
+public class SearchControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,13 +34,39 @@ public class ApproveControl extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
-            ActivityDAO actDAO = new ActivityDAO();
-            request.setAttribute("pendingEvents", actDAO.getPendingActivity());
+            String searchTerm = request.getParameter("searchTerm");
+            ActivityDAO DAO = new ActivityDAO();
+            int spage = 1, spageSize = 6;
+            int stotalPage = DAO.getSearchTotalRow(searchTerm);
+            if (request.getParameter("spage") != null) { // check param page
+                spage = Integer.parseInt(request.getParameter("spage"));
+            }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+            if (stotalPage % spageSize == 0) { // calculator total page to showinformation
+                stotalPage = stotalPage / spageSize;
+            } else {
+                stotalPage = stotalPage / spageSize + 1;
+            }
+            if (spage > stotalPage) {
+                request.setAttribute("noContent", "No article here!");
+            } else {
+                request.setAttribute("content", DAO.getSearchActivityFromTo(spage,
+                        spageSize, searchTerm));
+
+            }
+            //  List<VolunteerActivity> activities = DAO.getActivityFromTo(startRecord, recordsPerPage);
+
+            request.setAttribute("spage", spage);
+            request.setAttribute("stotalPage", stotalPage);
+            request.setAttribute("scurrentPage", spage);
+            request.setAttribute("searchTerm", searchTerm);
+            HttpSession session = request.getSession();
+            session.setAttribute("urlHistory", "SearchControl");
+            session.setAttribute("destPage", "SearchPage.jsp");
+        } catch (Exception e) {
+            log("Error at SearchController: " + e.toString());
         } finally {
-            request.getRequestDispatcher("Approve.jsp").forward(request, response);
+            request.getRequestDispatcher("SearchPage.jsp").forward(request, response);
         }
     }
 
@@ -73,30 +96,7 @@ public class ApproveControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
-        int eId = Integer.parseInt(request.getParameter("eId"));
-        int check = Integer.parseInt(request.getParameter("check"));
-        session.setAttribute("a", eId );
-        session.setAttribute("b", check);
-        ActivityDAO acDAO = new ActivityDAO();
-        if (check == 1) {
-            acDAO.CreateActivity(acDAO.getPendingActivityById(eId));
-            try {
-                acDAO.removePendingActivity(eId);
-            } catch (SQLException ex) {
-                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (check == 2) {
-            try {
-                acDAO.removePendingActivity(eId);
-            } catch (SQLException ex) {
-                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
- 
     }
 
     /**

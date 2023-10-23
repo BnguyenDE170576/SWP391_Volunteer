@@ -1,7 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+<nav class="navbar navbar-expand-lg custom-navbar">
     <a href="" class="navbar-brand p-0">
         <a href ="home"><h1 class="text-primary m-0" ><i class="fa fa-map-marker-alt me-3"></i>Volunteer</h1></a>
-        <!-- <img src="img/logo.png" alt="Logo"> -->
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="fa fa-bars"></span>
@@ -11,19 +10,22 @@
             <a href="home" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Services</a>
-            <a href="./ApproveControl" class="nav-item nav-link">Approve</a>
-            <div class="nav-item dropdown"> 
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activity</a>
-                <div class="dropdown-menu m-0">
-                    <a href="./CreateActivity.jsp" class="dropdown-item">Create Activity</a>
-                    <a href="booking.html" class="dropdown-item">Manager Activity</a>
+            <c:if test="${sessionScope.LOGIN_USER.role  == 3}">
+                <a href="./ApproveControl" class="nav-item nav-link">Approve</a>
+            </c:if>
+            <c:if test="${sessionScope.LOGIN_USER.role  == 2 || sessionScope.LOGIN_USER.role  == 3}">
+                <div class="nav-item dropdown"> 
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activity</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="./CreateActivity.jsp" class="dropdown-item">Create Activity</a>
+                        <a href="booking.html" class="dropdown-item">Manager Activity</a>
+                    </div>
                 </div>
-            </div>
-            <a href="donation.jsp" class="nav-item nav-link">Donation</a>
-
+                <a href="donation.jsp" class="nav-item nav-link">Donation</a>
+            </c:if>
 
         </div>
-
+      
         <c:choose>
             <c:when test="${sessionScope.LOGIN_USER == null}">
                 <li class="nav-item">
@@ -34,7 +36,6 @@
 
                 <div class="nav-item dropdown"> 
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
-
                         <img class="rounded-circle-perfect" src="img/package-2.jpg" alt="">
                         <label class="font-weight-bold text-primary">${sessionScope.LOGIN_USER.userName}</label>
                     </a>
@@ -42,10 +43,9 @@
                     <div class="dropdown-menu m-0">
                         <a class="dropdown-item" href="changepass">Change Password</a>
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
-
-                        <a class="dropdown-item" href="logout">Log Out</a>
+                        <a class="dropdown-item" href="./HistoryControl">View History</a>
+                        <a class="dropdown-item" href="logout">Log Out</a>    
                     </div>
-                </div>
             </c:otherwise>
         </c:choose>
 
@@ -60,4 +60,18 @@
         object-fit: cover;
         margin-right: 5px
     }
+     .custom-navbar {
+            background-color: #333;
+            color: #fff; 
+            padding-right: 1%;
+            padding-left:1%;
+        }
+
+        .custom-navbar .navbar-brand {
+            color: #fff;
+        }
+
+        .custom-navbar .navbar-nav .nav-link {
+            color: #fff; 
+        }
 </style>

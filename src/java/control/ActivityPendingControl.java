@@ -85,7 +85,11 @@ public class ActivityPendingControl extends HttpServlet {
         String description = request.getParameter("description");
         String startDateStr = request.getParameter("startDate");
         String endDateStr = request.getParameter("endDate");
-        String location = request.getParameter("location");
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        String ward = request.getParameter("ward");
+
+        String location = ward + "-" + district + "-" + province;
         int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
 
         // Xử lý tải lên hình ảnh (nếu có)
@@ -99,18 +103,13 @@ public class ActivityPendingControl extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        session.setAttribute("activityName", activityName);
-        session.setAttribute("description", description);
-        session.setAttribute("startDateStr", startDate);
-        session.setAttribute("endDateStr", endDate);
-        session.setAttribute("location", location);
-        session.setAttribute("memberLimit", memberLimit);
+
         AccountDAO dao = new AccountDAO();
         int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
         ActivityDAO acDAO = new ActivityDAO();
         acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit);
         // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
-        response.sendRedirect("newjsp.jsp");
+        response.sendRedirect("home");
     }
 
     /**

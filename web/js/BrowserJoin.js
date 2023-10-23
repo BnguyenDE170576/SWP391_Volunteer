@@ -5,7 +5,7 @@
 
 
 // JavaScript code to handle Approve button
-function approveMember(userId, eventID, listItem,approveButton) {
+function approveMember(userId, eventID, listItem, approveButton) {
     // Thay đổi giao diện ngay lập tức
     listItem.innerHTML = 'Đã xét duyệt'; // Thay đổi nội dung của list item
     approveButton.style.display = 'none';
@@ -27,7 +27,7 @@ function approveMember(userId, eventID, listItem,approveButton) {
 }
 
 // JavaScript code to handle Reject button
-function rejectMember(userId, eventID, listItem,approveButton) {
+function rejectMember(userId, eventID, listItem, approveButton) {
     // Thay đổi giao diện ngay lập tức
     listItem.innerHTML = 'Đã từ chối'; // Thay đổi nội dung của list item
     approveButton.style.display = 'none';
@@ -45,4 +45,95 @@ function rejectMember(userId, eventID, listItem,approveButton) {
             alert("Đã xảy ra lỗi khi từ chối thành viên.");
         },
     });
+}
+$(document).ready(function () {
+    $("#myModal").on("click", "button[data-action='reject']", function () {
+        // Xử lý từ chối thành viên
+        // Đóng modal sau khi xử lý
+        $("#myModal").modal("hide");
+    });
+
+    $("#myModal").on("click", "button[data-action='approve']", function () {
+        // Xử lý xét duyệt thành viên
+        // Đóng modal sau khi xử lý
+        $("#myModal").modal("hide");
+    });
+});
+
+//---------------------------------------------------------------------------
+
+
+function updateActivity() {
+    console.log("he");
+    if (validateForm()) {
+        console.log("hi");
+        var activityName = $("#activityName").val();
+        var description = $("#description").val();
+        var startDate = $("#startDateStr").val();
+        var endDate = $("#endDateStr").val();
+        var province = document.getElementById("province").value;
+        var district = document.getElementById("district").value;
+        var ward = document.getElementById("ward").value;
+        var memberLimit = $("#memberLimit").val();
+
+        var data = {
+            activityName: activityName,
+            description: description,
+            startDate: startDate,
+            endDate: endDate,
+            province: province, 
+            district: district, 
+            ward: ward,
+            memberLimit: memberLimit
+                    // Thêm dữ liệu từ các trường khác
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "UpdateActivityControl", //URL của servlet 
+            data: data,
+            success: function (response) {
+                console.log(data);
+            },
+            error: function () {
+                alert("Đã xảy ra lỗi khi gửi yêu cầu.");
+            }
+        });
+    }
+}
+document.getElementById("editButton").addEventListener("click", function () {
+    // Hiển thị form chỉnh sửa bằng cách thay đổi thuộc tính style.display
+    document.getElementById("editForm").style.display = "block";
+});
+function cancelEdit() {
+    // Ẩn form chỉnh sửa bằng cách thay đổi thuộc tính style.display
+    document.getElementById("editForm").style.display = "none";
+}
+//----------------------------------------------------------------
+function validateForm() {
+    var activityName = document.getElementById("activityName").value;
+    var startDate = new Date(document.getElementById("startDateStr").value);
+    var endDate = new Date(document.getElementById("endDateStr").value);
+    var currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
+    // Kiểm tra tên hoạt động
+    if (activityName.length > 70) {
+        alert("Tên hoạt động không được quá 70 ký tự.");
+        return false;
+    }
+
+    // Kiểm tra ngày bắt đầu và ngày kết thúc
+    if (startDate < currentDate && startDate != null) {
+        alert("Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại.");
+        return false;
+    }
+
+    if (endDate <= startDate && startDate != null) {
+        alert("Ngày kết thúc phải lớn hơn ngày bắt đầu.");
+        return false;
+    }
+
+    return true;
 }

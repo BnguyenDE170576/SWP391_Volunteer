@@ -4,6 +4,8 @@
     Author     : ytbhe
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -49,7 +51,7 @@
         <!-- Spinner End -->
 
 
-         <!-- Topbar Start -->
+        <!-- Topbar Start -->
         <div class="container-fluid bg-dark px-5 d-none d-lg-block">
             <div class="row gx-0">
                 <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
@@ -74,15 +76,15 @@
                                 class="fab fa-youtube fw-normal"></i></a>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
-
+         <%@include file="./components/header.jsp" %>
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <!-- header -->
-            <%@include file="./components/header.jsp" %>
+          
             <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                 <div class="container py-5">
                     <div class="row justify-content-center py-5">
@@ -90,10 +92,13 @@
                             <h1 class="display-3 text-white mb-3 animated slideInDown">Help us to save earth</h1>
 
                             <p class="fs-4 text-white mb-4 animated slideInDown">Make the World Great Again</p>
-                            <div class="position-relative w-75 mx-auto animated slideInDown">
-                                <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Eg: Da Nang">
-                                <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
-                            </div>
+                            <form action="SearchControl" method="get">
+                                <div class="position-relative w-75 mx-auto animated slideInDown">
+                                    <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" name="searchTerm" placeholder="Eg: Da Nang" required>
+                                    <button type="submit" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -118,20 +123,19 @@
                                 <div class="col-lg-4 col-md-6 wow fadeInUp mb-3" data-wow-delay="0.1s">
                                     <div class="package-item">
                                         <div class="overflow-hidden">
-                                            <img class="img-fluid" src="img/package-1.jpg" alt="">
+                                            <img class="img-fluid" src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg" alt="" >
                                         </div>
                                         <div class="d-flex border-bottom">
-                                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${activity.getLocation()}</small>
-                                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3  days</small>
+                                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${activity.getLocation()}</small>                                              
                                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>${activity.getNumberMember()}</small>
                                         </div>
                                         <div class="text-center p-4">
-                                            <h3 href="EventDetailControl?id=${activity.getActivityId()}" class="mb-0">${activity.getActivityName()}</h3>
+                                            <h4 href="EventDetailControl?id=${activity.getActivityId()}" class="mb-0">${activity.getActivityName()}</h4>
+                                            <br>
 
-                                            <p>Description.........</p>
                                             <div class="d-flex justify-content-center mb-2">
                                                 <a href="EventDetailControl?id=${activity.getActivityId()}" class="btn btn-sm btn-primary px-3 " style="border-radius: 30px 30px 30px 30px;">Detail</a>
-                                               
+
                                             </div>
                                         </div>
                                     </div>

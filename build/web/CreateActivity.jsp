@@ -49,6 +49,19 @@
                 margin-top: 20px; /* Tạo khoảng cách từ phía trên */
                 margin-bottom: 20px; /* Tạo khoảng cách từ phía dưới */
             }
+            select option {
+                background-color: #f2f2f2; /* Màu nền */
+                color: #333; /* Màu văn bản */
+                padding: 5px; /* Khoảng cách bên trong option */
+                border: 1px solid #ccc; /* Đường viền */
+                border-radius: 4px; /* Góc bo tròn */
+            }
+
+            /* Tùy chỉnh màu nền và văn bản cho option khi hover */
+            select option:hover {
+                background-color: #e0e0e0;
+                color: #000;
+            }
         </style>
 
     </head>
@@ -59,7 +72,7 @@
             <form action="ActivityPendingControl" method="post"  onsubmit="return validateForm()">
                 <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh:</label>
-                   
+
                 </div>
                 <br>
                 <div class="mb-3">
@@ -84,9 +97,28 @@
 
                 <br>
                 <div class="mb-3">
-                    <label for="location" class="form-label">Địa Chỉ:</label>
-                    <input type="text" class="form-control" id="autocomplete" name="location" placeholder="Tìm kiếm địa chỉ" required>
+                    <label for="province" class="form-label" >Tỉnh/Thành Phố:</label>
+                    <select id="province" class="form-select" name="province">
+                        <option value="">Chọn tỉnh/thành phố</option>
+                    </select>
                 </div>
+                <br>
+                <!-- Dropdown quận/huyện -->
+                <div class="mb-3">
+                    <label for="district" class="form-label" >Quận/Huyện:    </label>
+                    <select id="district" class="form-select" name="district">
+                        <option value="">Chọn quận/huyện</option>
+                    </select>
+                </div>
+                <br>
+                <!-- Dropdown xã/ward -->
+                <div class="mb-3">
+                    <label for="ward" class="form-label">Xã/Phường:</label>
+                    <select id="ward" class="form-select" name="ward">
+                        <option value="">Chọn xã/phường</option>
+                    </select>
+                </div>
+
                 <br>
                 <div class="mb-3">
                     <label for="description" class="form-label">Mô Tả:</label>
@@ -102,6 +134,7 @@
         <!-- Sử dụng Bootstrap JS và jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.min.js"></script>
+        <script src="./js/location.js"></script> 
 
         <script>
                 function validateForm() {

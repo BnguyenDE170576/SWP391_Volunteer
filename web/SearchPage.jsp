@@ -80,11 +80,11 @@
             </div>
         </div>
 
-         <%@include file="./components/header.jsp" %>
+
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <!-- header -->
-          
+            <%@include file="./components/header.jsp" %>
             <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                 <div class="container py-5">
                     <div class="row justify-content-center py-5">
@@ -112,8 +112,7 @@
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h1 class="mb-5">Events</h1>
-                </div>
-
+                </div>     
                 <c:if test="${not empty content}">
 
                     <div class="row g-4 justify-content-center">
@@ -153,28 +152,28 @@
                 <div class="mt-3 paging wow fadeInUp">  
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=1" aria-label="Trang đầu">
+                            <li class="page-item ${spage == 1 ? 'disabled' : ''}">
+                                <a class="page-link" href="SearchControl?spage=1&searchTerm=${searchTerm}" aria-label="Trang đầu">
                                     <span aria-hidden="true">&laquo;&laquo;</span>
                                 </a>
                             </li>
-                            <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page - 1}" aria-label="Trang trước">
+                            <li class="page-item ${spage == 1 ? 'disabled' : ''}">
+                                <a class="page-link" href="SearchControl?spage=${spage - 1}&searchTerm=${searchTerm}" aria-label="Trang trước">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <c:forEach var="j" begin="1" step="1" end="${totalPage}">
-                                <li class="page-item ${page == j ? 'active' : ''}">
-                                    <a class="page-link" href="home?page=${j}">${j}</a>
+                            <c:forEach var="j" begin="1" step="1" end="${stotalPage}">
+                                <li class="page-item ${spage == j ? 'active' : ''}">
+                                    <a class="page-link" href="SearchControl?spage=${j}&searchTerm=${searchTerm}">${j}</a>
                                 </li>
                             </c:forEach>
-                            <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page + 1}" aria-label="Trang sau">
+                            <li class="page-item ${spage == stotalPage ? 'disabled' : ''}">
+                                <a class="page-link" href="SearchControl?spage=${spage + 1}&searchTerm=${searchTerm}" aria-label="Trang sau">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
-                            <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${totalPage}" aria-label="Trang cuối">
+                            <li class="page-item ${spage == stotalPage ? 'disabled' : ''}">
+                                <a class="page-link" href="SearchControl?spage=${stotalPage}&searchTerm=${searchTerm}" aria-label="Trang cuối">
                                     <span aria-hidden="true">&raquo;&raquo;</span>
                                 </a>
                             </li>
