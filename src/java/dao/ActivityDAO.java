@@ -43,8 +43,8 @@ public class ActivityDAO {
     private static final String SELECT_USERPENDING_BY_ACTIVITY = "SELECT UserID FROM UserPending WHERE ActivityID = ?";
     private static final String SELECT_PARTICIPANTS_BY_ACTIVITY = "SELECT volunteer_id FROM volunteer_participation WHERE activity_id = ?";
     private static final String SELECT_ACTIVITIES_BY_USER = "SELECT activity_id, registration_date FROM volunteer_participation WHERE volunteer_id = ?;";
-    private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE())";
+    private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE())";
     private static final String UPDATE_ACTIVITY = "UPDATE volunteer_activities "
             + "SET activity_name = ?, "
             + "description = ?, "
@@ -82,6 +82,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
 
                 activities.add(activity);
             }
@@ -119,7 +120,7 @@ public class ActivityDAO {
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            psm = conn.prepareStatement(SEARCH_ACTIVITY);     
+            psm = conn.prepareStatement(SEARCH_ACTIVITY);
             rs = psm.executeQuery();
 
             while (rs.next()) {
@@ -134,18 +135,21 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
                 activities.add(activity);
             }
-            
-            for (int i=0;i<activities.size();i++){
-                String name =activities.get(i).getActivityName().toLowerCase();
+
+            for (int i = 0; i < activities.size(); i++) {
+                String name = activities.get(i).getActivityName().toLowerCase();
                 String location = activities.get(i).getLocation().toLowerCase();
-                    if (name.indexOf(keyword.toLowerCase()) != -1 || location.indexOf(keyword.toLowerCase()) != -1){
-                        activities1.add(activities.get(i));
-                    }
+                if (name.indexOf(keyword.toLowerCase()) != -1 || location.indexOf(keyword.toLowerCase()) != -1) {
+                    activities1.add(activities.get(i));
+                }
             }
-            if (to>activities1.size()+1) to=activities1.size()+1;
-            for(int i=from-1;i<to;i++){
+            if (to > activities1.size() + 1) {
+                to = activities1.size() + 1;
+            }
+            for (int i = from - 1; i < to; i++) {
                 activities2.add(activities1.get(i));
             }
 
@@ -193,7 +197,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
-
+                activity.setPhoto(rs.getString("photo"));
                 activities.add(activity);
             }
 
@@ -220,7 +224,7 @@ public class ActivityDAO {
     }
 
     public void UpdateActivity(String activityName, String description, Date startDate, Date endDate, String location, int memberLimit) throws SQLException, ClassNotFoundException {
-        try ( Connection conn = DBUtils.getConnection();  PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
+        try (Connection conn = DBUtils.getConnection(); PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
 
             psm.setString(1, activityName);
             psm.setString(2, description);
@@ -252,6 +256,7 @@ public class ActivityDAO {
             // created_date, updated_date
             psm.setTimestamp(8, new Timestamp(ev.getCreatedDate().getTime()));
             psm.setTimestamp(9, new Timestamp(ev.getUpdatedDate().getTime()));
+            psm.setString(10, ev.getPhoto());
             psm.executeUpdate();
 
         } catch (Exception e) {
@@ -275,7 +280,7 @@ public class ActivityDAO {
 
     }
 
-    public void CreatePendingActivity(String activityName, String description, Date startDate, Date endDate, String location, int organizerId, int memberLimit) {
+    public void CreatePendingActivity(String activityName, String description, Date startDate, Date endDate, String location, int organizerId, int memberLimit, String photo) {
         Connection conn = null;
         PreparedStatement psm = null;
 
@@ -289,6 +294,7 @@ public class ActivityDAO {
             psm.setString(5, location);
             psm.setInt(6, organizerId);
             psm.setInt(7, memberLimit);
+            psm.setString(8, photo);
             psm.executeUpdate();
 
         } catch (Exception e) {
@@ -824,6 +830,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
                 activities = activity;
             }
 

@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -22,6 +22,7 @@ public class VolunteerActivity {
     private int numberMember;
     private Date createdDate;
     private Date updatedDate;
+    private String photo;
 
     // Các phương thức getter và setter cho các thuộc tính
     public int getActivityId() {
@@ -103,4 +104,13 @@ public class VolunteerActivity {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
 }

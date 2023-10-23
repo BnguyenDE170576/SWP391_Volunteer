@@ -89,7 +89,7 @@
         <div class="container mt-5 ">
             <h1 class="display-4">Tạo Sự Kiện Mới</h1>
 
-            <form action="ActivityPendingControl" method="post"  onsubmit="return validateForm()">
+            <form action="ActivityPendingControl" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh:</label>
 
