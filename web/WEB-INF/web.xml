@@ -84,6 +84,22 @@
         <servlet-name>BlogsDetailController</servlet-name>
         <servlet-class>control.BlogsDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreatePostController</servlet-name>
+        <servlet-class>control.CreatePostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApproveBlogs</servlet-name>
+        <servlet-class>control.ApproveBlogs</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogsManagerControl</servlet-name>
+        <servlet-class>control.BlogsManagerControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogs</servlet-name>
+        <servlet-class>control.process.DeleteBlogs</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -163,6 +179,22 @@
     <servlet-mapping>
         <servlet-name>BlogsDetailController</servlet-name>
         <url-pattern>/blogsdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostController</servlet-name>
+        <url-pattern>/createpost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveBlogs</servlet-name>
+        <url-pattern>/ApproveBlogs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogsManagerControl</servlet-name>
+        <url-pattern>/BlogsManagerControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogs</servlet-name>
+        <url-pattern>/DeleteBlogs</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

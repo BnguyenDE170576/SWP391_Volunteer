@@ -137,34 +137,36 @@
 
                     <ul>
                         <c:forEach var="o" items="${blogs}">
-                            <article class="entry">
+                            <c:if test="${o.pending == 1}">
+                                <article class="entry">
 
-                                <header class="entry__header">
+                                    <header class="entry__header">
 
-                                    <h2 class="entry__title h1">
-                                        <a href="blogsdetail?id=${o.blogId}" title="">${o.title}</a>
-                                    </h2>
-                                    <img src="${o.photo}">
-                                    <div class="entry__meta">
-                                        <ul>
-                                            <li>${o.date}</li>
-                                            <li>
-                                                <a href="#0" title="" rel="category tag">Wordpress</a>,
-                                                <a href="#0" title="" rel="category tag">Ghost</a>
-                                            </li>
-                                            <li>${o.author}</li>
-                                        </ul>
+                                        <h2 class="entry__title h1">
+                                            <a href="blogsdetail?id=${o.blogId}" title="">${o.title}</a>
+                                        </h2>
+                                        <img src="${o.photo}">
+                                        <div class="entry__meta">
+                                            <ul>
+                                                <li>${o.date}</li>
+                                                <li>
+                                                    <a href="#0" title="" rel="category tag">Wordpress</a>,
+                                                    <a href="#0" title="" rel="category tag">Ghost</a>
+                                                </li>
+                                                <li>${o.author}</li>
+                                            </ul>
+                                        </div>
+
+                                    </header>
+
+                                    <div class="entry__content">
+                                        <p>
+                                            ${o.shortContent}
+                                        </p>
                                     </div>
 
-                                </header>
-
-                                <div class="entry__content">
-                                    <p>
-                                        ${o.shortContent}
-                                    </p>
-                                </div>
-
-                            </article> 
+                                </article> 
+                            </c:if>
                         </c:forEach>
 
                     </ul>
@@ -308,14 +310,13 @@
                         </ul>
                     </div>
 
-                    <div class="widget widget_text group">
-                        <h3 class="h6">Widget Text.</h3>
+                    <div class="widget widget_popular">
+                        <h3 class="h6">Create your blogs.</h3>
 
-                        <p>
-                            Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor 
-                            aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur 
-                            sint cillum sint consectetur voluptate adipisicing Duis irure magna ut sit amet reprehenderit.
-                        </p>
+                        <ul class="link-list">
+                            <li><a href="createpost">Add new post</a></li>
+
+                        </ul>
                     </div>
 
                     <div class="widget widget_tags">

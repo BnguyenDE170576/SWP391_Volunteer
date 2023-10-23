@@ -22,11 +22,12 @@ public class Blogs {
     private Date date;
     private String category;
     private String photo;
+    private int pending;
 
     public Blogs() {
     }
 
-    public Blogs(int blogId, String title, String content, String author, Date date, String category, String photo, String shortContent) {
+    public Blogs(int blogId, String title, String content, String author, Date date, String category, String photo, String shortContent, int pending) {
         this.blogId = blogId;
         this.title = title;
         this.content = content;
@@ -35,6 +36,8 @@ public class Blogs {
         this.category = category;
         this.photo = photo;
         this.shortContent = shortContent;
+        this.pending = pending;
+
     }
 
     public int getBlogId() {
@@ -103,9 +106,20 @@ public class Blogs {
         this.shortContent = shortContent;
     }
 
+    public int getPending() {
+   
+        return pending;
+    }
+
+    public void setPending(int pending) {
+        this.pending = pending;
+    }
+
     @Override
     public String toString() {
-        return "Blogs{" + "blogId=" + blogId + ", title=" + title + ", content=" + content + ", shortContent=" + shortContent + ", author=" + author + ", date=" + getDate() + ", category=" + category + ", photo=" + photo + '}';
+        return "Blogs{" + "blogId=" + blogId + ", title=" + title + ", content=" + content + ", shortContent=" + shortContent + ", author=" + author + ", date=" + getDate() + ", category=" + category + ", photo=" + photo + ", pending=" + getPending() + '}';
     }
+
+  
 
 }

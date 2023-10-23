@@ -130,7 +130,7 @@
                             </header> <!-- entry__header -->
 
                             <div class="entry__content-media">
-                                <img src=${p.photo}" 
+                                <img src="${p.photo}" 
                                      srcset="${p.photo} 1000w, 
                                      ${p.photo} 500w" 
                                      sizes="(max-width: 1000px) 100vw, 1000px" alt="null">
@@ -190,60 +190,61 @@
 
                                 <li class="depth-1 comment">
                                     <c:forEach var="o" items="${comments}">
-                                        <div class="comment__avatar">
-                                            <img class="avatar" src="${o.photoUser}" alt="./BlogsComponent/images/avatars/user-01.jpg" width="50" height="50">
-                                        </div>
+                                      
+                                            <div class="comment__avatar">
+                                                <img class="avatar" src="${o.photoUser}" alt="photo" width="50" height="50">
+                                            </div>
 
-                                        <div class="comment__content">
+                                            <div class="comment__content">
 
-                                            <div class="comment__info">
+                                                <div class="comment__info">
 
 
-                                                <div class="comment__author">${o.commentAuthorName}</div>
+                                                    <div class="comment__author">${o.commentAuthorName}</div>
 
-                                                <div class="comment__meta">
-                                                    <div class="comment__time">${o.commentDate}</div>
+                                                    <div class="comment__meta">
+                                                        <div class="comment__time">${o.commentDate}</div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="comment__text">
+                                                    <p>${o.commentContent} </p>
+                                                    <c:if test="${o.commentAuthorId == userIDLG}">
+                                                        <!-- Show the delete comment button here -->
+
+                                                        <form action="blogsdetail" method="post" style="  text-align: end;">
+                                                            <div class="a" style="
+                                                                 display: flex;
+                                                                 padding-left: 265px;
+                                                                 flex-wrap: wrap-reverse;
+                                                                 ">
+                                                                <div class="b"> Delete comment </div>
+                                                                <input type="hidden" name="postId" value="${p.blogId}">
+
+                                                                <input type="hidden" name="userId" value="<%=userID%>">
+                                                                <input type="hidden" name="cmtID" value="${o.commentId}">
+
+                                                                <input type="submit" value="Delete Comment" style="
+                                                                       height: 23px;
+                                                                       padding: 8px;
+                                                                       width: 5px;
+                                                                       justify-content: center;
+                                                                       font-size: 3px;
+                                                                       text-align: start;
+                                                                       ">
+                                                                </form>
+                                                            </c:if>
+                                                        </div>
+
+
+
+
+
+
 
                                                 </div>
-                                            </div>
-
-                                            <div class="comment__text">
-                                                <p>${o.commentContent} </p>
-                                                <c:if test="${o.commentAuthorId == userIDLG}">
-                                                    <!-- Show the delete comment button here -->
-
-                                                    <form action="blogsdetail" method="post" style="  text-align: end;">
-                                                        <div class="a" style="
-                                                             display: flex;
-                                                             padding-left: 265px;
-                                                             flex-wrap: wrap-reverse;
-                                                             ">
-                                                            <div class="b"> Delete comment </div>
-                                                            <input type="hidden" name="postId" value="${p.blogId}">
-
-                                                            <input type="hidden" name="userId" value="<%=userID%>">
-                                                            <input type="hidden" name="cmtID" value="${o.commentId}">
-
-                                                            <input type="submit" value="Delete Comment" style="
-                                                                   height: 23px;
-                                                                   padding: 8px;
-                                                                   width: 5px;
-                                                                   justify-content: center;
-                                                                   font-size: 3px;
-                                                                   text-align: start;
-                                                                   ">
-                                                            </form>
-                                                        </c:if>
-                                                    </div>
-
-
-
-
-
-
-
-                                            </div>
-
+                                  
                                         </c:forEach>
 
                                 </li> <!-- end comment level 1 -->
@@ -316,30 +317,18 @@
                         </ul>
                     </div>
 
-                    <div class="widget widget_text group">
-                        <h3 class="h6">Widget Text.</h3>
 
-                        <p>
-                            Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor 
-                            aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur 
-                            sint cillum sint consectetur voluptate adipisicing Duis irure magna ut sit amet reprehenderit.
-                        </p>
+
+
+
+                    <div class="widget widget_popular">
+                        <h3 class="h6">Create your blogs.</h3>
+
+                        <ul class="link-list">
+                            <li><a href="createpost">Add new post</a></li>
+
+                        </ul>
                     </div>
-
-                    <div class="widget widget_tags">
-                        <h3 class="h6">Post Tags.</h3>
-
-                        <div class="tagcloud group">
-                            <a href="#0">Corporate</a>
-                            <a href="#0">Onepage</a>
-                            <a href="#0">Agency</a>
-                            <a href="#0">Multipurpose</a>
-                            <a href="#0">Blog</a>
-                            <a href="#0">Landing Page</a>
-                            <a href="#0">Resume</a>
-                        </div>
-                    </div>
-
                     <div class="widget widget_popular">
                         <h3 class="h6">Popular Post.</h3>
 

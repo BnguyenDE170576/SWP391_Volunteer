@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ytbhe
  */
-public class BlogsController extends HttpServlet {
+public class BlogsManagerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,12 +33,18 @@ public class BlogsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        BlogsDAO dao = new BlogsDAO();
-        List<Blogs> list = dao.getAllBlogs();
-
-        request.setAttribute("blogs", list);
-
-        request.getRequestDispatcher("blogs.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet BlogsManagerControl</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet BlogsManagerControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,13 +59,12 @@ public class BlogsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         BlogsDAO dao = new BlogsDAO();
         List<Blogs> list = dao.getAllBlogs();
 
         request.setAttribute("blogs", list);
+        request.getRequestDispatcher("managerblogs.jsp").forward(request, response);
 
-        request.getRequestDispatcher("blogs.jsp").forward(request, response);
     }
 
     /**

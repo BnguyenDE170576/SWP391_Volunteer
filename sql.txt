@@ -16,16 +16,17 @@ CREATE TABLE Accounts (
     token VARCHAR(255)
 );
 
-CREATE TABLE Blogs (
+  CREATE TABLE Blogs (
     blog_id INT IDENTITY(1,1) not null PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    title nVARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
+	shortcontent TEXT NOT NULL,
     author int NOT NULL,
     date DATE NOT NULL,
-    category VARCHAR(50) NOT NULL
+    category nVARCHAR(50) NOT NULL, 
+	photo VARCHAR(255) NOT NULL
 		FOREIGN KEY (author) REFERENCES Accounts (UserID),
 );
-
 
 
 CREATE TABLE information_pages (
@@ -138,21 +139,21 @@ insert into TransOfOrganizer values(3,'038888059999','NGUYEN MANH TUONG', 'Mbban
 
 ----------------------------
 
-CREATE TABLE likes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE LikesBlogs (
+    id INT identity(1,1) PRIMARY KEY,
     id_clicker INT,
     id_post INT,
-    FOREIGN KEY (id_clicker) REFERENCES users(id),   -- Assuming 'users' is the user table
-    FOREIGN KEY (id_post) REFERENCES posts(id)        -- Assuming 'posts' is the post table
+    FOREIGN KEY (id_clicker) REFERENCES Accounts (UserID),   -- Assuming 'users' is the user table
+    FOREIGN KEY (id_post) REFERENCES Blogs(blog_id)        -- Assuming 'posts' is the post table
 );
 
-
-
 CREATE TABLE comments (
-    comment_id INT PRIMARY KEY,
+    comment_id INT identity(1,1) PRIMARY KEY,
     post_id INT, -- Foreign key referencing the post table
-    parent_comment_id INT, -- For replies, references the comment_id of the parent comment
+   
     comment_content TEXT,
     comment_author_id INT, -- Foreign key referencing the user table
-    comment_date TIMESTAMP
+	FOREIGN KEY (comment_author_id) REFERENCES Accounts (UserID),
+		FOREIGN KEY (post_id) REFERENCES Blogs (blog_id),
+    comment_date datetime
 );
