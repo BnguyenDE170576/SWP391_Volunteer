@@ -16,17 +16,6 @@ CREATE TABLE Accounts (
     token VARCHAR(255)
 );
 
-  CREATE TABLE Blogs (
-    blog_id INT IDENTITY(1,1) not null PRIMARY KEY,
-    title nVARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-	shortcontent TEXT NOT NULL,
-    author int NOT NULL,
-    date DATE NOT NULL,
-    category nVARCHAR(50) NOT NULL, 
-	photo VARCHAR(255) NOT NULL
-		FOREIGN KEY (author) REFERENCES Accounts (UserID),
-);
 
 
 CREATE TABLE information_pages (
@@ -139,6 +128,19 @@ insert into TransOfOrganizer values(3,'038888059999','NGUYEN MANH TUONG', 'Mbban
 
 ----------------------------
 
+  CREATE TABLE Blogs (
+    blog_id INT IDENTITY(1,1) not null PRIMARY KEY,
+    title nVARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+	shortcontent TEXT NOT NULL,
+    author int NOT NULL,
+    date DATE NOT NULL,
+    category nVARCHAR(50) NOT NULL, 
+	photo VARCHAR(255) NOT NULL,
+	pending int,
+		FOREIGN KEY (author) REFERENCES Accounts (UserID)
+);
+
 CREATE TABLE LikesBlogs (
     id INT identity(1,1) PRIMARY KEY,
     id_clicker INT,
@@ -157,3 +159,10 @@ CREATE TABLE comments (
 		FOREIGN KEY (post_id) REFERENCES Blogs (blog_id),
     comment_date datetime
 );
+
+  create table BlogsPending(
+  id int identity(1,1) not null,
+  idPost int,
+
+ FOREIGN KEY (idPost) REFERENCES Blogs (blog_id)
+  ) 
