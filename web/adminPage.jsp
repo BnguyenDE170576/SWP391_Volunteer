@@ -62,12 +62,13 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="inventory" target="">
-                            <span class="material-icons-outlined">fact_check</span> Inventory
+                      
+                        <a href="./ApproveControl" target="">
+                            <span class="material-icons-outlined">fact_check</span> Approve Event
                         </a>
                     </li>
-         
-            
+
+
                     <li class="sidebar-list-item">
                         <a href="userctl" target="">
                             <span class="material-icons-outlined">manage_accounts</span> Account Manager

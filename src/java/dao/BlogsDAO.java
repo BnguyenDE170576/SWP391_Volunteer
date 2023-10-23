@@ -180,9 +180,11 @@ public class BlogsDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                stm = conn.prepareStatement("delete Blogs WHERE blog_id = ?;");
+                stm = conn.prepareStatement("  delete from LikesBlogs where id_post = ?;   delete from comments where post_id = ?; delete from Blogs where blog_id = ?;");
 
                 stm.setInt(1, id_blogs);
+                stm.setInt(2, id_blogs);
+                stm.setInt(3, id_blogs);
 
                 check = stm.executeUpdate() > 0 ? true : false;
             }
@@ -210,6 +212,6 @@ public class BlogsDAO {
     public static void main(String[] args) {
         BlogsDAO a = new BlogsDAO();
 
-        a.pendingBlogs(3);
+        a.deleteBlogs(1);
     }
 }

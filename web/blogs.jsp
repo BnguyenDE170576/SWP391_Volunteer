@@ -33,7 +33,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-
+        
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="./BlogsComponent/css/base.css">
@@ -312,7 +312,7 @@
 
                     <div class="widget widget_popular">
                         <h3 class="h6">Create your blogs.</h3>
-
+                        <span id="error_message" style="color: red;  white-space: pre-line;"></span>
                         <ul class="link-list">
                             <li><a href="createpost">Add new post</a></li>
 
@@ -449,7 +449,20 @@
         <script src="./BlogsComponent/js/jquery-3.2.1.min.js"></script>
         <script src="./BlogsComponent/js/main.js"></script>
 
+        <script src="./js/location.js"></script> 
+        <script src="./js/BrowserJoin.js"></script>    
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
 
 
 

@@ -1,26 +1,25 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package control;
 
+import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.*;
-import entity.*;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author datka
  */
-public class ApproveMemberServlet extends HttpServlet {
+@WebServlet(name = "SearchControl", urlPatterns = {"/SearchControl"})
+public class SearchControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +32,41 @@ public class ApproveMemberServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ApproveMemberServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ApproveMemberServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            String searchTerm = request.getParameter("searchTerm");
+            ActivityDAO DAO = new ActivityDAO();
+            int spage = 1, spageSize = 6;
+            int stotalPage = DAO.getSearchTotalRow(searchTerm);
+            if (request.getParameter("spage") != null) { // check param page
+                spage = Integer.parseInt(request.getParameter("spage"));
+            }
+
+            if (stotalPage % spageSize == 0) { // calculator total page to showinformation
+                stotalPage = stotalPage / spageSize;
+            } else {
+                stotalPage = stotalPage / spageSize + 1;
+            }
+            if (spage > stotalPage) {
+                request.setAttribute("noContent", "No article here!");
+            } else {
+                request.setAttribute("content", DAO.getSearchActivityFromTo(spage,
+                        spageSize, searchTerm));
+
+            }
+            //  List<VolunteerActivity> activities = DAO.getActivityFromTo(startRecord, recordsPerPage);
+
+            request.setAttribute("spage", spage);
+            request.setAttribute("stotalPage", stotalPage);
+            request.setAttribute("scurrentPage", spage);
+            request.setAttribute("searchTerm", searchTerm);
+            HttpSession session = request.getSession();
+            session.setAttribute("urlHistory", "SearchControl");
+            session.setAttribute("destPage", "SearchPage.jsp");
+        } catch (Exception e) {
+            log("Error at SearchController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher("SearchPage.jsp").forward(request, response);
         }
     }
 
@@ -74,17 +96,6 @@ public class ApproveMemberServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            int eventId = Integer.parseInt(request.getParameter("eventID"));
-            ActivityDAO acDAO = new ActivityDAO();
-            acDAO.removePendingUser(userId, eventId);
-            acDAO.addParticipation(userId, eventId);
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
 
