@@ -85,12 +85,11 @@
 
         <!-- content -->
         <div class="container mt-5">
-<<<<<<< HEAD
+
             <h1 class="display-4" style="
                 padding-top: 12%;
                 ">Chi Tiết Hoạt Động</h1>
-=======
->>>>>>> origin/DAT
+
             <c:if test="${not empty detail}">
                 <section class="py-5">
                     <div class="container">

@@ -85,9 +85,11 @@
 
         <!-- content -->
         <div class="container mt-5">
+
             <h1 class="display-4" style="
                 padding-top: 12%;
                 ">Chi Tiết Hoạt Động</h1>
+
             <c:if test="${not empty detail}">
                 <section class="py-5">
                     <div class="container">

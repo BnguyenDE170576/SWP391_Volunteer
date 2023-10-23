@@ -81,7 +81,7 @@
         <servlet-class>control.AddActivityControl</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
+
         <servlet-name>LikeServlet</servlet-name>
         <servlet-class>control.LikeServlet</servlet-class>
     </servlet>
@@ -116,10 +116,13 @@
     <servlet>
         <servlet-name>AdminControl</servlet-name>
         <servlet-class>control.AdminControl</servlet-class>
-=======
+        
+         </servlet>
+
+<servlet>
         <servlet-name>ActivityPendingControl</servlet-name>
         <servlet-class>control.ActivityPendingControl</servlet-class>
->>>>>>> origin/DAT
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -186,7 +189,7 @@
         <url-pattern>/AddActivityControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
+
         <servlet-name>LikeServlet</servlet-name>
         <url-pattern>/LikeServlet</url-pattern>
     </servlet-mapping>
@@ -221,10 +224,12 @@
     <servlet-mapping>
         <servlet-name>AdminControl</servlet-name>
         <url-pattern>/admin</url-pattern>
-=======
+            </servlet-mapping>
+                    <servlet-mapping>
+
         <servlet-name>ActivityPendingControl</servlet-name>
         <url-pattern>/ActivityPendingControl</url-pattern>
->>>>>>> origin/DAT
+
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -92,7 +92,7 @@
 
                     <div id="yourActivities" style="display: none">
                         <c:choose>
-                            <c:when test="${sessionScope.LOGIN_USER.role == 2 || sessionScope.LOGIN_USER.role == 3}">
+                            <c:when test="${sessionScope.LOGIN_USER.role == 2 || sessionScope.LOGIN_USER.role == 0}">
                                 <h5>Hoạt động đã tạo: ${fn:length(listOAct)}</h5>
                                 <c:if test="${not empty listOAct}">            
                                     <table class="table table-striped table-bordered">
