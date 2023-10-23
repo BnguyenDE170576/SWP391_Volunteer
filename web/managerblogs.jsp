@@ -69,8 +69,9 @@ Author     : trinh
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="inventory" target="">
-                            <span class="material-icons-outlined">fact_check</span> Inventory
+
+                        <a href="./ApproveControl" target="">
+                            <span class="material-icons-outlined">fact_check</span> Approve Event
                         </a>
                     </li>
 
@@ -95,7 +96,7 @@ Author     : trinh
                     <div class="table-title">
                         <div class="menu">
                             <div >
-                                <h2 style="width: 100%;">Manage <b>Product</b></h2>
+                                <h2 style="width: 100%;">Manage <b>Blogs</b></h2>
                             </div>
 
                         </div>

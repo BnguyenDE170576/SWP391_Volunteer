@@ -12,6 +12,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -79,17 +80,18 @@ public class ProfileControl extends HttpServlet {
 
                 int userID = data.GetUSERID(user);
 
-                data.updateACCOUNT(userID, phone, address, name, email, birthday,"images/" + filename);
+                data.updateACCOUNT(userID, phone, address, name, email, birthday, "images/" + filename);
 
                 Account a = data.getAccount_BYUSER(user);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("LOGIN_USER", a);
                 request.setAttribute("LOGIN_USER", a);
                 request.getRequestDispatcher("Profile.jsp").forward(request, response);
             } else {
                 response.setContentType("text/plain");
                 response.getWriter().write("Invalid file type. Please upload an image.");
             }
-
-        
 
         }
     }
