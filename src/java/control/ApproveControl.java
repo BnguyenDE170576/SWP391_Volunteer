@@ -4,15 +4,14 @@
  */
 package control;
 
-import dao.AccountDAO;
 import dao.ActivityDAO;
-import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author datka
  */
-public class AddActivityControl extends HttpServlet {
+@WebServlet(name = "ApproveControl", urlPatterns = {"/ApproveControl"})
+public class ApproveControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,18 +35,15 @@ public class AddActivityControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddActivityControl</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddActivityControl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            ActivityDAO actDAO = new ActivityDAO();
+            request.setAttribute("pendingEvents", actDAO.getPendingActivity());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher("Approve.jsp").forward(request, response);
         }
     }
 
@@ -80,36 +77,26 @@ public class AddActivityControl extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        String activityName = request.getParameter("activityName");
-        String description = request.getParameter("description");
-        String startDateStr = request.getParameter("startDate");
-        String endDateStr = request.getParameter("endDate");
-        String location = request.getParameter("location");
-        int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
-
-        // Xử lý tải lên hình ảnh (nếu có)
-        // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
-        Date startDate = null;
-        Date endDate = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            startDate = dateFormat.parse(startDateStr);
-            endDate = dateFormat.parse(endDateStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        session.setAttribute("activityName", activityName);
-        session.setAttribute("description", description);
-        session.setAttribute("startDateStr", startDate);
-        session.setAttribute("endDateStr", endDate);
-        session.setAttribute("location", location);
-        session.setAttribute("memberLimit", memberLimit);
-        AccountDAO dao = new AccountDAO();
-        String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+        int eId = Integer.parseInt(request.getParameter("eId"));
+        int check = Integer.parseInt(request.getParameter("check"));
+        session.setAttribute("a", eId );
+        session.setAttribute("b", check);
         ActivityDAO acDAO = new ActivityDAO();
-      //  acDAO.CreateActivity(activityName, description, startDate, endDate, location, dao.GetUSERID(name),memberLimit);
-        // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
-        response.sendRedirect("home");
+        if (check == 1) {
+            acDAO.CreateActivity(acDAO.getPendingActivityById(eId));
+            try {
+                acDAO.removePendingActivity(eId);
+            } catch (SQLException ex) {
+                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (check == 2) {
+            try {
+                acDAO.removePendingActivity(eId);
+            } catch (SQLException ex) {
+                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+ 
     }
 
     /**

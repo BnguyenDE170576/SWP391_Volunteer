@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author datka
  */
-public class AddActivityControl extends HttpServlet {
+public class ActivityPendingControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class AddActivityControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddActivityControl</title>");
+            out.println("<title>Servlet ActivityPendingControl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddActivityControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ActivityPendingControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,7 @@ public class AddActivityControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -77,6 +77,7 @@ public class AddActivityControl extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
@@ -84,7 +85,11 @@ public class AddActivityControl extends HttpServlet {
         String description = request.getParameter("description");
         String startDateStr = request.getParameter("startDate");
         String endDateStr = request.getParameter("endDate");
-        String location = request.getParameter("location");
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        String ward = request.getParameter("ward");
+
+        String location = ward + "-" + district + "-" + province;
         int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
 
         // Xử lý tải lên hình ảnh (nếu có)
@@ -98,16 +103,11 @@ public class AddActivityControl extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        session.setAttribute("activityName", activityName);
-        session.setAttribute("description", description);
-        session.setAttribute("startDateStr", startDate);
-        session.setAttribute("endDateStr", endDate);
-        session.setAttribute("location", location);
-        session.setAttribute("memberLimit", memberLimit);
+
         AccountDAO dao = new AccountDAO();
-        String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+        int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
         ActivityDAO acDAO = new ActivityDAO();
-      //  acDAO.CreateActivity(activityName, description, startDate, endDate, location, dao.GetUSERID(name),memberLimit);
+        acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit);
         // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
         response.sendRedirect("home");
     }
