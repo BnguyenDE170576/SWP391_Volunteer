@@ -8,6 +8,7 @@ package dao;
  *
  * @author datka
  */
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import context.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import entity.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,7 @@ public class ActivityDAO {
     private static final String SELECT_PARTICIPANTS_BY_ACTIVITY = "SELECT volunteer_id FROM volunteer_participation WHERE activity_id = ?";
     private static final String SELECT_ACTIVITIES_BY_USER = "SELECT activity_id, registration_date FROM volunteer_participation WHERE volunteer_id = ?;";
     private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE())";
+    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE(),?)";
     private static final String UPDATE_ACTIVITY = "UPDATE volunteer_activities "
             + "SET activity_name = ?, "
             + "description = ?, "
@@ -854,6 +856,17 @@ public class ActivityDAO {
         }
 
         return activities;
+    }
+
+    public static void main(String[] args) {
+        ActivityDAO dao = new ActivityDAO();
+
+        LocalDateTime current = LocalDateTime.now();
+        Date date = new Date();
+        long millis = 1677166459123L;
+        date.setTime(millis);
+
+        dao.CreatePendingActivity("Dọn bãi biển", "aaaa",   date,   date, "VN", 3, 30, "photo");
     }
 
 }
