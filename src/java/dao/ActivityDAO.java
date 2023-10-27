@@ -8,7 +8,7 @@ package dao;
  *
  * @author datka
  */
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+
 import context.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

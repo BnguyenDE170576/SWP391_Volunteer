@@ -84,7 +84,7 @@
                         <div class="donation-container">
 
                             <div class="donation-box">
-                                <form id="donationForm" action="donationpage" method="post" onsubmit="return validateDonation()">
+                                <form id="donationForm" action="payment" method="post" onsubmit="return validateDonation()">
                                     <div class="title">Donation Information</div>
 
                                     <div class="fields">
@@ -123,9 +123,13 @@
                                         <br />
                                         <input type="checkbox" id="list" class="checkbox" />
                                         <label for="list">Add Me To Email List</label>
+                             
+
                                     </div>
 
 
+                                    <input type="hidden"  name="bankCode" value="VNBANK">
+                                    <input type="hidden" id="language" name="language" value="vn">
 
                                     <div class="donate-button"><input type="submit" style="background-color: #7beb7b" value="Donate"> </div>
                                 </form>
@@ -147,37 +151,37 @@
 
         <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
         <script>
-            function updateDonationValue(input) {
-                // Get the input value
-                var customValue = input.value;
+                                    function updateDonationValue(input) {
+                                        // Get the input value
+                                        var customValue = input.value;
 
-                // Find the radio button with class "set-amount"
-                var radioButton = document.querySelector('input[type="radio"].set-amount');
+                                        // Find the radio button with class "set-amount"
+                                        var radioButton = document.querySelector('input[type="radio"].set-amount');
 
-                // Update the radio button's value attribute
-                if (radioButton) {
-                    radioButton.value = customValue;
-                }
-            }
-            
-             function validateDonation() {
-        var selectedDonation = document.querySelector('input[name="donation"]:checked');
-        var customAmountInput = document.getElementById('customAmount');
+                                        // Update the radio button's value attribute
+                                        if (radioButton) {
+                                            radioButton.value = customValue;
+                                        }
+                                    }
 
-        // Check if either the radio button is checked or a custom amount is entered
-        if (!selectedDonation && customAmountInput.value.trim() === "") {
-            alert("Please choose a donation amount or enter a custom amount.");
-            return false; // Prevent form submission
-        }
-        
-        // If the "set-amount" radio button is checked, ensure that a custom amount is entered
-        if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
-            alert("Please enter a custom amount.");
-            return false; // Prevent form submission
-        }
-        
-        return true; // Allow form submission
-    }
+                                    function validateDonation() {
+                                        var selectedDonation = document.querySelector('input[name="donation"]:checked');
+                                        var customAmountInput = document.getElementById('customAmount');
+
+                                        // Check if either the radio button is checked or a custom amount is entered
+                                        if (!selectedDonation && customAmountInput.value.trim() === "") {
+                                            alert("Please choose a donation amount or enter a custom amount.");
+                                            return false; // Prevent form submission
+                                        }
+
+                                        // If the "set-amount" radio button is checked, ensure that a custom amount is entered
+                                        if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
+                                            alert("Please enter a custom amount.");
+                                            return false; // Prevent form submission
+                                        }
+
+                                        return true; // Allow form submission
+                                    }
         </script>
 
 

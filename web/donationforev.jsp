@@ -71,75 +71,145 @@
 
 
         <%@include file="./components/header.jsp" %>
-        <!-- About Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                        <div class="position-relative h-100">
-                            <img class="img-fluid position-absolute w-100 h-100" src="images/volunteer.jpg" alt="" style="object-fit: cover;">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="donation-container">
 
-                            <div class="donation-box">
-                                <form id="donationForm" action="donationeventq" method="post" onsubmit="return validateDonation()">
-                                    <div class="title">Donation Information</div>
+        <div class="col-md-12" style="width: 100%; display: flex;">
+            
+            
+            <div class="col-md-4">
+                <img src="images/volunteer.jpg" style="width: 100%;">
+            </div>
+            <div class="col-md-4">
+                <div class="donation-container" style="width: 100%">
 
-                                    <div class="fields">
-                                        <input type="text" id="firstName" placeholder="First Name" required> 
-                                        <input type="email" id="email" placeholder="Email" required>
-                                        <input type="hidden" name="id" value="${id}" id="id" placeholder="${id}">
+                    <div class="donation-box" style="height: 85%">
+                        <form id="donationForm" action="payment" method="post" onsubmit="return validateDonation()">
+                            <div class="title">Donation Information</div>
 
-                                        <input type="text" name="text" id="text" placeholder="Describe - option">
+                            <div class="fields">
+                                <input type="text" id="firstName" placeholder="First Name" required> 
+                                <input type="email" id="email" placeholder="Email" required>
+                                <input type="hidden" name="id" value="${id}" id="id" placeholder="${id}">
+                                <input type="hidden" name="iduser" value="${iduser}" id="id" placeholder="${iduser}">
+                                <input type="hidden" name="idEvent" value="${idEvent}" id="id" placeholder="${idEvent}">
 
-
-                                    </div>
-
-                                    <div class="amount">
-                                        <div class="button"> <label>
-                                                <input type="radio" name="donation" value="50000" checked >50.000đ</label></div>
-                                        <div class="button"> <label>
-                                                <input type="radio" name="donation" value="100000">100.000đ</label></div>
-                                        <div class="button"> <label>
-                                                <input type="radio" name="donation" value="200000">200.000đ</label></div>
-
-                                        <div class="button">
-                                            <label>
-                                                <input type="radio" class="set-amount" name="donation" value="">
-                                                <input type="number" name="donation"  id="customAmount" oninput="updateDonationValue(this)" style="width:100%;">
-                                            </label>
-                                        </div>
+                                <input type="text" name="text" id="text" placeholder="Describe - option">
 
 
-                                    </div>
-
-
-                                    <div class="checkboxes">
-                                        <input type="checkbox" id="receipt" class="checkbox" />
-                                        <label for="receipt">Email Me A Receipt</label>
-                                        <br />
-                                        <input type="checkbox" id="anon" class="checkbox" />
-                                        <label for="anon">Give Anonymously</label>
-                                        <br />
-                                        <input type="checkbox" id="list" class="checkbox" />
-                                        <label for="list">Add Me To Email List</label>
-                                    </div>
-
-
-
-                                    <div class="donate-button"><input type="submit" style="background-color: #7beb7b" value="Donate"> </div>
-                                </form>
                             </div>
 
-                        </div>
+                            <div class="amount">
+                                <div class="button"> <label>
+                                        <input type="radio" name="donation" value="50000" checked >50.000đ</label></div>
+                                <div class="button"> <label>
+                                        <input type="radio" name="donation" value="100000">100.000đ</label></div>
+                                <div class="button"> <label>
+                                        <input type="radio" name="donation" value="200000">200.000đ</label></div>
 
+                                <div class="button">
+                                    <label>
+                                        <input type="radio" class="set-amount" name="donation" value="">
+                                        <input type="number" name="donation"  id="customAmount" oninput="updateDonationValue(this)" style="width:100%;">
+                                    </label>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="checkboxes">
+                                <input type="checkbox" id="receipt" class="checkbox" />
+                                <label for="receipt">Email Me A Receipt</label>
+                                <br />
+                                <input type="checkbox" id="anon" class="checkbox" />
+                                <label for="anon">Give Anonymously</label>
+                                <br />
+                                <input type="checkbox" id="list" class="checkbox" />
+                                <label for="list">Add Me To Email List</label>
+                            </div>
+
+
+                            <input type="hidden"  name="bankCode" value="VNBANK">
+                            <input type="hidden" id="language" name="language" value="vn">
+                            <div class="donate-button"><input type="submit" style="background-color: #7beb7b" value="Donate"> </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+                                <div class="col-md-3" style="padding-left: 5%; text-align:center; padding-top: 3%;">
+                <div class="block" data-widget-id="52" data-widget-key="th_donate" data-widget-definition="thdonate_topDonors">
+                    <div class="block-container">
+                        <h3 class="block-minorHeader">
+                            Top donation
+                        </h3>
+                        <ul class="block-body">
+
+
+
+                            <!--start-->
+                            <li class="block-row">
+
+                                <div class="contentRow-main contentRow-main--close">
+                                    <div class="ax" style="display: flex;">
+
+                                        <div class="contentRow-inline">
+                                            <img src="images/volunteer.jpg" style="width: 100px; height: auto;">
+
+                                        </div>
+                                        <div class="contentRow-inline" style="font-size: 30px;">
+                                            <span>quocdk</span>>
+                                            <div class="contentRow-minor"  style="width: 100px; height: auto;">
+
+                                                50,000₫
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="contentRow-main contentRow-main--close">
+                                    <div class="ax" style="display: flex;">
+
+                                        <div class="contentRow-inline">
+                                            <img src="images/volunteer.jpg" style="width: 100px; height: auto;">
+
+                                        </div>
+                                        <div class="contentRow-inline" style="font-size: 30px;">
+                                            <span>quocdk</span>>
+                                            <div class="contentRow-minor"  style="width: 100px; height: auto;">
+
+                                                50,000₫
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentRow-main contentRow-main--close">
+                                    <div class="ax" style="display: flex;">
+
+                                        <div class="contentRow-inline">
+                                            <img src="images/volunteer.jpg" style="width: 100px; height: auto;">
+
+                                        </div>
+                                        <div class="contentRow-inline" style="font-size: 30px;">
+                                            <span>quocdk</span>>
+                                            <div class="contentRow-minor"  style="width: 100px; height: auto;">
+
+                                                50,000₫
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--end-->
+                                </div>
+                            </li>
+
+
+
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- About End -->
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -149,37 +219,37 @@
 
         <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
         <script>
-                                    function updateDonationValue(input) {
-                                        // Get the input value
-                                        var customValue = input.value;
+                            function updateDonationValue(input) {
+                                // Get the input value
+                                var customValue = input.value;
 
-                                        // Find the radio button with class "set-amount"
-                                        var radioButton = document.querySelector('input[type="radio"].set-amount');
+                                // Find the radio button with class "set-amount"
+                                var radioButton = document.querySelector('input[type="radio"].set-amount');
 
-                                        // Update the radio button's value attribute
-                                        if (radioButton) {
-                                            radioButton.value = customValue;
-                                        }
-                                    }
+                                // Update the radio button's value attribute
+                                if (radioButton) {
+                                    radioButton.value = customValue;
+                                }
+                            }
 
-                                    function validateDonation() {
-                                        var selectedDonation = document.querySelector('input[name="donation"]:checked');
-                                        var customAmountInput = document.getElementById('customAmount');
+                            function validateDonation() {
+                                var selectedDonation = document.querySelector('input[name="donation"]:checked');
+                                var customAmountInput = document.getElementById('customAmount');
 
-                                        // Check if either the radio button is checked or a custom amount is entered
-                                        if (!selectedDonation && customAmountInput.value.trim() === "") {
-                                            alert("Please choose a donation amount or enter a custom amount.");
-                                            return false; // Prevent form submission
-                                        }
+                                // Check if either the radio button is checked or a custom amount is entered
+                                if (!selectedDonation && customAmountInput.value.trim() === "") {
+                                    alert("Please choose a donation amount or enter a custom amount.");
+                                    return false; // Prevent form submission
+                                }
 
-                                        // If the "set-amount" radio button is checked, ensure that a custom amount is entered
-                                        if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
-                                            alert("Please enter a custom amount.");
-                                            return false; // Prevent form submission
-                                        }
+                                // If the "set-amount" radio button is checked, ensure that a custom amount is entered
+                                if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
+                                    alert("Please enter a custom amount.");
+                                    return false; // Prevent form submission
+                                }
 
-                                        return true; // Allow form submission
-                                    }
+                                return true; // Allow form submission
+                            }
         </script>
 
 
