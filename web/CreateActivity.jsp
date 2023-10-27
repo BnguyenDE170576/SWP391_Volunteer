@@ -92,7 +92,7 @@
             <form action="ActivityPendingControl" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh:</label>
-
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
                 <br>
                 <div class="mb-3">

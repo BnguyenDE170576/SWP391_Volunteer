@@ -17,7 +17,7 @@ function approveMember(userId, eventID, listItem, approveButton) {
         // Truyền userId, eventID cho servlet
         success: function (data) {
             // Xử lý thành công (nếu cần)
-            alert(data); // Hiển thị thông báo từ servlet (nếu có)
+        // Hiển thị thông báo từ servlet (nếu có)
         },
         error: function (error) {
             // Xử lý lỗi (nếu cần)
@@ -38,7 +38,7 @@ function rejectMember(userId, eventID, listItem, approveButton) {
         data: {userId: userId, eventID: eventID}, // Truyền userId cho servlet
         success: function (data) {
             // Xử lý thành công (nếu cần)
-            alert(data); // Hiển thị thông báo từ servlet (nếu có)
+       // Hiển thị thông báo từ servlet (nếu có)
         },
         error: function (error) {
             // Xử lý lỗi (nếu cần)
@@ -63,9 +63,11 @@ $(document).ready(function () {
 //---------------------------------------------------------------------------
 
 
-function updateActivity() {
+function updateActivity()    {
     console.log("he");
     if (validateForm()) {
+        console.log("hi");
+        var activityId = $("#activityId").val();
         console.log("hi");
         var activityName = $("#activityName").val();
         var description = $("#description").val();
@@ -77,6 +79,7 @@ function updateActivity() {
         var memberLimit = $("#memberLimit").val();
 
         var data = {
+            activityId: activityId,
             activityName: activityName,
             description: description,
             startDate: startDate,
@@ -94,6 +97,7 @@ function updateActivity() {
             data: data,
             success: function (response) {
                 console.log(data);
+                alert("Cập nhật thành công.");
             },
             error: function () {
                 alert("Đã xảy ra lỗi khi gửi yêu cầu.");

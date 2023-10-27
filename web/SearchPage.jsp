@@ -119,16 +119,16 @@
                         <div class="row row-product" >
                             <c:forEach var="activity" items="${content}" varStatus="status">
 
-                                <div class="col-lg-4 col-md-6 wow fadeInUp mb-3" data-wow-delay="0.1s">
+                                <div class="col-lg-4 col-md-6 wow fadeInUp mb-3 "  data-wow-delay="0.1s" >
                                     <div class="package-item">
-                                        <div class="overflow-hidden">
-                                            <img class="img-fluid" src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg" alt="" >
+                                        <div class="overflow-hidden " style="width: 100%; height: 270px;" >
+                                            <img  style="width: 100%; height: 270px;" class="img-fluid"  src="${activity.photo}" alt="Lỗi" >
                                         </div>
                                         <div class="d-flex border-bottom">
                                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${activity.getLocation()}</small>                                              
                                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>${activity.getNumberMember()}</small>
                                         </div>
-                                        <div class="text-center p-4">
+                                        <div class="text-center p-4" style="height: 169px;">
                                             <h4 href="EventDetailControl?id=${activity.getActivityId()}" class="mb-0">${activity.getActivityName()}</h4>
                                             <br>
 

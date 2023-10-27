@@ -17,8 +17,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-
-
+      
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,11 +79,11 @@
             </div>
         </div>
 
-         <%@include file="./components/header.jsp" %>
+        <%@include file="./components/header.jsp" %>
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <!-- header -->
-          
+
             <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                 <div class="container py-5">
                     <div class="row justify-content-center py-5">
@@ -120,16 +119,16 @@
                         <div class="row row-product" >
                             <c:forEach var="activity" items="${content}" varStatus="status">
 
-                                <div class="col-lg-4 col-md-6 wow fadeInUp mb-3" data-wow-delay="0.1s">
+                                <div class="col-lg-4 col-md-6 wow fadeInUp mb-3 "  data-wow-delay="0.1s" >
                                     <div class="package-item">
-                                        <div class="overflow-hidden">
-                                            <img class="img-fluid" src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg" alt="" >
+                                        <div class="overflow-hidden " style="width: 100%; height: 270px;" >
+                                            <img  style="width: 100%; height: 270px;" class="img-fluid"  src="${activity.photo}" alt="Lỗi" >
                                         </div>
                                         <div class="d-flex border-bottom">
                                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${activity.getLocation()}</small>                                              
                                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>${activity.getNumberMember()}</small>
                                         </div>
-                                        <div class="text-center p-4">
+                                        <div class="text-center p-4" style="height: 169px;">
                                             <h4 href="EventDetailControl?id=${activity.getActivityId()}" class="mb-0">${activity.getActivityName()}</h4>
                                             <br>
 
@@ -580,7 +579,7 @@
             </div>
             <!-- Testimonial End -->
             <div class="container-fluid">
-            <%@include file="./components/footer.jsp"%>
+                <%@include file="./components/footer.jsp"%>
 
             </div>
             <!-- Back to Top -->

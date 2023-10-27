@@ -46,7 +46,7 @@ public class HistoryControl extends HttpServlet {
             int role = ((Account) session.getAttribute("LOGIN_USER")).getRole();
             List<VolunteerActivityWithDate> listAct= actDAO.getParticipatedActivitiesByUser(vid);
             List<VolunteerActivity> listOAct= new ArrayList<>();
-            if (role==2 || role ==3){
+            if (role==2 || role ==0){
                 listOAct = actDAO.getParticipatedActivitiesByOgnaizer(vid);
             }
             

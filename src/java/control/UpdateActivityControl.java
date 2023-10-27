@@ -82,15 +82,19 @@ public class UpdateActivityControl extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
-            
+
             HttpSession session = request.getSession();
             String activityName = request.getParameter("activityName");
             String description = request.getParameter("description");
             String startDateStr = request.getParameter("startDate");
             String endDateStr = request.getParameter("endDate");
-            String location = request.getParameter("location");
+            String province = request.getParameter("province");
+            String district = request.getParameter("district");
+            String ward = request.getParameter("ward");
+
+            String location = ward + "-" + district + "-" + province;
             int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
-            
+
             // Xử lý tải lên hình ảnh (nếu có)
             // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
             Date startDate = null;
@@ -103,14 +107,14 @@ public class UpdateActivityControl extends HttpServlet {
                 e.printStackTrace();
             }
             ActivityDAO activityDAO = new ActivityDAO();
-            activityDAO.UpdateActivity(activityName, description, startDate, endDate, location, memberLimit);
-            
+            activityDAO.UpdateActivity(activityName, description, startDate, endDate, location, memberLimit,423);
+
         } catch (SQLException ex) {
             Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**

@@ -51,7 +51,7 @@ public class ActivityPendingControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -114,34 +114,31 @@ public class ActivityPendingControl extends HttpServlet {
         if (!Files.exists(Paths.get(realPath))) {
             Files.createDirectory(Paths.get(realPath));
         }
-
+        Date startDate = null;
+        Date endDate = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            startDate = dateFormat.parse(startDateStr);
+            endDate = dateFormat.parse(endDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if (imagePart != null && imagePart.getSize() > 0) {
 
             if (isImageFile(image)) {
                 imagePart.write(image);
                 request.setAttribute("img", "images/" + filename);
-                Date startDate = null;
-                Date endDate = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    startDate = dateFormat.parse(startDateStr);
-                    endDate = dateFormat.parse(endDateStr);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                AccountDAO dao = new AccountDAO();
-                int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
-                ActivityDAO acDAO = new ActivityDAO();
-                acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit, "images/" + filename);
-                // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
-                response.sendRedirect("home");
 
             } else {
                 response.setContentType("text/plain");
                 response.getWriter().write("Invalid file type. Please upload an image.");
             }
-
+            AccountDAO dao = new AccountDAO();
+            int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
+            ActivityDAO acDAO = new ActivityDAO();
+            acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit, "images/" + filename);
+            // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
+            response.sendRedirect("home");
         }
         // Xử lý tải lên hình ảnh (nếu có)
         // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)

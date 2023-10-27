@@ -73,14 +73,18 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên hoạt động</th>
+                                        <th>Địa điểm</th>
+                                        <th>Người tạo</th>
                                         <th>Ngày tham gia</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${listAct}" var="act" varStatus="loop">
                                         <tr>
-                                            <td>${loop.index + 1}</td>
+                                            <td>${loop.index + 1}</td>                                
                                             <td><a href="./EventDetailControl?id=${act.activity.activityId}">${act.activity.activityName}</a></td>
+                                            <td>${act.activity.location}</td>
+                                            <td>${act.oName}</td>
                                             <td><fmt:formatDate value="${act.participationDate}" pattern="yyyy-MM-dd" /></td>
                                         </tr>
                                     </c:forEach>

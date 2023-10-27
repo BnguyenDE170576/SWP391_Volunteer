@@ -43,8 +43,8 @@ public class ActivityDAO {
     private static final String SELECT_USERPENDING_BY_ACTIVITY = "SELECT UserID FROM UserPending WHERE ActivityID = ?";
     private static final String SELECT_PARTICIPANTS_BY_ACTIVITY = "SELECT volunteer_id FROM volunteer_participation WHERE activity_id = ?";
     private static final String SELECT_ACTIVITIES_BY_USER = "SELECT activity_id, registration_date FROM volunteer_participation WHERE volunteer_id = ?;";
-    private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE())";
+    private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numbizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE(),?)";
     private static final String UPDATE_ACTIVITY = "UPDATE volunteer_activities "
             + "SET activity_name = ?, "
             + "description = ?, "
@@ -223,7 +223,7 @@ public class ActivityDAO {
         return activities;
     }
 
-    public void UpdateActivity(String activityName, String description, Date startDate, Date endDate, String location, int memberLimit) throws SQLException, ClassNotFoundException {
+    public void UpdateActivity(String activityName, String description, Date startDate, Date endDate, String location, int memberLimit, int id) throws SQLException, ClassNotFoundException {
         try (Connection conn = DBUtils.getConnection(); PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
 
             psm.setString(1, activityName);
@@ -232,10 +232,10 @@ public class ActivityDAO {
             psm.setTimestamp(4, new Timestamp(endDate.getTime()));
             psm.setString(5, location);
             psm.setInt(6, memberLimit);
+            psm.setInt(7, id);
             psm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Xử lý lỗi tại đây
         }
     }
 
@@ -603,6 +603,7 @@ public class ActivityDAO {
         Connection conn = null;
         PreparedStatement psm = null;
         ResultSet rs = null;
+        AccountDAO dao= new AccountDAO();
         List<VolunteerActivityWithDate> participatedActivities = new ArrayList<>();
 
         try {
@@ -616,6 +617,7 @@ public class ActivityDAO {
                 VolunteerActivityWithDate activity = new VolunteerActivityWithDate();
                 activity.setActivity(getActivityById(rs.getInt("activity_id")));
                 activity.setParticipationDate(rs.getTimestamp("registration_date"));
+                activity.setoName(dao.GetUserName(activity.getActivity().getOrganizerId()));
                 participatedActivities.add(activity);
             }
 
@@ -666,6 +668,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
                 oActivities.add(activity);
             }
 
@@ -782,6 +785,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
                 activities = activity;
             }
 

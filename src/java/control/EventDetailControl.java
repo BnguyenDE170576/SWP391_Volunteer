@@ -70,6 +70,7 @@ public class EventDetailControl extends HttpServlet {
             } else if (currentDate.after(detail.getEndDate())) {
                 status = "Đã kết thúc";
             }
+            request.setAttribute("oname",dao.GetUserName(detail.getOrganizerId()));
             request.setAttribute("pendinglist", pendinglist);
             request.setAttribute("userID", dao.GetUSERID(name));
             request.setAttribute("check", check);

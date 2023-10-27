@@ -56,7 +56,8 @@
             }
 
             .donation-box .donate-button {
-                background-color: #86B817;}
+                background-color: #86B817;
+            }
 
             .donation-box .amount .button {
                 background-color: #86B817;
@@ -96,8 +97,8 @@
                         <div class="row gx-5">
                             <aside class="col-lg-6">
                                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp">
-                                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
+                                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" >
+                                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="${detail.photo}" />
                                     </a>
                                 </div>
                             </aside>
@@ -111,7 +112,7 @@
                                     </h6>
 
                                     <div class="d-flex flex-row my-3">
-                                        <span class="text-muted"></i>${detail.organizerId}</span>
+                                        <span class="text-muted"></i>Người tổ chức: ${oname}</span>
                                     </div>
                                     <div class="row">
                                         <dt class="col-3">Ngày Bắt Đầu:</dt>
@@ -132,7 +133,8 @@
                                         <dt class="col-4">Địa Điểm:</dt>
                                         <dd class="col-8"> ${detail.location}</dd>
                                         <dt class="col-4">Số Lượng Thành Viên:</dt>
-                                        <dd class="col-8">${detail.numberMember}</dd>
+                                        <dd class="col-8">${detail.numberMember}</dd
+                                        
 
                                     </div>
                                     <hr />                                
@@ -183,17 +185,18 @@
                     </div>
                     <div class="modal-body">
                         <!-- Hiển thị danh sách thành viên và các nút từ chối/xét duyệt tại đây -->
-                        <ul>
+                        <ul class="list-group">
                             <c:forEach var="us" items="${pendinglist}" varStatus="status">    
-                                <li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <span>${us.getUserName()}</span>
                                     <div class="btn-group" role="group">
-                                        <button onclick="rejectMember(${us.getId()}, ${detail.activityId}, this, this.nextElementSibling)">Từ chối</button>
-                                        <button onclick="approveMember(${us.getId()}, ${detail.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
+                                        <button style="margin-right: 10px;" class="btn btn-danger rounded-pill" onclick="rejectMember(${us.getId()}, ${detail.activityId}, this, this.nextElementSibling)">Từ chối</button>
+                                        <button class="btn btn-success rounded-pill" onclick="approveMember(${us.getId()}, ${detail.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
                                     </div>
                                 </li>
                             </c:forEach>   
                         </ul>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
@@ -213,14 +216,16 @@
                     </div>
                     <div class="modal-body">
                         <!-- Nội dung của modal -->
-
+                        <div class="mb-3">
+                             <input type="hidden" id="activityId" name="activityId" class="form-control" value="${detail.activityId}">
+                        </div>
                         <div class="mb-3">
                             <label for="activityName">Activity Name:</label>
                             <input type="text" id="activityName" name="activityName" class="form-control" required value="${detail.activityName}">
                         </div>
                         <div class="mb-3">
                             <label for="description">Description:</label>
-                            <textarea id="description" name="description" class="form-control" value="${detail.description}"></textarea>
+                            <textarea id="description" name="description" class="form-control" value="${detail.description}">${detail.description}</textarea>
                         </div>
 
                         <c:choose>

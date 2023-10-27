@@ -13,12 +13,21 @@ import java.util.Date;
 public class VolunteerActivityWithDate {
     private VolunteerActivity activity;
     private Date participationDate;
-
+    private String oName;
     // Các phương thức getter và setter cho activity và participationDate
 
-    public VolunteerActivityWithDate(VolunteerActivity activity, Date participationDate) {
+    public VolunteerActivityWithDate(VolunteerActivity activity, Date participationDate, String oName) {
         this.activity = activity;
         this.participationDate = participationDate;
+        this.oName = oName;
+    }
+
+    public String getoName() {
+        return oName;
+    }
+
+    public void setoName(String oName) {
+        this.oName = oName;
     }
 
     public VolunteerActivityWithDate() {

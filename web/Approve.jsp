@@ -51,7 +51,9 @@
                          data-enddate="${event.endDate}"
                          data-memberlimit="${event.numberMember}"
                          data-location="${event.location}">
-                        <span class="col-9">${event.activityName}</span>
+                        <span class="col-5">${event.activityName}</span>
+                        <span class="col-3">${event.location}</span>
+                        <span class="col-1">${event.organizerId}</span>
                         <div clas="col-1">
                             <button class="btn btn-link detail-button" data-toggle="modal" data-target="#eventModal">Detail</button>
                         </div>
