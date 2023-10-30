@@ -8,9 +8,6 @@ import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author datka
  */
-@WebServlet(name = "UpdateActivityControl", urlPatterns = {"/UpdateActivityControl"})
-public class UpdateActivityControl extends HttpServlet {
+@WebServlet(name = "AddUsePaymentControl", urlPatterns = {"/AddUsePaymentControl"})
+public class AddUsePaymentControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +40,10 @@ public class UpdateActivityControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateActivityControl</title>");
+            out.println("<title>Servlet AddUsePaymentControl</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateActivityControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddUsePaymentControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,40 +78,14 @@ public class UpdateActivityControl extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
-
-            HttpSession session = request.getSession();
-            int activityId = Integer.parseInt(request.getParameter("activityId"));
-            String activityName = request.getParameter("activityName");
-            String description = request.getParameter("description");
-            String startDateStr = request.getParameter("startDate");
-            String endDateStr = request.getParameter("endDate");
-            String province = request.getParameter("province");
-            String district = request.getParameter("district");
-            String ward = request.getParameter("ward");
-
-            String location = ward + "-" + district + "-" + province;
-            int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
-
-            // Xử lý tải lên hình ảnh (nếu có)
-            // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
-            Date startDate = null;
-            Date endDate = null;
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                startDate = dateFormat.parse(startDateStr);
-                endDate = dateFormat.parse(endDateStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            ActivityDAO activityDAO = new ActivityDAO();
-            activityDAO.UpdateActivity(activityName, description, startDate, endDate, location, memberLimit,activityId);
-
+            int hoatdongnhan = Integer.parseInt(request.getParameter("hoatdongnhan"));
+            String NDCK = request.getParameter("NDCK");
+            double money = Double.parseDouble(request.getParameter("money"));
+            ActivityDAO actDAO = new ActivityDAO();
+            actDAO.setUsePayment(NDCK, money, hoatdongnhan);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddUsePaymentControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**

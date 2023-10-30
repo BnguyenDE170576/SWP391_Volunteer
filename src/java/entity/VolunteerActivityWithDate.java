@@ -14,12 +14,31 @@ public class VolunteerActivityWithDate {
     private VolunteerActivity activity;
     private Date participationDate;
     private String oName;
+    private String status="null";
     // Các phương thức getter và setter cho activity và participationDate
 
     public VolunteerActivityWithDate(VolunteerActivity activity, Date participationDate, String oName) {
         this.activity = activity;
         this.participationDate = participationDate;
         this.oName = oName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus() {
+         Date currentDate = new Date();
+        if (activity.getEndDate().before(currentDate)){
+           this.status="Đã kết thúc";
+        }
+        else
+           if(activity.getStartDate().after(currentDate)){
+               this.status="Sắp diễn ra";
+           }
+           else {
+               this.status="Đang diễn ra";
+           }
     }
 
     public String getoName() {

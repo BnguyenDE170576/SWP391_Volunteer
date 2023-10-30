@@ -4,7 +4,7 @@ CREATE TABLE Accounts (
    UserID INT IDENTITY(1,1) not null PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    name VARCHAR(255),
+    name NVARCHAR(255),
 	email VARCHAR(255),
 	birthDay datetime,
 	sex int,
@@ -29,7 +29,7 @@ CREATE TABLE volunteer_activities (
     description  NVARCHAR(MAX),
     start_date datetime,
     end_date datetime,
-    location VARCHAR(100),
+    location NVARCHAR(100),
    organizer_id INT,
    numberMemBer int,
 	photo TEXT,
@@ -45,7 +45,7 @@ CREATE TABLE Pending_activity (
     description NVARCHAR(MAX),
     start_date datetime,
     end_date datetime,
-    location VARCHAR(100),
+    location NVARCHAR(100),
    organizer_id INT,
    numberMemBer int,
 	photo TEXT,
@@ -68,15 +68,19 @@ CREATE TABLE volunteer_participation (
     FOREIGN KEY (activity_id) REFERENCES volunteer_activities (activity_id)
 );
 
-CREATE TABLE transactions (
-    transaction_id INT not null IDENTITY(1,1) PRIMARY KEY,
-    activity_id INT,
-    donor_id INT,
+CREATE TABLE Payment (
+    payment_id INT not null PRIMARY KEY,
+    giverID INT,
+receiverID INT,
+eventID INT,
     transaction_date datetime NOT NULL,
     text TEXT,
     amount DECIMAL(10, 2) NOT NULL,
-	FOREIGN KEY (donor_id) REFERENCES Accounts (UserID),
-    FOREIGN KEY (activity_id) REFERENCES volunteer_activities (activity_id)
+	status int,
+	FOREIGN KEY (giverID) REFERENCES Accounts (UserID),
+	FOREIGN KEY (receiverID) REFERENCES Accounts (UserID),
+	FOREIGN KEY (eventID) REFERENCES volunteer_activities (activity_id)
+
 );
 
 CREATE TABLE reports (
@@ -85,17 +89,6 @@ CREATE TABLE reports (
     report_date datetime NOT NULL,
     report_text TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Accounts (UserID)
-);
-
-CREATE TABLE Payment (
-    payment_id INT not null IDENTITY(1,1) PRIMARY KEY,
-  
-    nguoigiaodich_id INT,
-    transaction_date datetime NOT NULL,
-    text TEXT,
-    amount DECIMAL(10, 2) NOT NULL,
-	FOREIGN KEY (nguoigiaodich_id) REFERENCES Accounts (UserID),
-
 );
 
 
@@ -109,17 +102,13 @@ CREATE TABLE UserOTP (
 
 
 
-
-CREATE TABLE TransOfOrganizer (
-    id INT not null IDENTITY(1,1) PRIMARY KEY,
-organizer_id int,
-    numberCard NVARCHAR(255) UNIQUE,
-    nameCard NVARCHAR(255),
-	nameBank NVARCHAR(255)
-FOREIGN KEY (organizer_id) REFERENCES Accounts (UserID) );
-
-insert into TransOfOrganizer values(3,'038888059999','NGUYEN MANH TUONG', 'Mbbank')
-
+CREATE TABLE UserPending (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT,
+    ActivityID INT,
+    FOREIGN KEY (UserID) REFERENCES Accounts(UserID),
+    FOREIGN KEY (ActivityID) REFERENCES volunteer_activities(activity_id)
+);
 
 
 ----------------------------

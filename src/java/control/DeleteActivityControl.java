@@ -6,8 +6,11 @@ package control;
 
 import dao.AccountDAO;
 import dao.ActivityDAO;
-import entity.*;
+import entity.Account;
+import entity.UserPending;
+import entity.VolunteerActivity;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author datka
  */
-public class EventDetailControl extends HttpServlet {
+@WebServlet(name = "DeleteActivityControl", urlPatterns = {"/DeleteActivityControl"})
+public class DeleteActivityControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,60 +41,22 @@ public class EventDetailControl extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
-        try {
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             int eid = Integer.parseInt(request.getParameter("id"));
             ActivityDAO aDAO = new ActivityDAO();
-            String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
-            AccountDAO dao = new AccountDAO();
-            int check = 0;
+            aDAO.removeActivity(eid);
 
-            if (aDAO.isPendingUserExists(dao.GetUSERID(name), eid)) {
-                check = 1;
-            } else if (aDAO.isParticipationExist(dao.GetUSERID(name), eid)) {
-                check = 2;
-            }
-            List<Integer> pendinglistid = new ArrayList<>();
-            List<UserPending> pendinglist = new ArrayList<>();
-            pendinglistid = aDAO.getPendingUserByActivity(eid);
-
-            for (int a : pendinglistid) {
-                Account x = dao.getAnAccountById(a);
-                if (x != null) {
-                    pendinglist.add(new UserPending(x.getUserName(), x.getPhoto(), x.getAccId()));
-
-                }
-            }
-            String status = "Sắp diễn ra";
-            VolunteerActivity detail = aDAO.getActivityById(eid);
-            List<Thu> donateThu = aDAO.getDonateActivityById(eid);
-            double tongThu=0;
-            for (Thu a : donateThu){
-                tongThu +=a.getSoTien();
-            }
-            Date currentDate = new Date();
-            if (currentDate.after(detail.getStartDate()) && currentDate.before(detail.getEndDate())) {
-                status = "Đang diễn ra";
-            } else if (currentDate.after(detail.getEndDate())) {
-                status = "Đã kết thúc";
-            }
-            request.setAttribute("donateThu", donateThu);
-            request.setAttribute("tongThu",tongThu);
-            request.setAttribute("oname",dao.GetUserName(detail.getOrganizerId()));
-            request.setAttribute("pendinglist", pendinglist);
-            request.setAttribute("userID", dao.GetUSERID(name));
-            request.setAttribute("check", check);
-            request.setAttribute("status",status);
-            request.setAttribute("detail",detail );
-            request.getRequestDispatcher("EventDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("home").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -101,11 +68,7 @@ public class EventDetailControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -119,7 +82,7 @@ public class EventDetailControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

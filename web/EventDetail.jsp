@@ -48,7 +48,7 @@
                 background-color: black;
             }
             .py-5{
-                padding-top: 10rem !important;
+                padding-top: 5rem !important;
             }
 
             .donation-box .title {
@@ -75,7 +75,43 @@
             .icon-hover:hover i {
                 color: #3b71ca !important;
             }
+            .options-menu {
+                position: absolute;
+                top: 0px;
+                right: 20px; /* Điều chỉnh khoảng cách từ phía phải */
+            }
 
+            .ellipsis-icon {
+                cursor: pointer;
+                font-size: 24px; /* Tùy chỉnh kích thước biểu tượng */
+                color: #333;
+            }
+
+            .options {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px; /* Bo tròn góc */
+                padding: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                z-index: 1;
+                width:150px;
+                display: none;
+            }
+
+            .options a {
+                display: block;
+                padding: 5px;
+                text-decoration: none;
+                color: #333; /* Màu sắc văn bản */
+                transition: background-color 0.3s; /* Hiệu ứng khi di chuột qua */
+            }
+
+            .options a:hover {
+                background-color: #f0f0f0; /* Màu nền khi di chuột qua */
+            }
         </style>
     </head>
 
@@ -88,12 +124,13 @@
         <div class="container mt-5">
 
             <h1 class="display-4" style="
-                padding-top: 12%;
+                padding-top: 5%;
                 ">Chi Tiết Hoạt Động</h1>
 
             <c:if test="${not empty detail}">
-                <section class="py-5">
-                    <div class="container">
+                <section class="py-5" >
+                    <div class="container" style="position: relative;">
+
                         <div class="row gx-5">
                             <aside class="col-lg-6">
                                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
@@ -125,6 +162,7 @@
                                         <dd class="col-3"><fmt:formatDate value="${detail.updatedDate}" pattern="yyyy-MM-dd" /></dd>        
                                     </div>
                                     <hr /> 
+
                                     <p style="word-wrap: break-word;">
                                         ${detail.description}
                                     </p>
@@ -134,7 +172,7 @@
                                         <dd class="col-8"> ${detail.location}</dd>
                                         <dt class="col-4">Số Lượng Thành Viên:</dt>
                                         <dd class="col-8">${detail.numberMember}</dd
-                                        
+
 
                                     </div>
                                     <hr />                                
@@ -147,9 +185,24 @@
                                                 <input type="hidden" value="${detail.organizerId}" name="id">
                                                 <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
                                             </form>
-                                            <c:if test="${detail.organizerId == userID}">
-                                                <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  
-                                            </c:if>
+
+                                            <div class="options-menu">
+                                                <div class="ellipsis-icon" style="font-size: 30px;">&#8942;</div>
+                                                <div class="options">
+                                                    <a href="#" data-toggle="modal" data-target="#donateModal">Xem thu chi</a>  
+                                                    <c:if test="${detail.organizerId == userID}">
+                                                        <a href="#" data-toggle="modal" data-target="#chiModal">Chi tiền</a>  
+                                                    </c:if>
+                                                    <c:if test="${detail.organizerId == userID}">
+                                                        <a href="#" data-toggle="modal" data-target="#editModal">Edit</a>  
+                                                    </c:if>                         
+                                                    <c:if test="${detail.organizerId == userID || sessionScope.LOGIN_USER.role  == 0}">
+                                                        <a href="DeleteActivityControl?id=${detail.activityId}">Xoá</a>
+                                                    </c:if>
+                                                    <a href="#">Tố cáo</a>
+
+                                                </div>
+                                            </div>
                                             <c:if test="${detail.organizerId != userID && check==0}">
                                                 <form action="PendingUser" method="POST">
                                                     <input type="hidden" name="activityId" value="${detail.activityId}">
@@ -176,6 +229,47 @@
 
 
         <%@include file="./components/footer.jsp" %>
+        <div class="modal fade" id="donateModal">
+            <div class="modal-dialog" style="max-width: 60%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thông tin Donate</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Tổng số tiền thu: ${tongThu}vnđ</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>người gửi</th>
+                                    <th>Người nhận</th>
+                                    <th>Ngày gửi</th>
+                                    <th>Số tiền</th>
+                                    <th>Nội dung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${donateThu}" var="a" varStatus="loop">
+                                    <tr>
+                                        <td>${loop.index + 1}</td>                                
+                                        <td>${a.tenNguoiGui}</td>
+                                        <td>${a.nguoiNhan}</td>
+                                        <td><fmt:formatDate value="${a.ngayGui}" pattern="yyyy-MM-dd" /></td>
+                                        <td>${a.soTien}vnđ</td>
+                                        <td>${a.noiDung}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>            
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -205,8 +299,36 @@
             </div>
         </div>
 
+        <div class="modal fade" id="chiModal">
+            <div class="modal-dialog" style="max-width: 50%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Chi tiền</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="hidden" id="hoatdongnhan" name="hoatdongnhan" class="form-control" value="${detail.activityId}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="NDCK">Nội dung:</label>
+                            <input type="text" id="NDCK" name="NDCK" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="money">Số tiền:</label>
+                            <input type="number" id="money" name="money" class="form-control" min="1" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                         <button type="button" class="btn btn-primary" onclick="addChi()">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog" style="max-width: 50%;" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Edit Activity</h5>
@@ -217,7 +339,7 @@
                     <div class="modal-body">
                         <!-- Nội dung của modal -->
                         <div class="mb-3">
-                             <input type="hidden" id="activityId" name="activityId" class="form-control" value="${detail.activityId}">
+                            <input type="hidden" id="activityId" name="activityId" class="form-control" value="${detail.activityId}">
                         </div>
                         <div class="mb-3">
                             <label for="activityName">Activity Name:</label>
@@ -272,7 +394,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="memberLimit">Member Limit:</label>
-                            <input type="number" id="memberLimit" name="memberLimit" class="form-control" min="1" max="50" required  value="${detail.numberMember}">
+                            <input type="number" id="memberLimit" name="memberLimit" class="form-control" min="1" required  value="${detail.numberMember}">
                         </div>
 
                     </div>
@@ -283,6 +405,24 @@
                 </div>
             </div>
         </div>
+        <script>
+            var optionsMenu = document.querySelector('.options-menu');
+            var optionsList = document.querySelector('.options');
+
+            optionsMenu.addEventListener('click', function (event) {
+                if (optionsList.style.display === 'block') {
+                    optionsList.style.display = 'none';
+                    return;
+                }
+                optionsList.style.display = 'block';
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!optionsMenu.contains(event.target)) {
+                    optionsList.style.display = 'none';
+                }
+            });
+        </script>
 
         <script src="./js/location.js"></script> 
         <script src="./js/BrowserJoin.js"></script>    

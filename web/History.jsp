@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -76,6 +78,7 @@
                                         <th>Địa điểm</th>
                                         <th>Người tạo</th>
                                         <th>Ngày tham gia</th>
+                                        <th>Tình trạng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,6 +89,7 @@
                                             <td>${act.activity.location}</td>
                                             <td>${act.oName}</td>
                                             <td><fmt:formatDate value="${act.participationDate}" pattern="yyyy-MM-dd" /></td>
+                                            <td>${act.status}</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -129,8 +133,33 @@
                     </div>
 
                     <div id="donationHistory" style="display: none">
-                        ss    ád <!-- Nội dung cho "Lịch sử donate" -->
-                        <!--sđá Sử dụng JSP để hiển thị thông tin lịch sử donate -->
+                        <h5>Số lần ủng hộ: ${fn:length(listThu)}</h5>
+                        <h5>Tổng tiền ủng hộ: ${tongDonate}</h5>
+                        <c:if test="${not empty listThu}">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên hoạt động</th>
+                                        <th>Ngày gửi</th>
+                                        <th>Số tiền</th>
+                                        <th>Nội dung</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${listThu}" var="act" varStatus="loop">
+                                        <tr>
+                                            <td>${loop.index + 1}</td>                                
+                                            <td><a href="./EventDetailControl?id=${act.hoatdong.activityId}">${act.hoatdong.activityName}</a></td>
+                                            <td><fmt:formatDate value="${act.ngayGui}" pattern="yyyy-MM-dd" /></td>
+                                            <td>${act.soTien}vnđ</td>
+                                            <td>${act.noiDung}</td>
+
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:if>
                     </div>
                 </div>
             </div>
