@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package control;
 
 import dao.AccountDAO;
@@ -110,15 +106,7 @@ public class ActivityPendingControl extends HttpServlet {
         String realPath = request.getServletContext().getRealPath("/images");
         String filename = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
         String image = realPath + "/" + filename;
-        Date startDate = null;
-                Date endDate = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    startDate = dateFormat.parse(startDateStr);
-                    endDate = dateFormat.parse(endDateStr);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+
         if (!Files.exists(Paths.get(realPath))) {
             Files.createDirectory(Paths.get(realPath));
         }
@@ -136,22 +124,6 @@ public class ActivityPendingControl extends HttpServlet {
             if (isImageFile(image)) {
                 imagePart.write(image);
                 request.setAttribute("img", "images/" + filename);
-<<<<<<< HEAD
-                
-
-               
-            } else {
-                response.setContentType("text/plain");
-                response.getWriter().write("Invalid file type. Please upload an image.");
-            }
-             AccountDAO dao = new AccountDAO();
-                int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
-                ActivityDAO acDAO = new ActivityDAO();
-                acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit, "images/" + filename);
-                // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
-                response.sendRedirect("home");
-
-=======
 
             } else {
                 response.setContentType("text/plain");
@@ -163,7 +135,6 @@ public class ActivityPendingControl extends HttpServlet {
             acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit, "images/" + filename);
             // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
             response.sendRedirect("home");
->>>>>>> origin/DAT
         }
         // Xử lý tải lên hình ảnh (nếu có)
         // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
