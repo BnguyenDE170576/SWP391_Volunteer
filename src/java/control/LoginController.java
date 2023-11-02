@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("LOGIN_USER", a);
             if (a == null) {
                 request.setAttribute("ERROR_MASSEGE", "Wrong password");
-                System.out.println(pass);
+         
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 Cookie userCookie = new Cookie("name", user);
