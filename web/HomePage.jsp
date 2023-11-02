@@ -631,7 +631,7 @@
 
         Tawk_API.visitor = {
             name: '${sessionScope.LOGIN_USER.userName}',
-            email: 'ytbhelp2@gmail.com',
+            email: '${sessionScope.LOGIN_USER.email}',
             hash: 'hash-value'
         };
 

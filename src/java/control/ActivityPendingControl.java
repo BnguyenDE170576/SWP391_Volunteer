@@ -150,13 +150,7 @@ public class ActivityPendingControl extends HttpServlet {
             response.setContentType("text/plain");
             response.getWriter().write("Invalid file type. Please upload an image.");
         }
-        AccountDAO dao = new AccountDAO();
-        int oid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
-        ActivityDAO acDAO = new ActivityDAO();
-        acDAO.CreatePendingActivity(activityName, description, startDate, endDate, location, oid, memberLimit, "images/" + filename);
-        // Sau khi xử lý thành công, chuyển hướng đến trang thành công hoặc trang danh sách sự kiện
-        response.sendRedirect("home");
-
+     
     }
     // Xử lý tải lên hình ảnh (nếu có)
     // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)

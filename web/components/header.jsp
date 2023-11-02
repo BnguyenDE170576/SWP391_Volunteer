@@ -15,7 +15,7 @@
             <a href="home" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="blogs" class="nav-item nav-link">Blogs</a>
-            <c:if test="${sessionScope.LOGIN_USER.role  == 1 || sessionScope.LOGIN_USER.role  == 0}">
+            <c:if test="${sessionScope.LOGIN_USER.role  == 2 || sessionScope.LOGIN_USER.role  == 0}">
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activity</a>
                     <div class="dropdown-menu m-0">

@@ -156,6 +156,10 @@
         <servlet-name>PaymentSuccess</servlet-name>
         <servlet-class>control.VNPayController.PaymentSuccess</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateBank</servlet-name>
+        <servlet-class>control.process.UpdateBank</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -295,6 +299,10 @@
     <servlet-mapping>
         <servlet-name>PaymentSuccess</servlet-name>
         <url-pattern>/success</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBank</servlet-name>
+        <url-pattern>/updatebank</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

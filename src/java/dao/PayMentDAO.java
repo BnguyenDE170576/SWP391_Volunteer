@@ -6,6 +6,7 @@
 package dao;
 
 import context.DBUtils;
+import entity.Bank;
 import entity.Payment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
 public class PayMentDAO {
 
     private String INSERT_PAY = "insert into Payment values (?,?,?,?,getDATe(),?,?,?)";
+    private String INSERT_PAYINFOR = "insert into TransOfOrganizer values(?,?,?,?);";
     private String Update_STATUS = "update Payment set status=? where payment_id=?";
     private String TOP5_TRANS = "   select  top (5) A.*, B.name, B.photo from Accounts B Join Payment A On A.giverID=b.UserID where A.status=1 ORDER BY A.transaction_date DESC ;";
 
@@ -44,6 +46,43 @@ public class PayMentDAO {
                 stm.setString(5, text);
                 stm.setLong(6, amount);
                 stm.setInt(7, status);
+
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return check;
+    }
+
+    public boolean insertPayInfor(int or, String nummberbank, String nameCard, String namebank) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(INSERT_PAYINFOR);
+                stm.setInt(1, or);
+                stm.setString(2, nummberbank);
+                stm.setString(3, nameCard);
+                stm.setString(4, namebank);
 
                 check = stm.executeUpdate() > 0 ? true : false;
             }
@@ -104,6 +143,44 @@ public class PayMentDAO {
         return check;
     }
 
+    public boolean updateBank(String numbercard, String namecard, String namebank, int userid) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement("  update TransOfOrganizer set numberCard=? , nameCard=? , nameBank=? where organizer_id=? ;");
+
+                stm.setString(1, numbercard);
+                stm.setString(2, namecard);
+                stm.setString(3, namebank);
+                stm.setInt(4, userid);
+
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+        }
+        return check;
+    }
+
     public List<Payment> Top5Trans() {
         List<Payment> l = new ArrayList<>();
         Connection conn = null;
@@ -120,7 +197,7 @@ public class PayMentDAO {
                 int id = rs.getInt(1);
                 int giverID = rs.getInt(2);
                 int receiverId = rs.getInt(3);
-                int eventID =  rs.getInt(4);
+                int eventID = rs.getInt(4);
                 Date date = rs.getTimestamp(5);
                 String text = rs.getString(6);
                 long amount = rs.getLong(7);
@@ -130,7 +207,6 @@ public class PayMentDAO {
                 o = new Payment(id, giverID, receiverId, eventID, date, text, amount, status, name, photo);
                 l.add(o);
             }
-             
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,9 +230,59 @@ public class PayMentDAO {
         return l;
     }
 
+    public Bank getBankID(int id) {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Bank b = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement("select * from TransOfOrganizer where organizer_id = ?;");
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int idBank = rs.getInt("id");
+                    int orID = rs.getInt("organizer_id");
+                    String numberCard = rs.getString("numberCard");
+                    String nameCard = rs.getString("nameCard");
+                    String nameBank = rs.getString("nameBank");
+
+                    b = new Bank(id, orID, numberCard, nameCard, nameBank);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PayMentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PayMentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PayMentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return b;
+    }
+
     public static void main(String[] args) {
         PayMentDAO e = new PayMentDAO();
-        System.out.println("" + e.Top5Trans());
+        System.out.println("" + e.updateBank("r", "r", "r",3));
 
     }
 }

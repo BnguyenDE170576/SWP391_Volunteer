@@ -3,6 +3,8 @@
     Created on : Mar 17, 2023, 1:59:39 PM
     Author     : DELL
 --%>
+<%@page import="entity.Bank"%>
+<%@page import="dao.PayMentDAO"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDate"%>
@@ -53,17 +55,18 @@
 
         <%
             String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
-         
+
             Account a = new Account();
             AccountDAO dao = new AccountDAO();
 
             a = dao.getAccount_BYUSER(name);
             String image = a.getPhoto();
-
+            PayMentDAO p = new PayMentDAO();
+            Bank b = p.getBankID(a.getAccId());
 
 
         %>
-        <form action="" method="post" class="form1">
+        <div class="form1">
 
             <c:set var="p" value=""/>
 
@@ -82,7 +85,7 @@
                         <!-- row -->
                         <div class="row tm-content-row">
                             <div class="tm-block-col tm-col-avatar">
-                                <div class="tm-bg-primary-dark tm-block tm-block-avatar">
+                                <div class="tm-bg-primary-dark tm-block tm-block-avatar" style="color: white;">
                                     <h2 class="tm-block-title">Change Avatar</h2>
                                     <div class="tm-avatar-container">
                                         <div class="photo-frame" style="height: 100%; width:  130%;">
@@ -93,12 +96,31 @@
 
                                         </div>
                                     </div>
+                                    <!--bank-->
+                                    <hr>
+
+                                    <p>BANK INFORMATION</p>
+                                    <label for="name">BankName:</label>
+                                    <form action="updatebank" method="post">
+                                        <input id="nameBank" name="nameBank" type="text" value="<% if (b.getNameBank() != null) {%> <%= b.getNameBank()%> <% } else { %> null <% } %>" />
+                                        <label for="name">NameCard:</label>
+                                        <input id="cardName" name="cardName" type="text" value="<% if (b.getNameCard() != null) {%> <%= b.getNameCard()%> <% } else { %> null <% } %>" />
+                                        <label for="name">NumberCard</label>
+                                        <input id="cardNumber" name="cardNumber" type="text" value="<% if (b.getNumberCard() != null) {%> <%= b.getNumberCard()%> <% } else { %> null <% }%>" />
+                                        <br>
+                                        <input type="hidden" class="form-control" id="iduser" value="<%=a.getAccId()%>" name="iduser">
+                                        <br>
+                                        <input type="submit" value="Save">
+                                    </form>
+
+
+
                                 </div>
                             </div>
                             <div class="tm-block-col tm-col-account-settings">
                                 <div class="tm-bg-primary-dark tm-block tm-block-settings">
                                     <h2 class="tm-block-title">Account Settings</h2>
-                                    <form action="" class="tm-signup-form row">
+                                    <form action="" class="tm-signup-form row" style="width: 151%;">
 
 
                                         <div class="form-group col-lg-6">
@@ -165,7 +187,9 @@
                                                 placeholder="<%=a.getAddress()%>"
                                                 class="form-control validate"  style="background-color: white;"
                                                 />
+
                                         </div>
+
                                         </table>
                                     </form>
                                 </div>

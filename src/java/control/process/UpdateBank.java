@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package control.process;
 
 import dao.PayMentDAO;
 import entity.Bank;
-import entity.Payment;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ytbhe
  */
-public class DonationEvent extends HttpServlet {
+public class UpdateBank extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class DonationEvent extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DonationEvent</title>");
+            out.println("<title>Servlet UpdateBank</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DonationEvent at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateBank at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,21 +73,19 @@ public class DonationEvent extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-          int id = Integer.parseInt(request.getParameter("id"));
-        int idEvent = Integer.parseInt(request.getParameter("activityId"));
-        int iduser = Integer.parseInt(request.getParameter("userID"));
-        PayMentDAO d = new PayMentDAO();
-        Bank bank = d.getBankID(id);
-        
-        List<Payment> listtran = d.Top5Trans();
-              
-        request.setAttribute("id", id);
-        request.setAttribute("iduser", iduser);
-        request.setAttribute("idEvent", idEvent);
-        request.setAttribute("bank", bank);
-        request.setAttribute("listtrans", listtran);
+        String nameBank = request.getParameter("nameBank").trim();
+        String cardName = request.getParameter("cardName").trim();
+        String cardNumber = request.getParameter("cardNumber").trim();
+        int iduser = Integer.parseInt(request.getParameter("iduser").trim());
+        PayMentDAO dao = new PayMentDAO();
+        Bank b = dao.getBankID(iduser);
+        if (b == null) {
+            dao.insertPayInfor(iduser, cardNumber, cardName, nameBank);
+        } else {
+            dao.updateBank(cardNumber, cardName, nameBank, iduser);
+        }
 
-        request.getRequestDispatcher("donationforev.jsp").forward(request, response);
+        request.getRequestDispatcher("Profile.jsp").forward(request, response);
     }
 
     /**
