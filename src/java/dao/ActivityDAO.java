@@ -8,6 +8,7 @@ package dao;
  *
  * @author datka
  */
+
 import context.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,16 +18,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import entity.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ActivityDAO {
 
-    private static final String GET_LIST_EVENT_FROM_TO = "select * from ("
-            + "select *, ROW_NUMBER() over (order by activity_id) as rownumber from volunteer_activities"
-            + ") as activity "
-            + "where activity.rownumber >= ? and activity.rownumber <=?";
+    private static final String GET_LIST_EVENT_FROM_TO = "select * from ( select *, ROW_NUMBER() over (order by activity_id) as rownumber from volunteer_activities ) as activity where activity.rownumber >= ? and activity.rownumber <=?";
+    private static final String GET_TOTAL_TRANG_THAI_DA_DIEN_RA = "SELECT COUNT(*) FROM volunteer_activities WHERE end_date < GETDATE()";
+    private static final String GET_TOTAL_TRANG_THAI_DANG_DIEN_RA = "SELECT COUNT(*) FROM volunteer_activities WHERE start_date <= GETDATE() AND end_date >= GETDATE()";
+    private static final String GET_TOTAL_TRANG_THAI_SAP_DIEN_RA = "SELECT COUNT(*) FROM volunteer_activities WHERE start_date > GETDATE()";
+    private static final String GET_TRANG_THAI_DA_DIEN_RA_FROM_TO = "SELECT * FROM volunteer_activities WHERE end_date < GETDATE() ORDER BY (SELECT NULL) OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
+    private static final String GET_TRANG_THAI_DANG_DIEN_RA_FROM_TO = "SELECT * FROM volunteer_activities WHERE start_date <= GETDATE() AND end_date >= GETDATE() ORDER BY (SELECT NULL) OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
+    private static final String GET_TRANG_THAI_SAP_DIEN_RA_FROM_TO = "SELECT * FROM volunteer_activities WHERE start_date > GETDATE() ORDER BY (SELECT NULL) OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
+    private static final String GET_USE_PAYMENT = "SELECT COUNT(*) FROM volunteer_activities WHERE start_date > GETDATE();";
+    private static final String GET_TOTAL_AMOUNT_USE_PAYMENT = "SELECT SUM(amount) FROM usePayment WHERE activity_id = ?;";
+    private static final String SET_USE_PAYMENT = "INSERT INTO usePayment (content, amount, activity_id) VALUES (?, ?, ?);";
+    private static final String GET_DONATE_BY_EVENT_ID = "SELECT [payment_id],[giverID],[receiverID],[eventID],[transaction_date] ,[text] ,[amount],[status] FROM [Payment] WHERE eventID=?";
+    private static final String GET_DONATE_BY_USER_ID = "SELECT [payment_id],[giverID],[receiverID],[eventID],[transaction_date] ,[text] ,[amount],[status] FROM [Payment] WHERE giverID=?";
+    private static final String GET_TOTAL_AMOUNT_BY_USER_ID = "SELECT SUM(amount) AS totalAmount FROM Payment WHERE giverID = ?";
     private static final String SEARCH_ACTIVITY = "select * from volunteer_activities";
     private static final String GET_WITH_ID = "SELECT * FROM volunteer_activities WHERE activity_id = ?;";
     private static final String GET_WITH_OID = "SELECT * FROM volunteer_activities WHERE organizer_id = ?;";
@@ -38,13 +49,14 @@ public class ActivityDAO {
     private static final String SET_PENDING_USER = "INSERT INTO UserPending (UserID, ActivityID) VALUES (?, ?);";
     private static final String CHECK_PENDING_USER = "SELECT COUNT(*) FROM Userpending WHERE UserID = ? AND ActivityID = ?";
     private static final String REMOVE_PENDING_USER = "DELETE FROM Userpending WHERE UserID = ? AND ActivityID = ?";
+    private static final String REMOVE_ACTIVITY = "DELETE FROM volunteer_activities WHERE activity_id = ?;";
     private static final String CHECK_PARTICIPATION_EXIST = "SELECT * FROM volunteer_participation WHERE volunteer_id = ? AND activity_id = ?";
     private static final String ADD_PARTICIPATION = "INSERT INTO volunteer_participation (volunteer_id, activity_id, registration_date) VALUES (?, ?, GETDATE())";
     private static final String SELECT_USERPENDING_BY_ACTIVITY = "SELECT UserID FROM UserPending WHERE ActivityID = ?";
     private static final String SELECT_PARTICIPANTS_BY_ACTIVITY = "SELECT volunteer_id FROM volunteer_participation WHERE activity_id = ?";
     private static final String SELECT_ACTIVITIES_BY_USER = "SELECT activity_id, registration_date FROM volunteer_participation WHERE volunteer_id = ?;";
     private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE())";
+    private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE(),?)";
     private static final String UPDATE_ACTIVITY = "UPDATE volunteer_activities "
             + "SET activity_name = ?, "
             + "description = ?, "
@@ -68,6 +80,75 @@ public class ActivityDAO {
             psm = conn.prepareStatement(GET_LIST_EVENT_FROM_TO);
             psm.setInt(1, from);
             psm.setInt(2, to);
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+                VolunteerActivity activity = new VolunteerActivity();
+                activity.setActivityId(rs.getInt("activity_id"));
+                activity.setActivityName(rs.getString("activity_name"));
+                activity.setDescription(rs.getString("description"));
+                activity.setStartDate(rs.getTimestamp("start_date"));
+                activity.setEndDate(rs.getTimestamp("end_date"));
+                activity.setLocation(rs.getString("location"));
+                activity.setOrganizerId(rs.getInt("organizer_id"));
+                activity.setNumberMember(rs.getInt("numberMemBer"));
+                activity.setCreatedDate(rs.getTimestamp("created_date"));
+                activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
+
+                activities.add(activity);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return activities;
+    }
+
+    public List<VolunteerActivity> getActivityStatusFromTo(int page, int pageSize, int cate) throws SQLException {
+        int from = page * pageSize - (pageSize - 1);
+        int to = page * pageSize;
+        List<VolunteerActivity> activities = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+
+            switch (cate) {
+                case 1: {
+                    psm = conn.prepareStatement(GET_TRANG_THAI_SAP_DIEN_RA_FROM_TO);
+                    break;
+                }
+                case 2: {
+                    psm = conn.prepareStatement(GET_TRANG_THAI_DANG_DIEN_RA_FROM_TO);
+                    break;
+                }
+                case 3: {
+                    psm = conn.prepareStatement(GET_TRANG_THAI_DA_DIEN_RA_FROM_TO);
+                    break;
+                }
+                default: {
+                    return null;
+                }
+            }
+            psm.setInt(1, from - 1);
             rs = psm.executeQuery();
 
             while (rs.next()) {
@@ -223,8 +304,8 @@ public class ActivityDAO {
         return activities;
     }
 
-    public void UpdateActivity(String activityName, String description, Date startDate, Date endDate, String location, int memberLimit) throws SQLException, ClassNotFoundException {
-        try (Connection conn = DBUtils.getConnection(); PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
+    public void UpdateActivity(String activityName, String description, Date startDate, Date endDate, String location, int memberLimit, int id) throws SQLException, ClassNotFoundException {
+        try ( Connection conn = DBUtils.getConnection();  PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
 
             psm.setString(1, activityName);
             psm.setString(2, description);
@@ -232,10 +313,10 @@ public class ActivityDAO {
             psm.setTimestamp(4, new Timestamp(endDate.getTime()));
             psm.setString(5, location);
             psm.setInt(6, memberLimit);
+            psm.setInt(7, id);
             psm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Xử lý lỗi tại đây
         }
     }
 
@@ -399,6 +480,36 @@ public class ActivityDAO {
         try {
             conn = DBUtils.getConnection();
             psm = conn.prepareStatement(REMOVE_PENDING_ACTIVITY);
+            psm.setInt(1, eid);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void removeActivity(int eid) throws SQLException {
+        Connection conn = null;
+        PreparedStatement psm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(REMOVE_ACTIVITY);
             psm.setInt(1, eid);
             psm.executeUpdate();
 
@@ -603,6 +714,7 @@ public class ActivityDAO {
         Connection conn = null;
         PreparedStatement psm = null;
         ResultSet rs = null;
+        AccountDAO dao = new AccountDAO();
         List<VolunteerActivityWithDate> participatedActivities = new ArrayList<>();
 
         try {
@@ -616,6 +728,8 @@ public class ActivityDAO {
                 VolunteerActivityWithDate activity = new VolunteerActivityWithDate();
                 activity.setActivity(getActivityById(rs.getInt("activity_id")));
                 activity.setParticipationDate(rs.getTimestamp("registration_date"));
+                activity.setoName(dao.GetUserName(activity.getActivity().getOrganizerId()));
+                activity.setStatus();
                 participatedActivities.add(activity);
             }
 
@@ -666,6 +780,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
                 oActivities.add(activity);
             }
 
@@ -689,6 +804,54 @@ public class ActivityDAO {
         }
 
         return oActivities;
+    }
+
+    public int getTotalStatusRow(int cate) {
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        int rowCount = 0;
+        try {
+            conn = DBUtils.getConnection();
+
+            switch (cate) {
+                case 1: {
+                    psm = conn.prepareStatement(GET_TOTAL_TRANG_THAI_SAP_DIEN_RA);
+                    break;
+                }
+                case 2: {
+                    psm = conn.prepareStatement(GET_TOTAL_TRANG_THAI_DANG_DIEN_RA);
+                    break;
+                }
+                case 3: {
+                    psm = conn.prepareStatement(GET_TOTAL_TRANG_THAI_DA_DIEN_RA);
+                    break;
+                }
+
+            }
+            rs = psm.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return rowCount;
     }
 
     public int getTotalRow() {
@@ -722,6 +885,74 @@ public class ActivityDAO {
             }
         }
         return rowCount;
+    }
+
+    public double getTotalAmountUsePayment(int id) {
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        double Amount = 0;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_TOTAL_AMOUNT_USE_PAYMENT);
+            psm.setInt(1, id);
+            rs = psm.executeQuery();
+            if (rs.next()) {
+                Amount = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return Amount;
+    }
+
+    public double getTotalAmountByUserId(int id) {
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        double Amount = 0;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_TOTAL_AMOUNT_BY_USER_ID);
+            psm.setInt(1, id);
+            rs = psm.executeQuery();
+            if (rs.next()) {
+                Amount = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return Amount;
     }
 
     public int getSearchTotalRow(String keyword) {
@@ -782,6 +1013,7 @@ public class ActivityDAO {
                 activity.setNumberMember(rs.getInt("numberMemBer"));
                 activity.setCreatedDate(rs.getTimestamp("created_date"));
                 activity.setUpdatedDate(rs.getTimestamp("updated_date"));
+                activity.setPhoto(rs.getString("photo"));
                 activities = activity;
             }
 
@@ -805,6 +1037,173 @@ public class ActivityDAO {
         }
 
         return activities;
+    }
+
+    public List<Chi> getUsePaymentById(int eid) {
+        List<Chi> tienChi = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        AccountDAO aDAO = new AccountDAO();
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_USE_PAYMENT);
+            psm.setInt(1, eid);
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+
+                Chi chi = new Chi();
+                chi.setText(rs.getString("content"));
+                chi.setMoney(rs.getDouble("amount"));
+                tienChi.add(chi);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return tienChi;
+    }
+
+    public List<Thu> getDonateActivityById(int eid) {
+        List<Thu> tienthu = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        AccountDAO aDAO = new AccountDAO();
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_DONATE_BY_EVENT_ID);
+            psm.setInt(1, eid);
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+
+                Thu thu = new Thu();
+                thu.setTenNguoiGui(aDAO.GetUserName(rs.getInt("giverID")));
+                thu.setNguoiNhan(aDAO.GetUserName(rs.getInt("receiverID")));
+                thu.setNoiDung(rs.getString("text"));
+                thu.setNgayGui(rs.getTimestamp("transaction_date"));
+                thu.setSoTien(rs.getDouble("amount"));
+                thu.setHoatdong(getActivityById(rs.getInt("eventID")));
+                tienthu.add(thu);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return tienthu;
+    }
+
+    public void setUsePayment(String content, double amount, int aid) throws SQLException {
+        Connection conn = null;
+        PreparedStatement psm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(SET_USE_PAYMENT);
+            psm.setString(1, content);
+            psm.setDouble(2, amount);
+            psm.setInt(3, aid);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+
+    public List<Thu> getDonateByUserId(int eid) {
+        List<Thu> tienthu = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        AccountDAO aDAO = new AccountDAO();
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_DONATE_BY_USER_ID);
+            psm.setInt(1, eid);
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+
+                Thu thu = new Thu();
+                thu.setTenNguoiGui(aDAO.GetUserName(rs.getInt("giverID")));
+                thu.setNguoiNhan(aDAO.GetUserName(rs.getInt("receiverID")));
+                thu.setNoiDung(rs.getString("text"));
+                thu.setNgayGui(rs.getTimestamp("transaction_date"));
+                thu.setSoTien(rs.getDouble("amount"));
+                thu.setHoatdong(getActivityById(rs.getInt("eventID")));
+                tienthu.add(thu);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return tienthu;
     }
 
     public VolunteerActivity getPendingActivityById(int eid) {
@@ -854,6 +1253,17 @@ public class ActivityDAO {
         }
 
         return activities;
+    }
+
+    public static void main(String[] args) {
+        ActivityDAO dao = new ActivityDAO();
+
+        LocalDateTime current = LocalDateTime.now();
+        Date date = new Date();
+        long millis = 1677166459123L;
+        date.setTime(millis);
+
+        dao.CreatePendingActivity("Dọn bãi biển", "aaaa",   date,   date, "VN", 3, 30, "photo");
     }
 
 }

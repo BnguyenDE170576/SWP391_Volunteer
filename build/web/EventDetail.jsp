@@ -144,6 +144,8 @@
                                             <form action="donationevent" method="post">
                                                 <input type="hidden" value="${detail.organizerId}" name="id">
                                                 <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
+                                                <input type="hidden" name="activityId" value="${detail.activityId}">
+                                                <input type="hidden" name="userID" value="${userID}">
                                             </form>
                                             <c:if test="${detail.organizerId == userID}">
                                                 <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  

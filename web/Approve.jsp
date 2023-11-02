@@ -41,70 +41,76 @@
         <div class="container mt-5">
             <h4>Xét duyệt các hoạt động:</h4>
             <hr/><br>
-            <div class="list-group">
-                <c:forEach items="${pendingEvents}" var="event">
-                    <div class="list-group-item d-flex justify-content-between align-items-center"
-                         date-eventid="${event.activityId}"
-                         data-activityname="${event.getActivityName()}"
-                         data-description="${event.description}"
-                         data-startdate="${event.startDate}"
-                         data-enddate="${event.endDate}"
-                         data-memberlimit="${event.numberMember}"
-                         data-location="${event.location}">
-                        <span class="col-9">${event.activityName}</span>
-                        <div clas="col-1">
-                            <button class="btn btn-link detail-button" data-toggle="modal" data-target="#eventModal">Detail</button>
-                        </div>
-                        <div clas="col-1">
-                            <button class="btn btn-danger" onclick="rejectEvent(${event.activityId}, this, this.nextElementSibling)">Từ chối</button>  
-                        </div>
-                        <div clas="col-1">
-                            <button class="btn btn btn-success" onclick="approveEvent(${event.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
-                        </div>
-
-                    </div>
-                    <br>
-                </c:forEach>
-            </div>
-        </div>
-
-
-
-        <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="eventModalLabel">Thông Tin Chi Tiết Sự Kiện</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4>Tên Sự Kiện:</h4>
-                                    <p id="event-name">Event Name</p>
-
-                                    <h4>Mô Tả:</h4>
-                                    <p id="event-description">Event Description</p>
-
-                                    <h4>Ngày Bắt Đầu:</h4>
-                                    <p id="event-start-date">Start Date</p>
-
-                                    <h4>Ngày Kết Thúc:</h4>
-                                    <p id="event-end-date">End Date</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên hoạt động</th>
+                        <th scope="col">Địa điểm</th>
+                        <th scope="col">Người tổ chức</th>
+                        <th scope="col">Chi tiết</th>
+                        <th scope="col">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${pendingEvents}" var="event" varStatus="loop">
+                        <tr>
+                            <td>${loop.index + 1}</td> 
+                            <td>${event.activityName}</td>
+                            <td>${event.location}</td>
+                            <td>${event.organizerId}</td>
+                            <td>
+                                <button class="btn btn-link detail-button" data-toggle="modal" data-target="#eventModal-${event.activityId}">Detail</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="rejectEvent(${event.activityId}, this, this.nextElementSibling)">Từ chối</button>
+                                <button class="btn btn-success" onclick="approveEvent(${event.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
+                            </td>
+                        </tr>
+                    <div class="modal fade" id="eventModal-${event.activityId}" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="eventModalLabel">Thông Tin Chi Tiết Sự Kiện</h5>
                                 </div>
-                                <div class="col-md-6">
-                                    <h4>Số Lượng:</h4>
-                                    <p id="modal-memberLimit">Member Limit</p>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>Tên Sự Kiện:</h4>
+                                                <p id="event-name">${event.activityName}</p>
 
-                                    <h4>Địa Điểm:</h4>
-                                    <p id="modal-location">Location</p>
+                                                <h4>Mô Tả:</h4>
+                                                <p id="event-description">${event.description}</p>
+
+                                                <h4>Ngày Bắt Đầu:</h4>
+                                                <p id="event-start-date">${event.startDate}</p>
+
+                                                <h4>Ngày Kết Thúc:</h4>
+                                                <p id="event-end-date">${event.endDate}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h4>Số Lượng:</h4>
+                                                <p id="modal-memberLimit">${event.numberMember}</p>
+
+                                                <h4>Địa Điểm:</h4>
+                                                <p id="modal-location">${event.location}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </c:forEach>
+                </tbody>
+            </table>
+
         </div>
+
+
+
+
         <script src="./js/location.js"></script> 
         <script src="./js/approveEvent.js"></script>    
         <script src="./js/BrowserJoin.js"></script>    

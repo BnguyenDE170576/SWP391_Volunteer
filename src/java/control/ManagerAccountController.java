@@ -5,11 +5,11 @@
  */
 package control;
 
-import dao.Login;
+import dao.AccountDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ytbhe
  */
-public class DonationForPage extends HttpServlet {
+public class ManagerAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +33,7 @@ public class DonationForPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DonationForPage</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DonationForPage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +48,11 @@ public class DonationForPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        AccountDAO acc = new AccountDAO();
+        List<Account> list = acc.getAllAcc();
+
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("accountmanager.jsp").forward(request, response);
     }
 
     /**
@@ -73,32 +66,7 @@ public class DonationForPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        /* TODO output your page here. You may use following sample code. */
-        String text = request.getParameter("text");
-        Login l = new Login();
-
-        String maDH = String.valueOf(l.generateOTP(6));
-        String donation = request.getParameter("donation");
-
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
-        String time = now.format(formatter);
-        // donate cho PAGE, nen stk goc la vay
-        
-        
-        // out.println("<img src='https://img.vietqr.io/image/mbbank-038888059999-print.png?amount=" + donation + "&addInfo=" + text + "&accountName=NGUYEN+MANH+TUONG'>");
-        request.setAttribute("text", text);
-        request.setAttribute("donation", donation);
-        request.setAttribute("maDH", maDH);
-        request.setAttribute("time", time);
-        request.setAttribute("namebank", "mbbank");
-        request.setAttribute("namecard", "038888059999");
-        request.setAttribute("nameAcc", "NGUYEN MANH TUONG");
-        
-
-        request.getRequestDispatcher("QRcode.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**

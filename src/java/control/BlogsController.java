@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,10 +34,29 @@ public class BlogsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        BlogsDAO dao = new BlogsDAO();
-        List<Blogs> list = dao.getAllBlogs();
+        BlogsDAO a = new BlogsDAO();
+        int spage = 1, spageSize = 6;
+        int stotalPage = a.getTotalRow();
+        if (request.getParameter("spage") != null) { // check param page
+            spage = Integer.parseInt(request.getParameter("spage"));
+        }
 
-        request.setAttribute("blogs", list);
+        if (stotalPage % spageSize == 0) { // calculator total page to showinformation
+            stotalPage = stotalPage / spageSize;
+        } else {
+            stotalPage = stotalPage / spageSize + 1;
+        }
+        if (spage > stotalPage) {
+            request.setAttribute("noContent", "No article here!");
+        } else {
+            request.setAttribute("blogs", a.getBlogFromTo(spage, spageSize));
+
+        }
+
+        request.setAttribute("spage", spage);
+        request.setAttribute("stotalPage", stotalPage);
+        request.setAttribute("scurrentPage", spage);
+
 
         request.getRequestDispatcher("blogs.jsp").forward(request, response);
     }

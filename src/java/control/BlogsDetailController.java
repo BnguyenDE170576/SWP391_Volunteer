@@ -9,16 +9,18 @@ import dao.AccountDAO;
 import dao.BlogsDAO;
 import dao.CommentDAO;
 import dao.likeDAO;
+import entity.Account;
 import entity.Blogs;
 import entity.Comment;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -66,38 +68,33 @@ public class BlogsDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = "";
-        Cookie[] cookies = request.getCookies();
+        HttpSession session = request.getSession();
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
+        int userIDLG = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
 
-                if (name.equals("email")) {
-                    email = cookie.getValue().trim();
-                }
-            }
 
-            AccountDAO a = new AccountDAO();
-            int userIDLG = a.GetUSERID(a.getUserName_byEmail(email));
+        likeDAO l = new likeDAO();
+        int id_blogs = Integer.parseInt(request.getParameter("id"));
+      
+        BlogsDAO dao = new BlogsDAO();
+        Blogs b = dao.getBlogByID(id_blogs);
+        AccountDAO accDao = new AccountDAO();
+        int acc = accDao.GetUSERID_byfullname(b.getAuthor());
+ 
+        int count = l.getToTalLike(id_blogs);
+        CommentDAO o = new CommentDAO();
+    
+        List<Comment> list = o.getAllComment(id_blogs);
+        int countcmt = o.getToTalComment(id_blogs);
 
-            likeDAO l = new likeDAO();
-            int id_blogs = Integer.parseInt(request.getParameter("id"));
-            BlogsDAO dao = new BlogsDAO();
-            Blogs b = dao.getBlogByID(id_blogs);
-            int count = l.getToTalLike(id_blogs);
-            CommentDAO o = new CommentDAO();
-            List<Comment> list = o.getAllComment(id_blogs);
-            int countcmt = o.getToTalComment(id_blogs);
-
-            request.setAttribute("userIDLG", userIDLG);
-            request.setAttribute("countcmt", countcmt);
-            request.setAttribute("comments", list);
-            request.setAttribute("blogsdetails", b);
-            request.setAttribute("count", count);
-            request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
-        }
-
+        request.setAttribute("userIDLG", userIDLG);
+        request.setAttribute("countcmt", countcmt);
+        request.setAttribute("comments", list);
+        request.setAttribute("idAuthor", acc);
+      
+        request.setAttribute("blogsdetails", b);
+        request.setAttribute("count", count);
+        request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
     }
 
     /**

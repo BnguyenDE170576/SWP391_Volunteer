@@ -121,8 +121,44 @@
         <servlet-class>control.ActivityPendingControl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VNpayController</servlet-name>
-        <servlet-class>control.VNpayController</servlet-class>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>control.VNPayController.ajaxServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentVerification</servlet-name>
+        <servlet-class>control.VNPayController.PaymentVerification</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentController</servlet-name>
+        <servlet-class>control.VNPayController.PaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayMentSuccess</servlet-name>
+        <servlet-class>control.VNPayController.PayMentSuccess</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentFailed</servlet-name>
+        <servlet-class>control.VNPayController.PaymentFailed</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBlog</servlet-name>
+        <servlet-class>control.SearchBlog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReplyComment</servlet-name>
+        <servlet-class>control.ReplyComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePost</servlet-name>
+        <servlet-class>control.process.DeletePost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerAccountController</servlet-name>
+        <servlet-class>control.ManagerAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteAccController</servlet-name>
+        <servlet-class>control.process.DeleteAccController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -229,8 +265,44 @@
         <url-pattern>/ActivityPendingControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VNpayController</servlet-name>
-        <url-pattern>/vnpay</url-pattern>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/vnpayajax/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentVerification</servlet-name>
+        <url-pattern>/verification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentController</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayMentSuccess</servlet-name>
+        <url-pattern>/success</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentFailed</servlet-name>
+        <url-pattern>/failed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBlog</servlet-name>
+        <url-pattern>/searchblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReplyComment</servlet-name>
+        <url-pattern>/replycomment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePost</servlet-name>
+        <url-pattern>/DeletePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerAccountController</servlet-name>
+        <url-pattern>/manageraccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAccController</servlet-name>
+        <url-pattern>/deleteacc</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

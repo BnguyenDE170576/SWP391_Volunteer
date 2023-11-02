@@ -70,7 +70,7 @@
 
 
                     <li class="sidebar-list-item">
-                        <a href="userctl" target="">
+                        <a href="manageraccount" target="">
                             <span class="material-icons-outlined">manage_accounts</span> Account Manager
                         </a>
                     </li>

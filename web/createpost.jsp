@@ -72,62 +72,60 @@
 
         <%@include file="./components/header.jsp" %>
         <!-- About Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                        <div class="position-relative h-100">
-                            <img class="img-fluid position-absolute w-100 h-100" src="images/blogging-services.jpg" alt="" style="object-fit: cover;">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="donation-container">
-
-                            <div class="donation-box" style="text-align: end;">
-                                <h3>Create New Blog Post</h3>
-
-                                <form action="createpost" method="POST" enctype="multipart/form-data">
-
-                                    <label for="title">Title:</label>
-                                    <input type="text" id="title" name="title" required><br><br>
-
-                                    <label for="content">Content:</label>
-                                    <textarea id="content" name="content" required></textarea><br><br>
-
-                                    <label for="shortcontent">Short Content:</label>
-                                    <textarea id="shortcontent" name="shortcontent"></textarea><br><br>
+        <div class="col-md-12" style="display: flex; padding: 5%; justify-content: space-between;">
+            <div class="col-md-5" >
 
 
+                <img src="images/blogging-services.jpg" alt="" style="width: 100%">
 
-                                    <label for="category">Category:</label>
-
-                                    <select id="category" name="category">
-
-
-                                        <option value="health">Health</option>
-                                        <option value="finance">Animal</option>
-
-                                        <option value="environment">Environment</option>
-                                        <option value="volunteer">Volunteer</option>
-
-                                    </select><br><br>
-
-                                    <label for="photo">Photo:</label>
-                                    <input type="file" id="photo" name="photo"><br>
-
-
-
-                                    <input type="submit" value="Submit Post">
-
-                                </form>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
             </div>
+          
+            <div class="col-md-5">
+
+
+                <h3>Create New Blog Post</h3>
+
+                <form action="createpost" method="POST" enctype="multipart/form-data">
+
+                    <label for="title">Title:</label>
+                    <textarea  id="title" name="title" required style="width: 60%;"> </textarea><br><br>
+
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" required style="width: 60%;"></textarea><br><br>
+
+                    <label for="shortcontent">Short Content:</label>
+                    <textarea id="shortcontent" name="shortcontent" style="width: 60%;"></textarea><br><br>
+
+
+
+                    <label for="category">Category:</label>
+
+                    <select id="category" name="category">
+
+
+                        <option value="health">Health</option>
+                        <option value="animal">Animal</option>
+
+                        <option value="environment">Environment</option>
+                        <option value="volunteer">Volunteer</option>
+
+                    </select><br><br>
+
+                    <label for="photo">Photo:</label>
+                    <input type="file" id="photo" name="photo"><br>
+
+
+                    <br>  <br>
+                    <input type="submit" value="Submit Post">
+
+                </form>
+
+
+            </div>
+
         </div>
+
+
         <!-- About End -->
 
 

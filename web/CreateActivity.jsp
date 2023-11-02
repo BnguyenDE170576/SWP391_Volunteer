@@ -4,11 +4,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-         
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
         <title>Tạo Sự Kiện</title>
         <!-- Sử dụng Bootstrap CSS -->
-         <!-- Google Web Fonts -->
+        <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
@@ -40,6 +40,7 @@
 
             /* Định dạng phần tử input */
             input[type="text"],
+            input[type="file"],
             input[type="date"],
             textarea {
                 width: 100%;
@@ -92,7 +93,7 @@
             <form action="ActivityPendingControl" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh:</label>
-
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
                 <br>
                 <div class="mb-3">
@@ -112,7 +113,7 @@
                 <br>
                 <div class="mb-3">
                     <label  class="form-label">Số Lượng Thành Viên:</label>
-                    <input type="number" class="form-control" id="memberLimit" name="memberLimit" min="1" max="50" required>
+                    <input type="number" class="form-control" id="memberLimit" name="memberLimit" min="1"  required>
                 </div>
 
                 <br>
@@ -183,18 +184,18 @@
                 }
 
         </script>
-          <!-- JavaScript Libraries -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/wow/wow.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-            <script src="lib/tempusdominus/js/moment.min.js"></script>
-            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-            <!-- Template Javascript -->
-            <script src="js/main.js"></script>
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
     </body>
 </html>

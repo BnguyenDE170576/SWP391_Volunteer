@@ -1,12 +1,11 @@
-<%@page import="dao.AccountDAO"%>
-<%@page import="entity.Account"%>
-<<<<<<< HEAD
-=======
+<%@page import="dao.AccountDAO" %>
+<%@page import="entity.Account" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> TUONG
 <nav class="navbar navbar-expand-lg custom-navbar">
     <a href="" class="navbar-brand p-0">
-        <a href ="home"><h1 class="text-primary m-0" ><i class="fa fa-map-marker-alt me-3"></i>Volunteer</h1></a>
+        <a href="home">
+            <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Volunteer</h1>
+        </a>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="fa fa-bars"></span>
@@ -15,9 +14,9 @@
         <div class="navbar-nav ms-auto py-0">
             <a href="home" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="blogs" class="nav-item nav-link">Blogs</a>         
-            <c:if test="${sessionScope.LOGIN_USER.role  == 2 || sessionScope.LOGIN_USER.role  == 0}">
-                <div class="nav-item dropdown"> 
+            <a href="blogs" class="nav-item nav-link">Blogs</a>
+            <c:if test="${sessionScope.LOGIN_USER.role  == 1 || sessionScope.LOGIN_USER.role  == 0}">
+                <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activity</a>
                     <div class="dropdown-menu m-0">
                         <a href="./CreateActivity.jsp" class="dropdown-item">Create Activity</a>
@@ -37,10 +36,12 @@
             </c:when>
             <c:otherwise>
 
-                <div class="nav-item dropdown"> 
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+                       data-bs-toggle="dropdown">
                         <img class="rounded-circle-perfect" src="${sessionScope.LOGIN_USER.photo}" alt="">
-                        <label class="font-weight-bold text-primary">${sessionScope.LOGIN_USER.userName}</label>
+                        <label
+                            class="font-weight-bold text-primary">${sessionScope.LOGIN_USER.userName}</label>
                     </a>
 
                     <div class="dropdown-menu m-0">
@@ -48,17 +49,19 @@
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="./HistoryControl">View History</a>
                         <c:if test="${ sessionScope.LOGIN_USER.role  == 0}">
-                        <a class="dropdown-item" href="admin">Admin</a>
+                            <a class="dropdown-item" href="admin">Admin</a>
                         </c:if>
 
-                        <a class="dropdown-item" href="logout">Log Out</a>    
+                        <a class="dropdown-item" href="logout">Log Out</a>
                     </div>
-            </c:otherwise>
-        </c:choose>
+                </c:otherwise>
+            </c:choose>
 
 
-    </div>
+        </div>
+
 </nav>
+
 <style>
     .rounded-circle-perfect {
         width: 35px;
@@ -67,11 +70,12 @@
         object-fit: cover;
         margin-right: 5px
     }
+
     .custom-navbar {
         background-color: #333;
-        color: #fff; 
+        color: #fff;
         padding-right: 1%;
-        padding-left:1%;
+        padding-left: 1%;
     }
 
     .custom-navbar .navbar-brand {
@@ -79,6 +83,6 @@
     }
 
     .custom-navbar .navbar-nav .nav-link {
-        color: #fff; 
+        color: #fff;
     }
 </style>

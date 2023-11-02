@@ -6,6 +6,7 @@
 package dao;
 
 import context.DBUtils;
+import entity.Account;
 import entity.Blogs;
 
 import java.sql.Connection;
@@ -63,6 +64,79 @@ public class BlogsDAO {
         }
 
         return list;
+    }
+
+    public int getSearchTotalRow(String keyword) {
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        int rowCount = 0;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement("SELECT count(*) FROM Blogs a join Accounts b on a.author=b.UserID WHERE (shortcontent LIKE ? or title like ?  or category like ? or b.name like ? ) and a.pending =1;");
+            psm.setString(1, "%" + keyword + "%");
+            psm.setString(2, "%" + keyword + "%");
+            psm.setString(3, "%" + keyword + "%");
+            psm.setString(4, "%" + keyword + "%");
+            rs = psm.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return rowCount;
+    }
+
+    public int getTotalRow() {
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        int rowCount = 0;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement("  SELECT count(*)\n"
+                    + "               FROM Blogs A\n"
+                    + "                JOIN Accounts B ON A.author = B.UserID where a.pending =1");
+    
+            rs = psm.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return rowCount;
     }
 
     public Blogs getBlogByID(int id) {
@@ -172,7 +246,8 @@ public class BlogsDAO {
         }
         return check;
     }
-    public boolean  deleteBlogs(int id_blogs) {
+
+    public boolean deleteBlogs(int id_blogs) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -209,9 +284,181 @@ public class BlogsDAO {
         return check;
     }
 
+    public int getToTalCate(String category) {
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement("  select COUNT(*)  from [Blogs] where category=?");
+                stm.setString(1, category);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(likeDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(likeDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(likeDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return count;
+    }
+     public List<Blogs> getBlogFromTo(int page, int pageSize) {
+        int from = page * pageSize - (pageSize - 1);
+        int to = page * pageSize;
+        List<Blogs> list = new ArrayList<>();
+     
+        List<Blogs> list2 = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement("  select a.*,b.name from Blogs a join Accounts b on a.author=b.UserID where  a.pending=1");
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+                int blogsID = rs.getInt("blog_ID");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String author = rs.getString("name");
+
+                Date date = rs.getDate("date");
+                String cate = rs.getString("category");
+                String photo = rs.getString("photo");
+                String shortcontent = rs.getString("shortcontent");
+                int pending = rs.getInt("pending");
+                Blogs blogs = new Blogs(blogsID, title, content, author, date, cate, photo, shortcontent, pending);
+                list.add(blogs);
+            }
+          
+
+            if (to > list.size() + 1) {
+                to = list.size() + 1;
+            }
+            for (int i = from - 1; i < to; i++) {
+                list2.add(list.get(i));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return list2;
+    }
+    public List<Blogs> getSearchBlogFromTo(int page, int pageSize, String keyword) {
+        int from = page * pageSize - (pageSize - 1);
+        int to = page * pageSize;
+        List<Blogs> list = new ArrayList<>();
+        List<Blogs> list1 = new ArrayList<>();
+        List<Blogs> list2 = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement("  select a.*,b.name from Blogs a join Accounts b on a.author=b.UserID where  a.pending=1");
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+                int blogsID = rs.getInt("blog_ID");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String author = rs.getString("name");
+
+                Date date = rs.getDate("date");
+                String cate = rs.getString("category");
+                String photo = rs.getString("photo");
+                String shortcontent = rs.getString("shortcontent");
+                int pending = rs.getInt("pending");
+                Blogs blogs = new Blogs(blogsID, title, content, author, date, cate, photo, shortcontent, pending);
+                list.add(blogs);
+            }
+            AccountDAO accDao = new AccountDAO();
+
+            for (int i = 0; i < list.size(); i++) {
+                String tt = list.get(i).getTitle().toLowerCase();
+                String cate = list.get(i).getCategory().toLowerCase();
+                String shortct = list.get(i).getShortContent().toLowerCase();
+
+                String author = list.get(i).getAuthor().toLowerCase();
+
+                if (tt.indexOf(keyword.toLowerCase()) != -1 || cate.indexOf(keyword.toLowerCase()) != -1 || shortct.indexOf(keyword.toLowerCase()) != -1 || author.indexOf(keyword.toLowerCase()) != -1) {
+                    list1.add(list.get(i));
+
+                }
+            }
+            if (to > list1.size() + 1) {
+                to = list1.size() + 1;
+            }
+            for (int i = from - 1; i < to; i++) {
+                list2.add(list1.get(i));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return list2;
+    }
+
     public static void main(String[] args) {
         BlogsDAO a = new BlogsDAO();
 
-        a.deleteBlogs(1);
+      a.deleteBlogs(14);
+
     }
 }

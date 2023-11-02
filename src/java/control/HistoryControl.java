@@ -6,6 +6,7 @@ package control;
 
 import dao.ActivityDAO;
 import entity.Account;
+import entity.Thu;
 import entity.VolunteerActivity;
 import entity.VolunteerActivityWithDate;
 import java.io.IOException;
@@ -46,12 +47,16 @@ public class HistoryControl extends HttpServlet {
             int role = ((Account) session.getAttribute("LOGIN_USER")).getRole();
             List<VolunteerActivityWithDate> listAct= actDAO.getParticipatedActivitiesByUser(vid);
             List<VolunteerActivity> listOAct= new ArrayList<>();
-            if (role==2 || role ==3){
+            if (role==2 || role ==0){
                 listOAct = actDAO.getParticipatedActivitiesByOgnaizer(vid);
             }
+            double tongDonate = actDAO.getTotalAmountByUserId(vid);
             
+            List<Thu> listThu  = actDAO.getDonateByUserId(vid);
+            session.setAttribute("tongDonate", tongDonate);
             session.setAttribute("listAct", listAct);
             session.setAttribute("listOAct", listOAct);
+            session.setAttribute("listThu", listThu);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HistoryControl.class.getName()).log(Level.SEVERE, null, ex);
         }

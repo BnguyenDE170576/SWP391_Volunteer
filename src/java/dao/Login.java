@@ -248,7 +248,9 @@ public class Login {
     }
 
     public static void main(String[] args) throws SQLException {
-
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(""+formatter);
     }
 
 }

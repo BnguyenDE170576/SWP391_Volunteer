@@ -5,13 +5,11 @@
  */
 package control;
 
-import dao.AccountDAO;
-import dao.Login;
-import entity.Bank;
+import dao.PayMentDAO;
+import entity.Payment;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,8 +75,15 @@ public class DonationEvent extends HttpServlet {
             throws ServletException, IOException {
 
         int id = Integer.parseInt(request.getParameter("id"));
+        int idEvent = Integer.parseInt(request.getParameter("activityId"));
+        int iduser = Integer.parseInt(request.getParameter("userID"));
+        PayMentDAO dao = new PayMentDAO();
+        List<Payment> o = dao.Top5Trans();
 
+        request.setAttribute("listtrans", o);
         request.setAttribute("id", id);
+        request.setAttribute("iduser", iduser);
+        request.setAttribute("idEvent", idEvent);
 
         request.getRequestDispatcher("donationforev.jsp").forward(request, response);
 
