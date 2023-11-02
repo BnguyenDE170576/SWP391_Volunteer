@@ -1,7 +1,6 @@
 <%@page import="dao.AccountDAO" %>
 <%@page import="entity.Account" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> TUONG
 <nav class="navbar navbar-expand-lg custom-navbar">
     <a href="" class="navbar-brand p-0">
         <a href="home">
