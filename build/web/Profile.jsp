@@ -5,6 +5,8 @@
 --%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,6 +26,8 @@
         <link rel="stylesheet" href="css/profile.css">
         <link rel="stylesheet" href="css/templatemo-style.css">
         <link rel="stylesheet" href="css/fontawesome.min.css" />
+        <link rel="stylesheet" href="css/templatemo-style.css">
+        <link rel="stylesheet" href="css/fontawesome.min.css" />
         <style>
             .photo-frame {
                 border: 2px;
@@ -40,17 +44,22 @@
 
 
 
+
+
+
         </style>
     </head>
     <body>
 
         <%
             String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+         
             Account a = new Account();
             AccountDAO dao = new AccountDAO();
 
             a = dao.getAccount_BYUSER(name);
             String image = a.getPhoto();
+
 
 
         %>
@@ -84,7 +93,6 @@
 
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="tm-block-col tm-col-account-settings">

@@ -53,7 +53,7 @@
 
         <%
             String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
-            String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+         
             Account a = new Account();
             AccountDAO dao = new AccountDAO();
 
