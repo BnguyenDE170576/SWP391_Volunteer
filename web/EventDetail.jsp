@@ -237,7 +237,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <h5>Tổng số tiền thu: ${tongThu}vnđ</h5>
+                        <h5>Tổng số tiền thu: ${tongThu}VNĐ</h5>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -256,8 +256,27 @@
                                         <td>${a.tenNguoiGui}</td>
                                         <td>${a.nguoiNhan}</td>
                                         <td><fmt:formatDate value="${a.ngayGui}" pattern="yyyy-MM-dd" /></td>
-                                        <td>${a.soTien}vnđ</td>
+                                        <td>${a.soTien}VNĐ</td>
                                         <td>${a.noiDung}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>            
+                        </table>
+                        <h5>Tổng số tiền chi: ${tongChi}VNĐ</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Số tiền</th>
+                                    <th>Nội dung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${donateChi}" var="a" varStatus="loop">
+                                    <tr>
+                                        <td>${loop.index + 1}</td>                                
+                                        <td>${a.money}vnđ</td>
+                                        <td>${a.text}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>            
@@ -321,7 +340,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-                         <button type="button" class="btn btn-primary" onclick="addChi()">Thêm</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addChi()">Thêm</button>
                     </div>
                 </div>
             </div>

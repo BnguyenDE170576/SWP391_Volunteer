@@ -7,7 +7,7 @@
         <title>Chọn Tỉnh/Thành Phố, Quận/Huyện và Xã/Phường</title>
     </head>
     <body>
-        <p>${a}</p>
-        <p>${b}</p>
+        <p>${page1}</p>
+        <p>${page}</p>
     </body>
 </html>

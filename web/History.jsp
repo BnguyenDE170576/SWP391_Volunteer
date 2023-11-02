@@ -45,6 +45,22 @@
                 // Hiển thị nội dung cho danh mục được chọn
                 document.getElementById(category).style.display = "block";
             }
+            function deleteActivity(actID,deleteButton,next) {
+                next.innerHTML = 'Đã xoá';
+                deleteButton.style.display = 'none';
+                $.ajax({
+                    type: "POST",
+                    url: "DeleteActivityControl", // Điều hướng đến servlet xử lý từ chối
+                    data: {id: actID}, // Truyền userId cho servlet
+                    success: function (data) {
+                    },
+                    error: function (error) {
+                        // Xử lý lỗi (nếu cần)
+                        alert("Đã xảy ra lỗi khi từ chối thành viên.");
+                    },
+                });
+            }
+
         </script>
     </head>
     <body>
@@ -110,6 +126,7 @@
                                                 <th>Tên hoạt động</th>
                                                 <th>Ngày Tạo</th>
                                                 <th>Ngày Cập Nhật</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -119,9 +136,13 @@
                                                     <td><a href="./EventDetailControl?id=${act.activityId}">${act.activityName}</a></td>
                                                     <td><fmt:formatDate value="${act.createdDate}" pattern="yyyy-MM-dd" /></td>
                                                     <td><fmt:formatDate value="${act.updatedDate}" pattern="yyyy-MM-dd" /></td>
+                                                    <td>
+                                                        <i class="fa-solid fa-trash-can" onclick="deleteActivity(${act.activityId},this,this.nextElementSibling)"></i>
+                                                        <p value=""></p>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
-                                        </tbody>
+                                        </tbody>    
                                     </table>
                                 </c:if>
                             </c:when>
@@ -134,7 +155,7 @@
 
                     <div id="donationHistory" style="display: none">
                         <h5>Số lần ủng hộ: ${fn:length(listThu)}</h5>
-                        <h5>Tổng tiền ủng hộ: ${tongDonate}</h5>
+                        <h5>Tổng tiền ủng hộ: ${tongDonate}VNĐ</h5>
                         <c:if test="${not empty listThu}">
                             <table class="table table-striped table-bordered">
                                 <thead>
@@ -152,7 +173,7 @@
                                             <td>${loop.index + 1}</td>                                
                                             <td><a href="./EventDetailControl?id=${act.hoatdong.activityId}">${act.hoatdong.activityName}</a></td>
                                             <td><fmt:formatDate value="${act.ngayGui}" pattern="yyyy-MM-dd" /></td>
-                                            <td>${act.soTien}vnđ</td>
+                                            <td>${act.soTien}VNĐ</td>
                                             <td>${act.noiDung}</td>
 
                                         </tr>

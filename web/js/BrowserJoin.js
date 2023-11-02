@@ -176,3 +176,4 @@ function addChi() {
     // Đóng modal sau khi gửi dữ liệu
     $('#chiModal').modal('hide');
 }
+

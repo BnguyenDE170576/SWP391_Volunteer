@@ -82,7 +82,17 @@ public class DeleteActivityControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            int eid = Integer.parseInt(request.getParameter("id"));
+            ActivityDAO aDAO = new ActivityDAO();
+            aDAO.removeActivity(eid);
+
+            request.getRequestDispatcher("home").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

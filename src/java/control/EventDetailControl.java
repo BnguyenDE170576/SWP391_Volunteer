@@ -74,8 +74,12 @@ public class EventDetailControl extends HttpServlet {
             } else if (currentDate.after(detail.getEndDate())) {
                 status = "Đã kết thúc";
             }
+            List<Chi> donateChi= aDAO.getUsePaymentById(eid);
+            double tongChi= aDAO.getTotalAmountUsePayment(eid);
             request.setAttribute("donateThu", donateThu);
             request.setAttribute("tongThu",tongThu);
+            request.setAttribute("donateChi", donateChi);
+            request.setAttribute("tongChi",tongChi);
             request.setAttribute("oname",dao.GetUserName(detail.getOrganizerId()));
             request.setAttribute("pendinglist", pendinglist);
             request.setAttribute("userID", dao.GetUSERID(name));

@@ -110,18 +110,17 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="list-group">
-                                <a href="CatePageControl?cate=1" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Sắp diễn ra</a>
-                        
+                            <a href="CatePageControl?cate=1" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Sắp diễn ra</a>              
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="list-group">
-                           <a href="CatePageControl?cate=2" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đang diễn ra</a>
+                            <a href="CatePageControl?cate=2" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đang diễn ra</a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="list-group">
-                           <a href="CatePageControl?cate=3" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đã kết thúc</a>
+                            <a href="CatePageControl?cate=3" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đã kết thúc</a>
                         </div>
                     </div>
                 </div>
@@ -182,27 +181,27 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=1" aria-label="Trang đầu">
+                                <a class="page-link" href="CatePageControl?page=1&cate=${catee}" aria-label="Trang đầu">
                                     <span aria-hidden="true">&laquo;&laquo;</span>
                                 </a>
                             </li>
                             <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page - 1}" aria-label="Trang trước">
+                                <a class="page-link" href="CatePageControl?page=${page - 1}&cate=${catee}" aria-label="Trang trước">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <c:forEach var="j" begin="1" step="1" end="${totalPage}">
                                 <li class="page-item ${page == j ? 'active' : ''}">
-                                    <a class="page-link" href="home?page=${j}">${j}</a>
+                                    <a class="page-link" href="CatePageControl?page=${j}&cate=${catee}">${j}</a>
                                 </li>
                             </c:forEach>
                             <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page + 1}" aria-label="Trang sau">
+                                <a class="page-link" href="CatePageControl?page=${page + 1}&cate=${catee}" aria-label="Trang sau">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                             <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${totalPage}" aria-label="Trang cuối">
+                                <a class="page-link" href="CatePageControl?page=${totalPage}&cate=${catee}" aria-label="Trang cuối">
                                     <span aria-hidden="true">&raquo;&raquo;</span>
                                 </a>
                             </li>

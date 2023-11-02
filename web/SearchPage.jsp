@@ -106,7 +106,28 @@
         </div>
         <!-- Navbar & Hero End -->
 
+        <div class="container-xxl py-5" style="background-color: #f9f9f9;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="list-group">
+                            <a href="CatePageControl?cate=1" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Sắp diễn ra</a>
 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="list-group">
+                            <a href="CatePageControl?cate=2" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đang diễn ra</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="list-group">
+                            <a href="CatePageControl?cate=3" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đã kết thúc</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Package Start -->
         <div class="container-xxl py-5">
             <div class="container">
