@@ -9,11 +9,11 @@ import entity.Report;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,10 +21,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author datka
+ * @author Admin
  */
-@WebServlet(name = "ApproveControl", urlPatterns = {"/ApproveControl"})
-public class ApproveControl extends HttpServlet {
+public class ApproveReport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,12 +44,9 @@ public class ApproveControl extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            request.getRequestDispatcher("Approve.jsp").forward(request, response);
+            request.getRequestDispatcher("ApproveNotification.jsp").forward(request, response);
         }
-        List<Report> reports = (List<Report>) request.getSession().getAttribute("reports");
-        request.setAttribute("reports", reports);
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -78,29 +74,23 @@ public class ApproveControl extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
+response.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
-        int eId = Integer.parseInt(request.getParameter("eId"));
-        int check = Integer.parseInt(request.getParameter("check"));
-        session.setAttribute("a", eId );
-        session.setAttribute("b", check);
-        ActivityDAO acDAO = new ActivityDAO();
-        if (check == 1) {
-            acDAO.CreateActivity(acDAO.getPendingActivityById(eId));
-            try {
-                acDAO.removePendingActivity(eId);
-            } catch (SQLException ex) {
-                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (check == 2) {
-            try {
-                acDAO.removePendingActivity(eId);
-            } catch (SQLException ex) {
-                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
- 
+int activityId = Integer.parseInt(request.getParameter("activityId"));
+int organizerId = Integer.parseInt(request.getParameter("organizerId"));
+
+// Lưu thông tin báo cáo, ví dụ:
+Report report = new Report(activityId, organizerId);
+List<Report> reports = (List<Report>) request.getSession().getAttribute("reports");
+if (reports == null) {
+    reports = new ArrayList<>();
+}
+reports.add(report);
+request.getSession().setAttribute("reports", reports);
+
+// Chuyển hướng đến ApproveNotification.jsp
+response.sendRedirect("ApproveNotification.jsp");
+
     }
 
     /**

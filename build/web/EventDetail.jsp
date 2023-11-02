@@ -10,7 +10,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Vounteer</title>
+        <title>Volunteer</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -145,6 +145,12 @@
                                                 <input type="hidden" value="${detail.organizerId}" name="id">
                                                 <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
                                             </form>
+                                            <c:if test="${detail.organizerId != userID && check==0}">
+                                                
+                                                <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reportModal">Report</button>  
+                                                </form>
+                                            </c:if>
+                                                
                                             <c:if test="${detail.organizerId == userID}">
                                                 <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  
                                             </c:if>
@@ -278,7 +284,211 @@
                 </div>
             </div>
         </div>
+                                            <c:if test="${detail.organizerId != userID && check==0}">
+                                            <button id ="approveButton" class="btn btn-primary btn-lg" data-toggle="modal" name="report" data-target="#reportModal">Report</button>
+                                            </c:if>
+                                            
+                                            <form action="donationevent" method="post">
+                                                <input type="hidden" value="${detail.organizerId}" name="id">
+                                                <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
+                                            </form>
+                                                
+                                            <c:if test="${detail.organizerId == userID}">
+                                                <button id="editButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Edit</button>  
+                                            </c:if>
+                                            <c:if test="${detail.organizerId != userID && check==0}">
+                                                <form action="PendingUser" method="POST">
+                                                    <input type="hidden" name="activityId" value="${detail.activityId}">
+                                                    <input type="hidden" name="userID" value="${userID}">
+                                                    <button class="btn btn-primary btn-lg">Tham gia</button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${detail.organizerId != userID && check==1}">
+                                                <box class="btn btn-primary btn-lg">Đợi xét duyệt</box>
+                                                </c:if>
+                                                <c:if test="${detail.organizerId != userID && check==2}">
+                                                <box class="btn btn-primary btn-lg">Đã Tham gia</box>
+                                                </c:if> 
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </section>
+        </div>
+
+
+        <%@include file="./components/footer.jsp" %>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xét duyệt thành viên</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Hiển thị danh sách thành viên và các nút từ chối/xét duyệt tại đây -->
+                        <ul>
+                            <c:forEach var="us" items="${pendinglist}" varStatus="status">    
+                                <li>
+                                    <span>${us.getUserName()}</span>
+                                    <div class="btn-group" role="group">
+                                        <button onclick="rejectMember(${us.getId()}, ${detail.activityId}, this, this.nextElementSibling)">Từ chối</button>
+                                        <button onclick="approveMember(${us.getId()}, ${detail.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
+                                    </div>
+                                </li>
+                            </c:forEach>   
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Activity</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nội dung của modal -->
+
+                        <div class="mb-3">
+                            <label for="activityName">Activity Name:</label>
+                            <input type="text" id="activityName" name="activityName" class="form-control" required value="${detail.activityName}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" class="form-control" value="${detail.description}"></textarea>
+                        </div>
+
+                        <c:choose>
+                            <c:when test="${status == 'Đang diễn ra'}">
+                                <div class="mb-3">
+                                    <label for="endDateStr">End Date:</label>
+                                    <input type="date" id="endDateStr" name="endDateStr" class="form-control" required>
+                                    <input type="hidden" name="startDateStr" id="startDateStr" class="form-control" value="${detail.startDate}">
+                                </div>
+                            </c:when>
+                            <c:when test="${status == 'Sắp diễn ra'}">
+                                <div class="mb-3">
+                                    <label for="startDateStr">Start Date:</label>
+                                    <input type="date" id="startDateStr" name="startDateStr" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="endDateStr">End Date:</label>
+                                    <input type="date" id="endDateStr" name="endDateStr" class="form-control" required>
+                                </div>
+                                <input type="hidden" name="editcase" class="form-control" value="2">
+                            </c:when>          
+                        </c:choose>
+
+
+                        <div class="mb-3">
+                            <label for="province" class="form-label" >Tỉnh/Thành Phố:</label>
+                            <select id="province" class="form-select" name="province">
+                                <option value="">Chọn tỉnh/thành phố</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown quận/huyện -->
+                        <div class="mb-3">
+                            <label for="district" class="form-label" >Quận/Huyện:    </label>
+                            <select id="district" class="form-select" name="district">
+                                <option value="">Chọn quận/huyện</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown xã/ward -->
+                        <div class="mb-3">
+                            <label for="ward" class="form-label">Xã/Phường:</label>
+                            <select id="ward" class="form-select" name="ward">
+                                <option value="">Chọn xã/phường</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="memberLimit">Member Limit:</label>
+                            <input type="number" id="memberLimit" name="memberLimit" class="form-control" min="1" max="50" required  value="${detail.numberMember}">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="updateActivity()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">Report This Activity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn muốn tố cáo hoạt động trên vì lý do gì?</p>
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="reason">Lý do tố cáo:</label>
+                        <select class="form-control" id="reason" name="reason">
+                            <option value="reason1">Hoạt động này không đúng như những gì đã mô tả</option>
+                            <option value="reason2">Hoạt động này không phù hợp với tổ chức tình nguyện</option>
+                            <option value="reason3">Hoạt động này mang ý nghĩa xấu với cộng đồng</option>
+                            <option value="reason4">Lý do khác</option>
+                            
+                            <!-- Thêm các lý do tố cáo khác -->
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+             <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+             <form action="ReportNotification" method="post" id="reportForm">
+              <input type="hidden" name="activityId" value="${detail.activityId}">
+              <input type="hidden" name="organizerId" value="${detail.organizerId}">
+              
+              <button type="submit" class="btn btn-danger" id="yes">Yes</button>
+            </form>
+              <script>
+$(document).ready(function () {
+    $('#reportSubmittedModal').on('shown.bs.modal', function () {
+        setTimeout(function () {
+            $('#reportForm').submit(); // Tự động gửi form sau 3 giây
+        }, 3000);
+    });
+});
+</script>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reportSubmittedModal" tabindex="-1" role="dialog" aria-labelledby="reportSubmittedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportSubmittedModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Cảm ơn bạn đã tố cáo. Quản trị viên sẽ xem xét ý kiến của bạn.</p>
+            </div>
+        </div>
+    </div>
+</div>
         <script src="./js/location.js"></script> 
         <script src="./js/BrowserJoin.js"></script>    
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
