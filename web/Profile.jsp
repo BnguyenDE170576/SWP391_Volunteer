@@ -112,7 +112,7 @@
                                                 id="phone"
                                                 name="sex"
                                                 type="text"
-                                                placeholder="Female"
+                                                placeholder="<%=a.getSex()%>"
                                                 class="form-control validate"  style="background-color: white;"
                                                 />
                                         </div>
@@ -189,6 +189,15 @@
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Name</label>
                                                 <input type="text" class="form-control" id="recipient-name" value="<%=a.getFullName()%>" name="name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">SEX</label>
+
+                                                <select id="recipient-name" class="form-control" name="sex"  placeholder ="<%=a.getSex()%>" style="height: auto;">
+                                                    <option value="0">Female</option>
+                                                    <option value="1">Male</option>
+                                                </select>
+
                                             </div>
 
 

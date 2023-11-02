@@ -73,8 +73,8 @@
         <%@include file="./components/header.jsp" %>
 
         <div class="col-md-12" style="width: 100%; display: flex;">
-            
-            
+
+
             <div class="col-md-4">
                 <img src="images/volunteer.jpg" style="width: 100%;">
             </div>
@@ -86,8 +86,8 @@
                             <div class="title">Donation Information</div>
 
                             <div class="fields">
-                                <input type="text" id="firstName" placeholder="First Name" required> 
-                                <input type="email" id="email" placeholder="Email" required>
+                                <input type="text" id="firstName" value="${sessionScope.LOGIN_USER.fullName}" readonly required> 
+                                <input type="email" id="email" value="${sessionScope.LOGIN_USER.email}" required>
                                 <input type="hidden" name="id" value="${id}" id="id" placeholder="${id}">
                                 <input type="hidden" name="iduser" value="${iduser}" id="id" placeholder="${iduser}">
                                 <input type="hidden" name="idEvent" value="${idEvent}" id="id" placeholder="${idEvent}">
@@ -116,16 +116,7 @@
                             </div>
 
 
-                            <div class="checkboxes">
-                                <input type="checkbox" id="receipt" class="checkbox" />
-                                <label for="receipt">Email Me A Receipt</label>
-                                <br />
-                                <input type="checkbox" id="anon" class="checkbox" />
-                                <label for="anon">Give Anonymously</label>
-                                <br />
-                                <input type="checkbox" id="list" class="checkbox" />
-                                <label for="list">Add Me To Email List</label>
-                            </div>
+                      
 
 
                             <input type="hidden"  name="bankCode" value="VNBANK">
@@ -136,11 +127,11 @@
 
                 </div>
             </div>
-                                <div class="col-md-3" style="padding-left: 5%; text-align:center; padding-top: 3%;">
+            <div class="col-md-3" style="padding-left: ; padding-top: 3%;">
                 <div class="block" data-widget-id="52" data-widget-key="th_donate" data-widget-definition="thdonate_topDonors">
                     <div class="block-container">
-                        <h3 class="block-minorHeader">
-                            Top donation
+                        <h3 class="block-minorHeader" style="text-align: center">
+                            Recent donation
                         </h3>
                         <ul class="block-body">
 
@@ -148,56 +139,39 @@
 
                             <!--start-->
                             <li class="block-row">
+                                <c:forEach var="o" items="${listtrans}">
+                                    <div class="contentRow-main contentRow-main--close">
+                                        <div class="ax" style="display: flex;">
 
-                                <div class="contentRow-main contentRow-main--close">
-                                    <div class="ax" style="display: flex;">
+                                            <div class="contentRow-inline">
+                                                <img src="${o.photo}" style="width: 100px; height: auto;">
 
-                                        <div class="contentRow-inline">
-                                            <img src="images/volunteer.jpg" style="width: 100px; height: auto;">
+                                            </div>
+                                            <div class="contentRow-inline" style="font-size: 20px; padding-left: 5px; color: red;">
+                                                <span>${o.giverName}</span>
 
-                                        </div>
-                                        <div class="contentRow-inline" style="font-size: 30px;">
-                                            <span>quocdk</span>>
-                                            <div class="contentRow-minor"  style="width: 100px; height: auto;">
-
-                                                50,000₫
+                                                <div class="contentRow-minor"  style="width: 100px; height: auto;">
+                                                    <span id="formattedAmount${o.paymentId}"style="color: blue;"></span>
+                                                </div>
+                                                <p style="color: blueviolet;">${o.transactionDate}</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="contentRow-main contentRow-main--close">
-                                    <div class="ax" style="display: flex;">
+                                    <br>
+                                    <script>
+                                        function formatAmount(amount) {
+                                            return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(amount);
+                                        }
 
-                                        <div class="contentRow-inline">
-                                            <img src="images/volunteer.jpg" style="width: 100px; height: auto;">
+                                        // Get the amount value from your data
+                                        var amount = ${o.amount};
 
-                                        </div>
-                                        <div class="contentRow-inline" style="font-size: 30px;">
-                                            <span>quocdk</span>>
-                                            <div class="contentRow-minor"  style="width: 100px; height: auto;">
+                                        // Format the amount using the function and display it
+                                        document.getElementById("formattedAmount${o.paymentId}").textContent = formatAmount(amount);
+                                    </script>
+                                </c:forEach>
 
-                                                50,000₫
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="contentRow-main contentRow-main--close">
-                                    <div class="ax" style="display: flex;">
 
-                                        <div class="contentRow-inline">
-                                            <img src="images/volunteer.jpg" style="width: 100px; height: auto;">
-
-                                        </div>
-                                        <div class="contentRow-inline" style="font-size: 30px;">
-                                            <span>quocdk</span>>
-                                            <div class="contentRow-minor"  style="width: 100px; height: auto;">
-
-                                                50,000₫
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!--end-->
                                 </div>
@@ -219,37 +193,37 @@
 
         <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
         <script>
-                            function updateDonationValue(input) {
-                                // Get the input value
-                                var customValue = input.value;
+                                           function updateDonationValue(input) {
+                                               // Get the input value
+                                               var customValue = input.value;
 
-                                // Find the radio button with class "set-amount"
-                                var radioButton = document.querySelector('input[type="radio"].set-amount');
+                                               // Find the radio button with class "set-amount"
+                                               var radioButton = document.querySelector('input[type="radio"].set-amount');
 
-                                // Update the radio button's value attribute
-                                if (radioButton) {
-                                    radioButton.value = customValue;
-                                }
-                            }
+                                               // Update the radio button's value attribute
+                                               if (radioButton) {
+                                                   radioButton.value = customValue;
+                                               }
+                                           }
 
-                            function validateDonation() {
-                                var selectedDonation = document.querySelector('input[name="donation"]:checked');
-                                var customAmountInput = document.getElementById('customAmount');
+                                           function validateDonation() {
+                                               var selectedDonation = document.querySelector('input[name="donation"]:checked');
+                                               var customAmountInput = document.getElementById('customAmount');
 
-                                // Check if either the radio button is checked or a custom amount is entered
-                                if (!selectedDonation && customAmountInput.value.trim() === "") {
-                                    alert("Please choose a donation amount or enter a custom amount.");
-                                    return false; // Prevent form submission
-                                }
+                                               // Check if either the radio button is checked or a custom amount is entered
+                                               if (!selectedDonation && customAmountInput.value.trim() === "") {
+                                                   alert("Please choose a donation amount or enter a custom amount.");
+                                                   return false; // Prevent form submission
+                                               }
 
-                                // If the "set-amount" radio button is checked, ensure that a custom amount is entered
-                                if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
-                                    alert("Please enter a custom amount.");
-                                    return false; // Prevent form submission
-                                }
+                                               // If the "set-amount" radio button is checked, ensure that a custom amount is entered
+                                               if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
+                                                   alert("Please enter a custom amount.");
+                                                   return false; // Prevent form submission
+                                               }
 
-                                return true; // Allow form submission
-                            }
+                                               return true; // Allow form submission
+                                           }
         </script>
 
 

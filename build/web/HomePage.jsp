@@ -80,11 +80,11 @@
             </div>
         </div>
 
-         <%@include file="./components/header.jsp" %>
+        <%@include file="./components/header.jsp" %>
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <!-- header -->
-          
+
             <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                 <div class="container py-5">
                     <div class="row justify-content-center py-5">
@@ -578,28 +578,49 @@
                     </div>
                 </div>
             </div>
-            <!-- Testimonial End -->
-            <div class="container-fluid">
-            <%@include file="./components/footer.jsp"%>
+        </div>
 
-            </div>
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <!-- Testimonial End -->
+    <div class="container-fluid">
+        <%@include file="./components/footer.jsp"%>
+
+    </div>
+    <!-- Back to Top -->
 
 
-            <!-- JavaScript Libraries -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/wow/wow.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-            <script src="lib/tempusdominus/js/moment.min.js"></script>
-            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-            <!-- Template Javascript -->
-            <script src="js/main.js"></script>
-    </body>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {};
+
+        Tawk_API.visitor = {
+            name: '${sessionScope.LOGIN_USER.userName}',
+            email: 'ytbhelp2@gmail.com',
+            hash: 'hash-value'
+        };
+
+
+        Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/653b29c9f2439e1631e8e3c0/1hdnhmesn';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
 
 </html>

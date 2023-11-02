@@ -77,7 +77,7 @@ Author     : trinh
 
 
                     <li class="sidebar-list-item">
-                        <a href="userctl" target="">
+                        <a href="manageraccount" target="">
                             <span class="material-icons-outlined">manage_accounts</span> Account Manager
                         </a>
                     </li>
@@ -93,7 +93,7 @@ Author     : trinh
             <!-- Main -->
             <div class="containerr">
                 <div class="table-wrapper">
-                    <div class="table-title">
+                    <div class="table-title" style="width: 102%;">
                         <div class="menu">
                             <div >
                                 <h2 style="width: 100%;">Manage <b>Blogs</b></h2>
@@ -140,7 +140,7 @@ Author     : trinh
                                     <td>
 
                                         <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/approved-icon-7.jpg" title="delete" style="display: ${o.pending == 0 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:20px;  "></a>
-                                          <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/noapprove.jpg"  title="delete" style="display: ${o.pending == 1 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:20px;  "></a>
+                                        <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/very.jpg"  title="delete" style="display: ${o.pending == 1 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:15px;  "></a>
 
                                     </td>
 

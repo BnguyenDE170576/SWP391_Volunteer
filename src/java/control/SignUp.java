@@ -66,6 +66,7 @@ public class SignUp extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         String user = "";
         String pass = "";
+        int role = 1;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 String name = cookie.getName();
@@ -76,12 +77,15 @@ public class SignUp extends HttpServlet {
                 if (name.equals("pass")) {
                     pass = cookie.getValue();
                 }
+                if (name.equals("role")) {
+                    role = Integer.parseInt(cookie.getValue());
+                }
             }
 
         }
 
         AccountDAO dao = new AccountDAO();
-        dao.insertAccount(email, SecurityUtils.hashMd5(pass), user, "", 1, 1, "", user);
+        dao.insertAccount(email, SecurityUtils.hashMd5(pass), user, "", 1, role, "images/uer.png", user);
 
         Login login = new Login();
         login.deleteOTP(email);
@@ -109,7 +113,7 @@ public class SignUp extends HttpServlet {
 
         String repass = request.getParameter("repass");
         String email = request.getParameter("email").trim();
-//        int role = Integer.parseInt(request.getParameter("is"));
+        String role = request.getParameter("is");
         if (!pass.equals(repass)) {
             request.setAttribute("ERROR_MASSEGE", "Account creation failed");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -130,10 +134,12 @@ public class SignUp extends HttpServlet {
                 Cookie userCookie = new Cookie("name", user);
                 Cookie emaill = new Cookie("email", email);
                 Cookie passwordCookie = new Cookie("pass", pass);
+                Cookie roleCookie = new Cookie("role", role);
                 //dat time ton tai
                 userCookie.setMaxAge(60 * 60 * 24);
                 passwordCookie.setMaxAge(60 * 60 * 24);
                 emaill.setMaxAge(60 * 60 * 24);
+                roleCookie.setMaxAge(60 * 60 * 24);
                 //add browser cua nguoi dung
                 response.addCookie(userCookie);
                 response.addCookie(passwordCookie);

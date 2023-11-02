@@ -61,6 +61,7 @@ public class ProfileControl extends HttpServlet {
         String phone = request.getParameter("phone");
 
         String email = request.getParameter("email");
+        int sex = Integer.parseInt(request.getParameter("sex"));
 
         String realPath = request.getServletContext().getRealPath("/images");
         String filename = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
@@ -80,7 +81,7 @@ public class ProfileControl extends HttpServlet {
 
                 int userID = data.GetUSERID(user);
 
-                data.updateACCOUNT(userID, phone, address, name, email, birthday, "images/" + filename);
+                data.updateACCOUNT(userID, phone, address, name, email, birthday, "images/" + filename, sex);
 
                 Account a = data.getAccount_BYUSER(user);
 

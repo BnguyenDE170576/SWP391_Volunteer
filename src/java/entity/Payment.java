@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,6 +22,21 @@ public class Payment {
     private String text;
     private double amount;
     private int status;
+    private String giverName;
+    private String photo;
+
+    public Payment(int paymentId, int giverId, int receiverId, int eventId, Date transactionDate, String text, double amount, int status, String giverName, String photo) {
+        this.paymentId = paymentId;
+        this.giverId = giverId;
+        this.receiverId = receiverId;
+        this.eventId = eventId;
+        this.transactionDate = transactionDate;
+        this.text = text;
+        this.amount = amount;
+        this.status = status;
+        this.giverName = giverName;
+        this.photo = photo;
+    }
 
     public Payment(int paymentId, int giverId, int receiverId, int eventId, Date transactionDate, String text, double amount, int status) {
         this.paymentId = paymentId;
@@ -44,8 +60,24 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public int getGiverId() {
         return giverId;
+    }
+
+    public String getGiverName() {
+        return giverName;
+    }
+
+    public void setGiverName(String giverName) {
+        this.giverName = giverName;
     }
 
     public void setGiverId(int giverId) {
@@ -68,8 +100,11 @@ public class Payment {
         this.eventId = eventId;
     }
 
-    public Date getTransactionDate() {
-        return transactionDate;
+    public String getTransactionDate() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+        String formattedDate = dateFormat.format(transactionDate);
+        return formattedDate;
     }
 
     public void setTransactionDate(Date transactionDate) {
@@ -102,7 +137,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" + "paymentId=" + paymentId + ", giverId=" + giverId + ", receiverId=" + receiverId + ", eventId=" + eventId + ", transactionDate=" + transactionDate + ", text=" + text + ", amount=" + amount + ", status=" + status + '}';
+        return "Payment{" + "paymentId=" + paymentId + ", giverId=" + giverId + ", receiverId=" + receiverId + ", eventId=" + eventId + ", transactionDate=" + getTransactionDate() + ", text=" + text + ", amount=" + amount + ", status=" + status + '}';
     }
 
 }

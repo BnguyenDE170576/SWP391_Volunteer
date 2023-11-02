@@ -29,11 +29,13 @@
                     <input type="password" id="newpass"  name="su_password" placeholder="Password" onkeyup="checkStrong();" />
                     <input type="password" id ="repass" name="repass" placeholder="Repeat Password" onkeyup="checkPasswordMatch();"/>
 
-                 <label for="Is">Is:</label>
-                    <select id="is" name="is">
-                        <option value="1">Volunteer</option>
-                        <option value="2">Organizer</option>
-                    </select>
+                    <div class="a" style="display:flex;text-align: left;align-items: start;padding-bottom: 30px;">
+                        <label for="Is">Is:</label>
+                        <select id="is" name="is">
+                            <option value="1">Volunteer</option>
+                            <option value="2">Organizer</option>
+                        </select>
+                    </div>
 
 
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>

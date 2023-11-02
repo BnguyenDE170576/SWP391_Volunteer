@@ -7,6 +7,7 @@ package dao;
 
 import context.DBUtils;
 import entity.Comment;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +56,7 @@ public class CommentDAO {
                 Date commentDate = rs.getDate(6);
                 String photo = rs.getString(7);
 
-                Comment comment = new Comment(commentId, postId, commentContent, commentAuthorId, name, commentDate,photo);
+                Comment comment = new Comment(commentId, postId, commentContent, commentAuthorId, name, commentDate, photo);
                 list.add(comment);
             }
         } catch (Exception e) {
@@ -134,10 +135,10 @@ public class CommentDAO {
         } catch (Exception e) {
         }
     }
-    
+
     public static void main(String[] args) {
         CommentDAO a = new CommentDAO();
-        System.out.println(""+a.getToTalComment(1));
+
     }
 
 }

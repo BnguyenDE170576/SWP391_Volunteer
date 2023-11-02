@@ -108,8 +108,9 @@ public class Account implements Serializable {
         return accId;
     }
 
-    public int getSex() {
-        return sex;
+    public String getSex() {
+        if(sex==1) return "Male";
+        return "Female";
     }
 
     public void setSex(int sex) {
@@ -189,7 +190,7 @@ public class Account implements Serializable {
     @Override
     public String toString() {
 
-        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + getBirtDay() + '}';
+        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + getSex() + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + getBirtDay() + '}';
     }
 
 }

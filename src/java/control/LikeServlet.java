@@ -9,6 +9,7 @@ import dao.AccountDAO;
 import dao.BlogsDAO;
 import dao.CommentDAO;
 import dao.likeDAO;
+import entity.Account;
 import entity.Blogs;
 import entity.Comment;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -70,20 +72,11 @@ public class LikeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the action (Like or Unlike)
 
-        String email = "";
-        Cookie[] cookies = request.getCookies();
+  
+            HttpSession session = request.getSession();
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
+            int userIDLG = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
 
-                if (name.equals("email")) {
-                    email = cookie.getValue().trim();
-                }
-            }
-
-            AccountDAO a = new AccountDAO();
-            int userIDLG = a.GetUSERID(a.getUserName_byEmail(email));
 
             String action = request.getParameter("action");
             likeDAO l = new likeDAO();
@@ -119,7 +112,7 @@ public class LikeServlet extends HttpServlet {
             request.setAttribute("id", postId);
 
             request.getRequestDispatcher("blogsdetails.jsp").forward(request, response);
-        }
+        
     }
 
     @Override

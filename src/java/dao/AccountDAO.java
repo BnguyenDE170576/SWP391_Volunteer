@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,12 +24,14 @@ public class AccountDAO {
     private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address,birthDay FROM Accounts WHERE Email = ? AND Password = ?;";
     private static final String GET_AN_ACCOUNT1 = "SELECT UserID, username, Password, name, Phone, email,photo,status, Role,address,birthDay FROM Accounts WHERE username = ? AND Password = ?;";
     private static final String GET_USER_ID = "SELECT UserID FROM Accounts WHERE username = ?;";
+    private static final String GET_USER_ID_name = "SELECT UserID FROM Accounts WHERE name = ?;";
     private static final String GET_USER_NAME = "SELECT username FROM Accounts WHERE UserID = ?;";
-    private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name) VALUES (?, ?, ?, ?, ?, ?,?,?)";
+    private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name,birthDay) VALUES (?, ?, ?, ?, ?, ?,?,?,getdate())";
     private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address,birthDay FROM Accounts WHERE Email = ?";
     private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address,birthDay FROM Accounts WHERE UserID = ?";
     private static final String GET_AN_ACCOUNT_BY_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role,address FROM Accounts WHERE token = ?";
     private static final String GET_ACC = "SELECT UserID,username ,Email, Password, name, Phone, photo,Status, Role,address,birthDay,sex FROM Accounts WHERE username = ?";
+    private static final String GET_All = "SELECT UserID,username ,Email, Password, name, Phone, photo,Status, Role,address,birthDay,sex FROM Accounts WHERE Role != 0;";
     private static final String UPDATE_TOKEN = "UPDATE Accounts Set token = ? WHERE email = ?";
 
     private static final String VALID_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role FROM Accounts WHERE token = ?";
@@ -43,10 +47,61 @@ public class AccountDAO {
             + "[phone] = ?, "
             + "[address] = ?, "
             + "[birthDay] = ?, "
-            + "[photo] = ? "
+            + "[photo] = ? ,"
+            + "[sex] = ? "
             + "WHERE USERID = ?;";
 
-    public boolean updateACCOUNT(int accId, String phone, String Address, String Fullname, String email, String birthDAY, String photo) {
+    public List<Account> getAllAcc() {
+
+        List<Account> l = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement psm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(GET_All);
+
+            rs = psm.executeQuery();
+
+            while (rs.next()) {
+                int userid = rs.getInt("UserID");
+                String username = rs.getString(2);
+                String email = rs.getString(3);
+                String fullname = rs.getString(5);
+                String phone = rs.getString(6);
+                String photo = rs.getString(7);
+                int status = rs.getInt(8);
+                int role = rs.getInt(9);
+                String address = rs.getString(10);
+                Date date = rs.getDate(11);
+                int sex = rs.getInt(12);
+
+                l.add(new Account(userid, email, photo, username, photo, fullname, status, phone, role, address, date, sex));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return l;
+    }
+
+    public boolean updateACCOUNT(int accId, String phone, String Address, String Fullname, String email, String birthDAY, String photo, int sex) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement psm = null;
@@ -65,7 +120,8 @@ public class AccountDAO {
 
                 psm.setString(3, phone);
                 psm.setString(4, Address);
-                psm.setInt(7, accId);
+                psm.setInt(7, sex);
+                psm.setInt(8, accId);
                 psm.setString(5, formattedDate);
                 psm.setString(6, photo);
                 check = psm.executeUpdate() > 0 ? true : false;
@@ -124,7 +180,7 @@ public class AccountDAO {
         return check;
     }
 
-    public Account getAnAccountById(int id)  {
+    public Account getAnAccountById(int id) {
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -361,7 +417,7 @@ public class AccountDAO {
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
                     Date d = rs.getDate("birthDay");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add,d);
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add, d);
 
                 }
             }
@@ -527,7 +583,7 @@ public class AccountDAO {
         return acc;
     }
 
-    public Account getAccountInfoByEmail(String email) throws SQLException {
+    public Account getAccountInfoByEmail(String email) {
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -550,7 +606,7 @@ public class AccountDAO {
                     int Role = rs.getInt("Role");
                     String add = rs.getString("address");
                     Date date = rs.getDate("birthDay");
-                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add,date);
+                    acc = new Account(AccId, Email, photo, username, Password, FullName, Status, Phone, Role, add, date);
 
                 }
             }
@@ -558,13 +614,25 @@ public class AccountDAO {
             e.printStackTrace();
         } finally {
             if (rs != null) {
-                rs.close();
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if (stm != null) {
-                stm.close();
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if (conn != null) {
-                conn.close();
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return acc;
@@ -692,6 +760,49 @@ public class AccountDAO {
         return id;
     }
 
+    public int GetUSERID_byfullname(String username) {
+        int id = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(GET_USER_ID_name);
+                stm.setString(1, username);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return id;
+    }
+
     public String GetUserName(int id) {
         String name = "";
         Connection conn = null;
@@ -752,10 +863,61 @@ public class AccountDAO {
         }
     }
 
+    public boolean deleteAcc(int iduser) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement("delete from reports where user_id =  ?\n"
+                        + "delete from TransOfOrganizer where organizer_id =  ?\n"
+                        + "delete from Payment where payment_id =  ?\n"
+                        + "delete from volunteer_participation where activity_id =  ?\n"
+                        + "delete from volunteer_activities where organizer_id =  ?\n"
+                        + "delete from comments where comment_author_id =  ?\n"
+                        + "delete from LikesBlogs where id_clicker =  ?\n"
+                        + "delete from Blogs where author =  ?\n"
+                        + "delete from Accounts where userID = ?;");
+
+                stm.setInt(1, iduser);
+                stm.setInt(2, iduser);
+                stm.setInt(3, iduser);
+                stm.setInt(4, iduser);
+                stm.setInt(5, iduser);
+                stm.setInt(6, iduser);
+                stm.setInt(7, iduser);
+                stm.setInt(8, iduser);
+                stm.setInt(9, iduser);
+
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+        }
+        return check;
+    }
+
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.getAccountInfoByEmail("tuongnmde170578@fpt.edu.vn"));
+        System.out.println("" + dao.deleteAcc(6));
 
     }
 }

@@ -46,18 +46,14 @@ public class PaymentController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        HttpSession session = req.getSession();
+
         int id = Integer.parseInt(req.getParameter("id"));
         int iduser = Integer.parseInt(req.getParameter("iduser"));
         int idEvent = Integer.parseInt(req.getParameter("idEvent"));
 
         System.out.println("" + id + "uer" + iduser + "ev" + idEvent);
-        String date = req.getParameter("2020-02-02");
-        String time = req.getParameter("01:01:01");
-        String description = "Mieu ta";
+
         String payment = "vnpay";
-        session.setAttribute("time", time);
-        session.setAttribute("date", date);
 
         if (payment.equals("vnpay")) {
             String vnp_Version = "2.1.0";
@@ -71,7 +67,7 @@ public class PaymentController extends HttpServlet {
 
             PayMentDAO paydao = new PayMentDAO();
 
-            paydao.insertPayment(Integer.parseInt(vnp_TxnRef), iduser, id, idEvent, "text", Integer.parseInt(req.getParameter("donation")), 0);
+            paydao.insertPayment(Integer.parseInt(vnp_TxnRef), iduser, id, idEvent, "Thanh toan don hang:" + vnp_TxnRef, Integer.parseInt(req.getParameter("donation")), 0);
 
             String vnp_TmnCode = Config.vnp_TmnCode;
 
