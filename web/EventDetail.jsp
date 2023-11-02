@@ -184,8 +184,6 @@
                                             <form action="donationevent" method="post">
                                                 <input type="hidden" value="${detail.organizerId}" name="id">
                                                 <button id="donation" class="btn btn-primary btn-lg">Donation</button>  
-                                                <input type="hidden" name="activityId" value="${detail.activityId}">
-                                                <input type="hidden" name="userID" value="${userID}">
                                             </form>
 
                                             <div class="options-menu">

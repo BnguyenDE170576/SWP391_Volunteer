@@ -71,6 +71,7 @@
 
 
         <%@include file="./components/header.jsp" %>
+<<<<<<< HEAD
 
         <div class="col-md-12" style="width: 100%; display: flex;">
 
@@ -123,8 +124,21 @@
                             <input type="hidden" id="language" name="language" value="vn">
                             <div class="donate-button"><input type="submit" style="background-color: #7beb7b" value="Donate"> </div>
                         </form>
+=======
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                        <div class="position-relative h-100">
+                            <img class="img-fluid position-absolute w-100 h-100" src="images/volunteer.jpg" alt="" style="object-fit: cover;">
+                        </div>
+>>>>>>> parent of e9863af (messenger_user_page)
                     </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="donation-container">
 
+<<<<<<< HEAD
                 </div>
             </div>
             <div class="col-md-3" style="padding-left: ; padding-top: 3%;">
@@ -176,14 +190,65 @@
                                 <!--end-->
                                 </div>
                             </li>
+=======
+                            <div class="donation-box">
+                                <form id="donationForm" action="donationeventq" method="post" onsubmit="return validateDonation()">
+                                    <div class="title">Donation Information</div>
+
+                                    <div class="fields">
+                                        <input type="text" id="firstName" placeholder="First Name" required> 
+                                        <input type="email" id="email" placeholder="Email" required>
+                                        <input type="hidden" name="id" value="${id}" id="id" placeholder="${id}">
+
+                                        <input type="text" name="text" id="text" placeholder="Describe - option">
+
+
+                                    </div>
+
+                                    <div class="amount">
+                                        <div class="button"> <label>
+                                                <input type="radio" name="donation" value="50000" checked >50.000đ</label></div>
+                                        <div class="button"> <label>
+                                                <input type="radio" name="donation" value="100000">100.000đ</label></div>
+                                        <div class="button"> <label>
+                                                <input type="radio" name="donation" value="200000">200.000đ</label></div>
+
+                                        <div class="button">
+                                            <label>
+                                                <input type="radio" class="set-amount" name="donation" value="">
+                                                <input type="number" name="donation"  id="customAmount" oninput="updateDonationValue(this)" style="width:100%;">
+                                            </label>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="checkboxes">
+                                        <input type="checkbox" id="receipt" class="checkbox" />
+                                        <label for="receipt">Email Me A Receipt</label>
+                                        <br />
+                                        <input type="checkbox" id="anon" class="checkbox" />
+                                        <label for="anon">Give Anonymously</label>
+                                        <br />
+                                        <input type="checkbox" id="list" class="checkbox" />
+                                        <label for="list">Add Me To Email List</label>
+                                    </div>
+>>>>>>> parent of e9863af (messenger_user_page)
 
 
 
-                        </ul>
+                                    <div class="donate-button"><input type="submit" style="background-color: #7beb7b" value="Donate"> </div>
+                                </form>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+        <!-- About End -->
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -193,6 +258,7 @@
 
         <script src="https://raw.githubusercontent.com/jerryluk/jquery.autogrow/master/jquery.autogrow-min.js"></script>
         <script>
+<<<<<<< HEAD
                                            function updateDonationValue(input) {
                                                // Get the input value
                                                var customValue = input.value;
@@ -224,6 +290,39 @@
 
                                                return true; // Allow form submission
                                            }
+=======
+                                    function updateDonationValue(input) {
+                                        // Get the input value
+                                        var customValue = input.value;
+
+                                        // Find the radio button with class "set-amount"
+                                        var radioButton = document.querySelector('input[type="radio"].set-amount');
+
+                                        // Update the radio button's value attribute
+                                        if (radioButton) {
+                                            radioButton.value = customValue;
+                                        }
+                                    }
+
+                                    function validateDonation() {
+                                        var selectedDonation = document.querySelector('input[name="donation"]:checked');
+                                        var customAmountInput = document.getElementById('customAmount');
+
+                                        // Check if either the radio button is checked or a custom amount is entered
+                                        if (!selectedDonation && customAmountInput.value.trim() === "") {
+                                            alert("Please choose a donation amount or enter a custom amount.");
+                                            return false; // Prevent form submission
+                                        }
+
+                                        // If the "set-amount" radio button is checked, ensure that a custom amount is entered
+                                        if (selectedDonation && selectedDonation.classList.contains("set-amount") && customAmountInput.value.trim() === "") {
+                                            alert("Please enter a custom amount.");
+                                            return false; // Prevent form submission
+                                        }
+
+                                        return true; // Allow form submission
+                                    }
+>>>>>>> parent of e9863af (messenger_user_page)
         </script>
 
 

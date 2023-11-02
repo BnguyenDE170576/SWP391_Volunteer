@@ -145,10 +145,8 @@ Author     : trinh
                                     </td>
 
                                 </tr>
-                                
-                                
 
-                                
+
                             </c:forEach>
                         </tbody>
                     </table>
