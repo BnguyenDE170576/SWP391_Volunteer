@@ -1,10 +1,11 @@
 package entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+public class Account implements Serializable {
 
-public class Account implements Serializable{
-    
     private int accId;
     private String email;
     private String photo;
@@ -12,12 +13,44 @@ public class Account implements Serializable{
     private String password;
     private String fullName;
     private int status;
+    private int sex;
     private String phone;
     private int role;
     private String address;
-    //private String birtDay;
+    private Date birtDay;
 
     public Account() {
+    }
+
+    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address, Date date, int sex) {
+        this.accId = accId;
+        this.email = email;
+        this.photo = photo;
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+        this.status = status;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+        this.birtDay = date;
+        this.sex = sex;
+
+    }
+
+    public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address, Date d) {
+        this.accId = accId;
+        this.email = email;
+        this.photo = photo;
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+        this.status = status;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+        this.birtDay = d;
+
     }
 
     public Account(int accId, String email, String photo, String userName, String password, String fullName, int status, String phone, int role, String address) {
@@ -31,10 +64,8 @@ public class Account implements Serializable{
         this.phone = phone;
         this.role = role;
         this.address = address;
-    
-    }
 
-    
+    }
 
     public String getAddress() {
         return address;
@@ -44,7 +75,6 @@ public class Account implements Serializable{
         this.address = address;
     }
 
-  
     public Account(int AccId, String Email, String Password, String FullName, int Status, String Phone, int Role) {
         this.accId = AccId;
         this.email = Email;
@@ -73,9 +103,17 @@ public class Account implements Serializable{
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     public int getAccId() {
         return accId;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     public void setAccId(int accId) {
@@ -92,6 +130,16 @@ public class Account implements Serializable{
 
     public String getPhoto() {
         return photo;
+    }
+
+    public String getBirtDay() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(birtDay);
+        return formattedDate;
+    }
+
+    public void setBirtDay(Date birtDay) {
+        this.birtDay = birtDay;
     }
 
     public void setPhoto(String photo) {
@@ -140,9 +188,8 @@ public class Account implements Serializable{
 
     @Override
     public String toString() {
-        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", phone=" + phone + ", role=" + role + '}';
+
+        return "Account{" + "accId=" + accId + ", email=" + email + ", photo=" + photo + ", userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", status=" + status + ", sex=" + sex + ", phone=" + phone + ", role=" + role + ", address=" + address + ", birtDay=" + getBirtDay() + '}';
     }
-    
-    
 
 }

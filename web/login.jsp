@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Volunteer</title>
         <link rel="stylesheet" href="./css/loginCSS.css">
+        <script src="./js/checkinput.js"></script>
 
     </head>
 
@@ -22,19 +23,19 @@
             <div class="form-container sign-up-container">
                 <form action="signup" method="post">
                     <h1>Create Account</h1>
-                    <div class="social-container">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/CommunityUnity/LoginGoogleController&response_type=code&client_id=552963219492-6a880it69r6hmnahrj8c69f328id25m6.apps.googleusercontent.com&approval_prompt=force" class="social">
-                            <img src="./images/OIP.jpg" style="height: 100%;" alt="Image Description"><i
-                                class="fab fa-google"></i></a>
+                    <span id="error_message" style="color: red;  white-space: pre-line;"></span>
+                    <input type="text" id="username" placeholder="username" name="su_username" onkeyup="checkUserNAme();lowerCase();"/>
+                    <input type="email" id="email" name="email" placeholder="email" onkeyup="checkEmail();trimInput();"/>
+                    <input type="password" id="newpass"  name="su_password" placeholder="Password" onkeyup="checkStrong();" />
+                    <input type="password" id ="repass" name="repass" placeholder="Repeat Password" onkeyup="checkPasswordMatch();"/>
+
+                 <label for="Is">Is:</label>
+                    <select id="is" name="is">
+                        <option value="1">Volunteer</option>
+                        <option value="2">Organizer</option>
+                    </select>
 
 
-
-                    </div>
-                    <span>or registration by Account</span>
-                    <input type="text" placeholder="username" name="su_username" />
-
-                    <input type="password" name="su_password" placeholder="Password" />
-                    <input type="password" name="repass" placeholder="Repeat Password" />
                     <button class="btn btn-dark btn-lg btn-block" type="submit">SIGN UP</button>
                 </form>
             </div>
@@ -42,12 +43,12 @@
                 <form action="login" method ="POST">
                     <h1>Sign in</h1>
                     <div class="social-container">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/MilkTeaProjectPRJ301/LoginGoogleController&response_type=code&client_id=552963219492-6a880it69r6hmnahrj8c69f328id25m6.apps.googleusercontent.com&approval_prompt=force" class="social">
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/CommunityUnity/LoginGoogleController&response_type=code&client_id=552963219492-rlahrheu7p4a3vab2pimmed69atebaeo.apps.googleusercontent.com&approval_prompt=force" class="social">
                             <img src="./images/OIP.jpg" style="height: 100%;" alt="Image Description">
                             <i class="fab fa-google"></i></a>
 
                     </div>
-                    
+
                     <c:if test="${not empty requestScope.ERROR_MASSEGE}">
                         <!-- Error MSG -->
                         <div class="alert alert-danger" role="alert" style="color: red">
@@ -61,7 +62,8 @@
                         </div>
                     </c:if>
                     <span>or use your account</span>
-                    <input type="text" placeholder="username" name="username" />
+                    <span id="error_message1" style="color: red;  white-space: pre-line;"></span>
+                    <input type="text" id="username1" placeholder="username" name="username" onkeyup="checkUserNAmeLogin();lowerCase1();"/>
                     <input type="password" placeholder="Password" name="password" />
                     <a href="foget.jsp">Forgot your password?</a>
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>

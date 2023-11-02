@@ -2,6 +2,7 @@ package control;
 
 import dao.AccountDAO;
 import entity.Account;
+import entity.SecurityUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -10,7 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< HEAD
 
+=======
+/**
+ *
+ * @author twna21
+ */
+>>>>>>> main
 public class LoginController extends HttpServlet {
 
     @Override
@@ -43,10 +51,10 @@ public class LoginController extends HttpServlet {
 
         try {
             String user = request.getParameter("username");
-            String pass = request.getParameter("password");
+            String pass =  SecurityUtils.hashMd5(request.getParameter("password"));
             AccountDAO loginDAO = new AccountDAO();
 
-            if (!loginDAO.checkAccountExits(user)) {
+            if (!loginDAO.checkAccountExits(user) ) {
                 request.setAttribute("ERROR_MASSEGE", "Account not existed");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
