@@ -13,13 +13,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-<<<<<<< HEAD
-=======
-/**
- *
- * @author twna21
- */
->>>>>>> main
+
 public class AccountDAO {
 
     private static final String GET_AN_ACCOUNT = "SELECT UserID, username, Password, name, Phone, email, Role,address,birthDay FROM Accounts WHERE Email = ? AND Password = ?;";

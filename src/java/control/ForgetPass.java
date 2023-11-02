@@ -16,14 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
 
-=======
-/**
- *
- * @author twna21
- */
->>>>>>> main
 public class ForgetPass extends HttpServlet {
 
     /**
