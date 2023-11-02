@@ -7,12 +7,6 @@ package control;
 import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author datka
  */
-@WebServlet(name = "UpdateActivityControl", urlPatterns = {"/UpdateActivityControl"})
-public class UpdateActivityControl extends HttpServlet {
+@WebServlet(name = "CatePageControl", urlPatterns = {"/CatePageControl"})
+public class CatePageControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +38,10 @@ public class UpdateActivityControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateActivityControl</title>");
+            out.println("<title>Servlet CatePageControl</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateActivityControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CatePageControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,7 +59,43 @@ public class UpdateActivityControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession();
+            ActivityDAO DAO = new ActivityDAO();
+            int cate = Integer.parseInt(request.getParameter("cate"));
+            int page = 1, pageSize = 6;
+            int totalPage = DAO.getTotalStatusRow(cate);
+            request.setAttribute("catee", cate);
+            if (request.getParameter("page") != null) { // check param page
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+
+            if (totalPage % pageSize == 0) { // calculator total page to showinformation
+                totalPage = totalPage / pageSize;
+            } else {
+                totalPage = totalPage / pageSize + 1;
+            }
+
+            if (page > totalPage) {
+                request.setAttribute("noContent", "No article here!");
+            } else {
+                request.setAttribute("content", DAO.getActivityStatusFromTo(page,
+                        pageSize,cate));
+                
+            }
+            //  List<VolunteerActivity> activities = DAO.getActivityFromTo(startRecord, recordsPerPage);
+
+            request.setAttribute("page", page);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("currentPage", page);
+            session.setAttribute("urlHistory", "CatePageControl");
+            session.setAttribute("destPage", "CatePage.jsp");
+        } catch (Exception e) {
+            log("Error at HomeController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher("CatePage.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -79,43 +109,7 @@ public class UpdateActivityControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            response.setCharacterEncoding("UTF-8");
-
-            HttpSession session = request.getSession();
-            int activityId = Integer.parseInt(request.getParameter("activityId"));
-            String activityName = request.getParameter("activityName");
-            String description = request.getParameter("description");
-            String startDateStr = request.getParameter("startDate");
-            String endDateStr = request.getParameter("endDate");
-            String province = request.getParameter("province");
-            String district = request.getParameter("district");
-            String ward = request.getParameter("ward");
-
-            String location = ward + "-" + district + "-" + province;
-            int memberLimit = Integer.parseInt(request.getParameter("memberLimit"));
-
-            // Xử lý tải lên hình ảnh (nếu có)
-            // Xử lý ngày bắt đầu và ngày kết thúc (chuyển từ String sang Date)
-            Date startDate = null;
-            Date endDate = null;
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                startDate = dateFormat.parse(startDateStr);
-                endDate = dateFormat.parse(endDateStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            ActivityDAO activityDAO = new ActivityDAO();
-            activityDAO.UpdateActivity(activityName, description, startDate, endDate, location, memberLimit,activityId);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateActivityControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        processRequest(request, response);
     }
 
     /**

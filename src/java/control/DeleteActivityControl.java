@@ -4,13 +4,16 @@
  */
 package control;
 
+import dao.AccountDAO;
 import dao.ActivityDAO;
 import entity.Account;
-import entity.Thu;
+import entity.UserPending;
 import entity.VolunteerActivity;
-import entity.VolunteerActivityWithDate;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,8 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author datka
  */
-@WebServlet(name = "HistoryControl", urlPatterns = {"/HistoryControl"})
-public class HistoryControl extends HttpServlet {
+@WebServlet(name = "DeleteActivityControl", urlPatterns = {"/DeleteActivityControl"})
+public class DeleteActivityControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,44 +42,31 @@ public class HistoryControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            ActivityDAO actDAO = new ActivityDAO();
-            int vid = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
-            int role = ((Account) session.getAttribute("LOGIN_USER")).getRole();
-            List<VolunteerActivityWithDate> listAct= actDAO.getParticipatedActivitiesByUser(vid);
-            List<VolunteerActivity> listOAct= new ArrayList<>();
-            if (role==2 || role ==0){
-                listOAct = actDAO.getParticipatedActivitiesByOgnaizer(vid);
-            }
-            double tongDonate = actDAO.getTotalAmountByUserId(vid);
-            
-            List<Thu> listThu  = actDAO.getDonateByUserId(vid);
-            session.setAttribute("tongDonate", tongDonate);
-            session.setAttribute("listAct", listAct);
-            session.setAttribute("listOAct", listOAct);
-            session.setAttribute("listThu", listThu);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HistoryControl.class.getName()).log(Level.SEVERE, null, ex);
+            int eid = Integer.parseInt(request.getParameter("id"));
+            ActivityDAO aDAO = new ActivityDAO();
+            aDAO.removeActivity(eid);
+
+            request.getRequestDispatcher("home").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally {
-            request.getRequestDispatcher("History.jsp").forward(request, response);
-        }
+
     }
 
-
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -90,9 +80,19 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            int eid = Integer.parseInt(request.getParameter("id"));
+            ActivityDAO aDAO = new ActivityDAO();
+            aDAO.removeActivity(eid);
+
+            request.getRequestDispatcher("home").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDetailControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -101,7 +101,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

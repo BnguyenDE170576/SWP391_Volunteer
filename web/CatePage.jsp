@@ -110,18 +110,17 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="list-group">
-                                <a href="CatePageControl?cate=1" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Sắp diễn ra</a>
-                        
+                            <a href="CatePageControl?cate=1" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Sắp diễn ra</a>              
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="list-group">
-                           <a href="CatePageControl?cate=2" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đang diễn ra</a>
+                            <a href="CatePageControl?cate=2" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đang diễn ra</a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="list-group">
-                           <a href="CatePageControl?cate=3" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đã kết thúc</a>
+                            <a href="CatePageControl?cate=3" class="list-group-item list-group-item-action text-center" style="max-width: 60%; margin: 0 auto;">Đã kết thúc</a>
                         </div>
                     </div>
                 </div>
@@ -182,27 +181,27 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=1" aria-label="Trang đầu">
+                                <a class="page-link" href="CatePageControl?page=1&cate=${catee}" aria-label="Trang đầu">
                                     <span aria-hidden="true">&laquo;&laquo;</span>
                                 </a>
                             </li>
                             <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page - 1}" aria-label="Trang trước">
+                                <a class="page-link" href="CatePageControl?page=${page - 1}&cate=${catee}" aria-label="Trang trước">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <c:forEach var="j" begin="1" step="1" end="${totalPage}">
                                 <li class="page-item ${page == j ? 'active' : ''}">
-                                    <a class="page-link" href="home?page=${j}">${j}</a>
+                                    <a class="page-link" href="CatePageControl?page=${j}&cate=${catee}">${j}</a>
                                 </li>
                             </c:forEach>
                             <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page + 1}" aria-label="Trang sau">
+                                <a class="page-link" href="CatePageControl?page=${page + 1}&cate=${catee}" aria-label="Trang sau">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                             <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${totalPage}" aria-label="Trang cuối">
+                                <a class="page-link" href="CatePageControl?page=${totalPage}&cate=${catee}" aria-label="Trang cuối">
                                     <span aria-hidden="true">&raquo;&raquo;</span>
                                 </a>
                             </li>
@@ -606,55 +605,40 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-=======
             <!-- Testimonial End -->
             <div class="container-fluid">
                 <%@include file="./components/footer.jsp"%>
->>>>>>> origin/DAT
 
-    <!-- Testimonial End -->
-    <div class="container-fluid">
-        <%@include file="./components/footer.jsp"%>
-
-    </div>
-    <!-- Back to Top -->
+            </div>
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {};
-
-        Tawk_API.visitor = {
-            name: '${sessionScope.LOGIN_USER.userName}',
-            email: 'ytbhelp2@gmail.com',
-            hash: 'hash-value'
-        };
-
-
-        Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/653b29c9f2439e1631e8e3c0/1hdnhmesn';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
+            <!-- Template Javascript -->
+            <script src="js/main.js"></script>
+            <script>
+                // Sử dụng JavaScript để thêm sự kiện click cho các thẻ category
+                document.getElementById("category1").addEventListener("click", function () {
+                    this.classList.toggle("category-clicked");
+                });
+                document.getElementById("category2").addEventListener("click", function () {
+                    this.classList.toggle("category-clicked");
+                });
+                document.getElementById("category3").addEventListener("click", function () {
+                    this.classList.toggle("category-clicked");
+                });
+            </script>
+    </body>
 
 </html>

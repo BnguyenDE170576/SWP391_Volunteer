@@ -63,13 +63,24 @@ public class EventDetailControl extends HttpServlet {
             }
             String status = "Sắp diễn ra";
             VolunteerActivity detail = aDAO.getActivityById(eid);
-            
+            List<Thu> donateThu = aDAO.getDonateActivityById(eid);
+            double tongThu=0;
+            for (Thu a : donateThu){
+                tongThu +=a.getSoTien();
+            }
             Date currentDate = new Date();
             if (currentDate.after(detail.getStartDate()) && currentDate.before(detail.getEndDate())) {
                 status = "Đang diễn ra";
             } else if (currentDate.after(detail.getEndDate())) {
                 status = "Đã kết thúc";
             }
+            List<Chi> donateChi= aDAO.getUsePaymentById(eid);
+            double tongChi= aDAO.getTotalAmountUsePayment(eid);
+            request.setAttribute("donateThu", donateThu);
+            request.setAttribute("tongThu",tongThu);
+            request.setAttribute("donateChi", donateChi);
+            request.setAttribute("tongChi",tongChi);
+            request.setAttribute("oname",dao.GetUserName(detail.getOrganizerId()));
             request.setAttribute("pendinglist", pendinglist);
             request.setAttribute("userID", dao.GetUSERID(name));
             request.setAttribute("check", check);

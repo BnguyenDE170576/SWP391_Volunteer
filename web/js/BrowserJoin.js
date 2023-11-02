@@ -17,7 +17,7 @@ function approveMember(userId, eventID, listItem, approveButton) {
         // Truyền userId, eventID cho servlet
         success: function (data) {
             // Xử lý thành công (nếu cần)
-            alert(data); // Hiển thị thông báo từ servlet (nếu có)
+        // Hiển thị thông báo từ servlet (nếu có)
         },
         error: function (error) {
             // Xử lý lỗi (nếu cần)
@@ -38,7 +38,7 @@ function rejectMember(userId, eventID, listItem, approveButton) {
         data: {userId: userId, eventID: eventID}, // Truyền userId cho servlet
         success: function (data) {
             // Xử lý thành công (nếu cần)
-            alert(data); // Hiển thị thông báo từ servlet (nếu có)
+       // Hiển thị thông báo từ servlet (nếu có)
         },
         error: function (error) {
             // Xử lý lỗi (nếu cần)
@@ -46,6 +46,7 @@ function rejectMember(userId, eventID, listItem, approveButton) {
         },
     });
 }
+
 $(document).ready(function () {
     $("#myModal").on("click", "button[data-action='reject']", function () {
         // Xử lý từ chối thành viên
@@ -63,9 +64,11 @@ $(document).ready(function () {
 //---------------------------------------------------------------------------
 
 
-function updateActivity() {
+function updateActivity()    {
     console.log("he");
     if (validateForm()) {
+        console.log("hi");
+        var activityId = $("#activityId").val();
         console.log("hi");
         var activityName = $("#activityName").val();
         var description = $("#description").val();
@@ -77,6 +80,7 @@ function updateActivity() {
         var memberLimit = $("#memberLimit").val();
 
         var data = {
+            activityId: activityId,
             activityName: activityName,
             description: description,
             startDate: startDate,
@@ -94,6 +98,7 @@ function updateActivity() {
             data: data,
             success: function (response) {
                 console.log(data);
+                alert("Cập nhật thành công.");
             },
             error: function () {
                 alert("Đã xảy ra lỗi khi gửi yêu cầu.");
@@ -137,3 +142,38 @@ function validateForm() {
 
     return true;
 }
+
+//------------------------------
+function addChi() {
+    console.log("1");
+    var hoatdongnhan = $("#hoatdongnhan").val();
+    var NDCK = $("#NDCK").val();
+    var money = $("#money").val();
+
+    // Tạo một đối tượng chứa dữ liệu để gửi đi
+    var data = {
+        hoatdongnhan: hoatdongnhan,
+        NDCK: NDCK,
+        money: money
+    };
+
+    // Sử dụng AJAX để gửi dữ liệu đến servlet
+    $.ajax({
+        type: "POST", // Hoặc "GET" tùy vào phương thức của servlet
+        url: "AddUsePaymentControl", // Thay "ten-servlet" bằng URL của servlet
+        data: data,
+        success: function (response) {
+            console.log(data);
+            alert("Thêm dữ liệu thành công!");
+        },
+        error: function (xhr, status, error) {
+            // Xử lý lỗi nếu có
+            // Ví dụ: Hiển thị thông báo lỗi
+            alert("Lỗi: " + error);
+        }
+    });
+
+    // Đóng modal sau khi gửi dữ liệu
+    $('#chiModal').modal('hide');
+}
+
