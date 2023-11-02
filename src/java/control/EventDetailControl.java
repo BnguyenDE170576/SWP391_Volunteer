@@ -42,6 +42,7 @@ public class EventDetailControl extends HttpServlet {
             int eid = Integer.parseInt(request.getParameter("id"));
             ActivityDAO aDAO = new ActivityDAO();
             String name = ((Account) session.getAttribute("LOGIN_USER")).getUserName();
+       
             AccountDAO dao = new AccountDAO();
             int check = 0;
 

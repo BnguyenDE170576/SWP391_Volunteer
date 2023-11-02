@@ -292,7 +292,7 @@ public class BlogsDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                stm = conn.prepareStatement("  select COUNT(*)  from [Blogs] where category=?");
+                stm = conn.prepareStatement("  select COUNT(*)  from [Blogs] where category=? and pending=1;");
                 stm.setString(1, category);
                 rs = stm.executeQuery();
                 if (rs.next()) {

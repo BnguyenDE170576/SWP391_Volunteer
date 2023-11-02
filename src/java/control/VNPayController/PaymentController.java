@@ -8,6 +8,7 @@ package control.VNPayController;
 import dao.PayMentDAO;
 import entity.VNPAY.Config;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ytbhe
  */
+
 public class PaymentController extends HttpServlet {
 
     /**
@@ -49,9 +51,9 @@ public class PaymentController extends HttpServlet {
 
         int id = Integer.parseInt(req.getParameter("id"));
         int iduser = Integer.parseInt(req.getParameter("iduser"));
-        int idEvent = Integer.parseInt(req.getParameter("idEvent"));
-
-        System.out.println("" + id + "uer" + iduser + "ev" + idEvent);
+       int idEvent = Integer.parseInt(req.getParameter("idEvent"));
+        PrintWriter out = response.getWriter();
+       
 
         String payment = "vnpay";
 
@@ -59,7 +61,7 @@ public class PaymentController extends HttpServlet {
             String vnp_Version = "2.1.0";
             String vnp_Command = "pay";
             String orderType = "other";
-            long amount = Integer.parseInt(req.getParameter("donation")) * 100;
+            long amount =Integer.parseInt(req.getParameter("donation")) * 100;
             String bankCode = "";
 
             String vnp_TxnRef = Config.getRandomNumber(8);
@@ -142,6 +144,7 @@ public class PaymentController extends HttpServlet {
         return;
 
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

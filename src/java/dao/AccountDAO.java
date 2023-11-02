@@ -917,7 +917,7 @@ public class AccountDAO {
     public static void main(String[] args) throws SQLException {
         AccountDAO dao = new AccountDAO();
 
-        System.out.println("" + dao.deleteAcc(6));
+        System.out.println("" + dao.GetUSERID("tuongnmde170578"));
 
     }
 }

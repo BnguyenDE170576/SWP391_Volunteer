@@ -606,20 +606,13 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
+
         </div>
-=======
+
             <!-- Testimonial End -->
             <div class="container-fluid">
                 <%@include file="./components/footer.jsp"%>
->>>>>>> origin/DAT
 
-    <!-- Testimonial End -->
-    <div class="container-fluid">
-        <%@include file="./components/footer.jsp"%>
-
-    </div>
-    <!-- Back to Top -->
 
 
 

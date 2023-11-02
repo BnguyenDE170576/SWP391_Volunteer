@@ -3,25 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control.process;
+package control.VNPayController;
 
-import dao.AccountDAO;
-import dao.Login;
-import entity.Bank;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import dao.PayMentDAO;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ytbhe
+ * @author Twna21
  */
-public class processDonationEV extends HttpServlet {
+public class PaymentVerification extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +34,33 @@ public class processDonationEV extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet processDonationEV</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet processDonationEV at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String vnp_TxnRef = request.getParameter("vnp_TxnRef").replaceAll("[a-zA-Z]", "");
+        int id_TxnRef = Integer.parseInt(vnp_TxnRef);
+        String vnp_BankTranNo = request.getParameter("vnp_BankTranNo");
+        String vnp_TransactionNo = request.getParameter("vnp_TransactionNo");
+        String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
+
+        HttpSession session = request.getSession();
+        PayMentDAO paydao = new PayMentDAO();
+
+        PrintWriter out = response.getWriter();
+
+        try {
+            if (vnp_TxnRef != null && Integer.parseInt(vnp_TxnRef) > 0
+                    && vnp_BankTranNo != null && vnp_ResponseCode != null && vnp_ResponseCode.equals("00")
+                    && vnp_TransactionNo != null && Integer.parseInt(vnp_TransactionNo) > 0) {
+
+                paydao.updateStaus(id_TxnRef, 1);
+
+                response.sendRedirect(request.getContextPath() + "/success");
+                return;
+            } else {
+                paydao.updateStaus(id_TxnRef, 0);
+                response.sendRedirect(request.getContextPath() + "/failed");
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -75,29 +90,7 @@ public class processDonationEV extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        AccountDAO acc = new AccountDAO();
-        Bank bank = acc.getBank(id);
-        /* TODO output your page here. You may use following sample code. */
-        String text = request.getParameter("text");
-        Login l = new Login();
-
-        String maDH = String.valueOf(l.generateOTP(6));
-        String donation = request.getParameter("donation");
-
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
-        String time = now.format(formatter);
-
-        request.setAttribute("text", text);
-        request.setAttribute("donation", donation);
-        request.setAttribute("maDH", maDH);
-        request.setAttribute("time", time);
-        request.setAttribute("namebank", bank.getNameBank());
-        request.setAttribute("namecard", bank.getNumberCard());
-        request.setAttribute("nameAcc", bank.getNameCard());
-
-        request.getRequestDispatcher("QRcode.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
