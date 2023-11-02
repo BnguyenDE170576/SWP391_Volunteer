@@ -123,6 +123,7 @@
         <servlet-name>ActivityPendingControl</servlet-name>
         <servlet-class>control.ActivityPendingControl</servlet-class>
 
+<<<<<<< HEAD
     </servlet>
     <servlet>
         <servlet-name>PaymentFailed</servlet-name>
@@ -147,6 +148,8 @@
     <servlet>
         <servlet-name>DeleteAccController</servlet-name>
         <servlet-class>control.process.DeleteAccController</servlet-class>
+=======
+>>>>>>> parent of e9863af (messenger_user_page)
     </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
@@ -254,6 +257,7 @@
         <servlet-name>ActivityPendingControl</servlet-name>
         <url-pattern>/ActivityPendingControl</url-pattern>
 
+<<<<<<< HEAD
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PaymentFailed</servlet-name>
@@ -278,6 +282,8 @@
     <servlet-mapping>
         <servlet-name>DeleteAccController</servlet-name>
         <url-pattern>/deleteacc</url-pattern>
+=======
+>>>>>>> parent of e9863af (messenger_user_page)
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

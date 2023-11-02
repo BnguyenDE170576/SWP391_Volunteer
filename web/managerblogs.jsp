@@ -139,8 +139,12 @@ Author     : trinh
                                     </td>
                                     <td>
 
+<<<<<<< HEAD
                                         <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/approved-icon-7.jpg" title="delete" style="display: ${o.pending == 0 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:20px;  "></a>
                                         <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/very.jpg"  title="delete" style="display: ${o.pending == 1 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:15px;  "></a>
+=======
+                                        <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><span class="fas fa-plus" title="delete" style="display: ${o.pending == 1 ? 'none' : 'inline'}"></a>
+>>>>>>> parent of e9863af (messenger_user_page)
 
                                     </td>
 
