@@ -70,6 +70,9 @@
             .commentlist>.comment{
                 padding-left: 6%;
             }
+            body{
+                background: white;
+            }
         </style>
 
     </head>
@@ -118,8 +121,8 @@
                             <c:if test="${blogsdetails != null}">
                                 <header class="entry__header">
 
-                                    <h2 class="entry__title h1">
-                                        <a href=title=""><h2>${p.title}</h2></a>
+                                    <h2 class="entry__title h1" style="text-align: center;">
+                                        ${p.title}
                                     </h2>
 
                                     <div class="entry__meta">
@@ -148,9 +151,9 @@
 
                             </c:if>
 
-                            <p class="entry__tags">
-                                <span>Tagged in </span>:
-                                <a href="#0">orci</a>, <a href="#0">lectus</a>, <a href="#0">varius</a>, <a href="#0">turpis</a>
+                                <p class="entry__tags" style="color: #84be5b;">
+                                    <span style="color:black;">Tagged in </span>:
+                                ${p.category}
                             </p>
 
                             <ul class="entry__post-nav h-group">
@@ -212,7 +215,7 @@
                                                             </div>
                                                         </div> 
 
-                                                        <c:if test="${o.commentAuthorId == userIDLG}">
+                                                        <c:if test="${o.commentAuthorId == userIDLG || sessionScope.LOGIN_USER.role  == 0 }">
                                                             <!-- Show the delete comment button here -->
 
                                                             <form action="blogsdetail" method="post" style="  text-align: end;">
@@ -342,7 +345,7 @@
                             <li><a href="createpost">Add new post</a></li>
 
                         </ul>
-                        <ul class="link-list"  style="display: ${ userIDLG==idAuthor  ? 'inline' : 'none'} ;">
+                        <ul class="link-list"  style="display: ${ userIDLG==idAuthor  || sessionScope.LOGIN_USER.role  == 0? 'inline' : 'none'} ;">
                             <li><a href="DeletePost?id=${p.blogId}">Delete post</a></li>
 
                         </ul>
@@ -357,7 +360,7 @@
 
 
 
-        <footer style="display: flex;background-color: black;height: 5%;color: aquamarine;flex-direction: column;text-align: center;">
+        <footer style="display: flex;background-color: black;height: 10%;color: aquamarine;flex-direction: column;text-align: center;">
 
 
 

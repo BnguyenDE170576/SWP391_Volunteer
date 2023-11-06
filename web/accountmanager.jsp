@@ -116,7 +116,7 @@ Author     : trinh
                                 <th>Address</th>
                                 <th>Role</th>
                                 <th>Delete</th>
-                                <th>Detail</th>
+                     
                             </tr>
                         </thead>
                         <tbody>

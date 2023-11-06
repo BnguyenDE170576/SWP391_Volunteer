@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
             <a href="home" class="nav-item nav-link active">Home</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="about.jsp" class="nav-item nav-link">About</a>
             <a href="blogs" class="nav-item nav-link">Blogs</a>
             <c:if test="${sessionScope.LOGIN_USER.role  == 2 || sessionScope.LOGIN_USER.role  == 0}">
                 <div class="nav-item dropdown">
