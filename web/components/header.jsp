@@ -45,7 +45,7 @@
                     </a>
 
                     <div class="dropdown-menu m-0">
-                        <a class="dropdown-item" href="changepass">Change Password</a>
+                        <a class="dropdown-item" href="changepass">Reset Password</a>
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="./HistoryControl">View History</a>
                         <c:if test="${ sessionScope.LOGIN_USER.role  == 0}">

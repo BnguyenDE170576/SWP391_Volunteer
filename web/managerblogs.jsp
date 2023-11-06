@@ -118,7 +118,8 @@ Author     : trinh
                         <tbody>
                             <c:forEach items="${blogs}" var="o">
                                 <tr>
-                                    <td>${o.blogId}</td>
+                             
+                                    <td> <a href="./blogsdetail?id=${o.blogId}">${o.blogId}</a></td>
                                     <td>${o.title}</td>
                                     <td>
                                         <img width="150px" src="${o.photo}">
@@ -140,15 +141,15 @@ Author     : trinh
                                     <td>
 
                                         <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/approved-icon-7.jpg" title="delete" style="display: ${o.pending == 0 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:20px;  "></a>
-                                          <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/noapprove.jpg"  title="delete" style="display: ${o.pending == 1 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:20px;  "></a>
+                                        <a href="ApproveBlogs?id=${o.blogId}" class="add" data-toggle="modal"><img src="./images/noapprove.jpg"  title="delete" style="display: ${o.pending == 1 ? 'none' : 'inline'} ;height: 28px;padding-bottom: 7px; padding-left:20px;  "></a>
 
                                     </td>
 
                                 </tr>
-                                
-                                
 
-                                
+
+
+
                             </c:forEach>
                         </tbody>
                     </table>

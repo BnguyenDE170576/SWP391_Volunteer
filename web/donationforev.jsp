@@ -92,16 +92,7 @@
                                 <input type="hidden" name="id" value="${id}" id="id" placeholder="${id}">
                                 <input type="hidden" name="iduser" value="${sessionScope.LOGIN_USER.accId}" id="id" placeholder="${sessionScope.LOGIN_USER.accId}">
                                 <input type="hidden" name="idEvent" value="${idEvent}" id="id" placeholder="${idEvent}">
-                                <c:set var="bank" value="${bank}" />
-                                <div class="bank" style="font-weight: bolder;">
-                                    <hr>
 
-                                    <p>Organization's Bank information<p>
-                                    <p>Bank: ${bank.nameBank}</p> 
-                                    <p>NumberCard: ${bank.numberCard}</p> 
-                                    <p>NameCard: ${bank.nameCard}</p> 
-
-                                </div>
 
                             </div>
 

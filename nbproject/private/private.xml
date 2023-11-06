@@ -59,26 +59,15 @@
         <group name="Group 20230725-10:42:04">
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/EventDetail.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/donationforev.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/PayMentDAO.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/VNPayController/PaymentFailed.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/login.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/CreateActivity.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/forgetPass_newpass.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/managerblogs.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/EventDetailControl.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ActivityPendingControl.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/VNPayController/PaymentVerification.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/context/DBUtils.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/SignUp.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ProfileControl.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/BlogsDAO.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/entity/VNPAY/Config.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/entity/Account.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/payment_failed.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/blogsdetails.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/accountmanager.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/HomePage.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/VNPayController/PaymentController.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/DonationEvent.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/VNPayController/PaymentSuccess.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/BlogsDetailController.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/js/BrowserJoin.js</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
         </group>
     </open-files>
 </project-private>

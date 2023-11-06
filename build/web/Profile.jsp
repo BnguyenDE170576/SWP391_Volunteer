@@ -61,8 +61,6 @@
 
             a = dao.getAccount_BYUSER(name);
             String image = a.getPhoto();
-            PayMentDAO p = new PayMentDAO();
-            Bank b = p.getBankID(a.getAccId());
 
 
         %>
@@ -96,22 +94,6 @@
 
                                         </div>
                                     </div>
-                                    <!--bank-->
-                                    <hr>
-
-                                    <p>BANK INFORMATION</p>
-                                    <label for="name">BankName:</label>
-                                    <form action="updatebank" method="post">
-                                        <input id="nameBank" name="nameBank" type="text" value="<% if (b.getNameBank() != null) {%> <%= b.getNameBank()%> <% } else { %> null <% } %>" />
-                                        <label for="name">NameCard:</label>
-                                        <input id="cardName" name="cardName" type="text" value="<% if (b.getNameCard() != null) {%> <%= b.getNameCard()%> <% } else { %> null <% } %>" />
-                                        <label for="name">NumberCard</label>
-                                        <input id="cardNumber" name="cardNumber" type="text" value="<% if (b.getNumberCard() != null) {%> <%= b.getNumberCard()%> <% } else { %> null <% }%>" />
-                                        <br>
-                                        <input type="hidden" class="form-control" id="iduser" value="<%=a.getAccId()%>" name="iduser">
-                                        <br>
-                                        <input type="submit" value="Save">
-                                    </form>
 
 
 
