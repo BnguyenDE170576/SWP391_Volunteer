@@ -2,76 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/PasswordGenerator.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/js/BrowserJoin.js</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/BlogsComment.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/Approve.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/dao/CommentDAO.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/js/admin.js</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/duyettv.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/js/location.js</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/css/bootstrap.min.css</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/components/footer.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/CatePage.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/BlogsManagerControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/CreateActivity.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/CreatePostController.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/SearchControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ApproveControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/newjsp.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/filter/AdminFilter.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/components/header.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Chi.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/LoginController.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/context/DBUtils.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ActivityPendingControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/DeleteActivityControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/EventDetail.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Tools.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/AddUsePaymentControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/SearchPage.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/js/approveEvent.js</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Payment.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/VolunteerActivityWithDate.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/HomePage.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/adminPage.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/DonationEvent.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ProfileControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/CatePageControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/History.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/HistoryControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/web/managerblogs.jsp</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Thu.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ApproveBlogs.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/LoginGoogleController.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/UpdateActivityControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/AdminControl.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/SecurityUtils.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/DonationForPage.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ApproveMemberServlet.java</file>
-            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/HomeControl.java</file>
-        </group>
-=======
->>>>>>> origin/manhdao
-        <group name="Group 20230725-10:42:04">
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/EventDetail.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/donationforev.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/CreateActivity.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/forgetPass_newpass.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/managerblogs.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/blogsdetails.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/accountmanager.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/HomePage.jsp</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/BlogsDetailController.java</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/js/BrowserJoin.js</file>
-            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
-        </group>
         <group>
             <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/dao/ActivityDAO.java</file>
             <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/ApproveNotification.jsp</file>
@@ -83,6 +13,16 @@
             <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/entity/Report.java</file>
             <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ApproveControl.java</file>
             <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/EventDetail.jsp</file>
+        </group>
+        <group name="Group 20230725-10:42:04">
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/components/header.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/managerblogs.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/blogsdetails.jsp</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/entity/Blogs.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/BlogsDetailController.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/SignUp.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/adminPage.jsp</file>
         </group>
     </open-files>
 </project-private>
