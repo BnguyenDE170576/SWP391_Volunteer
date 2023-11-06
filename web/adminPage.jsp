@@ -67,8 +67,12 @@
                             <span class="material-icons-outlined">fact_check</span> Approve Event
                         </a>
                     </li>
+                    <li class="sidebar-list-item">
 
-
+                        <a href="./ApproveNotification.jsp" target="">
+                            <span class="material-icons-outlined">warning</span> Report
+                        </a>
+                    </li>    
                     <li class="sidebar-list-item">
                         <a href="manageraccount" target="">
                             <span class="material-icons-outlined">manage_accounts</span> Account Manager
@@ -82,7 +86,7 @@
                 </ul>
             </aside>
             <!-- End Sidebar -->
-
+           
             <!-- Main -->
             <main class="main-container">
                 <div class="main-title">

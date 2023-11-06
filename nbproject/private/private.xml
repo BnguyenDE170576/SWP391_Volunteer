@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/PasswordGenerator.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/js/BrowserJoin.js</file>
@@ -56,6 +57,8 @@
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ApproveMemberServlet.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/HomeControl.java</file>
         </group>
+=======
+>>>>>>> origin/manhdao
         <group name="Group 20230725-10:42:04">
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/EventDetail.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/donationforev.jsp</file>
@@ -68,6 +71,18 @@
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/BlogsDetailController.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/js/BrowserJoin.js</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/dao/ActivityDAO.java</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/ApproveNotification.jsp</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/reportnotification.jsp</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ReportNotification.java</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/adminPage.jsp</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ApproveReport.java</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/entity/Report.java</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ApproveControl.java</file>
+            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/EventDetail.jsp</file>
         </group>
     </open-files>
 </project-private>

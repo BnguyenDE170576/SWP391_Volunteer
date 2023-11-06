@@ -160,6 +160,10 @@
         <servlet-name>UpdateBank</servlet-name>
         <servlet-class>control.process.UpdateBank</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportNotification</servlet-name>
+        <servlet-class>control.ReportNotification</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ForgetPass</servlet-name>
         <url-pattern>/forget</url-pattern>
@@ -303,6 +307,10 @@
     <servlet-mapping>
         <servlet-name>UpdateBank</servlet-name>
         <url-pattern>/updatebank</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportNotification</servlet-name>
+        <url-pattern>/ReportNotification</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
