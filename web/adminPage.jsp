@@ -79,6 +79,11 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
+                        <a href="https://dashboard.tawk.to/#/dashboard/653b29c9f2439e1631e8e3c0" target="_blank">
+                            <span class="material-icons-outlined">chat</span> Chat
+                        </a> 
+                    </li>
+                    <li class="sidebar-list-item">
                         <a href="logout" target="">
                             <span class="material-icons-outlined">logout</span> Log Out
                         </a> 

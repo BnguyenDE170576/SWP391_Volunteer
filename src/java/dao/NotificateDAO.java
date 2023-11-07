@@ -12,37 +12,37 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class NotificateDAO {
+
     List<Notification> listOfNotifications = new ArrayList<>();
+
     // hàm get tất cả thông báo ở database
     public List<Notification> getAllNotifications() throws ClassNotFoundException {
         Connection cnt = null;
         PreparedStatement stm = null;
         ResultSet res = null;
-        try{
+        try {
             // lấy tất cả thông báo trong db sử dụng câu lệnh của sql sever
             String sql = "select * from Notification";
             cnt = DBUtils.getConnection();
-            stm = cnt.prepareStatement(sql);    
+            stm = cnt.prepareStatement(sql);
             res = stm.executeQuery();
-            while(res.next()){
+            while (res.next()) {
                 int id = res.getInt("id");
                 int user_id = res.getInt("user_id");
                 String notification_content = res.getString("content");
                 Date notification_date = res.getDate("date");
                 String link_notify = res.getString("link_notification");
                 int reacter = res.getInt("reacter");
-               
-                
+
                 Notification notify = new Notification(id, user_id, notification_content,
                         notification_date, link_notify, reacter);
                 listOfNotifications.add(notify);
             }
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally{
+        } finally {
             try {
                 cnt.close();
                 stm.close();
@@ -77,7 +77,7 @@ public class NotificateDAO {
             System.out.println("Error occurred while inserting: " + e.getMessage());
         } finally {
             try {
-                
+
                 if (stmt != null) {
                     stmt.close();
                 }
@@ -91,53 +91,45 @@ public class NotificateDAO {
         }
     }
 
-
     public void deleteNotification(int id) throws ClassNotFoundException {
         Connection cnt = null;
         PreparedStatement stm = null;
         ResultSet res = null;
-         try{
-             // delete cái id = id mình đưa vào
-            String sql = "delete from Notification where id = ?";
+        try {
+            // delete cái id = id mình đưa vào
+            String sql = "  delete from Notification where Reacter = ? and content like '%Like%'";
             cnt = DBUtils.getConnection();
             cnt.setAutoCommit(false);
             stm = cnt.prepareStatement(sql);
-            stm.setInt(1,id);
+            stm.setInt(1, id);
             stm.executeUpdate();
             cnt.commit();
             System.err.println("Delete!");
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            try{
+            try {
                 cnt.rollback();
-            }catch(SQLException e1){
+            } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-        }finally{
-            try{
-                if (cnt != null){
-                   cnt.close();
-               }
-               if (stm != null){
-                   stm.close();
-               }
-            }catch(Exception e2){
+        } finally {
+            try {
+                if (cnt != null) {
+                    cnt.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (Exception e2) {
                 e2.printStackTrace();
             }
         }
     }
-    
-    
+
     public static void main(String[] args) throws ClassNotFoundException {
         NotificateDAO notify = new NotificateDAO();
-        for (Notification noti : notify.getAllNotifications()) {
-            if (noti.getUser_id() ==1 ) {
-                System.out.println(noti.getContent());
-
-            }
-        }
+        notify.deleteNotification(3);
+      
     }
 
-   
-    
 }

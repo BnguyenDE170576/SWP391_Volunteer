@@ -56,6 +56,8 @@ public class PaymentSuccess extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // them thong bao vao day
+        
         request.getRequestDispatcher("payment_success.jsp").forward(request, response);
     }
 

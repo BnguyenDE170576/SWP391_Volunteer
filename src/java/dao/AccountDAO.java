@@ -25,7 +25,7 @@ public class AccountDAO {
     private static final String GET_AN_ACCOUNT1 = "SELECT UserID, username, Password, name, Phone, email,photo,status, Role,address,birthDay FROM Accounts WHERE username = ? AND Password = ?;";
     private static final String GET_USER_ID = "SELECT UserID FROM Accounts WHERE username = ?;";
     private static final String GET_USER_ID_name = "SELECT UserID FROM Accounts WHERE name = ?;";
-    private static final String GET_USER_NAME = "SELECT username FROM Accounts WHERE UserID = ?;";
+    private static final String GET_USER_NAME = "SELECT name FROM Accounts WHERE UserID = ?;";
     private static final String INSERT_ACCOUNT = "INSERT INTO Accounts (email, password, username, phone, status, role,photo,name,birthDay) VALUES (?, ?, ?, ?, ?, ?,?,?,getdate())";
     private static final String GET_ACCOUNT_INFO_BY_EMAIL = "SELECT UserID, Email,photo,name, Password, username, Phone, Status, Role,address,birthDay FROM Accounts WHERE Email = ?";
     private static final String GET_AN_ACCOUNT_BY_ID = "SELECT UserID, email,photo,username, password, name, status, phone, role, address,birthDay FROM Accounts WHERE UserID = ?";
@@ -36,7 +36,7 @@ public class AccountDAO {
 
     private static final String VALID_TOKEN = "SELECT UserID, Email, Password, name, Phone, Status, Role FROM Accounts WHERE token = ?";
     private static final String VALID_ACCOUNT_USERNAME = "select * from Accounts where username = ?  ";
-
+    private static final String GET_USER_ByName = "SELECT UserID FROM Accounts WHERE name = ?;";
     private static final String GET_ROLE_ACCOUNT_BY_TOKEN = "SELECT role FROM Accounts WHERE token = ?";
 
     private static final String UPDATE_PASSWORD = "UPDATE Accounts Set password = ? WHERE email = ?";
@@ -676,6 +676,49 @@ public class AccountDAO {
             }
         }
         return check;
+    }
+
+    public int GetUSERIDByName(String name) {
+        int id = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(GET_USER_ByName);
+                stm.setString(1, name);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return id;
     }
 
     public boolean checkEmail(String email) {

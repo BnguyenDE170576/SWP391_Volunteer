@@ -24,143 +24,145 @@
                         <a href="booking.html" class="dropdown-item">Manager Activity</a>
                     </div>
                 </div>
-                <a href="donation.jsp" class="nav-item nav-link">Donation</a>
+
             </c:if>
-        <div id="notificationIconContainer">
-            <i id="notificationIcon" class="fa-solid fa-bell"></i>
-     
-          <%
-        NotificateDAO notify = new NotificateDAO();
-        Account loginUser = null;
-        ArrayList<Notification> listNotidisplay = new ArrayList<>();
-        try{
-        loginUser = (Account) session.getAttribute("LOGIN_USER"); 
-        for (Notification noti : notify.getAllNotifications()) {
-            if (noti.getUser_id() == loginUser.getAccId()) {
-            listNotidisplay.add(noti);
-             }
-        }}catch(Exception e){}
-        %>
-        <div class="notifications">
-        <% for(Notification notifies : listNotidisplay){ %>
-        <div id="notification" class="hidden notifications" style="margin-right:900px;">
+            <div id="notificationIconContainer">
+                <i id="notificationIcon" class="fa-solid fa-bell"></i>
 
-            <div class="notification-content">
-                <a href="<%= notifies.getLink() %>" style="color: black;">
-                    <p><%=notifies.getContent() %></p>
-                </a>
+                <%
+                    NotificateDAO notify = new NotificateDAO();
+                    Account loginUser = null;
+                    ArrayList<Notification> listNotidisplay = new ArrayList<>();
+                    try {
+                        loginUser = (Account) session.getAttribute("LOGIN_USER");
+                        for (Notification noti : notify.getAllNotifications()) {
+                            if (noti.getUser_id() == loginUser.getAccId()) {
+                                listNotidisplay.add(noti);
+                            }
+                        }
+                    } catch (Exception e) {
+                    }
+                %>
+                <div class="notifications">
+                    <% for (Notification notifies : listNotidisplay) {%>
+                    <div id="notification" class="hidden notifications" style="margin-right:900px;">
+
+                        <div class="notification-content">
+                            <a href="<%= notifies.getLink()%>" style="color: black;">
+                                <p><%=notifies.getContent()%></p>
+                            </a>
+                        </div>
+
+                        <div class="notification-time" style="margin-left : 30px;"><%=notifies.getDate()%></div>
+                    </div>
+
+                    <%}%>
+                </div>
+
             </div>
-                    
-            <div class="notification-time" style="margin-left : 30px;"><%=notifies.getDate() %></div>
-        </div>
-           
-        <%}%>
-        </div>
+            <script>
+                const notificationIcon = document.getElementById("notificationIcon");
+                const notification = document.getElementsByClassName('notifications');
 
-    </div>
-<script>
-  const notificationIcon = document.getElementById("notificationIcon");
-const notification = document.getElementsByClassName('notifications');
+                let isNotificationVisible = false;
 
-let isNotificationVisible = false;
+                notificationIcon.addEventListener("click", () => {
+                    if (!isNotificationVisible) {
+                        // Hi?n th? th�ng b�o n?u n� kh�ng hi?n th?
+                        for (var i = 0; i < notification.length; i++) {
+                            notification[i].style.display = "block"; // ho?c s? d?ng c�c l?p CSS
+                            notification[i].style.top = i * 6 + "0px";
+                        }
 
-notificationIcon.addEventListener("click", () => {
-  if (!isNotificationVisible) {
-    // Hi?n th? th�ng b�o n?u n� kh�ng hi?n th?
-    for(var i =0;i<notification.length;i++ ){
-        notification[i].style.display = "block"; // ho?c s? d?ng c�c l?p CSS
-        notification[i].style.top =i*6+"0px";
-    }
-    
-    isNotificationVisible = true;
-  } else {
-    // ?n th�ng b�o n?u n� ?ang hi?n th?
-    for(var i =0;i<notification.length;i++ ){
-    notification[i].style.display = "none"; 
-    }
-    //// ho?c s? d?ng c�c l?p CSS
-    isNotificationVisible = false;
-  }
-});
+                        isNotificationVisible = true;
+                    } else {
+                        // ?n th�ng b�o n?u n� ?ang hi?n th?
+                        for (var i = 0; i < notification.length; i++) {
+                            notification[i].style.display = "none";
+                        }
+                        //// ho?c s? d?ng c�c l?p CSS
+                        isNotificationVisible = false;
+                    }
+                });
 
-</script>
+            </script>
 
 
-<style>
- #notification {
-    display: none;
-    position: fixed;
-    background-color: white;
-    border: 1px solid #ccc;
-    width: 320px; /* ?i?u ch?nh k�ch th??c theo mong mu?n */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    border-radius: 4px;
-    margin-top: 53px;
-    margin-left: -80px;
-}
+            <style>
+                #notification {
+                    display: none;
+                    position: fixed;
+                    background-color: white;
+                    border: 1px solid #ccc;
+                    width: 320px; /* ?i?u ch?nh k�ch th??c theo mong mu?n */
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                    border-radius: 4px;
+                    margin-top: 53px;
+                    margin-left: -80px;
+                }
 
-.notification-header {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
+                .notification-header {
+                    padding: 10px;
+                    border-bottom: 1px solid #ccc;
+                }
 
-.notification-header h3 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 700;
-}
+                .notification-header h3 {
+                    margin: 0;
+                    font-size: 20px;
+                    font-weight: 700;
+                }
 
-.notification-content {
-    font-size:19px; 
-    font-weight: 500;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
+                .notification-content {
+                    font-size:19px; 
+                    font-weight: 500;
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                }
 
-.notification-content img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+                .notification-content img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
 
-.notification-content p {
-    margin: 0;
-    font-size: 14px;
-}
-.notification-time {
-    margin-top: -10px; /* Di chuy?n l�n tr�n 10px */
-    margin-left: 57px; /* Di chuy?n sang ph?i 20px */
-    font-size: 12px;
-    color: #1877f2;
-}
+                .notification-content p {
+                    margin: 0;
+                    font-size: 14px;
+                }
+                .notification-time {
+                    margin-top: -10px; /* Di chuy?n l�n tr�n 10px */
+                    margin-left: 57px; /* Di chuy?n sang ph?i 20px */
+                    font-size: 12px;
+                    color: #1877f2;
+                }
 
-#notificationIconContainer {
-  position: relative;
-  display: inline-block;
-}
+                #notificationIconContainer {
+                    position: relative;
+                    display: inline-block;
+                }
 
-#notificationIcon {
-  font-size: 24px; /* Thay ??i k�ch th??c bi?u t??ng theo mong mu?n */
-}
+                #notificationIcon {
+                    font-size: 24px; /* Thay ??i k�ch th??c bi?u t??ng theo mong mu?n */
+                }
 
-#notificationCount {
-  position: absolute;
-  margin-top: -8px;
-  margin-left: 7px;
-  top: 0;
-  right: 0;
-  background-color: red; /* M�u n?n cho s? th�ng b�o */
-  color: white; /* M�u ch? cho s? th�ng b�o */
-  border-radius: 50%; /* K�ch th??c g�c bo tr�n */
-  padding: 4px 8px; /* Kho?ng c�ch gi?a s? v� bi?u t??ng */
-  font-size: 12px; /* K�ch th??c c?a s? th�ng b�o */
-}
+                #notificationCount {
+                    position: absolute;
+                    margin-top: -8px;
+                    margin-left: 7px;
+                    top: 0;
+                    right: 0;
+                    background-color: red; /* M�u n?n cho s? th�ng b�o */
+                    color: white; /* M�u ch? cho s? th�ng b�o */
+                    border-radius: 50%; /* K�ch th??c g�c bo tr�n */
+                    padding: 4px 8px; /* Kho?ng c�ch gi?a s? v� bi?u t??ng */
+                    font-size: 12px; /* K�ch th??c c?a s? th�ng b�o */
+                }
 
- 
-</style>
+
+            </style>
         </div>
 
         <c:choose>
@@ -182,16 +184,16 @@ notificationIcon.addEventListener("click", () => {
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="./HistoryControl">View History</a>
                         <c:if test="${ sessionScope.LOGIN_USER.role  == 0}">
-                        <a class="dropdown-item" href="admin">Admin</a>
+                            <a class="dropdown-item" href="admin">Admin</a>
                         </c:if>
 
                         <a class="dropdown-item" href="logout">Log Out</a>    
                     </div>
-            </c:otherwise>
-        </c:choose>
+                </c:otherwise>
+            </c:choose>
 
 
-    </div>
+        </div>
 </nav>
 <style>
     .rounded-circle-perfect {

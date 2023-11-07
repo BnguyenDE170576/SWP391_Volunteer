@@ -129,6 +129,26 @@
         <script src="../lib/tempusdominus/js/moment.min.js"></script>
         <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script type="text/javascript">
+        var Tawk_API = Tawk_API || {};
+
+        Tawk_API.visitor = {
+            name: '${sessionScope.LOGIN_USER.userName}',
+            email: '${sessionScope.LOGIN_USER.email}',
+            hash: 'hash-value'
+        };
+
+
+        Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/653b29c9f2439e1631e8e3c0/1hdnhmesn';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>

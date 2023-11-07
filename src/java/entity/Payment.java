@@ -25,6 +25,13 @@ public class Payment {
     private String giverName;
     private String photo;
 
+    public Payment(Date transactionDate, String text, double amount, String giverName) {
+        this.transactionDate = transactionDate;
+        this.text = text;
+        this.amount = amount;
+        this.giverName = giverName;
+    }
+
     public Payment(int paymentId, int giverId, int receiverId, int eventId, Date transactionDate, String text, double amount, int status, String giverName, String photo) {
         this.paymentId = paymentId;
         this.giverId = giverId;
@@ -137,7 +144,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" + "paymentId=" + paymentId + ", giverId=" + giverId + ", receiverId=" + receiverId + ", eventId=" + eventId + ", transactionDate=" + getTransactionDate() + ", text=" + text + ", amount=" + amount + ", status=" + status + '}';
+        return "Payment{" + "paymentId=" + paymentId + ", giverId=" + giverId + ", receiverId=" + receiverId + ", eventId=" + eventId + " "+giverName+ ", transactionDate=" + getTransactionDate() + ", text=" + text + ", amount=" + amount + ", status=" + status + '}';
     }
 
 }

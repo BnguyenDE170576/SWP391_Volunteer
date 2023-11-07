@@ -32,12 +32,12 @@ public class ReportNotification extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ReportNotification</title>");            
+            out.println("<title>Servlet ReportNotification</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ReportNotification at " + request.getContextPath() + "</h1>");
@@ -58,9 +58,10 @@ public class ReportNotification extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                 processRequest(request, response);
+        processRequest(request, response);
 
-}
+    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -79,18 +80,18 @@ public class ReportNotification extends HttpServlet {
         int organizerId = Integer.parseInt(request.getParameter("organizerId"));
         // Tạo một đối tượng Report và lưu vào danh sách báo cáo
         Report report = new Report(activityId, organizerId);
-List<Report> reports = (List<Report>) request.getSession().getAttribute("reports");
-if (reports == null) {
-    reports = new ArrayList<>();
-}
-reports.add(report);
-request.getSession().setAttribute("reports", reports);
+        List<Report> reports = (List<Report>) request.getSession().getAttribute("reports");
+        if (reports == null) {
+            reports = new ArrayList<>();
+        }
+        reports.add(report);
+        request.getSession().setAttribute("reports", reports);
 
 // Chuyển hướng đến ApproveNotification.jsp
-response.sendRedirect("reportnotification.jsp");
+        response.sendRedirect("reportnotification.jsp");
 
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

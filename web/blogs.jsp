@@ -62,6 +62,13 @@
         <link rel="manifest" href="site.webmanifest">
 
         <style>
+            
+         
+            .nav-link.dropdown-toggle{
+                display: flex;
+            }
+
+            
             .navbar-light {
                 background-color: black;
             }

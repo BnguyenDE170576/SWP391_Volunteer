@@ -5,11 +5,14 @@
  */
 package control.VNPayController;
 
+import dao.ActivityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import dao.PayMentDAO;
-import java.sql.SQLException;
+import entity.Account;
+import entity.Payment;
+import entity.SendMail;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,9 +42,12 @@ public class PaymentVerification extends HttpServlet {
         String vnp_BankTranNo = request.getParameter("vnp_BankTranNo");
         String vnp_TransactionNo = request.getParameter("vnp_TransactionNo");
         String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
-
         HttpSession session = request.getSession();
+
+        String email = ((Account) session.getAttribute("LOGIN_USER")).getEmail();
+
         PayMentDAO paydao = new PayMentDAO();
+        SendMail send = new SendMail();
 
         PrintWriter out = response.getWriter();
 
@@ -51,7 +57,10 @@ public class PaymentVerification extends HttpServlet {
                     && vnp_TransactionNo != null && Integer.parseInt(vnp_TransactionNo) > 0) {
 
                 paydao.updateStaus(id_TxnRef, 1);
-
+                Payment pay = paydao.getPayMent_ID(id_TxnRef);
+                ActivityDAO acc = new ActivityDAO();
+             
+                send.sendEmail2(email, pay.getTransactionDate(), pay.getText(), pay.getAmount(), pay.getGiverName());
                 response.sendRedirect(request.getContextPath() + "/success");
                 return;
             } else {

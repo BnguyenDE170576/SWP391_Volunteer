@@ -118,14 +118,14 @@ Author     : trinh
                         <tbody>
                             <c:forEach items="${blogs}" var="o">
                                 <tr>
-                             
+
                                     <td> <a href="./blogsdetail?id=${o.blogId}">${o.blogId}</a></td>
                                     <td>${o.title}</td>
-                                    <td>
-                                        <img width="150px" src="${o.photo}">
-                                    </td>
-                                    <td>
-                                        ${o.shortContent}
+
+                                    <td> <a href="./blogsdetail?id=${o.blogId}"><img width="150px" src="${o.photo}"></a></td> 
+
+
+                                    ${o.shortContent}
                                     </td>
                                     <td>
                                         ${o.author}

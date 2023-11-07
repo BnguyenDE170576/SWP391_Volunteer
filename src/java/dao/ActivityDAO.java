@@ -8,7 +8,6 @@ package dao;
  *
  * @author datka
  */
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import context.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +18,7 @@ import java.util.logging.Logger;
 import entity.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -305,7 +305,7 @@ public class ActivityDAO {
     }
 
     public void UpdateActivity(String activityName, String description, Date startDate, Date endDate, String location, int memberLimit, int id) throws SQLException, ClassNotFoundException {
-        try ( Connection conn = DBUtils.getConnection();  PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
+        try (Connection conn = DBUtils.getConnection(); PreparedStatement psm = conn.prepareStatement(UPDATE_ACTIVITY)) {
 
             psm.setString(1, activityName);
             psm.setString(2, description);
@@ -1258,12 +1258,8 @@ public class ActivityDAO {
     public static void main(String[] args) {
         ActivityDAO dao = new ActivityDAO();
 
-        LocalDateTime current = LocalDateTime.now();
-        Date date = new Date();
-        long millis = 1677166459123L;
-        date.setTime(millis);
 
-        dao.CreatePendingActivity("Dọn bãi biển", "aaaa",   date,   date, "VN", 3, 30, "photo");
+        System.out.println(dao.getActivityById(3));
     }
 
 }

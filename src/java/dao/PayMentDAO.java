@@ -27,6 +27,7 @@ public class PayMentDAO {
     private String INSERT_PAY = "insert into Payment values (?,?,?,?,getDATe(),?,?,?)";
     private String INSERT_PAYINFOR = "insert into TransOfOrganizer values(?,?,?,?);";
     private String Update_STATUS = "update Payment set status=? where payment_id=?";
+    private String GET_TRANS = "   select   A.*, B.activity_name from volunteer_activities B Join Payment A On A.eventID=b.activity_id where A.status=1 and a.payment_id = ?";
     private String TOP5_TRANS = "   select  top (5) A.*, B.name, B.photo from Accounts B Join Payment A On A.giverID=b.UserID where A.status=1 ORDER BY A.transaction_date DESC ;";
 
     public boolean insertPayment(int idPay, int giverID, int receiverID, int eventID, String text, long amount, int status) {
@@ -83,7 +84,7 @@ public class PayMentDAO {
                 stm.setString(2, nummberbank);
                 stm.setString(3, nameCard);
                 stm.setString(4, namebank);
-
+                
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -280,9 +281,59 @@ public class PayMentDAO {
         return b;
     }
 
+    public Payment getPayMent_ID(int id) {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Payment b = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(GET_TRANS);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    Date date = rs.getTimestamp("transaction_date");
+
+                    String text = rs.getString("text");
+                    double amount = rs.getDouble("amount");
+                    String actName = rs.getString("activity_name");
+
+                    b = new Payment(date, text, amount, actName);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PayMentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PayMentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PayMentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return b;
+    }
+
     public static void main(String[] args) {
         PayMentDAO e = new PayMentDAO();
-        System.out.println("" + e.updateBank("r", "r", "r",3));
+        System.out.println("" + e.getPayMent_ID(95205048));
 
     }
 }
