@@ -40,6 +40,7 @@
 
             /* Định dạng phần tử input */
             input[type="text"],
+            input[type="file"],
             input[type="date"],
             textarea {
                 width: 100%;
@@ -112,7 +113,7 @@
                 <br>
                 <div class="mb-3">
                     <label  class="form-label">Số Lượng Thành Viên:</label>
-                    <input type="number" class="form-control" id="memberLimit" name="memberLimit" min="1" max="50" required>
+                    <input type="number" class="form-control" id="memberLimit" name="memberLimit" min="1"  required>
                 </div>
 
                 <br>
