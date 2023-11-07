@@ -5,9 +5,11 @@
 package control;
 
 import dao.ActivityDAO;
+import dao.NotificateDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -80,6 +82,14 @@ public class RejectMemberServlet extends HttpServlet {
             int eventId = Integer.parseInt(request.getParameter("eventID"));
             ActivityDAO acDAO = new ActivityDAO();
             acDAO.removePendingUser(userId, eventId);
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+
+            try {
+                noti.addNotification(userId, "You have been refused as an event member !! ", date, "EventDetailControl?id="+eventId, userId);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LikeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

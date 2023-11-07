@@ -8,19 +8,24 @@ package control;
 import dao.AccountDAO;
 import dao.BlogsDAO;
 import dao.CommentDAO;
+import dao.NotificateDAO;
 import dao.likeDAO;
 import entity.Account;
 import entity.Blogs;
 import entity.Comment;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static org.apache.coyote.http11.Constants.a;
 
 /**
  *
@@ -74,9 +79,9 @@ public class LikeServlet extends HttpServlet {
 
   
             HttpSession session = request.getSession();
-
+            
             int userIDLG = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
-
+             AccountDAO a = new AccountDAO();
 
             String action = request.getParameter("action");
             likeDAO l = new likeDAO();
@@ -84,14 +89,33 @@ public class LikeServlet extends HttpServlet {
             // Get the user ID and post ID from the request
             int userId = Integer.parseInt(request.getParameter("userId"));
             int postId = Integer.parseInt(request.getParameter("postId"));
-
+            int receiver = 0;
+            BlogsDAO blog = new BlogsDAO();
+            for(Blogs b : blog.getAllBlogs()){
+                if(b.getBlogId() == postId){
+                    receiver = a.GetUSERID_byfullname(b.getAuthor());
+                    break;
+                    
+                }
+            }
             // Your logic to handle liking or unliking the post
             if ("Like".equals(action)) {
                 if (l.checkValid(userId, postId)) {
                     l.deleteLikePost(userId, postId);
                 } else {
                     l.insertAccount(userId, postId);
+                    NotificateDAO noti = new NotificateDAO();
+                    Date date = new Date();
+  
+                    try {
+                        noti.addNotification(receiver , "You Received 1 Like From  "+a.GetUserName(userId), date, "blogsdetail?id="+postId, userIDLG);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(LikeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
+            
+                
             }
 
             // Redirect back to the post.jsp page after processing

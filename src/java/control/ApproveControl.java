@@ -5,9 +5,13 @@
 package control;
 
 import dao.ActivityDAO;
+import dao.NotificateDAO;
+import entity.Account;
+import entity.VolunteerActivity;
 import java.io.IOException;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -77,13 +81,25 @@ public class ApproveControl extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        int eId = Integer.parseInt(request.getParameter("eId"));
+int eId = Integer.parseInt(request.getParameter("eId"));
         int check = Integer.parseInt(request.getParameter("check"));
-        session.setAttribute("a", eId );
+        session.setAttribute("a", eId);
         session.setAttribute("b", check);
+
         ActivityDAO acDAO = new ActivityDAO();
         if (check == 1) {
             acDAO.CreateActivity(acDAO.getPendingActivityById(eId));
+            // ADD NOTIFICATION 
+            VolunteerActivity acti = acDAO.getActivityById(eId);
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+            try {
+                noti.addNotification(acti.getOrganizerId(), "Your Event is already approved by Admin ", date, null, acti.getOrganizerId());
+                System.out.println(""+ acti.getOrganizerId());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             try {
                 acDAO.removePendingActivity(eId);
             } catch (SQLException ex) {
@@ -91,12 +107,20 @@ public class ApproveControl extends HttpServlet {
             }
         } else if (check == 2) {
             try {
+                VolunteerActivity acti = acDAO.getActivityById(eId);
+                NotificateDAO noti = new NotificateDAO();
+                Date date = new Date();
+                try {
+                    noti.addNotification(acti.getOrganizerId(), "Your Event is already refused by Admin ", date, null, acti.getOrganizerId());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 acDAO.removePendingActivity(eId);
             } catch (SQLException ex) {
                 Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
- 
+
     }
 
     /**

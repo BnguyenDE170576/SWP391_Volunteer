@@ -8,13 +8,17 @@ package control;
 import dao.AccountDAO;
 import dao.BlogsDAO;
 import dao.CommentDAO;
+import dao.NotificateDAO;
 import dao.likeDAO;
 import entity.Account;
 import entity.Blogs;
 import entity.Comment;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -85,17 +89,36 @@ public class BlogsComment extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         HttpSession session = request.getSession();
-
+        AccountDAO a = new AccountDAO();
         int userIDLG = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
 
         likeDAO l = new likeDAO();
         int id_blogs = Integer.parseInt(request.getParameter("postId"));
+        int receiver = 0;
+            BlogsDAO blog = new BlogsDAO();
+            for(Blogs b : blog.getAllBlogs()){
+                if(b.getBlogId() == id_blogs){
+                    receiver = a.GetUSERID_byfullname(b.getAuthor());
+                    break;
+                    
+                }
+            }
         BlogsDAO dao = new BlogsDAO();
         Blogs b = dao.getBlogByID(id_blogs);
         int count = l.getToTalLike(id_blogs);
 
         CommentDAO o = new CommentDAO();
         o.insertComment(id_blogs, userId, commentMessage);
+            //add notification
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+  
+            try {
+                noti.addNotification(receiver , "You Received 1 Comment From  "+a.GetUserName(userId), date,  "blogsdetail?id="+id_blogs, userIDLG);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LikeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //end 
         List<Comment> list = o.getAllComment(id_blogs);
         int countcmt = o.getToTalComment(id_blogs);
 
