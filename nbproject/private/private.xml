@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/dao/ActivityDAO.java</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/ApproveNotification.jsp</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/reportnotification.jsp</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ReportNotification.java</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/adminPage.jsp</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ApproveReport.java</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/entity/Report.java</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/src/java/control/ApproveControl.java</file>
-            <file>file:/C:/Code/FPT/CN5/SWP391/SWP391_Volunteer-main/web/EventDetail.jsp</file>
-        </group>
-=======
->>>>>>> ANHQUAN
         <group name="Group 20230725-10:42:04">
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/PendingUserControl.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Approve.jsp</file>
@@ -28,6 +13,7 @@
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/ApproveControl.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/NotificateDAO.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/VNPayController/PaymentVerification.java</file>
+            <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/DeleteActivityControl.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/adminPage.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/ApproveNotification.jsp</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/BlogsComment.java</file>
@@ -36,37 +22,6 @@
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/dao/ActivityDAO.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/entity/UserPending.java</file>
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/src/java/control/VNPayController/PaymentSuccess.java</file>
-        </group>
-        <group>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/LikeServlet.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/entity/Constants.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/accountmanager.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/EventDetail.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/components/header.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/VNPayController/PayMentSuccess.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/dao/NotificateDAO.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/entity/Comment.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/BlogsComment.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/entity/Chi.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/entity/VolunteerActivityWithDate.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/AdminControl.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/js/BrowserJoin.js</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/donationforev.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/ApproveControl.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/Approve.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/RejectMemberServlet.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/HomePage.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/ActivityPendingControl.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/ApproveMemberServlet.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/BlogsController.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/entity/VolunteerActivity.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/control/ApproveBlogs.java</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/duyettv.jsp</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/web/js/approveEvent.js</file>
-            <file>file:/C:/Users/ANH%20QUAN/source/SWP391_Volunteer/src/java/context/DBUtils.java</file>
         </group>
     </open-files>
 </project-private>
