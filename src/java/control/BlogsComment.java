@@ -90,33 +90,39 @@ public class BlogsComment extends HttpServlet {
         
         
 
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
+        HttpSession session = request.getSession();
+        AccountDAO a = new AccountDAO();
+        int userIDLG = ((Account) session.getAttribute("LOGIN_USER")).getAccId();
 
-                if (name.equals("email")) {
-                    email = cookie.getValue().trim();
-                }
-            }
-
-            AccountDAO a = new AccountDAO();
-            int userIDLG = a.GetUSERID(a.getUserName_byEmail(email));
-
-            likeDAO l = new likeDAO();
-            int id_blogs = Integer.parseInt(request.getParameter("postId"));
-            int receiver = 0;
+        likeDAO l = new likeDAO();
+        int id_blogs = Integer.parseInt(request.getParameter("postId"));
+        int receiver = 0;
             BlogsDAO blog = new BlogsDAO();
             for(Blogs b : blog.getAllBlogs()){
                 if(b.getBlogId() == id_blogs){
-                    receiver = a.GetUSERIDByName(b.getAuthor());
+                    receiver = a.GetUSERID_byfullname(b.getAuthor());
                     break;
                     
                 }
             }
-            
-            BlogsDAO dao = new BlogsDAO();
-            Blogs b = dao.getBlogByID(id_blogs);
-            int count = l.getToTalLike(id_blogs);
+        BlogsDAO dao = new BlogsDAO();
+        Blogs b = dao.getBlogByID(id_blogs);
+        int count = l.getToTalLike(id_blogs);
+
+        CommentDAO o = new CommentDAO();
+        o.insertComment(id_blogs, userId, commentMessage);
+            //add notification
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+  
+            try {
+                noti.addNotification(receiver , "You Received 1 Comment From  "+a.GetUserName(userId), date,  "blogsdetail?id="+id_blogs, userIDLG);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LikeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //end 
+        List<Comment> list = o.getAllComment(id_blogs);
+        int countcmt = o.getToTalComment(id_blogs);
 
             CommentDAO o = new CommentDAO();
             o.insertComment(id_blogs, userId, commentMessage);

@@ -503,9 +503,12 @@
 
         </div>
 
+<<<<<<< HEAD
             <!-- Testimonial End -->
             <div class="container-fluid">
                 <%@include file="./components/footer.jsp"%>
+=======
+>>>>>>> ANHQUAN
 
 
 

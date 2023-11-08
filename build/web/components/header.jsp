@@ -4,6 +4,7 @@
 <%@page import="dao.AccountDAO"%>
 <%@page import="entity.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <nav class="navbar navbar-expand-lg custom-navbar">
     <a href="" class="navbar-brand p-0">
         <a href ="home"><h1 class="text-primary m-0" ><i class="fa fa-map-marker-alt me-3"></i>Volunteer</h1></a>
@@ -184,13 +185,13 @@
                         <a class="dropdown-item" href="./Profile.jsp">View Profile</a>
                         <a class="dropdown-item" href="./HistoryControl">View History</a>
                         <c:if test="${ sessionScope.LOGIN_USER.role  == 0}">
-                            <a class="dropdown-item" href="admin">Admin</a>
+                        <a class="dropdown-item" href="admin">Admin</a>
                         </c:if>
 
                         <a class="dropdown-item" href="logout">Log Out</a>    
                     </div>
-                </c:otherwise>
-            </c:choose>
+            </c:otherwise>
+        </c:choose>
 
 
         </div>

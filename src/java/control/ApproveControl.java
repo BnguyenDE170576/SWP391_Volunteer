@@ -81,15 +81,20 @@ public class ApproveControl extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        int eId = Integer.parseInt(request.getParameter("eId"));
+int eId = Integer.parseInt(request.getParameter("eId"));
         int check = Integer.parseInt(request.getParameter("check"));
         session.setAttribute("a", eId);
         session.setAttribute("b", check);
+<<<<<<< HEAD
  session.setAttribute("c", "null");
+=======
+
+>>>>>>> ANHQUAN
         ActivityDAO acDAO = new ActivityDAO();
         if (check == 1) {
             acDAO.CreateActivity(acDAO.getPendingActivityById(eId));
             // ADD NOTIFICATION 
+<<<<<<< HEAD
             int organizerId=acDAO.getPendingActivityById(eId).getOrganizerId();
         
             NotificateDAO noti = new NotificateDAO();
@@ -97,6 +102,14 @@ public class ApproveControl extends HttpServlet {
             try {
                 noti.addNotification(organizerId, "Your Event is already approved by Admin ", date, null, organizerId);
                 
+=======
+            VolunteerActivity acti = acDAO.getActivityById(eId);
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+            try {
+                noti.addNotification(acti.getOrganizerId(), "Your Event is already approved by Admin ", date, null, acti.getOrganizerId());
+                System.out.println(""+ acti.getOrganizerId());
+>>>>>>> ANHQUAN
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ApproveControl.class.getName()).log(Level.SEVERE, null, ex);
             }

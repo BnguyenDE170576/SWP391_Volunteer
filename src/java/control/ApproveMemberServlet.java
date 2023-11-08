@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.*;
 import entity.*;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,6 +81,14 @@ public class ApproveMemberServlet extends HttpServlet {
             ActivityDAO acDAO = new ActivityDAO();
             acDAO.removePendingUser(userId, eventId);
             acDAO.addParticipation(userId, eventId);
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+
+            try {
+                noti.addNotification(userId, "You have been approved as an event member !! ", date, "EventDetailControl?id="+eventId, userId);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LikeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ApproveMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

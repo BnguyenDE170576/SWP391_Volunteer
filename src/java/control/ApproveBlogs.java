@@ -5,12 +5,18 @@
  */
 package control;
 
+import dao.AccountDAO;
 import dao.BlogsDAO;
+import dao.NotificateDAO;
 import entity.Blogs;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,6 +71,34 @@ public class ApproveBlogs extends HttpServlet {
              
              BlogsDAO dao = new BlogsDAO();
              dao.pendingBlogs(idblogs);
+             
+             int receiver = 0;
+            String email = ""; 
+            Cookie[] cookies = request.getCookies();
+            BlogsDAO blog = new BlogsDAO();
+            AccountDAO a = new AccountDAO();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    String name = cookie.getName();
+                    if (name.equals("email")) {
+                        email = cookie.getValue().trim();
+                    }
+                }
+            }
+            int userIDLG = a.GetUSERID(a.getUserName_byEmail(email));
+            for(Blogs b : blog.getAllBlogs()){
+                if(b.getBlogId() == idblogs){
+                    receiver = a.GetUSERID_byfullname(b.getAuthor());
+                    break;
+                }
+            }
+            NotificateDAO noti = new NotificateDAO();
+            Date date = new Date();
+            try {
+                noti.addNotification(receiver , "Your blog is already approved by admin", date, "blogsdetail?id="+idblogs, userIDLG);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LikeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
              
              response.sendRedirect("BlogsManagerControl");
 
