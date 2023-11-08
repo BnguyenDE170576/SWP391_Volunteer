@@ -178,37 +178,37 @@
                     </div>
 
                 </div>
-                <div class="mt-3 paging wow fadeInUp">  
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=1" aria-label="Trang đầu">
-                                    <span aria-hidden="true">&laquo;&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page - 1}" aria-label="Trang trước">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <c:forEach var="j" begin="1" step="1" end="${totalPage}">
-                                <li class="page-item ${page == j ? 'active' : ''}">
-                                    <a class="page-link" href="home?page=${j}">${j}</a>
+                    <div class="mt-3 paging wow fadeInUp">  
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item ${page == 1 ? 'disabled' : ''}">
+                                    <a class="page-link" href="home?page=1" aria-label="Trang đầu">
+                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                    </a>
                                 </li>
-                            </c:forEach>
-                            <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${page + 1}" aria-label="Trang sau">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item ${page == totalPage ? 'disabled' : ''}">
-                                <a class="page-link" href="home?page=${totalPage}" aria-label="Trang cuối">
-                                    <span aria-hidden="true">&raquo;&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                                <li class="page-item ${page == 1 ? 'disabled' : ''}">
+                                    <a class="page-link" href="home?page=${page - 1}" aria-label="Trang trước">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <c:forEach var="j" begin="1" step="1" end="${totalPage}">
+                                    <li class="page-item ${page == j ? 'active' : ''}">
+                                        <a class="page-link" href="home?page=${j}">${j}</a>
+                                    </li>
+                                </c:forEach>
+                                <li class="page-item ${page == totalPage ? 'disabled' : ''}">
+                                    <a class="page-link" href="home?page=${page + 1}" aria-label="Trang sau">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item ${page == totalPage ? 'disabled' : ''}">
+                                    <a class="page-link" href="home?page=${totalPage}" aria-label="Trang cuối">
+                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
             </div>
             <!-- Package End -->

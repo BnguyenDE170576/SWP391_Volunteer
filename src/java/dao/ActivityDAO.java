@@ -23,6 +23,15 @@ import java.util.List;
 
 public class ActivityDAO {
 
+    //Remove------------------------------------------------
+    private static final String REMOVE_PENDING_ACTIVITY = "DELETE FROM Pending_activity WHERE activity_id = ?;";
+    private static final String REMOVE_PENDING_USER = "DELETE FROM Userpending WHERE UserID = ? AND ActivityID = ?";
+    private static final String REMOVE_ACTIVITY = "DELETE FROM volunteer_activities WHERE activity_id = ?;";
+    private static final String REMOVE_PARITICIPATIONACTIVITY = "DELETE FROM volunteer_participation WHERE activity_id = ?;";
+    private static final String REMOVE_PAYMENT_BY_ACTIVITY = "DELETE FROM Payment WHERE eventID = ?;";
+    private static final String REMOVE_USEPAYMENT_BY_ACTIVITY = "DELETE FROM usePayment WHERE activity_id = ?;";
+    private static final String REMOVE_PENDING_USER_BY_ACTIVITY = "DELETE FROM UserPending WHERE ActivityID = ?";
+    //GET------------------------------------
     private static final String GET_LIST_EVENT_FROM_TO = "select * from ( select *, ROW_NUMBER() over (order by activity_id) as rownumber from volunteer_activities ) as activity where activity.rownumber >= ? and activity.rownumber <=?";
     private static final String GET_TOTAL_TRANG_THAI_DA_DIEN_RA = "SELECT COUNT(*) FROM volunteer_activities WHERE end_date < GETDATE()";
     private static final String GET_TOTAL_TRANG_THAI_DANG_DIEN_RA = "SELECT COUNT(*) FROM volunteer_activities WHERE start_date <= GETDATE() AND end_date >= GETDATE()";
@@ -30,9 +39,8 @@ public class ActivityDAO {
     private static final String GET_TRANG_THAI_DA_DIEN_RA_FROM_TO = "SELECT * FROM volunteer_activities WHERE end_date < GETDATE() ORDER BY (SELECT NULL) OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
     private static final String GET_TRANG_THAI_DANG_DIEN_RA_FROM_TO = "SELECT * FROM volunteer_activities WHERE start_date <= GETDATE() AND end_date >= GETDATE() ORDER BY (SELECT NULL) OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
     private static final String GET_TRANG_THAI_SAP_DIEN_RA_FROM_TO = "SELECT * FROM volunteer_activities WHERE start_date > GETDATE() ORDER BY (SELECT NULL) OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
-    private static final String GET_USE_PAYMENT = "SELECT COUNT(*) FROM volunteer_activities WHERE start_date > GETDATE();";
+    private static final String GET_USE_PAYMENT = "SELECT * FROM usePayment WHERE activity_id = ?;";
     private static final String GET_TOTAL_AMOUNT_USE_PAYMENT = "SELECT SUM(amount) FROM usePayment WHERE activity_id = ?;";
-    private static final String SET_USE_PAYMENT = "INSERT INTO usePayment (content, amount, activity_id) VALUES (?, ?, ?);";
     private static final String GET_DONATE_BY_EVENT_ID = "SELECT [payment_id],[giverID],[receiverID],[eventID],[transaction_date] ,[text] ,[amount],[status] FROM [Payment] WHERE eventID=?";
     private static final String GET_DONATE_BY_USER_ID = "SELECT [payment_id],[giverID],[receiverID],[eventID],[transaction_date] ,[text] ,[amount],[status] FROM [Payment] WHERE giverID=?";
     private static final String GET_TOTAL_AMOUNT_BY_USER_ID = "SELECT SUM(amount) AS totalAmount FROM Payment WHERE giverID = ?";
@@ -42,20 +50,20 @@ public class ActivityDAO {
     private static final String GET_TOTAL_ROWS = "SELECT COUNT(*) FROM volunteer_activities;";
     private static final String GET_SEARCH_TOTAL_ROWS = "SELECT COUNT(*) FROM volunteer_activities WHERE activity_name LIKE ? OR location LIKE ?;";
     private static final String GET_PENDING_ACTIVITY = "SELECT * FROM Pending_activity;";
-    private static final String REMOVE_PENDING_ACTIVITY = "DELETE FROM Pending_activity WHERE activity_id = ?;";
     private static final String FIND_PENDING_ACTIVITY = "SELECT * FROM Pending_activity WHERE activity_id = ?;";
-    private static final String SET_PENDING_USER = "INSERT INTO UserPending (UserID, ActivityID) VALUES (?, ?);";
     private static final String CHECK_PENDING_USER = "SELECT COUNT(*) FROM Userpending WHERE UserID = ? AND ActivityID = ?";
-    private static final String REMOVE_PENDING_USER = "DELETE FROM Userpending WHERE UserID = ? AND ActivityID = ?";
-    private static final String REMOVE_ACTIVITY = "DELETE FROM volunteer_activities WHERE activity_id = ?;";
     private static final String CHECK_PARTICIPATION_EXIST = "SELECT * FROM volunteer_participation WHERE volunteer_id = ? AND activity_id = ?";
-    private static final String ADD_PARTICIPATION = "INSERT INTO volunteer_participation (volunteer_id, activity_id, registration_date) VALUES (?, ?, GETDATE())";
     private static final String SELECT_USERPENDING_BY_ACTIVITY = "SELECT UserID FROM UserPending WHERE ActivityID = ?";
     private static final String SELECT_PARTICIPANTS_BY_ACTIVITY = "SELECT volunteer_id FROM volunteer_participation WHERE activity_id = ?";
     private static final String SELECT_ACTIVITIES_BY_USER = "SELECT activity_id, registration_date FROM volunteer_participation WHERE volunteer_id = ?;";
+    //SET----------------------------
+    private static final String SET_PENDING_USER = "INSERT INTO UserPending (UserID, ActivityID) VALUES (?, ?);";
     private static final String CREATE_ACTIVITY = "INSERT INTO volunteer_activities (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     private static final String CREATE_PENDING_ACTIVITY = "INSERT INTO Pending_activity (activity_name, description, start_date, end_date, location, organizer_id, numberMember, created_date, updated_date,photo) VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), GETDATE(),?)";
     private static final String UPDATE_ACTIVITY = "UPDATE volunteer_activities SET activity_name = ?, description = ?, start_date = ?, end_date = ?, location = ?, numberMember = ?, updated_date = GETDATE() WHERE activity_id = ?";
+    private static final String ADD_PARTICIPATION = "INSERT INTO volunteer_participation (volunteer_id, activity_id, registration_date) VALUES (?, ?, GETDATE())";
+    private static final String SET_USE_PAYMENT = "INSERT INTO usePayment (content, amount, activity_id) VALUES (?, ?, ?);";
+    //--------------------------------
 
     public List<VolunteerActivity> getActivityFromTo(int page, int pageSize) throws SQLException {
         int from = page * pageSize - (pageSize - 1);
@@ -500,6 +508,123 @@ public class ActivityDAO {
             conn = DBUtils.getConnection();
             psm = conn.prepareStatement(REMOVE_ACTIVITY);
             psm.setInt(1, eid);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    public void removeParticipationByActivityID(int activityid) throws SQLException {
+        Connection conn = null;
+        PreparedStatement psm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(REMOVE_PARITICIPATIONACTIVITY);
+            psm.setInt(1, activityid);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public void removePaymentByActivityID(int activityid) throws SQLException {
+        Connection conn = null;
+        PreparedStatement psm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(REMOVE_PAYMENT_BY_ACTIVITY);
+            psm.setInt(1, activityid);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    public void removeUsePaymentByActivityID(int activityid) throws SQLException {
+        Connection conn = null;
+        PreparedStatement psm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(REMOVE_USEPAYMENT_BY_ACTIVITY);
+            psm.setInt(1, activityid);
+            psm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (psm != null) {
+                try {
+                    psm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    public void removePendingUserByActivityID(int activityid) throws SQLException {
+        Connection conn = null;
+        PreparedStatement psm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            psm = conn.prepareStatement(REMOVE_PENDING_USER_BY_ACTIVITY);
+            psm.setInt(1, activityid);
             psm.executeUpdate();
 
         } catch (Exception e) {

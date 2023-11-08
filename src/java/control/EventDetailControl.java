@@ -52,12 +52,21 @@ public class EventDetailControl extends HttpServlet {
             }
             List<Integer> pendinglistid = new ArrayList<>();
             List<UserPending> pendinglist = new ArrayList<>();
+            List<UserPending> memberlist = new ArrayList<>();
+            List<Integer> memberListid = new ArrayList<>();
             pendinglistid = aDAO.getPendingUserByActivity(eid);
-
+            memberListid = aDAO.getParticipatingUsersByActivity(eid);
             for (int a : pendinglistid) {
                 Account x = dao.getAnAccountById(a);
                 if (x != null) {
                     pendinglist.add(new UserPending(x.getUserName(), x.getPhoto(), x.getAccId()));
+
+                }
+            }
+            for (int a : memberListid) {
+                Account x = dao.getAnAccountById(a);
+                if (x != null) {
+                    memberlist.add(new UserPending(x.getUserName(), x.getPhoto(), x.getAccId()));
 
                 }
             }
@@ -82,6 +91,8 @@ public class EventDetailControl extends HttpServlet {
             request.setAttribute("tongChi",tongChi);
             request.setAttribute("oname",dao.GetUserName(detail.getOrganizerId()));
             request.setAttribute("pendinglist", pendinglist);
+            request.setAttribute("memberlist", memberlist);
+            request.setAttribute("member",memberlist.size());
             request.setAttribute("userID", dao.GetUSERID(name));
             request.setAttribute("check", check);
             request.setAttribute("status",status);

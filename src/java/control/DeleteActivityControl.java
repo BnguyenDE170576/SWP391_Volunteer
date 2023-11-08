@@ -47,6 +47,10 @@ public class DeleteActivityControl extends HttpServlet {
             HttpSession session = request.getSession();
             int eid = Integer.parseInt(request.getParameter("id"));
             ActivityDAO aDAO = new ActivityDAO();
+            aDAO.removeParticipationByActivityID(eid);
+            aDAO.removePaymentByActivityID(eid);
+            aDAO.removePendingUserByActivityID(eid);
+            aDAO.removeUsePaymentByActivityID(eid);
             aDAO.removeActivity(eid);
 
             request.getRequestDispatcher("home").forward(request, response);
@@ -87,6 +91,10 @@ public class DeleteActivityControl extends HttpServlet {
             HttpSession session = request.getSession();
             int eid = Integer.parseInt(request.getParameter("id"));
             ActivityDAO aDAO = new ActivityDAO();
+            aDAO.removeParticipationByActivityID(eid);
+            aDAO.removePaymentByActivityID(eid);
+            aDAO.removePendingUserByActivityID(eid);
+            aDAO.removeUsePaymentByActivityID(eid);
             aDAO.removeActivity(eid);
 
             request.getRequestDispatcher("home").forward(request, response);

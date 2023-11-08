@@ -7,7 +7,7 @@
 // JavaScript code to handle Approve button
 function approveMember(userId, eventID, listItem, approveButton) {
     // Thay đổi giao diện ngay lập tức
-    listItem.innerHTML = 'Đã xét duyệt'; // Thay đổi nội dung của list item
+    listItem.innerHTML = 'Đã đồng ý'; // Thay đổi nội dung của list item
     approveButton.style.display = 'none';
     // Gửi yêu cầu xét duyệt thành viên bằng AJAX (nếu cần)
     $.ajax({

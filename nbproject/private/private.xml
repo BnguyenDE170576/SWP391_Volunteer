@@ -27,8 +27,10 @@
             <file>file:/C:/Users/ytbhe/Documents/Zalo%20Received%20Files/CommunityUnity/web/Profile.jsp</file>
         </group>
         <group>
+            <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/UserPending.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/PasswordGenerator.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/js/BrowserJoin.js</file>
+            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/LogoutControl.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/BlogsComment.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/EventDetailControl.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/Approve.jsp</file>
@@ -41,6 +43,8 @@
             <file>file:/D:/Project/SWP391_Volunteer/web/components/footer.jsp</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/CatePage.jsp</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/BlogsManagerControl.java</file>
+            <file>file:/D:/Project/SWP391_Volunteer/web/Profile.jsp</file>
+            <file>file:/D:/Project/SWP391_Volunteer/src/java/control/BlogsDetailController.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/CreateActivity.jsp</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/CreatePostController.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/SearchControl.java</file>
@@ -54,6 +58,7 @@
             <file>file:/D:/Project/SWP391_Volunteer/src/java/dao/ActivityDAO.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ActivityPendingControl.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/DeleteActivityControl.java</file>
+            <file>file:/D:/Project/SWP391_Volunteer/src/java/dao/likeDAO.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/EventDetail.jsp</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Tools.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/AddUsePaymentControl.java</file>
@@ -62,6 +67,7 @@
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Payment.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/VolunteerActivityWithDate.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/HomePage.jsp</file>
+            <file>file:/D:/Project/SWP391_Volunteer/src/java/dao/AccountDAO.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ForgetPass.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/web/adminPage.jsp</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/DonationEvent.java</file>
@@ -73,10 +79,12 @@
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/Thu.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ApproveBlogs.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/LoginGoogleController.java</file>
+            <file>file:/D:/Project/SWP391_Volunteer/src/java/dao/Login.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/UpdateActivityControl.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/AdminControl.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/entity/SecurityUtils.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/DonationForPage.java</file>
+            <file>file:/D:/Project/SWP391_Volunteer/web/login.jsp</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/ApproveMemberServlet.java</file>
             <file>file:/D:/Project/SWP391_Volunteer/src/java/control/HomeControl.java</file>
         </group>

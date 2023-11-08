@@ -97,7 +97,7 @@
                 top: 5px;
                 right: 10px;
                 z-index: 1;
-                width:150px;
+                width:250px;
                 display: none;
             }
 
@@ -112,6 +112,15 @@
             .options a:hover {
                 background-color: #f0f0f0; /* Màu nền khi di chuột qua */
             }
+            .rounded-circle-perfect {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 5px
+            }
+
+
         </style>
     </head>
 
@@ -168,11 +177,10 @@
                                     </p>
                                     <hr /> 
                                     <div class="row">
-                                        <dt class="col-4">Địa Điểm:</dt>
-                                        <dd class="col-8"> ${detail.location}</dd>
-                                        <dt class="col-4">Số Lượng Thành Viên:</dt>
-                                        <dd class="col-8">${detail.numberMember}</dd
-
+                                        <dt class="col-1 fa-solid fa-location-dot text-primary"></dt>
+                                        <dd class="col-11"> ${detail.location}</dd>
+                                        <dt class="col-1 fa fa-user text-primary"></dt>   
+                                        <dd class="col-11">${member}/${detail.numberMember}</dd
 
                                     </div>
                                     <hr />                                
@@ -190,6 +198,7 @@
                                                 <div class="ellipsis-icon" style="font-size: 30px;">&#8942;</div>
                                                 <div class="options">
                                                     <a href="#" data-toggle="modal" data-target="#donateModal">Xem thu chi</a>  
+                                                    <a href="#" data-toggle="modal" data-target="#memberModal">Xem người tham gia</a>  
                                                     <c:if test="${detail.organizerId == userID}">
                                                         <a href="#" data-toggle="modal" data-target="#chiModal">Chi tiền</a>  
                                                     </c:if>
@@ -203,7 +212,7 @@
 
                                                 </div>
                                             </div>
-                                            <c:if test="${detail.organizerId != userID && check==0}">
+                                            <c:if test="${detail.organizerId != userID && check==0 && member<detail.numberMember}">
                                                 <form action="PendingUser" method="POST">
                                                     <input type="hidden" name="activityId" value="${detail.activityId}">
                                                     <input type="hidden" name="userID" value="${userID}">
@@ -233,7 +242,7 @@
             <div class="modal-dialog" style="max-width: 60%;">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Thông tin Donate</h4>
+                        <h4 class="modal-title">Thông tin thu chi</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -301,10 +310,40 @@
                         <ul class="list-group">
                             <c:forEach var="us" items="${pendinglist}" varStatus="status">    
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <span>${us.getUserName()}</span>
+                                    <div>
+                                        <img class="rounded-circle-perfect" src="${us.photo}" alt="">
+                                        <label>${us.getUserName()}</label>
+                                    </div>
                                     <div class="btn-group" role="group">
                                         <button style="margin-right: 10px;" class="btn btn-danger rounded-pill" onclick="rejectMember(${us.getId()}, ${detail.activityId}, this, this.nextElementSibling)">Từ chối</button>
-                                        <button class="btn btn-success rounded-pill" onclick="approveMember(${us.getId()}, ${detail.activityId}, this, this.previousElementSibling)">Xét duyệt</button>
+                                        <button class="btn btn-success rounded-pill" onclick="approveMember(${us.getId()}, ${detail.activityId}, this, this.previousElementSibling)">Đồng Ý</button>
+                                    </div>
+                                </li>
+                            </c:forEach>   
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="memberModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thành viên tham gia</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Hiển thị danh sách thành viên và các nút từ chối/xét duyệt tại đây -->
+                        <ul class="list-group">
+                            <c:forEach var="us" items="${memberlist}" varStatus="status">    
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <img class="rounded-circle-perfect" src="${us.photo}" alt="">
+                                        <label>${us.getUserName()}</label>
                                     </div>
                                 </li>
                             </c:forEach>   
